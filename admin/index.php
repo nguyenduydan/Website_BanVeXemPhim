@@ -25,10 +25,9 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';  // Mặc định l�
     } else {
         include BASE_PATH . 'dashboard.php';  // Hiển thị dashboard mặc định
     }
+
+
+    include BASE_PATH . 'footer.php';
+
     ?>
 </main>
-
-<?php
-// Include footer
-include BASE_PATH . 'footer.php';
-?>

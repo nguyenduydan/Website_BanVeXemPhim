@@ -1,9 +1,9 @@
 <!-- Footer -->
 <footer class="footer py-3">
     <div class="container-fluid">
-        <div class="row align-items-center justify-content-lg-bottom">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-                <div class="copyright text-center text-sm text-muted text-lg-end">
+        <div class="align-items-center justify-content-lg-bottom">
+            <div class="col-lg mb-lg-0 mb-4">
+                <div class="copyright text-center text-sm text-muted text-lg-center">
                     © <script>
                         document.write(new Date().getFullYear())
                     </script>,
