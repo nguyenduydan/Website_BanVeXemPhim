@@ -1,4 +1,5 @@
 <!-- Footer -->
+
 <footer class="footer py-3">
     <div class="container-fluid">
         <div class="align-items-center justify-content-lg-bottom">
@@ -8,13 +9,15 @@
                         document.write(new Date().getFullYear())
                     </script>,
                     made with <i class="fa fa-heart"></i> by
-                    <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
+                    <a href="https://github.com/nguyenduydan/Website_BanVeXemPhim" class="font-weight-bold" target="_blank">Creative FogVN, Dino, Phúc ngu</a>
                     for a better web.
                 </div>
             </div>
         </div>
     </div>
 </footer>
+</div>
+</main>
 <!-- Liên kết đến các file JS dùng chung -->
 <script src="../assets/js/core/popper.min.js"></script>
 <script src="../assets/js/core/bootstrap.min.js"></script>
