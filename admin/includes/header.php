@@ -3,7 +3,7 @@
 
 <head>
     <?php
-    $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard'; // Mặc định là dashboard
+    $page = pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME);
     switch ($page) {
         case 'dashboard': {
                 $title = 'Dashboard';

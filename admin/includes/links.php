@@ -1,4 +1,4 @@
-<link rel="shortcut icon" href="../assets/images/favicon-32x32.png" type="image/x-icon">
+<link rel="shortcut icon" href="../assets/imgs/favicon-32x32.png" type="image/x-icon">
 <!--     Fonts and icons     -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 <!-- Nucleo Icons -->
@@ -9,6 +9,7 @@
 <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
 <!-- CSS Files -->
 <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/css/soft-ui-dashboard.min.css">
 <!-- Bootstrap CSS v5.2.1 -->
 <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"

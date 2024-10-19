@@ -1,4 +1,8 @@
-   <?php $current_page_name = pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME); ?>
+   <?php $current_page_name = pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME);
+    if ($current_page_name == 'index') {
+        $current_page_name = 'dashboard';
+    }
+    ?>
    <!-- Navbar -->
    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
        <div class="container-fluid py-1 px-3">
