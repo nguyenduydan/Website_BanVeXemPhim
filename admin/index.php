@@ -1,33 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
 <?php
-// Bật hiển thị lỗi PHP (nếu cần)
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// Đường dẫn tới các tệp
-define('BASE_PATH', '/XAMP/htdocs/Website_BanVeXemPhim/admin/');
-
-// Include header
-include BASE_PATH . 'header.php';
-
-// Include menu
-include BASE_PATH . 'menu.php';
-
-// Xác định trang hiện tại bằng tham số GET
-$page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';  // Mặc định là dashboard
-
+$page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
+switch ($page) {
+    case 'dashboard': {
+            $title = 'Dashboard';
+            break;
+        }
+    case 'films': {
+            $title = 'Danh sách phim';
+            break;
+        }
+    default: {
+            $title = 'Dashboard'; // Trường hợp mặc định nếu không có trang hợp lệ
+        }
+}
 ?>
-<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
-    <?php
-    // Điều kiện để load nội dung phù hợp
-    if ($page === 'films') {
-        include BASE_PATH . 'films.php';  // Hiển thị nội dung trang films.php
-    } else {
-        include BASE_PATH . 'dashboard.php';  // Hiển thị dashboard mặc định
-    }
 
+<head>
 
-    include BASE_PATH . 'footer.php';
+    <title><?php echo $title ?></title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <?php require('includes/header.php') ?>
+</head>
 
-    ?>
-</main>
+<body class="g-sidenav-show  bg-gray-100">
+    <?php require('includes/menu.php') ?>;
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+        <?php
+        define('BASE_PATH', '/XAMP/htdocs/Website_BanVeXemPhim/admin/');
+        // Xác định trang hiện tại bằng tham số GET
+        // Mặc định là dashboard
+
+        // Điều kiện để load nội dung phù hợp
+        if ($page === 'films') {
+            include BASE_PATH . 'films.php';  // Hiển thị nội dung trang films.php
+        } else {
+            include BASE_PATH . 'dashboard.php';  // Hiển thị dashboard mặc định
+        }
+
+        require('includes/footer.php');
+
+        ?>
+    </main>
+</body>
+
+</html>
