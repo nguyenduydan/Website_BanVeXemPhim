@@ -13,7 +13,7 @@
 
 <body>
     <!--End sidebar-->
-    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <main class="main-content position-relative max-height-vh-100 h-100 ">
         <!--Start navbar-->
         <?php include('includes/navbar.php'); ?>
         <!--End sidebar-->

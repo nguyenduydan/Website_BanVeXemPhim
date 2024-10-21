@@ -1,5 +1,4 @@
     </div>
-    </main>
     <footer class="py-sm-3 py-md-4 py-xl-6" style="background-color: black;">
         <div class="container-fluid ">
             <div class="row justify-content-center">
@@ -224,6 +223,8 @@
             </div>
         </div>
     </footer>
+    </main>
+
     <script src="assets/js/core/popper.min.js"></script>
     <script src="assets/js/core/bootstrap.min.js"></script>
     <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
