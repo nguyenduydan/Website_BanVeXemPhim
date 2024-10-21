@@ -3,26 +3,21 @@
 
 <head>
     <?php
-    //lấy tên trang hiện tại
+    // Lấy tên trang hiện tại
     $page = pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME);
-    switch ($page) {
-        case 'dashboard': {
-                $title = 'Dashboard';
-                break;
-            }
-        case 'film-list': {
-                $title = 'Danh sách phim';
-                break;
-            }
-        case 'film-add': {
-                $title = 'Thêm phim';
-                break;
-            }
-        default: {
-                $title = 'Dashboard'; // Trường hợp mặc định nếu không có trang hợp lệ
-            }
-    }
+
+    $page_titles = [
+        'dashboard' => 'Dashboard',
+        'film-list' => 'Danh sách phim',
+        'film-add' => 'Thêm phim',
+        'categories-list' => 'Danh sách thể loại phim',
+        'categories-add' => 'Thêm thể loại phim',
+    ];
+
+    // Sử dụng giá trị mặc định nếu không có ánh xạ
+    $title = $page_titles[$page] ?? 'Dashboard';
     ?>
+
     <!-- Required meta tags -->
     <title><?php echo $title; ?></title>
     <meta charset="utf-8" />
