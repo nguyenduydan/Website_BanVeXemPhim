@@ -10,8 +10,12 @@
                 $title = 'Dashboard';
                 break;
             }
-        case 'films': {
+        case 'film-list': {
                 $title = 'Danh sách phim';
+                break;
+            }
+        case 'film-add': {
+                $title = 'Thêm phim';
                 break;
             }
         default: {
