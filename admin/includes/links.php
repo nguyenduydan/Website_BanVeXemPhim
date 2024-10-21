@@ -10,3 +10,4 @@
 <!-- CSS Files -->
 <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
 <link rel="stylesheet" href="../assets/css/soft-ui-dashboard.min.css">
+<link rel="stylesheet" href="../assets/css/style.css">
