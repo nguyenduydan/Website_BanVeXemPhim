@@ -99,7 +99,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addCategoryModalLabel">Thêm phim</h5>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">
+                <button type="button" class="btn btn-danger"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                    data-bs-dismiss="modal" aria-label="Close">
                     <span>Đóng</span>
                 </button>
             </div>
