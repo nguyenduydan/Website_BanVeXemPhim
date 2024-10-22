@@ -6,61 +6,38 @@
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center pb-0">
                 <h5><?php echo $title ?></h5>
-                <a href="../admin/categories-add.php" class="btn btn-lg me-5 btn-add" style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">Thêm</a>
+                <a href="#" class="btn btn-lg me-5 btn-add"
+                    style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">Thêm</a>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
                     <table class="table table-striped table-borderless align-items-center mb-0">
                         <thead>
                             <tr>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên phim</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thời lượng</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ảnh</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên ghế</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mã phòng</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Loại ghế</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Giá ghế</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Đạo diễn</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Diễn viên</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Quốc gia</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Năm phát hành</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phân loại</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Người tạo</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày tạo</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td class="align-middle text-center text-sm">
-                                    <p class="text-xs font-weight-bolder mb-0">phim hành động</p>
+                                    <p class="text-xs font-weight-bolder mb-0"></p>
                                 </td>
                                 <td class="align-middle text-center text-sm">
-                                    <p class="text-xs font-weight-bold mb-0">120 phút</p>
+                                    <p class="text-xs font-weight-bold mb-0"></p>
                                 </td>
                                 <td class="align-middle text-center text-sm">
-                                    <img src="../uploads/product-images/curved5-small.jpg" class="img-fluid">
+                                    <p class="text-xs font-weight-bold mb-0"></p>
                                 </td>
                                 <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-success">Online</span>
+                                    <p class="text-xs font-weight-bold mb-0"></p>
                                 </td>
                                 <td class="align-middle text-center text-sm">
-                                    <p class="text-xs font-weight-bold mb-0">phúc ngu</p>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <p class="text-xs font-weight-bold mb-0">phúc đần</p>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <p class="text-xs font-weight-bold mb-0">Việt Nam</p>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <p class="text-xs font-weight-bold mb-0">Việt Nam</p>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <p class="text-xs font-weight-bold mb-0">Việt Nam</p>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <p class="text-xs font-weight-bold mb-0">Việt Nam</p>
+                                    <span class="badge badge-sm bg-gradient-light text-dark">OFF</span>
                                 </td>
                                 <td class="align-middle text-center text-sm">
                                     <a class="btn btn-danger m-0"
