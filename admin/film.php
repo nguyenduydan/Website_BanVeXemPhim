@@ -11,7 +11,7 @@
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
-                    <table class="table align-items-center mb-0">
+                    <table class="table table-striped table-borderless align-items-center mb-0">
                         <thead>
                             <tr>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên phim</th>
@@ -193,7 +193,13 @@
                                     <label for="nam_phat_hanh">Năm phát hành</label>
                                     <input type="number" class="form-control" id="nam_phat_hanh" name="nam_phat_hanh" placeholder="Nhập năm phát hành" required>
                                 </div>
-
+                                <div class="form-group mb-3">
+                                    <label for="status">Trạng thái</label>
+                                    <select class="form-control" id="status" name="status" required>
+                                        <option value="Active">Online</option>
+                                        <option value="Inactive">Offline</option>
+                                    </select>
+                                </div>
                                 <!-- Thời lượng phim -->
                                 <div class="form-group mb-3">
                                     <label for="thoi_luong">Thời lượng (phút)</label>
