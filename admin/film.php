@@ -93,7 +93,7 @@
     </div>
 </div>
 
-<!-- Modal Thêm thể loại phim -->
+<!-- Modal Thêmphim -->
 <div class="modal fade" id="addFilmModal" style="--bs-modal-width: 60rem" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
