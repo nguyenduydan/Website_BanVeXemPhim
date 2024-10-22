@@ -17,6 +17,8 @@
         'timeshow' => 'Danh sách suất chiếu',
         'user' => 'Danh sách người dùng',
         'room' => 'Danh sách phòng chiếu',
+        'room' => 'Danh sách menu',
+        //----//
         'film-add' => 'Thêm phim',
         'categories-add' => 'Thêm thể loại phim',
     ];
