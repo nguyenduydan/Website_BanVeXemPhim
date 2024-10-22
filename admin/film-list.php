@@ -68,13 +68,11 @@
                                         Xóa
                                     </a>
                                     <a class="btn btn-info m-0"
-                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                                        Sửa
+                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" href="../admin/film-edit.php">
+                                        Sửa 
                                     </a>
                                 </td>
                             </tr>
-
-
                         </tbody>
                     </table>
                 </div>
