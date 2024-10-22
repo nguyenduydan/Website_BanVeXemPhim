@@ -7,7 +7,7 @@
 <div id="carousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner border-radius-2xl">
         <div class="carousel-item active" data-bs-interval="5000">
-            <img style="border-radius: 0 !important;" src="assets/imgs/curved-images/curved-10.jpg" class="d-block w-100" alt="...">
+            <img src="assets/imgs/curved-images/curved-10.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item" data-bs-interval="5000">
             <img src="assets/imgs/curved-images/curved-10.jpg" class="d-block w-100" alt="...">
