@@ -6,7 +6,7 @@ a<?php include('includes/header.php'); ?>
         <h2>Chỉnh sửa thể loại phim</h2>
 
         <!-- Nút quay lại nằm sát bên phải -->
-        <a class="btn btn-secondary mb-4" href="categorie.php" style="float: right;">Quay lại</a>
+        <a class="btn btn-secondary mb-4" href="categories.php" style="float: right;">Quay lại</a>
 
         <form action="category-edit-process.php" method="POST">
             <div class="row">
