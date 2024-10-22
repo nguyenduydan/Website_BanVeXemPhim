@@ -8,16 +8,16 @@ $current_page_name = end($path_parts); // Lấy phần cuối cùng của đư�
 
 $page_names = [
     'index' => 'Dashboard',
-    'categories-list' => 'Categories List',
+    'categories' => 'Categories',
     'categories-add' => 'Categories Add',
-    'film-list' => 'Film List',
+    'film' => 'Film',
 ];
 
 // Ánh xạ trang cha cho từng trang
 $parent_pages = [
-    'categories-list' => 'Dashboard', // Trang cha của categories-list
-    'categories-add' => 'categories-list',
-    'film-list' => 'Categories List', // Trang cha của film-list
+    'categories' => 'Dashboard', // Trang cha của categories
+    'categories-add' => 'categories',
+    'film' => 'Categories', // Trang cha của film
 ];
 
 // Gán tên trang cha nếu có
