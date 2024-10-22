@@ -1,6 +1,9 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-info p-3">
     <div class="container-fluid">
-        <a class="navbar-brand fs-3 ms-2" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; " href="#">D2P</a>
+        <a class="navbar-brand fs-2 ms-5 p-0"
+            style="
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            " href="#">D2P</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
