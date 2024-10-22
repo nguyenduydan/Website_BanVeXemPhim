@@ -45,13 +45,11 @@
                                         Xóa
                                     </a>
                                     <a class="btn btn-info m-0"
-                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" href="../admin/categories-edit.php">
                                         Sửa
                                     </a>
                                 </td>
                             </tr>
-
-
                         </tbody>
                     </table>
                 </div>
