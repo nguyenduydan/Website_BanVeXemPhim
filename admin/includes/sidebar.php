@@ -42,9 +42,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if ($current_page === "categories-list.php" || $current_page === "categories-add.php") {
+                <a class="nav-link <?php if ($current_page === "categories.php" || $current_page === "categories-add.php") {
                                         echo "active";
-                                    } ?>" href="../admin/categories-list.php" data-class="bg-white">
+                                    } ?>" href="../admin/categories.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 640 512" version="1.1"
@@ -66,9 +66,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if ($current_page === "film-list.php" || $current_page === "film-add.php") {
+                <a class="nav-link <?php if ($current_page === "film.php" || $current_page === "film-add.php") {
                                         echo "active";
-                                    } ?>" href="../admin/film-list.php" data-class="bg-white">
+                                    } ?>" href="../admin/film.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 16 16" version="1.1"
@@ -90,9 +90,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if ($current_page === "chair-list.php" || $current_page === "chair-add.php") {
+                <a class="nav-link <?php if ($current_page === "chair.php" || $current_page === "chair-add.php") {
                                         echo "active";
-                                    } ?>" href="../admin/chair-list.php" data-class="bg-white">
+                                    } ?>" href="../admin/chair.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 640 512" version="1.1"
@@ -115,9 +115,34 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if ($current_page === "timeshow-list.php" || $current_page === "timeshow-add.php") {
+                <a class="nav-link <?php if ($current_page === "room.php" || $current_page === "room-add.php") {
                                         echo "active";
-                                    } ?>" href="../admin/timeshow-list.php" data-class="bg-white">
+                                    } ?>" href="../admin/room.php" data-class="bg-white">
+                    <div
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg width="12px" height="12px" viewBox="0 0 640 512" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>office</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g id="office" transform="translate(153.000000, 2.000000)">
+                                            <path class="color-background opacity-6"
+                                                d="M64 160C64 89.3 121.3 32 192 32l256 0c70.7 0 128 57.3 128 128l0 33.6c-36.5 7.4-64 39.7-64 78.4l0 48-384 0 0-48c0-38.7-27.5-71-64-78.4L64 160zM544 272c0-20.9 13.4-38.7 32-45.3c5-1.8 10.4-2.7 16-2.7c26.5 0 48 21.5 48 48l0 176c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32L96 448c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32L0 272c0-26.5 21.5-48 48-48c5.6 0 11 1 16 2.7c18.6 6.6 32 24.4 32 45.3l0 48 0 32 32 0 384 0 32 0 0-32 0-48z">
+                                            </path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text ms-1">Danh sách phòng</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <?php if ($current_page === "timeshow.php" || $current_page === "timeshow-add.php") {
+                                        echo "active";
+                                    } ?>" href="../admin/timeshow.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -143,9 +168,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if ($current_page === "topic-list.php" || $current_page === "topic-add.php") {
+                <a class="nav-link <?php if ($current_page === "topic.php" || $current_page === "topic-add.php") {
                                         echo "active";
-                                    } ?>" href="../admin/topic-list.php" data-class="bg-white">
+                                    } ?>" href="../admin/topic.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -171,9 +196,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if ($current_page === "content-list.php" || $current_page === "content-add.php") {
+                <a class="nav-link <?php if ($current_page === "content.php" || $current_page === "content-add.php") {
                                         echo "active";
-                                    } ?>" href="../admin/content-list.php" data-class="bg-white">
+                                    } ?>" href="../admin/content.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -199,9 +224,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if ($current_page === "slider-list.php" || $current_page === "slider-add.php") {
+                <a class="nav-link <?php if ($current_page === "slider.php" || $current_page === "slider-add.php") {
                                         echo "active";
-                                    } ?>" href="../admin/slider-list.php" data-class="bg-white">
+                                    } ?>" href="../admin/slider.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -227,9 +252,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if ($current_page === "menu-list.php" || $current_page === "menu-add.php") {
+                <a class="nav-link <?php if ($current_page === "menu.php" || $current_page === "menu-add.php") {
                                         echo "active";
-                                    } ?>" href="../admin/menu-list.php" data-class="bg-white">
+                                    } ?>" href="../admin/menu.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -258,9 +283,9 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if ($current_page === "user-list.php") {
+                <a class="nav-link <?php if ($current_page === "user.php") {
                                         echo "active";
-                                    } ?>" href="../admin/user-list.php" data-class="bg-white">
+                                    } ?>" href="../admin/user.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1"
@@ -311,7 +336,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Đăng xuất</span>
+                    <span class="nav-link-text ms-1 text-danger fw-bold">Đăng xuất</span>
                 </a>
             </li>
         </ul>
