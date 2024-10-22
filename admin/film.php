@@ -94,11 +94,11 @@
 </div>
 
 <!-- Modal Thêm phim -->
-<div class="modal fade" id="addFilmModal" style="--bs-modal-width: 60rem" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+<div class="modal fade" id="addFilmModal" style="--bs-modal-width: 60rem" tabindex="-1" aria-labelledby="addFilmModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addCategoryModalLabel">Thêm phim</h5>
+                <h5 class="modal-title" id="addFilmModalLabel">Thêm phim</h5>
                 <button type="button" class="btn btn-danger"
                     style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .2rem; --bs-btn-font-size: .75rem;"
                     data-bs-dismiss="modal" aria-label="Close">
@@ -227,17 +227,17 @@
             </div>
         </div>
     </div>
+</div>
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var output = document.getElementById('preview');
+            output.src = reader.result;
+            output.style.display = 'block';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
 
-    <script>
-        function previewImage(event) {
-            var reader = new FileReader();
-            reader.onload = function() {
-                var output = document.getElementById('preview');
-                output.src = reader.result;
-                output.style.display = 'block';
-            };
-            reader.readAsDataURL(event.target.files[0]);
-        }
-    </script>
-
-    <?php include('includes/footer.php'); ?>
+<?php include('includes/footer.php'); ?>
