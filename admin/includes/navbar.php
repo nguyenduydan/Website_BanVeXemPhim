@@ -35,7 +35,6 @@ $parent_title = $parent_pages[$current_page_name] ?? null;
     #results {
         position: absolute;
         top: 100%;
-        text-align: center;
         /* Hiển thị ngay dưới ô tìm kiếm */
         left: 20;
         right: 0;
@@ -50,11 +49,17 @@ $parent_title = $parent_pages[$current_page_name] ?? null;
         display: none;
     }
 
+    #results a {
+        padding: 5px 15px;
+        font-weight: 900;
+    }
+
+
     .result-item {
         padding: 10px;
         border-bottom: 1px solid #ddd;
         text-decoration: none;
-        color: #007BFF;
+        color: #17ad37;
         display: block;
         width: 100%;
         transition: all ease .15s;
@@ -62,7 +67,7 @@ $parent_title = $parent_pages[$current_page_name] ?? null;
 
     /* Thêm viền và hiệu ứng khi di chuột qua vùng kết quả */
     #results .result-item:hover {
-        background-color: #004cb0;
+        background-color: #17ad37;
         color: #fff;
     }
 </style>
