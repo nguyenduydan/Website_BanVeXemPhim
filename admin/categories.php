@@ -114,7 +114,7 @@
                         </div>
 
                         <!-- Nút submit -->
-                        <button type="submit" class="btn btn-primary">Thêm thể loại</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
                     </form>
                 </div>
             </div>

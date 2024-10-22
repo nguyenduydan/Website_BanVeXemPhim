@@ -221,7 +221,7 @@
                         <input type="hidden" id="nguoi_chinh_sua" name="nguoi_chinh_sua" value="<?php echo $_SESSION['username']; ?>">
 
                         <!-- Nút submit -->
-                        <button type="submit" class="btn btn-primary">Thêm phim</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
                     </form>
                 </div>
             </div>
