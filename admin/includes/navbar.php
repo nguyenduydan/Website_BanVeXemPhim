@@ -8,14 +8,16 @@ $current_page_name = end($path_parts); // Lấy phần cuối cùng của đư�
 
 $page_names = [
     'index' => 'Dashboard',
-    'categories-list' => 'Categories List',
-    'film-list' => 'Film List',
+    'categories' => 'Categories',
+    'categories-add' => 'Categories Add',
+    'film' => 'Film',
 ];
 
 // Ánh xạ trang cha cho từng trang
 $parent_pages = [
-    'categories-list' => 'Dashboard', // Trang cha của categories-list
-    'film-list' => 'Categories List', // Trang cha của film-list
+    'categories' => 'Dashboard', // Trang cha của categories
+    'categories-add' => 'categories',
+    'film' => 'Categories', // Trang cha của film
 ];
 
 // Gán tên trang cha nếu có
@@ -42,12 +44,7 @@ $parent_title = $parent_pages[$current_page_name] ?? null;
                 </div>
             </div>
             <ul class="navbar-nav justify-content-end">
-                <li class="nav-item d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
-                        <i class="fa fa-user me-sm-1"></i>
-                        <span class="d-sm-inline d-none">Sign In</span>
-                    </a>
-                </li>
+
                 <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                         <div class="sidenav-toggler-inner">

@@ -8,9 +8,16 @@
 
     $page_titles = [
         'dashboard' => 'Dashboard',
-        'film-list' => 'Danh sách phim',
+        'film' => 'Danh sách phim',
+        'categories' => 'Danh sách thể loại phim',
+        'chair' => 'Danh sách ghế',
+        'content' => 'Danh sách nội dung',
+        'topic' => 'Danh sách chủ đề',
+        'slider' => 'Danh sách slider',
+        'timeshow' => 'Danh sách suất chiếu',
+        'user' => 'Danh sách người dùng',
+        'room' => 'Danh sách phòng chiếu',
         'film-add' => 'Thêm phim',
-        'categories-list' => 'Danh sách thể loại phim',
         'categories-add' => 'Thêm thể loại phim',
     ];
 

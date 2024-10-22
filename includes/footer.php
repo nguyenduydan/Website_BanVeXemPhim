@@ -1,22 +1,8 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <title>D2P Ticket Cinema</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-    </head>
-
-    <body>
-    <!-- Footer 11 - Bootstrap Brain Component -->
-    <footer class="py-sm-3 py-md-4 py-xl-6">
-        <div class="container-fluid bg-black py-3 py-md-6 py-xl-9 py-xxl-10">
+    </div>
+    <footer class="py-sm-3 py-md-4 py-xl-6" style="background-color: black;">
+        <div class="container-fluid ">
             <div class="row justify-content-center">
                 <div class="col-7">
-
                     <!-- Widgets - Bootstrap Brain Component -->
                     <section class="mb-4 mb-md-5 mb-xl-9 mb-xxl-10">
                         <div class="row gy-4 gy-md-0">
@@ -171,55 +157,12 @@
                             </div>
                         </div>
                     </section>
-
-                    <!-- Link - Bootstrap Brain Component -->
-                    <div class="mb-3">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="link-wrapper">
-                                    <ul
-                                        class="m-0 list-unstyled d-flex justify-content-center justify-content-md-start gap-3">
-                                        <li>
-                                            <a href="#!"
-                                                class="fs-7 link-underline-opacity-0 link-opacity-75-hover link-underline-opacity-100-hover link-offset-1 link-light">
-                                                Terms
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#!"
-                                                class="fs-7 link-underline-opacity-0 link-opacity-75-hover link-underline-opacity-100-hover link-offset-1 link-light">
-                                                Privacy
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#!"
-                                                class="fs-7 link-underline-opacity-0 link-opacity-75-hover link-underline-opacity-100-hover link-offset-1 link-light">
-                                                Advertise
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#!"
-                                                class="fs-7 link-underline-opacity-0 link-opacity-75-hover link-underline-opacity-100-hover link-offset-1 link-light">
-                                                Media
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Copyright - Bootstrap Brain Component -->
                     <div class="border-top border-dark-subtle pt-3">
                         <div class="row gy-3 align-items-center">
                             <div class="col-12 col-md-6">
                                 <div class="copyright-wrapper d-block mb-1 fs-8 text-light text-center text-md-start">
                                     &copy; 2024. All Rights Reserved.
-                                </div>
-                                <div
-                                    class="credit-wrapper d-block text-secondary fs-9 text-light text-center text-md-start">
-                                    Built by<a href="https://bootstrapbrain.com/" class="link-light text-decoration-none">
-                                        BootstrapBrain</a> with <span class="text-primary">&#9829;</span>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
@@ -280,5 +223,24 @@
             </div>
         </div>
     </footer>
+    </main>
+    <script src="assets/js/core/popper.min.js"></script>
+    <script src="assets/js/core/bootstrap.min.js"></script>
+    <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="assets/js/plugins/chartjs.min.js"></script>
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     </body>
-</html>
+
+    </html>

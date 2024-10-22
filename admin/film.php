@@ -77,6 +77,17 @@
                     </table>
                 </div>
             </div>
+            <div class="card-footer">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item"><a class="page-link bg-dark text-light font-weight-bold" href="#">Trước</a></li>
+                        <li class="page-item active" aria-current="page"><a class="page-link mx-1" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link mx-1" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link mx-1" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link bg-dark text-light font-weight-bold" href="#">Tiếp</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
 </div>

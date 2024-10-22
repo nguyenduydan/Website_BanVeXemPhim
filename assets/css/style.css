@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
 
 /* CSS */
 .btn-add{
@@ -46,3 +47,18 @@ img
 {
    border-radius: 20px !important;
 }
+.page-item .page-link,
+.page-item a{
+    background-color: #ffffff;
+    width: 50px;
+    border-radius: 20px !important;
+}
+
+.carousel-item
+{
+    height: 30rem;
+
+}
+
+
+
