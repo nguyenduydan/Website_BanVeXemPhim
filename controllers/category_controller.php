@@ -12,14 +12,6 @@ $status;
 
 $category_list = 'SELECT * FROM theloai';
 $result = mysqli_query($conn, $category_list);
-while ($row = mysqli_fetch_assoc($result)) {
-    // Lưu trữ từng phần của dữ liệu trong biến
-    $categoryId = $row['MaTheLoai'];
-    $categoryName = $row['TenTheLoai'];
-    $personCreated = $row['NguoiTao'];
-    $status = $row['TrangThai'];
-    $timeCreated = $row['NgayTao'];
-}
 
 
 // Đóng kết nối

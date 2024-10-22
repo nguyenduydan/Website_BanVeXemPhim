@@ -24,34 +24,42 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="align-middle text-center text-sm">
-                                    <p class="text-xs font-weight-bold mb-0"><?php echo $categoryId ?? '' ?></p>
-                                </td>
-                                <td class=" align-middle text-center text-sm">
-                                    <p class="text-xs font-weight-bold mb-0"><?php echo $categoryName ?? '' ?></p>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-bold"><?php echo $personCreated ?? '' ?></span>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-success">Offline</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-bold"><?php echo $timeCreated ?? '' ?></span>
-                                </td>
+                            <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+                                <tr>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-xs font-weight-bold mb-0"><?php echo $row['MaTheLoai'] ?? '' ?></p>
+                                    </td>
+                                    <td class=" align-middle text-center text-sm">
+                                        <p class="text-xs font-weight-bold mb-0"><?php echo $row['TenTheLoai'] ?? '' ?></p>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold"><?php echo $row['NguoiTao'] ?? '' ?></span>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <?php
+                                        if ($row['TrangThai'] == '0') {
+                                            echo '<span class="badge badge-sm bg-gradient-light">OFF</span>';
+                                        } else {
+                                            echo '<span class="badge badge-sm bg-gradient-success">ON</span>';
+                                        }
+                                        ?>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold"><?php echo $row['NgayTao'] ?? '' ?></span>
+                                    </td>
 
-                                <td class="align-middle text-center text-sm">
-                                    <a class="btn btn-danger m-0"
-                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                                        Xóa
-                                    </a>
-                                    <a class="btn btn-info m-0"
-                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" href="../admin/categories-edit.php">
-                                        Sửa
-                                    </a>
-                                </td>
-                            </tr>
+                                    <td class="align-middle text-center text-sm">
+                                        <a class="btn btn-danger m-0"
+                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                            Xóa
+                                        </a>
+                                        <a class="btn btn-info m-0"
+                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" href="../admin/categories-edit.php">
+                                            Sửa
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
                         </tbody>
                     </table>
                 </div>
@@ -74,7 +82,7 @@
                     <form action="" method="POST">
                         <div class="row">
                             <!-- Cột 1: Tên thể loại và trạng thái -->
-                            <div class="col-md-6">
+                            <div class="col-md">
                                 <!-- Nhập tên thể loại -->
                                 <div class="form-group mb-3">
                                     <label for="ten_the_loai">Tên thể loại</label>
@@ -85,8 +93,8 @@
                                 <div class="form-group mb-3">
                                     <label for="trang_thai">Trạng thái</label>
                                     <select class="form-control" id="trang_thai" name="trang_thai" required>
-                                        <option value="Active">Kích hoạt</option>
-                                        <option value="Inactive">Không kích hoạt</option>
+                                        <option value="Active">Hiển thị</option>
+                                        <option value="Inactive">Không hiển thị</option>
                                     </select>
                                 </div>
                             </div>
