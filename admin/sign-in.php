@@ -9,7 +9,25 @@
     Đăng nhập
   </title>
   <?php require('../admin/includes/links.php'); ?>
+  <style>
+    .input-group .form-control {
+      padding-right: 40px;
+      /* Để dành khoảng trống cho icon */
+    }
 
+    .input-group .icon {
+      position: absolute;
+      right: 20px;
+      /* Đặt icon ở phía bên phải của ô input */
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+
+    .input-group {
+      position: relative;
+    }
+  </style>
 </head>
 
 <body class="">
@@ -21,18 +39,21 @@
             <div class="col-xl-6 col-lg-7 col-md-6 d-flex flex-column mx-auto">
               <div class="card card-plain mt-8">
                 <div class="card-header pb-0 text-left bg-transparent">
-                  <h1 class="fx- font-weight-bolder text-info text-gradient">Welcome back</h3>
-                    <p class="mb-0 fs-4">Enter your email and password to sign in</p>
+                  <h1 class="fx- font-weight-bolder text-info text-gradient">Đăng nhập</h3>
+
                 </div>
                 <div class="card-body">
                   <form role="form">
-                    <label class="fs-5">Email</label>
+                    <label class="fs-5">Username</label>
                     <div class="mb-3">
-                      <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
+                      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="username-addon">
                     </div>
                     <label class="fs-5">Password</label>
-                    <div class="mb-3">
-                      <input type="email" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
+                    <div class="input-group mb-3">
+                      <input type="password" id="passwordInput" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
+                      <span class="icon d-flex" id="password-addon">
+                        <i class="fas fa-eye" id="togglePassword" style="cursor: pointer;"></i>
+                      </span>
                     </div>
                     <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
@@ -55,5 +76,19 @@
       </div>
     </section>
   </main>
+  <script>
+    const togglePassword = document.querySelector("#togglePassword");
+    const passwordInput = document.querySelector("#passwordInput");
 
-  <?php include('includes/footer.php'); ?>
+    togglePassword.addEventListener("click", function() {
+      // Chuyển đổi thuộc tính type giữa password và text
+      const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+      passwordInput.setAttribute("type", type);
+
+      // Đổi icon mắt
+      this.classList.toggle("fa-eye-slash");
+    });
+  </script>
+  <div class="mt-5">
+    <?php include('includes/footer.php'); ?>
+  </div>
