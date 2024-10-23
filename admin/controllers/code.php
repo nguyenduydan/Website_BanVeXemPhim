@@ -1,10 +1,11 @@
 <?php
-require '../../config/function.php';
-session_start(); // Bắt đầu phiên làm việc với session
+session_start();
+require '../../config/function.php'; // This includes Validator.php
 
-$errors = [];
+$validator = new Validator(); // Instantiate the Validator class
 
 if (isset($_POST['saveUser'])) {
+    // Validate and sanitize input
     $name = validate($_POST['name']);
     $username = validate($_POST['username']);
     $password = validate($_POST['password']);
@@ -16,49 +17,56 @@ if (isset($_POST['saveUser'])) {
     $role = validate($_POST['role']);
     $status = validate($_POST['status']);
 
-    // Kiểm tra tên đăng nhập hoặc email tồn tại
-    if (isUsernameAndEmailExists($username, $email)) {
-        $_SESSION['error'] = 'Tên đăng nhập hoặc email đã tồn tại, vui lòng sử dụng tên khác';
-        header("Location: ../user.php"); // Thay "user.php"
-        exit();
+    // Validate required fields
+    $validator->validateRequired('name', $name, 'Tên không được để trống');
+    $validator->validateRequired('username', $username, 'Tên đăng nhập không được để trống');
+    $validator->validateRequired('password', $password, 'Mật khẩu không được để trống');
+    if ($password !== $re_password) {
+        $validator->validateRequired('re_password', $re_password, 'Mật khẩu không khớp');
     }
 
+    // Check for existing username/email
+    $validator->validateUsernameAndEmail($username, $email);
+
+    // Handle avatar upload
     $avatar = '';
-    if (isset($_FILES['avatar'])) {
+    if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
         $avatarResult = uploadAvatar($_FILES['avatar'], "upload/avatars/");
         if ($avatarResult['success']) {
             $avatar = $avatarResult['filename'];
         } else {
-            $errors[] = $avatarResult['message'];
+            $validator->validateRequired('avatar', '', $avatarResult['message']);
         }
     }
 
-    // Kiểm tra và băm mật khẩu
+    // Hash password
     $passwordDetails = validateAndHashPassword($password, $re_password);
     if (!$passwordDetails['status']) {
-        $errors[] = $passwordDetails['message'];
+        $validator->validateRequired('password', '', $passwordDetails['message']);
     }
     $hashedPassword = $passwordDetails['hashed'];
 
+    // Collect errors
+    $errors = $validator->getErrors();
+
     if (empty($errors)) {
+        // Insert into database
         $ngay_tao = date('Y-m-d H:i:s');
         $query = "INSERT INTO NguoiDung (TenND, username, NgaySinh, GioiTinh, SDT, Anh, Email, MatKhau, Role, NguoiTao, NgayTao, TrangThai)
                   VALUES ('$name', '$username', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email', '$hashedPassword', '$role', '1', '$ngay_tao', '$status')";
 
-        $result = mysqli_query($conn, $query);
-        if ($result) {
+        if (mysqli_query($conn, $query)) {
             $_SESSION['success'] = 'Thêm tài khoản thành công';
-            header("Location: ../user.php"); // Thay "user.php"
+            header("Location: ../user.php");
             exit();
         } else {
-            $errors[] = 'Thêm tài khoản thất bại';
+            $_SESSION['error'] = 'Thêm tài khoản thất bại';
+            header("Location: ../user-add.php");
+            exit();
         }
-    }
-
-    // Nếu có lỗi
-    if ($errors) {
-        $_SESSION['error'] = implode(', ', $errors);
-        header("Location: ../user.php"); // Thay "user.php"
+    } else {
+        $_SESSION['error'] = 'Có lỗi xảy ra, vui lòng kiểm tra lại';
+        header("Location: ../user-add.php");
         exit();
     }
 }

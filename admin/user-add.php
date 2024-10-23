@@ -1,55 +1,67 @@
-<?php include('includes/header.php'); ?>
+<?php
+require '../config/function.php'; // This includes Validator.php
+include('includes/header.php');
+
+$validator = new Validator(); // Instantiate Validator class
+?>
+
+<div id="toast"></div>
+<script src="/Website_BanVeXemPhim/assets/js/toast.js"></script>
+<?php alertMessage() ?>
+
 <div class="row">
     <div class="col-xl-12 col-lg-12 mx-auto">
         <h2><?php echo htmlspecialchars($title); ?></h2>
-        <!-- Nút quay lại nằm sát bên phải -->
         <div class="text-end mb-4">
             <a class="btn btn-secondary" href="javascript:window.history.back(-1);"><i class="bi bi-arrow-left-short"></i> Quay lại</a>
         </div>
-        <form id="addUserForm" action="../admin/controllers/code.php" method="post">
+        <form id="addUserForm" action="../admin/controllers/code.php" method="post" enctype="multipart/form-data">
             <div class="row">
-                <!-- Cột 1 -->
                 <div class="col-md-6">
-                    <!-- Nhập tên người dùng -->
                     <div class="form-group mb-3">
-                        <label for="name"> Họ và tên người dùng</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ và tên" required>
+                        <label for="name">Họ và tên người dùng</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ và tên"
+                            value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>">
+                        <?php echo '<small style="color: red;">lỗi</small>'; ?>
                     </div>
                     <div class="form-group mb-3">
                         <label for="username">Tên người dùng</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên đăng nhập" required>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên đăng nhập"
+                            value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
+                        <?php echo $validator->displayError('username'); ?>
                     </div>
                     <div class="form-group mb-3">
                         <label for="password">Mật khẩu</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" required>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
+                        <?php echo $validator->displayError('password'); ?>
                     </div>
                     <div class="form-group mb-3">
                         <label for="re_password">Nhập lại mật khẩu</label>
-                        <input type="password" class="form-control" id="re_password" name="re_password" placeholder="Nhập lại mật khẩu" required>
+                        <input type="password" class="form-control" id="re_password" name="re_password" placeholder="Nhập lại mật khẩu">
+                        <?php echo $validator->displayError('re_password'); ?>
                     </div>
-
-                    <!-- Dropdown giới tính-->
                     <div class="form-group mb-3">
                         <label for="gioi_tinh">Giới tính</label>
-                        <select class="form-control" id="gioi_tinh" name="gioi_tinh" required>
-                            <option value="Active">Nam</option>
-                            <option value="Inactive">Nữ</option>
+                        <select class="form-control" id="gioi_tinh" name="gioi_tinh">
+                            <option value="Nam" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] === 'Nam') ? 'selected' : ''; ?>>Nam</option>
+                            <option value="Nữ" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] === 'Nữ') ? 'selected' : ''; ?>>Nữ</option>
                         </select>
                     </div>
                     <div class="form-group mb-3">
                         <label for="sdt">Số điện thoại</label>
-                        <input type="number" class="form-control" id="sdt" name="sdt" placeholder="Nhập số điện thoại" required>
+                        <input type="number" class="form-control" id="sdt" name="sdt" placeholder="Nhập số điện thoại"
+                            value="<?php echo isset($_POST['sdt']) ? htmlspecialchars($_POST['sdt']) : ''; ?>">
                     </div>
                     <div class="form-group mb-3">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email" required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email"
+                            value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" required>
                     </div>
                 </div>
-                <!-- Cột 2 -->
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="ngay_sinh">Ngày sinh</label>
-                        <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh" placeholder="Nhập ngày sinh" required>
+                        <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="role">Vai trò</label>
@@ -58,7 +70,6 @@
                             <option value="0">User</option>
                         </select>
                     </div>
-
                     <div class="form-group mb-3">
                         <label for="status">Trạng thái</label>
                         <select class="form-control" id="status" name="status" required>
@@ -70,13 +81,11 @@
                         <label for="avatar">Chọn ảnh</label>
                         <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*" required onchange="previewImage(event)">
                     </div>
-                    <!-- Hiển thị ảnh đã chọn -->
                     <div class="form-group mb-3">
                         <img id="preview" src="#" alt="Ảnh xem trước" class="img-fluid" style="display:none; max-width: 100%; max-height: 220px;" />
                     </div>
                 </div>
             </div>
-            <!-- Nút submit -->
             <button type="submit" name="saveUser" class="btn btn-success w-15 mt-3">Lưu</button>
         </form>
     </div>

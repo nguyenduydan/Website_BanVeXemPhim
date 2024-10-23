@@ -1,19 +1,18 @@
-
 function showSuccessToast(message) {
     toast({
         title: "Thành công!",
         message: message,
         type: "success",
-        duration: 1000
+        duration: 3000
     });
-};
+}
 
 function showErrorToast(message) {
     toast({
         title: "Thất bại!",
         message: message,
         type: "error",
-        duration: 1000
+        duration: 3000
     });
 }
 
@@ -21,17 +20,18 @@ function toast({
     title = "",
     message = "",
     type = "info",
-    duration = 500
+    duration = 400
 }) {
     const main = document.getElementById("toast");
     if (main) {
         const toast = document.createElement("div");
-        main.appendChild(toast);
 
+        // Auto remove toast
         const autoRemoveId = setTimeout(function () {
             main.removeChild(toast);
-        }, duration + 500);
+        }, duration + 100);
 
+        // Remove toast when clicked
         toast.onclick = function (e) {
             if (e.target.closest(".toast__close")) {
                 main.removeChild(toast);
@@ -41,24 +41,29 @@ function toast({
 
         const icons = {
             success: "fas fa-check-circle",
-            error: "fas fa-exclamation-circle",
+            info: "fas fa-info-circle",
+            warning: "fas fa-exclamation-circle",
+            error: "fas fa-exclamation-circle"
         };
         const icon = icons[type];
+        const delay = (duration / 1000).toFixed(2);
 
         toast.classList.add("toast", `toast--${type}`);
-        toast.style.animation = `slideInLeft ease .3s forwards, fadeOut linear 0.3s ${duration / 1000}s forwards`;
+        toast.style.animation = `slideInLeft ease .3s, fadeOut linear .3s ${delay}s forwards`;
 
         toast.innerHTML = `
-                <div class="toast__icon">
-                    <i class="${icon}"></i>
-                </div>
-                <div class="toast__body">
-                    <h3 class="toast__title">${title}</h3>
-                    <p class="toast__msg">${message}</p>
-                </div>
-                <div class="toast__close">
-                    <i class="fas fa-times"></i>
-                </div>
-            `;
+            <div class="toast__icon">
+                <i class="${icon}"></i>
+            </div>
+            <div class="toast__body">
+                <h3 class="toast__title">${title}</h3>
+                <p class="toast__msg">${message}</p>
+            </div>
+            <div class="toast__close">
+                <i class="fas fa-times"></i>
+            </div>
+        `;
+        main.appendChild(toast);
     }
 }
+

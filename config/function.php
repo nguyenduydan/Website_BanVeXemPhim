@@ -19,21 +19,21 @@ function redirect($url, $status)
     exit(0);
 }
 
-
 function alertMessage()
 {
-
     if (isset($_SESSION['error'])) {
-        echo '<div class="alert alert-danger">' . $_SESSION['error'] . '</div>';
+        // Nếu là mảng, chuyển đổi thành chuỗi
+        $errorMessage = is_array($_SESSION['error']) ? implode(', ', $_SESSION['error']) : $_SESSION['error'];
+        echo '<script>showErrorToast("' . addslashes($errorMessage) . '");</script>';
         unset($_SESSION['error']); // Xóa thông báo sau khi đã hiển thị
     }
     if (isset($_SESSION['success'])) {
-        echo '<div class="alert alert-success">' . $_SESSION['success'] . '</div>';
+        // Nếu là mảng, chuyển đổi thành chuỗi
+        $successMessage = is_array($_SESSION['success']) ? implode(', ', $_SESSION['success']) : $_SESSION['success'];
+        echo '<script>showSuccessToast("' . addslashes($successMessage) . '");</script>';
         unset($_SESSION['success']); // Xóa thông báo sau khi đã hiển thị
     }
 }
-
-
 
 function uploadAvatar($file, $targetDir)
 {
@@ -76,4 +76,36 @@ function isUsernameAndEmailExists($username, $email)
     $result = mysqli_query($conn, $query);
 
     return mysqli_num_rows($result) > 0;
+}
+
+class Validator
+{
+    private $errors = [];
+
+    public function validateRequired($field, $value, $message)
+    {
+        if (empty($value)) {
+            $this->errors[$field] = $message;
+        }
+    }
+
+    public function validateUsernameAndEmail($username, $email)
+    {
+        if (isUsernameAndEmailExists($username, $email)) {
+            $this->errors['username_email'] = 'Tên đăng nhập hoặc email đã tồn tại, vui lòng sử dụng tên khác';
+        }
+    }
+
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+
+    public function displayError($field)
+    {
+        if (isset($this->errors[$field])) {
+            return '<small style="color: red;">' . $this->errors[$field] . '</small>';
+        }
+        return '';
+    }
 }
