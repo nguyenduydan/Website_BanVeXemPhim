@@ -59,7 +59,7 @@
                                     </a>
                                     <a class="btn btn-danger m-0"
                                         style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" href="../admin/film-delete.php">
-                                        <i class="bi bi-pencil"></i> Sửa
+                                        <i class="bi bi-trash"></i> Xoá
                                     </a>
                                 </td>
                             </tr>
