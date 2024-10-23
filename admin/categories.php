@@ -50,7 +50,7 @@
 
                                     <td class="align-middle text-center text-sm">
                                         <a class="btn btn-info m-0" data-bs-toggle="modal" data-bs-target="#editCategoryModal"
-                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" href="../admin/categories-edit.php">
+                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                             Sửa
                                         </a>
                                         <a class="btn btn-danger m-0" data-bs-toggle="modal" data-bs-target="#delCategoryModal"
