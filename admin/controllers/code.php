@@ -1,9 +1,9 @@
 <?php
 require '../../config/function.php';
-
+session_start(); // Bắt đầu phiên làm việc với session
 
 $errors = [];
-$response = [];
+
 if (isset($_POST['saveUser'])) {
     $name = validate($_POST['name']);
     $username = validate($_POST['username']);
@@ -18,20 +18,21 @@ if (isset($_POST['saveUser'])) {
 
     // Kiểm tra tên đăng nhập hoặc email tồn tại
     if (isUsernameAndEmailExists($username, $email)) {
-        echo '<span style="color:red;">Tên đăng nhập hoặc email đã tồn tại, vui lòng sử dụng tên khác</span>';
-        exit(); // Exit to stop further processing
+        $_SESSION['error'] = 'Tên đăng nhập hoặc email đã tồn tại, vui lòng sử dụng tên khác';
+        header("Location: ../user.php"); // Thay "user.php"
+        exit();
     }
-    
+
     $avatar = '';
     if (isset($_FILES['avatar'])) {
         $avatarResult = uploadAvatar($_FILES['avatar'], "upload/avatars/");
         if ($avatarResult['success']) {
-            $avatar = $avatarResult['filename'];  
+            $avatar = $avatarResult['filename'];
         } else {
-            $errors[] = $avatarResult['message']; 
+            $errors[] = $avatarResult['message'];
         }
     }
-    
+
     // Kiểm tra và băm mật khẩu
     $passwordDetails = validateAndHashPassword($password, $re_password);
     if (!$passwordDetails['status']) {
@@ -43,24 +44,21 @@ if (isset($_POST['saveUser'])) {
         $ngay_tao = date('Y-m-d H:i:s');
         $query = "INSERT INTO NguoiDung (TenND, username, NgaySinh, GioiTinh, SDT, Anh, Email, MatKhau, Role, NguoiTao, NgayTao, TrangThai)
                   VALUES ('$name', '$username', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email', '$hashedPassword', '$role', '1', '$ngay_tao', '$status')";
-        
+
         $result = mysqli_query($conn, $query);
         if ($result) {
-            $response['success'] = true;
-            $response['message'] = 'Thêm tài khoản thành công';
+            $_SESSION['success'] = 'Thêm tài khoản thành công';
+            header("Location: ../user.php"); // Thay "user.php"
+            exit();
         } else {
-            $response['success'] = false;
             $errors[] = 'Thêm tài khoản thất bại';
         }
     }
-    if ($errors) {
-        echo json_encode(['success' => false, 'errors' => $errors]);
-    } else {
-        echo json_encode(['success' => true]);
-    }
-    
-    exit();
 
- 
+    // Nếu có lỗi
+    if ($errors) {
+        $_SESSION['error'] = implode(', ', $errors);
+        header("Location: ../user.php"); // Thay "user.php"
+        exit();
+    }
 }
-?>

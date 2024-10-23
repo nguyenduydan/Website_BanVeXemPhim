@@ -35,6 +35,7 @@
         Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 </script>
+
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>

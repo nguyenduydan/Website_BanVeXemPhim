@@ -16,3 +16,5 @@
 <link id="pagestyle" href="/Website_BanVeXemPhim/assets/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
 <link rel="stylesheet" href="/Website_BanVeXemPhim/assets/css/soft-ui-dashboard.min.css">
 <link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="assets/css/toast.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

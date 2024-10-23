@@ -1,15 +1,19 @@
 <?php
+session_start();
 require '../config/function.php';
 include('includes/header.php');
 ?>
 
 <!-- Hiển thị nội dung danh sách phim -->
-
+<div id="toast"></div>
 <div class="row">
     <div class="col-12">
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center pb-0">
                 <h5><?php echo $title ?></h5>
+                <div>
+                    <?php alertMessage(); ?>
+                </div>
                 <a href="user-add.php" class="btn btn-lg me-5 btn-add"
                     style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">Thêm</a>
             </div>
