@@ -30,14 +30,15 @@ if (isset($_POST['saveUser'])) {
 
     // Handle avatar upload
     $avatar = '';
-    if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
-        $avatarResult = uploadAvatar($_FILES['avatar'], "upload/avatars/");
+    if (isset($_FILES['avatar'])) {
+        $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/");
         if ($avatarResult['success']) {
-            $avatar = $avatarResult['filename'];
+            $avatar =  $avatarResult['filename'];
         } else {
-            $validator->validateRequired('avatar', '', $avatarResult['message']);
+            $errors[] = $avatarResult['message'];
         }
     }
+
 
     // Hash password
     $passwordDetails = validateAndHashPassword($password, $re_password);

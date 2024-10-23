@@ -11,6 +11,39 @@ function validate($inpData)
     global $conn;
     return mysqli_real_escape_string($conn, $inpData);
 }
+function uploadImage($file, $targetDir)
+{
+    $result = ['success' => false, 'message' => '', 'filename' => ''];
+
+    if (isset($file) && $file['error'] == 0) {
+        $fileName = basename($file["name"]);
+        $fileTmpName = $file["tmp_name"];
+        $fileSize = $file["size"];
+        $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+        
+        // Allowed file types
+        $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+        
+        // Validate file type
+        if (!in_array($fileType, $allowedTypes)) {
+            $result['message'] = "Chỉ các định dạng JPG, JPEG, PNG và GIF được chấp nhận.";
+            return $result;
+        }
+
+        $newFileName = uniqid() . "." . $fileType;
+        $filePath = $targetDir . $newFileName;
+        if (move_uploaded_file($fileTmpName, $filePath)) {
+            $result['success'] = true;
+            $result['filename'] = $newFileName;
+        } else {
+            $result['message'] = "Có lỗi xảy ra khi tải tệp lên.";
+        }
+    } else {
+        $result['message'] = "Không có tệp nào được tải lên hoặc có lỗi trong quá trình tải.";
+    }
+    
+    return $result;
+}
 
 function redirect($url, $status)
 {
@@ -35,27 +68,27 @@ function alertMessage()
     }
 }
 
-function uploadAvatar($file, $targetDir)
-{
-    if (isset($file) && $file['error'] === UPLOAD_ERR_OK) {
-        $targetFile = $targetDir . basename($file["name"]);
+// function uploadAvatar($file, $targetDir)
+// {
+//     if (isset($file) && $file['error'] === UPLOAD_ERR_OK) {
+//         $targetFile = $targetDir . basename($file["name"]);
 
-        $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-        $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+//         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+//         $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
 
-        if (in_array($imageFileType, $allowedTypes)) {
-            if (move_uploaded_file($file["tmp_name"], $targetFile)) {
-                return "Tệp đã được tải lên thành công: " . htmlspecialchars(basename($file["name"]));
-            } else {
-                return "Có lỗi khi tải tệp lên.";
-            }
-        } else {
-            return "Chỉ cho phép các tệp ảnh: JPG, JPEG, PNG, GIF.";
-        }
-    } else {
-        return "Không có tệp nào được tải lên hoặc có lỗi xảy ra.";
-    }
-}
+//         if (in_array($imageFileType, $allowedTypes)) {
+//             if (move_uploaded_file($file["tmp_name"], $targetFile)) {
+//                 return "Tệp đã được tải lên thành công: " . htmlspecialchars(basename($file["name"]));
+//             } else {
+//                 return "Có lỗi khi tải tệp lên.";
+//             }
+//         } else {
+//             return "Chỉ cho phép các tệp ảnh: JPG, JPEG, PNG, GIF.";
+//         }
+//     } else {
+//         return "Không có tệp nào được tải lên hoặc có lỗi xảy ra.";
+//     }
+// }
 
 function validateAndHashPassword($password, $re_password)
 {
