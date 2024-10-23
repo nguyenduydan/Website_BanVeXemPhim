@@ -37,68 +37,19 @@ include('includes/header.php');
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            // Include file category_controller.php để lấy danh sách thể loại
-                            // Kiểm tra file trước khi include
-                           
-
-<<<<<<< Updated upstream
-                                    <td class="align-middle text-center text-sm">
-                                        <a class="btn btn-info m-0" data-bs-toggle="modal" data-bs-target="#editCategoryModal"
-                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                                            Sửa
-                                        </a>
-                                        <a class="btn btn-danger m-0" data-bs-toggle="modal" data-bs-target="#delCategoryModal"
-                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                                            Xóa
-                                        </a>
-                                    </td>
-=======
-                            // Duyệt qua từng dòng dữ liệu từ kết quả truy vấn
-                            if ($result && mysqli_num_rows($result) > 0) {
-                                while ($row = mysqli_fetch_assoc($result)) : ?>
-                                    <tr>
-                                        <td class="align-middle text-center text-sm">
-                                            <p class="text-xs font-weight-bold mb-0"><?php echo $row['MaTheLoai'] ?? ''; ?></p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <p class="text-xs font-weight-bold mb-0"><?php echo $row['TenTheLoai'] ?? ''; ?></p>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold"><?php echo $row['NguoiTao'] ?? ''; ?></span>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <?php
-                                            if ($row['TrangThai'] == '0') {
-                                                echo '<span class="badge badge-sm bg-gradient-light text-dark">OFF</span>';
-                                            } else {
-                                                echo '<span class="badge badge-sm bg-gradient-success">ON</span>';
-                                            }
-                                            ?>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold"><?php echo $row['NgayTao'] ?? ''; ?></span>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <a class="btn btn-info m-0" data-bs-toggle="modal" data-bs-target="#editCategoryModal"
-                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" href="../admin/categories-edit.php">
-                                                Sửa
-                                            </a>
-                                            <a class="btn btn-danger m-0" data-bs-toggle="modal" data-bs-target="#delCategoryModal"
-                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                                                Xóa
-                                            </a>
-                                        </td>
-                                    </tr>
-                                <?php endwhile;
-                            } else { ?>
-                                <tr>
-                                    <td colspan="6" class="text-center">Không có dữ liệu</td>
->>>>>>> Stashed changes
-                                </tr>
-                            <?php } ?>
+                            <tr>
+                                <td class="align-middle text-center text-sm">
+                                    <a class="btn btn-info m-0" data-bs-toggle="modal" data-bs-target="#editCategoryModal"
+                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                        Sửa
+                                    </a>
+                                    <a class="btn btn-danger m-0" data-bs-toggle="modal" data-bs-target="#delCategoryModal"
+                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                        Xóa
+                                    </a>
+                                </td>
+                            </tr>
                         </tbody>
-
                     </table>
                 </div>
             </div>
