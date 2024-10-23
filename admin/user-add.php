@@ -1,8 +1,7 @@
 <?php include('includes/header.php'); ?>
-
 <div class="row">
     <div class="col-xl-12 col-lg-12 mx-auto">
-        <h2><?php echo $title ?></h2>
+        <h2><?php echo htmlspecialchars($title); ?></h2>
         <!-- Nút quay lại nằm sát bên phải -->
         <div class="text-end mb-4">
             <a class="btn btn-secondary" href="javascript:window.history.back(-1);"><i class="bi bi-arrow-left-short"></i> Quay lại</a>

@@ -5,14 +5,6 @@ $path_parts = explode('/', trim($url_path, '/'));
 
 // Giả sử bạn đang sử dụng tên file để xác định trang
 $current_page_name = end($path_parts); // Lấy phần cuối cùng của đường dẫn
-
-$page_names = [
-    'index' => 'Dashboard',
-    'categories' => 'Categories',
-    'categories-add' => 'Categories Add',
-    'film' => 'Film',
-];
-
 // Ánh xạ trang cha cho từng trang
 $parent_pages = [
     'categories' => 'Dashboard', // Trang cha của categories

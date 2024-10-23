@@ -17,7 +17,7 @@
         'timeshow' => 'Danh sách suất chiếu',
         'user' => 'Danh sách người dùng',
         'room' => 'Danh sách phòng chiếu',
-        'room' => 'Danh sách menu',
+        'menu' => 'Danh sách menu',
         'user-add' => 'Thêm người dùng',
         //----//
         'film-add' => 'Thêm phim',
@@ -27,6 +27,7 @@
 
     // Sử dụng giá trị mặc định nếu không có ánh xạ
     $title = $page_titles[$page] ?? 'Dashboard';
+    global $title;
     ?>
 
     <!-- Required meta tags -->

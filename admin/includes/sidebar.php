@@ -270,7 +270,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if ($current_page === "user.php") {
+                <a class="nav-link <?php if ($current_page === "user.php" || $current_page === "user_add.php") {
                                         echo "active";
                                     } ?>" href="../admin/user.php" data-class="bg-white">
                     <div
