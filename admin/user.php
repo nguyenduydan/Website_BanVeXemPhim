@@ -68,7 +68,7 @@ include('includes/header.php');
             <div class="modal-body">
                 <div class="col-xl-12 col-lg-12 mx-auto">
                     <?= alertMessage(); ?>
-                    <form action="code.php" method="post">
+                    <form action="../admin/controllers/code.php" method="post">
                         <div class="row">
                             <!-- Cột 1 -->
                             <div class="col-md-6">

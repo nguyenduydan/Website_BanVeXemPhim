@@ -1,5 +1,5 @@
 <?php
-    require '../config/function.php';
+    require '../../config/function.php';
     if (isset($_POST['saveUser'])) {
         $name = validate($_POST['name']);
         $password = validate($_POST['password']);
@@ -27,12 +27,12 @@
             
             $result = mysqli_query($conn, $query);
             if($result){
-                redirect('user.php','Thêm tài khoản thành công');
+                redirect('../user.php','Thêm tài khoản thành công');
             } else {
-                redirect('user.php','Thêm tài khoản thất bại');
+                redirect('../user.php','Thêm tài khoản thất bại');
             }
         } else {
-            redirect('user.php','Vui lòng điền đầy đủ thông tin');
+            redirect('../user.php','Vui lòng điền đầy đủ thông tin');
         }
     }
 ?>
