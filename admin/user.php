@@ -4,11 +4,13 @@ include('includes/header.php');
 ?>
 
 <!-- Hiển thị nội dung danh sách phim -->
+<?= alertMessage(); ?>
 <div class="row">
     <div class="col-12">
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center pb-0">
                 <h5><?php echo $title ?></h5>
+                
                 <a href="#" class="btn btn-lg me-5 btn-add"
                     data-bs-toggle="modal" data-bs-target="#addUserModal"
                     style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">Thêm</a>
@@ -66,16 +68,20 @@ include('includes/header.php');
                 </button>
             </div>
             <div class="modal-body">
+                <div id="formErrors" class="alert alert-danger" style="display:none;"></div>
                 <div class="col-xl-12 col-lg-12 mx-auto">
-                    <?= alertMessage(); ?>
-                    <form action="../admin/controllers/code.php" method="post">
+                    <form id="addUserForm" action="../admin/controllers/code.php" method="post">
                         <div class="row">
                             <!-- Cột 1 -->
                             <div class="col-md-6">
                                 <!-- Nhập tên người dùng -->
                                 <div class="form-group mb-3">
-                                    <label for="name">Tên người dùng</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên người dùng" required>
+                                    <label for="name"> Họ và tên người dùng</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ và tên" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="username">Tên người dùng</label>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên đăng nhập" required>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="password">Mật khẩu</label>
@@ -85,10 +91,7 @@ include('includes/header.php');
                                     <label for="re_password">Nhập lại mật khẩu</label>
                                     <input type="password" class="form-control" id="re_password" name="re_password" placeholder="Nhập lại mật khẩu" required>
                                 </div>
-                                <div class="form-group mb-3">
-                                    <label for="ngay_sinh">Ngày sinh</label>
-                                    <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh" placeholder="Nhập ngày sinh" required>
-                                </div>
+                               
                                 <!-- Dropdown giới tính-->
                                 <div class="form-group mb-3">
                                     <label for="gioi_tinh">Giới tính</label>
@@ -109,23 +112,28 @@ include('includes/header.php');
                             <!-- Cột 2 -->
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
+                                    <label for="ngay_sinh">Ngày sinh</label>
+                                    <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh" placeholder="Nhập ngày sinh" required>
+                                </div>
+                                <div class="form-group mb-3">
                                     <label for="role">Vai trò</label>
                                     <select class="form-control" id="role" name="role" required>
-                                        <option value="Admin">Admin</option>
-                                        <option value="User">User</option>
+                                        <option value="1">Admin</option>
+                                        <option value="0">User</option>
                                     </select>
                                 </div>
+                                
                                 <div class="form-group mb-3">
                                     <label for="status">Trạng thái</label>
                                     <select class="form-control" id="status" name="status" required>
-                                        <option value="Active">Online</option>
-                                        <option value="Inactive">Offline</option>
+                                        <option value="1">Online</option>
+                                        <option value="0">Offline</option>
                                     </select>
                                 </div>
-                                <!-- <div class="form-group mb-3">
+                                <div class="form-group mb-3">
                                     <label for="avatar">Chọn ảnh</label>
                                     <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*" required onchange="previewImage(event)">
-                                </div> -->
+                                </div>
                                 <!-- Hiển thị ảnh đã chọn -->
                                 <div class="form-group mb-3">
                                     <img id="preview" src="#" alt="Ảnh xem trước" style="display:none; max-width: 100%; height: auto;" />
@@ -237,3 +245,67 @@ include('includes/header.php');
 </script>
 
 <?php include('includes/footer.php'); ?>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Check username
+        $('#username').on('blur', function() {
+            const username = $(this).val();
+            if (username) {
+                $.ajax({
+                    url: 'check_user.php',
+                    type: 'POST',
+                    data: { username: username },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.username_exists) {
+                            alert('Tên người dùng đã tồn tại!');
+                            $('#username').val(''); // Optionally clear the input
+                            $('#username').focus();
+                        }
+                    }
+                });
+            }
+        });
+
+        // Check email
+        $('#email').on('blur', function() {
+            const email = $(this).val();
+            if (email) {
+                $.ajax({
+                    url: 'check_user.php',
+                    type: 'POST',
+                    data: { email: email },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.email_exists) {
+                            alert('Email đã tồn tại!');
+                            $('#email').val(''); // Optionally clear the input
+                            $('#email').focus();
+                        }
+                    }
+                });
+            }
+        });
+
+        $('#addUserForm').on('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // AJAX submission (as before)
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                dataType: 'json',
+                success: function(response) {
+                    // Handle the response (as before)
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors (as before)
+                }
+            });
+        });
+    });
+</script>
