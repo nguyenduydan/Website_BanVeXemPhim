@@ -1,6 +1,6 @@
-<?php 
-    require '../config/function.php';
-    include('includes/header.php');
+<?php
+require '../config/function.php';
+include('includes/header.php');
 ?>
 
 <!-- Hiển thị nội dung danh sách phim -->
@@ -67,7 +67,7 @@
             </div>
             <div class="modal-body">
                 <div class="col-xl-12 col-lg-12 mx-auto">
-                    <?= alertMessage();?>
+                    <?= alertMessage(); ?>
                     <form action="code.php" method="post">
                         <div class="row">
                             <!-- Cột 1 -->
@@ -111,8 +111,8 @@
                                 <div class="form-group mb-3">
                                     <label for="role">Vai trò</label>
                                     <select class="form-control" id="role" name="role" required>
-                                        <option value="Active">Admin</option>
-                                        <option value="Inactive">User</option>
+                                        <option value="Admin">Admin</option>
+                                        <option value="User">User</option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
