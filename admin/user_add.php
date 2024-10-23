@@ -1,6 +1,5 @@
 <?php include('includes/header.php'); ?>
 
-<div id="formErrors" class="alert alert-danger" style="display:none;"></div>
 <div class="row">
     <div class="col-xl-12 col-lg-12 mx-auto">
         <h2><?php echo $title ?></h2>
