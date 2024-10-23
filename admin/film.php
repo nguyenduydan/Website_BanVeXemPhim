@@ -50,16 +50,16 @@
                                 <td class="align-middle text-center text-sm">
                                     <a class="btn btn-secondary m-0"
                                         style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" href="../admin/film-detail.php">
-                                        Chi tiết
+                                        <i class="bi bi-info-circle"></i> Chi tiết
                                     </a>
                                     <a class="btn btn-info m-0"
                                         style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                         href="../admin/film-edit.php">
-                                        Sửa
+                                        <i class="bi bi-pencil"></i> Sửa
                                     </a>
                                     <a class="btn btn-danger m-0"
                                         style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" href="../admin/film-delete.php">
-                                        Xoá
+                                        <i class="bi bi-pencil"></i> Sửa
                                     </a>
                                 </td>
                             </tr>
