@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,9 +18,11 @@
         'user' => 'Danh sách người dùng',
         'room' => 'Danh sách phòng chiếu',
         'room' => 'Danh sách menu',
+        'user-add' => 'Thêm người dùng',
         //----//
         'film-add' => 'Thêm phim',
         'categories-add' => 'Thêm thể loại phim',
+
     ];
 
     // Sử dụng giá trị mặc định nếu không có ánh xạ
