@@ -93,28 +93,28 @@ function validateAndHashPassword($password, $re_password)
     return ['status' => true, 'hashed' => $hashedPassword];
 }
 
-function isUsername($username)
+function isUsername($username, $currentId = null)
 {
-    global $conn;
-    $username = validate($username);
-    // Sử dụng Prepared Statements để bảo vệ chống SQL Injection
-    $stmt = $conn->prepare("SELECT * FROM NguoiDung WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    return $result->num_rows > 0;
+    global $conn; // Kết nối CSDL
+    $query = "SELECT COUNT(*) as count FROM NguoiDung WHERE username = '$username'";
+    if ($currentId) {
+        $query .= " AND MaND != '$currentId'"; // Bỏ qua người dùng hiện tại nếu ID được cung cấp
+    }
+    $result = mysqli_query($conn, $query);
+    $data = mysqli_fetch_assoc($result);
+    return $data['count'] > 0; // Trả về true nếu username đã tồn tại
 }
 
-function isEmail($email)
+function isEmail($email, $currentId = null)
 {
-    global $conn;
-    $email = validate($email);
-
-    $query = "SELECT * FROM NguoiDung WHERE email = '$email'";
+    global $conn; // Kết nối CSDL
+    $query = "SELECT COUNT(*) as count FROM NguoiDung WHERE Email = '$email'";
+    if ($currentId) {
+        $query .= " AND MaND != '$currentId'"; // Bỏ qua người dùng hiện tại nếu ID được cung cấp
+    }
     $result = mysqli_query($conn, $query);
-
-    return mysqli_num_rows($result) > 0;
+    $data = mysqli_fetch_assoc($result);
+    return $data['count'] > 0; // Trả về true nếu email đã tồn tại
 }
 
 function getAll($tableName)
@@ -169,13 +169,14 @@ function getByID($tableName, $colName, $id)
     }
     return $response;
 }
-function deleteQuery($tableName, $colName, $id) {
+function deleteQuery($tableName, $colName, $id)
+{
     global $conn;
     $table = validate($tableName);
     $col = validate($colName);
     $id = validate($id);
     $query = "DELETE FROM $table WHERE $colName ='$id' LIMIT 1";
-    $result = mysqli_query($conn,$query);
+    $result = mysqli_query($conn, $query);
     return $result;
 }
 

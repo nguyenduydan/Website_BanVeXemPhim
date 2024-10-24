@@ -95,23 +95,26 @@ if (isset($_POST['editUser'])) {
     $role = validate($_POST['role']);
     $status = validate($_POST['status']);
 
+    // Kiểm tra tên người dùng
     if (empty($name)) {
         $errors['name'] = "Họ và tên không được để trống.";
     }
     if (empty($username)) {
         $errors['username'] = "Tên người dùng không được để trống.";
-    } else if (isUsername($username)) {
-        $errors['username'] = "Tên người dùng đã tồn tại";
+    } else {
+        // Kiểm tra tính duy nhất của username
+        if (isUsername($username, $id)) {
+            $errors['username'] = "Tên người dùng đã tồn tại";
+        }
     }
     if (empty($ngay_sinh)) {
         $errors['ngay_sinh'] = "Ngày sinh không được để trống.";
     }
     if (empty($email)) {
         $errors['email'] = "Email không được để trống.";
-    } elseif (isEmail($email)) {
+    } elseif (isEmail($email, $id)) {
         $errors['email'] = "Email đã tồn tại";
     }
-
 
     $user = getByID('NguoiDung', 'MaND', $id);
     if (empty($errors)) {
