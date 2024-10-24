@@ -13,7 +13,7 @@ $validator = new Validator(); // Instantiate Validator class
     <div class="col-xl-12 col-lg-12 mx-auto">
         <h2><?php echo htmlspecialchars($title); ?></h2>
         <div class="text-end mb-4">
-            <a class="btn btn-secondary" href="javascript:window.history.back(-1);"><i class="bi bi-arrow-left-short"></i> Quay lại</a>
+            <a class="btn btn-secondary" href="user.php"><i class="bi bi-arrow-left-short"></i> Quay lại</a>
         </div>
         <form id="addUserForm" action="../admin/controllers/code.php" method="post" enctype="multipart/form-data">
             <div class="row">
