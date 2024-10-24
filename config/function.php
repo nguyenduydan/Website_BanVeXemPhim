@@ -168,3 +168,36 @@ function getByID($tableName, $colName, $id)
     return $response;
 }
 function deleteQuery() {}
+
+
+//Phan trang
+function paginate($conn, $table, $records_per_page, $current_page)
+{
+    // Tính tổng số bản ghi
+    $total_query = "SELECT COUNT(*) AS total FROM $table";
+    $total_result = $conn->query($total_query);
+    $total_row = $total_result->fetch_assoc();
+    $total_records = $total_row['total'];
+
+    // Tính số trang
+    $total_pages = ceil($total_records / $records_per_page);
+
+    // Đảm bảo số trang không nhỏ hơn 1
+    if ($current_page < 1) {
+        $current_page = 1;
+    }
+
+    // Tính vị trí bắt đầu cho truy vấn
+    $start_from = ($current_page - 1) * $records_per_page;
+
+    // Truy vấn để lấy dữ liệu cho trang hiện tại
+    $query = "SELECT * FROM $table LIMIT $start_from, $records_per_page";
+    $result = $conn->query($query);
+
+    return [
+        'data' => $result,
+        'total_pages' => $total_pages,
+        'current_page' => $current_page,
+        'total_records' => $total_records
+    ];
+}

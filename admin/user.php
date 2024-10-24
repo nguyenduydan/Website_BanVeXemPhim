@@ -35,10 +35,15 @@ include('includes/header.php');
                         </thead>
                         <tbody>
                             <?php
-                            $users = getAll('NguoiDung');
+                            // Lấy số trang hiện tại từ URL, mặc định là 1
+                            $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                            // $users = getAll('NguoiDung');
+                            // Gọi hàm phân trang
+                            $pagination = paginate($conn, 'NguoiDung', 2, $current_page); //(database, tableName,số trang, trang hiện tại)
+                            $data = $pagination['data'];
                             $stt = 0;
-                            if (mysqli_num_rows($users) > 0) {
-                                foreach ($users as $userItem) {
+                            if (mysqli_num_rows($data) > 0) {
+                                foreach ($data as $userItem) {
                                     $stt++;
                             ?>
                                     <tr>
@@ -86,11 +91,21 @@ include('includes/header.php');
             <div class="card-footer">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item"><a class="page-link bg-dark text-light font-weight-bold" href="#">Trước</a></li>
-                        <li class="page-item active" aria-current="page"><a class="page-link mx-1" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link mx-1" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link mx-1" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link bg-dark text-light font-weight-bold" href="#">Tiếp</a></li>
+                        <?php if ($current_page > 1): ?>
+                            <li class="page-item"><a class="page-link bg-gradient-primary text-white fw-bold" href="user.php?page=1">Đầu</a></li>
+                            <li class="page-item"><a class="page-link" href="user.php?page=<?= $current_page - 1 ?>">Trước</a></li>
+                        <?php endif; ?>
+
+                        <?php for ($i = 1; $i <= $pagination['total_pages']; $i++): ?>
+                            <li class="page-item <?= ($i == $current_page) ? 'active' : '' ?>">
+                                <a class="page-link" href="user.php?page=<?= $i ?>"><?= $i ?></a>
+                            </li>
+                        <?php endfor; ?>
+
+                        <?php if ($current_page < $pagination['total_pages']): ?>
+                            <li class="page-item"><a class="page-link" href="user.php?page=<?= $current_page + 1 ?>">Tiếp</a></li>
+                            <li class="page-item"><a class="page-link bg-gradient-primary text-white fw-bold" href="user.php?page=<?= $pagination['total_pages'] ?>">Cuối</a></li>
+                        <?php endif; ?>
                     </ul>
                 </nav>
             </div>
