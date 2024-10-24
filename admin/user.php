@@ -56,7 +56,7 @@ include('includes/header.php');
                                         </th>
                                         <td class="align-middle text-center text-sm">
                                             <a class="btn btn-secondary m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="../admin/user-detail.php">
+                                                href="../admin/user-detail.php?id=<?= $userItem['MaND'] ?>">
                                                 <i class="bi bi-info-circle"></i> Chi tiết
                                             </a>
                                             <a class="btn btn-info m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
@@ -64,7 +64,7 @@ include('includes/header.php');
                                                 <i class="bi bi-pencil"></i> Sửa
                                             </a>
                                             <a class="btn btn-danger m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="../admin/user-delete.php">
+                                                href="../admin/user-delete.php?id=<?= $userItem['MaND'] ?>">
                                                 <i class="bi bi-trash"></i> Xoá
                                             </a>
                                         </td>

@@ -54,8 +54,8 @@ if (isset($_POST['saveUser'])) {
         }
         // Insert into database
         $ngay_tao = date('Y-m-d H:i:s');
-        $query = "INSERT INTO NguoiDung (TenND, username, NgaySinh, GioiTinh, SDT, Anh, Email, MatKhau, Role, NguoiTao, NgayTao, TrangThai)
-                  VALUES ('$name', '$username', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email', '$hashedPassword', '$role', '1', '$ngay_tao', '$status')";
+        $query = "INSERT INTO NguoiDung (TenND, username, NgaySinh, GioiTinh, SDT, Anh, Email, MatKhau, Role, NguoiTao, NgayTao,NguoiCapNhat, NgayCapNhat, TrangThai)
+                  VALUES ('$name', '$username', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email', '$hashedPassword', '$role', '1', '$ngay_tao','1', '$ngay_tao', '$status')";
 
         if (mysqli_query($conn, $query)) {
             $_SESSION['success'] = 'Thêm tài khoản thành công';
@@ -111,8 +111,7 @@ if(isset($_POST['editUser'])){
                 Anh = '$avatar',
                 Email = '$email',
                 Role = '$role',
-                NguoiTao = 1,
-                NgayTao = '$ngay_tao',
+                NgayCapNhat = '$ngay_tao',
                 TrangThai = '$status'
                 WHERE MaND = '$id'";    
 
