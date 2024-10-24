@@ -1,24 +1,26 @@
 <?php
+ob_start(); // Bắt đầu output buffering
 session_start(); // Bắt đầu session
 
 require '../config/function.php';
 include('includes/header.php');
 
-// Lấy số bản ghi muốn hiển thị từ session hoặc mặc định là 2
-$records_per_page = isset($_SESSION['records_per_page']) ? (int)$_SESSION['records_per_page'] : 2;
-
-if (isset($_GET['records_per_page'])) {
-    $records_per_page = (int)$_GET['records_per_page'];
-    $_SESSION['records_per_page'] = $records_per_page; // Lưu vào session
+// Xử lý biểu mẫu
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['records_per_page'])) {
+    $_SESSION['records_per_page'] = (int)$_POST['records_per_page'];
+    header("Location: " . $_SERVER['PHP_SELF'] . "?page=1"); // Chuyển hướng
+    exit; // Dừng thực thi mã
 }
+
+// Gán giá trị cho $records_per_page từ session hoặc mặc định là 2
+$records_per_page = isset($_SESSION['records_per_page']) ? $_SESSION['records_per_page'] : 2;
 
 // Lấy số trang hiện tại từ URL, mặc định là 1
 $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
 ?>
 
-<div id="toast">
-</div>
+<div id="toast"></div>
 
 <?php alertMessage() ?>
 
@@ -27,7 +29,7 @@ $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center pb-0">
                 <h5><?php echo $title ?></h5>
-                <form method="GET" class="d-inline">
+                <form method="POST" class="d-inline">
                     <label for="records_per_page" class="me-2 fs-6">Chọn hiển thị số bản ghi:</label>
                     <select name="records_per_page" id="records_per_page" class="form-select" onchange="this.form.submit()">
                         <option value="2" <?= $records_per_page == 2 ? 'selected' : '' ?>>2</option>
@@ -35,7 +37,6 @@ $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
                         <option value="10" <?= $records_per_page == 10 ? 'selected' : '' ?>>10</option>
                         <option value="20" <?= $records_per_page == 20 ? 'selected' : '' ?>>20</option>
                     </select>
-                    <input type="hidden" name="page" value="<?= $current_page ?>">
                 </form>
                 <a href="user-add.php" class="btn btn-lg me-5 btn-add"
                     style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">Thêm</a>
@@ -108,21 +109,31 @@ $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
             <div class="card-footer">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
-                        <?php if ($current_page > 1): ?>
-                            <li class="page-item"><a class="page-link bg-gradient-dark text-white fw-bold" href="user.php?page=1&records_per_page=<?= $records_per_page ?>">Đầu</a></li>
-                            <li class="page-item"><a class="page-link" href="user.php?page=<?= $current_page - 1 ?>&records_per_page=<?= $records_per_page ?>">Trước</a></li>
-                        <?php endif; ?>
+                        <?php if ($pagination['total_pages'] > 1): // Kiểm tra xem có nhiều hơn 1 trang
+                        ?>
+                            <?php if ($current_page > 1): ?>
+                                <li class="page-item">
+                                    <a class="page-link bg-gradient-dark text-white" href="?page=<?= $current_page - 1 ?>">
+                                        <i class="bi bi-chevron-left fs-6 fw-bolder"></i>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
 
-                        <?php for ($i = 1; $i <= $pagination['total_pages']; $i++): ?>
-                            <li class="page-item <?= ($i == $current_page) ? 'active' : '' ?>">
-                                <a class="page-link border-radius-xs" href="user.php?page=<?= $i ?>&records_per_page=<?= $records_per_page ?>"><?= $i ?></a>
-                            </li>
-                        <?php endfor; ?>
+                            <?php for ($i = 1; $i <= $pagination['total_pages']; $i++): ?>
+                                <li class="page-item <?= ($i == $current_page) ? 'active' : '' ?>">
+                                    <a class="page-link border-radius-xs" href="?page=<?= $i ?>"><?= $i ?></a>
+                                </li>
+                            <?php endfor; ?>
 
-                        <?php if ($current_page < $pagination['total_pages']): ?>
-                            <li class="page-item"><a class="page-link" href="user.php?page=<?= $current_page + 1 ?>&records_per_page=<?= $records_per_page ?>">Tiếp</a></li>
-                            <li class="page-item"><a class="page-link bg-gradient-dark text-white fw-bold" href="user.php?page=<?= $pagination['total_pages'] ?>&records_per_page=<?= $records_per_page ?>">Cuối</a></li>
-                        <?php endif; ?>
+                            <?php if ($current_page < $pagination['total_pages']): ?>
+                                <li class="page-item">
+                                    <a class="page-link bg-gradient-dark text-white" href="?page=<?= $current_page + 1 ?>">
+                                        <i class="bi bi-chevron-right fs-6 fw-bolder"></i>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                        <?php endif; // Kết thúc kiểm tra số trang
+                        ?>
                     </ul>
                 </nav>
             </div>

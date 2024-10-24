@@ -22,9 +22,14 @@ if (isset($_POST['saveUser'])) {
     }
     if (empty($username)) {
         $errors['username'] = "Tên người dùng không được để trống.";
+    } else if (isUsername($username)) {
+        $errors['username'] = "Tên người dùng đã tồn tại";
     }
+
     if (empty($password)) {
         $errors['password'] = "Mật khẩu không được để trống.";
+    } elseif (strlen($password) < 6) {
+        $errors['password'] = "Mật khẩu phải từ 6 kí tự trở lên";
     }
     if (empty($re_password)) {
         $errors['re_password'] = "Xác nhận mật khẩu không được để trống.";
@@ -34,6 +39,8 @@ if (isset($_POST['saveUser'])) {
     }
     if (empty($email)) {
         $errors['email'] = "Email không được để trống.";
+    } elseif (isEmail($email)) {
+        $errors['email'] = "Email đã tồn tại";
     }
 
 
@@ -93,9 +100,11 @@ if (isset($_POST['editUser'])) {
     if (empty($username)) {
         $errors['username'] = "Tên người dùng không được để trống.";
     }
+
     if (empty($password)) {
         $errors['password'] = "Mật khẩu không được để trống.";
     }
+
     if (empty($re_password)) {
         $errors['re_password'] = "Xác nhận mật khẩu không được để trống.";
     }

@@ -10,7 +10,6 @@
                     </script>,
                     made with <i class="fa fa-heart"></i> by
                     <a href="https://github.com/nguyenduydan/Website_BanVeXemPhim" class="font-weight-bold" target="_blank">Creative FogVN, Dino, Phúc ngu</a>
-                    for a better web.
                 </div>
             </div>
         </div>
