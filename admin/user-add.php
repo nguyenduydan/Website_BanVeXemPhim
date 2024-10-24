@@ -10,7 +10,7 @@ include('includes/header.php');
 
 <div class="row">
     <div class="col-xl-12 col-lg-12 mx-auto">
-        <h2><?php echo htmlspecialchars($title); ?></h2>
+        <h2>Thêm người dùng</h2>
         <div class="text-end mb-4">
             <a class="btn btn-secondary" href="user.php">Quay lại</a>
         </div>
