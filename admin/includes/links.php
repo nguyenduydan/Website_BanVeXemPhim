@@ -18,3 +18,4 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="../assets/css/toast.css">
 <script src="/Website_BanVeXemPhim/assets/js/toast.js"></script>
+<script src="/Website_BanVeXemPhim/assets/js/myJS.js"></script>

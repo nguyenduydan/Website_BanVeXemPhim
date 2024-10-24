@@ -17,14 +17,14 @@ $records_per_page = isset($_SESSION['records_per_page']) ? $_SESSION['records_pe
 
 // Lấy số trang hiện tại từ URL, mặc định là 1
 $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+// Gọi hàm phân trang
+$pagination = paginate($conn, 'NguoiDung', $records_per_page, $current_page);
+$data = $pagination['data'];
+
 
 // Thêm phần này để xử lý sắp xếp
 $sortField = isset($_GET['sort']) ? $_GET['sort'] : 'username'; // Trường sắp xếp mặc định
 $sortOrder = isset($_GET['order']) ? $_GET['order'] : 'ASC'; // Thứ tự sắp xếp mặc định
-
-// Gọi hàm phân trang
-$pagination = paginate($conn, 'NguoiDung', $records_per_page, $current_page);
-$data = $pagination['data'];
 
 
 // Chuyển đổi $data từ mysqli_result sang mảng
@@ -68,7 +68,7 @@ sortData($dataArray, $sortField, $sortOrder);
                                     Tên đăng nhập
                                     <a href="?page=<?= $current_page ?>&sort=username&order=<?= ($sortField === 'username' && $sortOrder === 'ASC') ? 'DESC' : 'ASC' ?>">
                                         <?php if ($sortField === 'username'): ?>
-                                            <i class="bi <?= $sortOrder === 'ASC' ? 'bi-sort-alpha-down' : 'bi bi-sort-alpha-up' ?> fs-6"></i>
+                                            <i class="bi <?= $sortOrder === 'ASC' ? 'bi-sort-alpha-down' : 'bi bi-sort-alpha-up' ?> fs-6 fw-bolder"></i>
                                         <?php endif; ?>
                                     </a>
                                 </th>
@@ -110,8 +110,9 @@ sortData($dataArray, $sortField, $sortOrder);
                                                 href="../admin/user-edit.php?id=<?= $userItem['MaND'] ?>">
                                                 <i class="bi bi-pencil"></i> Sửa
                                             </a>
-                                            <a class="btn btn-danger m-0 delete-btn" data-bs-toggle="modal" data-bs-target="#confirmModal" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="../admin/user-delete.php?id=<?= $userItem['MaND'] ?>">
+                                            <a class="btn btn-danger m-0 delete-btn" data-id="<?= $userItem['MaND'] ?>"
+                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                data-bs-toggle="modal" data-bs-target="#confirmModal">
                                                 <i class="bi bi-trash"></i> Xoá
                                             </a>
                                             <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
@@ -181,24 +182,4 @@ sortData($dataArray, $sortField, $sortOrder);
         </div>
     </div>
 </div>
-<script>
-    document.querySelectorAll('.delete-btn').forEach(function(button) {
-        button.addEventListener('click', function(event) {
-            event.preventDefault(); // Ngăn chặn hành vi mặc định
-
-            const popup = document.getElementById('confirmPopup');
-            popup.style.display = 'block'; // Hiển thị popup
-
-            // Xử lý nút "Có"
-            document.getElementById('confirmYes').onclick = function() {
-                window.location.href = button.href; // Chuyển hướng đến liên kết
-            };
-
-            // Xử lý nút "Không"
-            document.getElementById('confirmNo').onclick = function() {
-                popup.style.display = 'none'; // Ẩn popup
-            };
-        });
-    });
-</script>
 <?php include('includes/footer.php'); ?>
