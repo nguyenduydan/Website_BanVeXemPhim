@@ -3,7 +3,6 @@
         width: 300px;
         padding: 10px;
         font-size: 16px;
-
     }
 
     #results {
@@ -12,20 +11,20 @@
         /* Hiển thị ngay dưới ô tìm kiếm */
         left: 20;
         right: 0;
-        background-color: white;
+        background-color: #fff;
         max-height: 200px;
         overflow-y: auto;
         z-index: 1000;
         width: 90%;
-        border: 1px #e293d3 solid;
-        box-shadow: 0 5px 7px 1px #707070;
-        border-radius: 0 0 10px 10px;
+        border: 0.2px solid #17ad37;
+        border-radius: 10px;
         display: none;
     }
 
     #results a {
         padding: 5px 15px;
         font-weight: 900;
+        border: none;
     }
 
 
@@ -36,12 +35,12 @@
         color: #17ad37;
         display: block;
         width: 100%;
-        transition: all ease .15s;
+        transition: ease-in-out .05s;
     }
 
     /* Thêm viền và hiệu ứng khi di chuột qua vùng kết quả */
     #results .result-item:hover {
-        background-color: #17ad37;
+        background-image: linear-gradient(310deg, #98ec2d 0%, #17ad37 100%);
         color: #fff;
     }
 </style>
@@ -59,7 +58,7 @@
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <div class="input-group">
                     <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                    <input type="text" class="form-control" id="searchBox" placeholder="Type here..." onkeyup="searchData()">
+                    <input type="text" class="form-control" id="searchBox" placeholder="Tìm kiếm..." onkeyup="searchData()">
                     <div id="results"></div>
                 </div>
             </div>
