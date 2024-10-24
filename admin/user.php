@@ -52,7 +52,7 @@ include('includes/header.php');
                                         </th>
 
                                         <th class="text-center text-s font-weight-bolder">
-                                            <?= $userItem['TrangThai'] == 1 ? '<span class="badge badge-sm bg-gradient-success text-uppercase">ON</span>' : '<span class="badge badge-sm bg-gradient-success text-uppercase text-secondary">ON</span>'; ?>
+                                            <?= $userItem['TrangThai'] == 1 ? '<span class="badge badge-sm bg-gradient-success text-uppercase">ON</span>' : '<span class="badge badge-sm bg-gradient-secondary text-uppercase">OFF</span>'; ?>
                                         </th>
                                         <td class="align-middle text-center text-sm">
                                             <a class="btn btn-secondary m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
