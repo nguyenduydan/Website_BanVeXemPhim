@@ -99,7 +99,7 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
                     </div>
                     <div class="form-group mb-3">
                         <label for="avatar">Chọn ảnh</label>
-                        <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*" onchange="previewImage(event)">
+                        <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*" onchange="previewImageAdd(event)">
                     </div>
                     <div class="form-group mb-3">
                         <img id="preview" src="#" alt="Ảnh xem trước" class="img-fluid" style="display:none; max-width: 100%; max-height: 220px;" />
@@ -112,15 +112,7 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
 </div>
 
 <script>
-    function previewImage(event) {
-        var reader = new FileReader();
-        reader.onload = function() {
-            var output = document.getElementById('preview');
-            output.src = reader.result;
-            output.style.display = 'block';
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
+
 </script>
 
 <?php include('includes/footer.php'); ?>

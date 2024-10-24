@@ -1,3 +1,32 @@
+
+function previewImageAdd(event) {
+    var reader = new FileReader();
+    reader.onload = function () {
+        var output = document.getElementById('preview');
+        output.src = reader.result;
+        output.style.display = 'block';
+    };
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+function previewImage(event) {
+    var preview = document.getElementById('preview');
+    var file = event.target.files[0];
+    var reader = new FileReader();
+
+    reader.onload = function () {
+        preview.src = reader.result;
+        preview.style.display = 'block';
+    };
+
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        preview.src = '#';
+        preview.style.display = 'none';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     let deleteId = null; // Biến để lưu ID người dùng
 
