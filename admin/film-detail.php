@@ -5,8 +5,8 @@
         <h2>Chi tiết phim</h2>
         <!-- Nút quay lại nằm sát bên phải -->
         <div class="text-end mb-4">
-            <a class="btn btn-secondary" href="javascript:window.history.back(-1);">
-                <i class="bi bi-arrow-left-short"></i> Quay lại
+            <a class="btn btn-secondary" href="film.php">
+                Quay lại
             </a>
         </div>
 
@@ -85,4 +85,3 @@
 </div>
 
 <?php include('includes/footer.php'); ?>
-

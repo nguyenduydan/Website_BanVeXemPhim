@@ -21,66 +21,64 @@ include('includes/header.php');
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
-                    <table class="table align-items-center mb-0">
+                    <table class="table table-striped table-borderless align-items-center mb-0">
                         <thead>
                             <tr>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mã người dùng</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên đăng nhập</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">SĐT</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ảnh</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hành động</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">stt</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Tên đăng nhập</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Email</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">SĐT</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Ảnh</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Trạng thái</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php
-                                $users = getAll('NguoiDung');
-                                if(mysqli_num_rows($users) > 0){
-                                    foreach($users as $userItem){
-                                        ?>
-                                        <tr>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><?= $userItem['MaND']; ?></th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><?= $userItem['username']; ?></th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><?= $userItem['Email']; ?></th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><?= $userItem['SDT']; ?></th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-    <img src="../uploads/avatars/<?= htmlspecialchars($userItem['Anh']); ?>" alt="Ảnh đại diện" class="img-fluid" style="max-width: 100px;">
-
-</th>
-
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><?= $userItem['TrangThai'] == 1 ? 'ON': 'OFF'; ?></th>
-                                            <td class="align-middle text-center text-sm">
-                                                <a class="btn btn-secondary m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" 
-                                                    href="../admin/user-detail.php">
-                                                    <i class="bi bi-info-circle"></i> Chi tiết
-                                            </a>
-                                                <a class="btn btn-info m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                    href="../admin/user-edit.php?id=<?=$userItem['MaND']?>">
-                                                    <i class="bi bi-pencil"></i> Sửa
-                                                </a>
-                                                <a class="btn btn-danger m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" 
-                                                    href="../admin/user-delete.php">
-                                                    <i class="bi bi-trash"></i> Xoá
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <?php
-                                    }
-                                }
-                                else{
-                                    ?>
-                                    <tr>
-                                        <td colspan="6" class="text-center">Không có bản ghi nào</td>
-                                    </tr>
-                                    <?php
-                                }
+                            <?php
+                            $users = getAll('NguoiDung');
+                            $stt = 0;
+                            if (mysqli_num_rows($users) > 0) {
+                                foreach ($users as $userItem) {
+                                    $stt++;
                             ?>
-                            <tr>
+                                    <tr>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $userItem['username']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $userItem['Email']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $userItem['SDT']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder">
+                                            <img src="../uploads/avatars/<?= htmlspecialchars($userItem['Anh']); ?>" alt="Ảnh đại diện" class="img-fluid" style="max-width: 100px;">
 
-                            </tr>
+                                        </th>
 
-
+                                        <th class="text-center text-s font-weight-bolder">
+                                            <?= $userItem['TrangThai'] == 1 ? '<span class="badge badge-sm bg-gradient-success text-uppercase">ON</span>' : '<span class="badge badge-sm bg-gradient-success text-uppercase text-secondary">ON</span>'; ?>
+                                        </th>
+                                        <td class="align-middle text-center text-sm">
+                                            <a class="btn btn-secondary m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                href="../admin/user-detail.php">
+                                                <i class="bi bi-info-circle"></i> Chi tiết
+                                            </a>
+                                            <a class="btn btn-info m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                href="../admin/user-edit.php?id=<?= $userItem['MaND'] ?>">
+                                                <i class="bi bi-pencil"></i> Sửa
+                                            </a>
+                                            <a class="btn btn-danger m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                href="../admin/user-delete.php">
+                                                <i class="bi bi-trash"></i> Xoá
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php
+                                }
+                            } else {
+                                ?>
+                                <tr>
+                                    <td colspan="6" class="text-center">Không có bản ghi nào</td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>

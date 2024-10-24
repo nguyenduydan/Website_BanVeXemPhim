@@ -5,7 +5,7 @@
         <h2><?php echo htmlspecialchars($title); ?></h2>
         <!-- Nút quay lại nằm sát bên phải -->
         <div class="text-end mb-4">
-            <a class="btn btn-secondary" href="javascript:window.history.back(-1);">
+            <a class="btn btn-secondary" href="film.php">
                 <i class="bi bi-arrow-left-short"></i> Quay lại
             </a>
         </div>
@@ -46,9 +46,9 @@
                     <div class="form-group mb-3">
                         <label for="the_loai">Thể loại</label>
                         <div class="d-flex flex-wrap">
-                            <?php 
+                            <?php
                             $genres = ['Hành động', 'Tình cảm', 'Kinh dị', 'Viễn tưởng', 'Hài'];
-                            foreach($genres as $genre): ?>
+                            foreach ($genres as $genre): ?>
                                 <div class="form-check me-3">
                                     <input class="form-check-input" type="checkbox" name="the_loai[]" value="<?= $genre ?>" id="the_loai_<?= strtolower($genre) ?>">
                                     <label class="form-check-label" for="the_loai_<?= strtolower($genre) ?>"><?= $genre ?></label>

@@ -13,15 +13,15 @@ $validator = new Validator(); // Instantiate Validator class
     <div class="col-xl-12 col-lg-12 mx-auto">
         <h2><?php echo htmlspecialchars($title); ?></h2>
         <div class="text-end mb-4">
-            <a class="btn btn-secondary" href="javascript:window.history.back(-1);"><i class="bi bi-arrow-left-short"></i> Quay lại</a>
+            <a class="btn btn-secondary" href="user.php">Quay lại</a>
         </div>
         <form id="addUserForm" action="../admin/controllers/code.php" method="post" enctype="multipart/form-data">
             <?php
-                $id_result = check_valid_ID('id');
-                if(!is_numeric($id_result)){
-                    echo '<h5>'.$id_result.'</h5>';
-                    return false;
-                }
+            $id_result = check_valid_ID('id');
+            if (!is_numeric($id_result)) {
+                echo '<h5>' . $id_result . '</h5>';
+                return false;
+            }
             ?>
             <div class="row">
                 <div class="col-md-6">
@@ -29,13 +29,11 @@ $validator = new Validator(); // Instantiate Validator class
                         <label for="name">Họ và tên người dùng</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ và tên"
                             value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>">
-                        <?php echo '<small style="color: red;">lỗi</small>'; ?>
                     </div>
                     <div class="form-group mb-3">
                         <label for="username">Tên người dùng</label>
                         <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên đăng nhập"
                             value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
-                        <?php echo $validator->displayError('username'); ?>
                     </div>
                     <div class="form-group mb-3">
                         <label for="gioi_tinh">Giới tính</label>

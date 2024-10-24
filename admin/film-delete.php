@@ -5,7 +5,7 @@
         <h2>Xoá phim</h2>
         <!-- Nút quay lại nằm sát bên phải -->
         <div class="text-end mb-4">
-            <a class="btn btn-secondary" href="javascript:window.history.back(-1);">
+            <a class="btn btn-secondary" href="film.php">
                 <i class="bi bi-arrow-left-short"></i> Quay lại
             </a>
         </div>
