@@ -15,7 +15,7 @@
         'content' => 'Danh sách nội dung',
         'topic' => 'Danh sách chủ đề',
         'slider' => 'Danh sách slider',
-        'timeshow' => 'Danh sách suất chiếu',
+        'showtime' => 'Danh sách suất chiếu',
         'user' => 'Danh sách người dùng',
         'room' => 'Danh sách phòng chiếu',
         'menu' => 'Danh sách menu',

@@ -13,7 +13,7 @@ include('includes/header.php');
             <div class="card-header d-flex justify-content-between align-items-center pb-0">
                 <h5><?php echo $title ?></h5>
                 <a href="categories-add.php" class="btn btn-lg me-5 btn-add"
-                style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">Thêm</a>
+                    style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">Thêm</a>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0 ">
@@ -30,7 +30,7 @@ include('includes/header.php');
                             </tr>
                         </thead>
                         <tbody>
-                        <?php
+                            <?php
                             $categories = getAll('TheLoai');
                             $stt = 0;
                             if (mysqli_num_rows($categories) > 0) {
