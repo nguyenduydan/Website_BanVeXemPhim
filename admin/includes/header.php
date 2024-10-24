@@ -34,6 +34,20 @@
             }
             return 'Dashboard';
         }
+        if (strpos($page, '-edit') !== false) {
+            $basePage = str_replace('-edit', '', $page);
+            if (isset($titles[$basePage])) {
+                return "Cập nhật " . strtolower($titles[$basePage]);
+            }
+            return 'Dashboard';
+        }
+        if (strpos($page, '-detail') !== false) {
+            $basePage = str_replace('-detail', '', $page);
+            if (isset($titles[$basePage])) {
+                return "Chi tiết " . strtolower($titles[$basePage]);
+            }
+            return 'Dashboard';
+        }
         // Nếu không có đuôi -add, trả về tiêu đề gốc với chữ in hoa
         return $titles[$page] ?? 'Dashboard';
     }
