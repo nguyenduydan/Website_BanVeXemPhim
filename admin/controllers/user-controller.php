@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../../config/function.php'; // This includes Validator.php
+require '../../config/function.php';
 
 $errors = [];
 if (isset($_POST['saveUser'])) {
@@ -86,10 +86,27 @@ if (isset($_POST['editUser'])) {
     $email = validate($_POST['email']);
     $role = validate($_POST['role']);
     $status = validate($_POST['status']);
-    $validator->validateRequired('name', $name, 'Tên không được để trống');
-    $validator->validateRequired('username', $username, 'Tên đăng nhập không được để trống');
-    $validator->validateUsernameAndEmail($username, $email);
-    $errors = $validator->getErrors();
+
+    if (empty($name)) {
+        $errors['name'] = "Họ và tên không được để trống.";
+    }
+    if (empty($username)) {
+        $errors['username'] = "Tên người dùng không được để trống.";
+    }
+    if (empty($password)) {
+        $errors['password'] = "Mật khẩu không được để trống.";
+    }
+    if (empty($re_password)) {
+        $errors['re_password'] = "Xác nhận mật khẩu không được để trống.";
+    }
+    if (empty($ngay_sinh)) {
+        $errors['ngay_sinh'] = "Ngày sinh không được để trống.";
+    }
+    if (empty($email)) {
+        $errors['email'] = "Email không được để trống.";
+    }
+
+
     $user = getByID('NguoiDung', 'MaND', $id);
     if (empty($errors)) {
         if (isset($_POST['deleteAvatar'])) {
@@ -129,8 +146,8 @@ if (isset($_POST['editUser'])) {
             exit();
         }
     } else {
-        $_SESSION['error'] = 'Có lỗi xảy ra, vui lòng kiểm tra lại';
-        header("Location: ../user-edit.php");
+        $_SESSION['errors'] = $errors; // Lưu lỗi vào session
+        header("Location: ../user-add.php"); // Chuyển hướng về trang thêm người dùng
         exit();
     }
 }

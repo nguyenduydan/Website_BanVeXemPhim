@@ -29,66 +29,68 @@ if ($user['status'] == 200) {
             <!-- Thông tin chi tiết phim -->
             <div class="card">
                 <div class="card-body">
-                    <div class="row">
+                    <div class="row fs-6">
                         <!-- Cột 1 -->
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <strong>Mã ND:</strong>
-                                <p><?= $user['data']['MaND']; ?></p>
+                                <label class="fs-6">Mã ND:</label>
+                                <span><?= $user['data']['MaND']; ?></span>
                             </div>
                             <div class="mb-3">
-                                <strong>Họ và tên:</strong>
-                                <p><?= $user['data']['TenND']; ?></p>
+                                <label class="fs-6">Họ và tên:</label>
+                                <span><?= $user['data']['TenND']; ?></span>
                             </div>
                             <div class="mb-3">
-                                <strong>Tên đăng nhập:</strong>
-                                <p><?= $user['data']['username']; ?></p>
+                                <label class="fs-6">Tên đăng nhập:</label>
+                                <span><?= $user['data']['username']; ?></span>
                             </div>
                             <div class="mb-3">
-                                <strong>Ngày sinh:</strong>
-                                <p><?= date('d/m/Y', strtotime($user['data']['NgaySinh'])); ?></p>
+                                <label class="fs-6">Ngày sinh:</label>
+                                <span><?= date('d/m/Y', strtotime($user['data']['NgaySinh'])); ?></span>
                             </div>
                             <div class="mb-3">
-                                <strong>Giới tính:</strong>
-                                <p><?= $user['data']['GioiTinh'] == 1 ? 'Nam' : 'Nữ'; ?></p>
+                                <label class="fs-6">Giới tính:</label>
+                                <span><?= $user['data']['GioiTinh'] == 1 ? 'Nam' : 'Nữ'; ?></span>
                             </div>
                             <div class="mb-3">
-                                <strong>Số điện thoại:</strong>
-                                <p><?= $user['data']['SDT']; ?></p>
+                                <label class="fs-6">Số điện thoại:</label>
+                                <span><?= $user['data']['SDT']; ?></span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="fs-6">Email:</label>
+                                <span><?= $user['data']['Email']; ?></span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="fs-6">Role:</label>
+                                <span><?= $user['data']['Role'] == 1 ? 'Admin' : 'User'; ?></span>
                             </div>
                         </div>
 
                         <!-- Cột 2 -->
                         <div class="col-md-6">
+
                             <div class="mb-3">
-                                <strong>Email:</strong>
-                                <p><?= $user['data']['Email']; ?></p>
+                                <label class="fs-6">Người tạo:</label>
+                                <span><?= $user['data']['NguoiTao']; ?></span>
                             </div>
                             <div class="mb-3">
-                                <strong>Role:</strong>
-                                <p><?= $user['data']['Role'] == 1 ? 'Admin' : 'User'; ?></p>
+                                <label class="fs-6">Ngày tạo:</label>
+                                <span><?= $user['data']['NgayTao']; ?></span>
                             </div>
                             <div class="mb-3">
-                                <strong>Người tạo:</strong>
-                                <p><?= $user['data']['NguoiTao']; ?></p>
+                                <label class="fs-6">Người cập nhật:</label>
+                                <span><?= $user['data']['NguoiCapNhat']; ?></span>
                             </div>
                             <div class="mb-3">
-                                <strong>Ngày tạo:</strong>
-                                <p><?= $user['data']['NgayTao']; ?></p>
+                                <label class="fs-6">Ngày cập nhật:</label>
+                                <span><?= $user['data']['NgayCapNhat']; ?></span>
                             </div>
-                            <div class="mb-3">
-                                <strong>Người cập nhật:</strong>
-                                <p><?= $user['data']['NguoiCapNhat']; ?></p>
-                            </div>
-                            <div class="mb-3">
-                                <strong>Ngày cập nhật:</strong>
-                                <p><?= $user['data']['NgayCapNhat']; ?></p>
+                            <div class="form-group mb-3">
+                                <img id="preview" src="<?php echo isset($user['data']['Anh']) ? '../uploads/avatars/' . htmlspecialchars($user['data']['Anh']) : '#'; ?>" alt="Ảnh xem trước" class="img-fluid" style="display: <?php echo isset($user['data']['Anh']) ? 'block' : 'none'; ?>; max-width: 100%; max-height: 150px;" />
+                                <!-- Ảnh phim -->
                             </div>
                         </div>
-                        <div class="form-group mb-3">
-                            <img id="preview" src="<?php echo isset($user['data']['Anh']) ? '../uploads/avatars/' . htmlspecialchars($user['data']['Anh']) : '#'; ?>" alt="Ảnh xem trước" class="img-fluid" style="display: <?php echo isset($user['data']['Anh']) ? 'block' : 'none'; ?>; max-width: 100%; max-height: 220px;" />
-                            <!-- Ảnh phim -->
-                        </div>
+
                     </div>
                 </div>
             </div>

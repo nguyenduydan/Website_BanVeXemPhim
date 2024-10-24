@@ -1,7 +1,8 @@
 <?php
 require '../config/function.php';
 include('includes/header.php');
-
+$errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : []; // Lấy lỗi từ session
+unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
 ?>
 
 <div id="toast"></div>
@@ -24,16 +25,16 @@ include('includes/header.php');
             $user = getByID('NguoiDung', 'MaND', check_valid_ID('id'));
             if ($user['status'] == 200) {
             ?>
-                <input type="hidden" name="mand" value=<?= $user['data']['MaND'] ?>" required>
+                <input type="hidden" name="mand" value=<?= $user['data']['MaND'] ?> required>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group mb-3">
-                            <label for="name">Họ và tên người dùng</label>
+                            <label for="name">Họ và tên người dùng(<span class="text-danger">*</span>)</label>
                             <input type="text" class="form-control" id="name" name="name" value="<?= $user['data']['TenND']; ?>" placeholder="Nhập họ và tên"
                                 value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="username">Tên đăng nhập</label>
+                            <label for="username">Tên đăng nhập (<span class="text-danger">*</span>)</label>
                             <input type="text" class="form-control" id="username" name="username" value="<?= $user['data']['username']; ?>" placeholder="Nhập tên đăng nhập"
                                 value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
                         </div>
@@ -50,18 +51,19 @@ include('includes/header.php');
                                 value="<?php echo isset($_POST['sdt']) ? htmlspecialchars($_POST['sdt']) : ''; ?>">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="email">Email</label>
+                            <label for="email">Email (<span class="text-danger">*</span>)</label>
                             <input type="email" class="form-control" id="email" name="email" value="<?= $user['data']['Email']; ?>" placeholder="Nhập email"
                                 value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" required>
                         </div>
-                    </div>
-                    <div class="col-md-6">
                         <div class="form-group mb-3">
-                            <label for="ngay_sinh">Ngày sinh</label>
+                            <label for="ngay_sinh">Ngày sinh (<span class="text-danger">*</span>)</label>
                             <input type="date" class="form-control" id="ngay_sinh"
                                 value="<?= isset($user['data']['NgaySinh']) ? htmlspecialchars($user['data']['NgaySinh']) : ''; ?>"
                                 name="ngay_sinh" required>
                         </div>
+
+                    </div>
+                    <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="role">Vai trò</label>
                             <select class="form-control" id="role" name="role" required>
