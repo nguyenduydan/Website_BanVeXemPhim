@@ -28,16 +28,7 @@ if (isset($_POST['saveUser'])) {
     // Check for existing username/email
     $validator->validateUsernameAndEmail($username, $email);
 
-    // Handle avatar upload
-    $avatar = '';
-    if (isset($_FILES['avatar'])) {
-        $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/");
-        if ($avatarResult['success']) {
-            $avatar =  $avatarResult['filename'];
-        } else {
-            $errors[] = $avatarResult['message'];
-        }
-    }
+    
 
 
     // Hash password
@@ -51,6 +42,16 @@ if (isset($_POST['saveUser'])) {
     $errors = $validator->getErrors();
 
     if (empty($errors)) {
+        // Handle avatar upload
+        $avatar = '';
+        if (isset($_FILES['avatar'])) {
+            $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/");
+            if ($avatarResult['success']) {
+                $avatar =  $avatarResult['filename'];
+            } else {
+                $errors[] = $avatarResult['message'];
+            }
+        }
         // Insert into database
         $ngay_tao = date('Y-m-d H:i:s');
         $query = "INSERT INTO NguoiDung (TenND, username, NgaySinh, GioiTinh, SDT, Anh, Email, MatKhau, Role, NguoiTao, NgayTao, TrangThai)

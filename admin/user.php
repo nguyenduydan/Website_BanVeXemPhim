@@ -24,11 +24,12 @@ include('includes/header.php');
                     <table class="table align-items-center mb-0">
                         <thead>
                             <tr>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mã thể loại</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thể loại phim</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Người tạo</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mã người dùng</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên đăng nhập</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">SĐT</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ảnh</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày tạo</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hành động</th>
                             </tr>
                         </thead>
@@ -49,6 +50,20 @@ include('includes/header.php');
 </th>
 
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><?= $userItem['TrangThai'] == 1 ? 'ON': 'OFF'; ?></th>
+                                            <td class="align-middle text-center text-sm">
+                                                <a class="btn btn-secondary m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" 
+                                                    href="../admin/user-detail.php">
+                                                    <i class="bi bi-info-circle"></i> Chi tiết
+                                            </a>
+                                                <a class="btn btn-info m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                    href="../admin/user-edit.php?id=<?=$userItem['MaND']?>">
+                                                    <i class="bi bi-pencil"></i> Sửa
+                                                </a>
+                                                <a class="btn btn-danger m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" 
+                                                    href="../admin/user-delete.php">
+                                                    <i class="bi bi-trash"></i> Xoá
+                                                </a>
+                                            </td>
                                         </tr>
                                         <?php
                                     }
