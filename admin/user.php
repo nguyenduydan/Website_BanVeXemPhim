@@ -7,7 +7,7 @@ include('includes/header.php');
 
 <div id="toast">
 </div>
-<script src="/Website_BanVeXemPhim/assets/js/toast.js"></script>
+
 <?php alertMessage() ?>
 
 <div class="row">
