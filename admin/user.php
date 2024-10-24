@@ -12,12 +12,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['records_per_page'])) 
     exit; // Dừng thực thi mã
 }
 
-// Gán giá trị cho $records_per_page từ session hoặc mặc định là 2
-$records_per_page = isset($_SESSION['records_per_page']) ? $_SESSION['records_per_page'] : 2;
+// Gán giá trị cho $records_per_page từ session hoặc mặc định là 5
+$records_per_page = isset($_SESSION['records_per_page']) ? $_SESSION['records_per_page'] : 5;
 
 // Lấy số trang hiện tại từ URL, mặc định là 1
 $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
+// Thêm phần này để xử lý sắp xếp
+$sortField = isset($_GET['sort']) ? $_GET['sort'] : 'username'; // Trường sắp xếp mặc định
+$sortOrder = isset($_GET['order']) ? $_GET['order'] : 'ASC'; // Thứ tự sắp xếp mặc định
+
+// Gọi hàm phân trang
+$pagination = paginate($conn, 'NguoiDung', $records_per_page, $current_page);
+$data = $pagination['data'];
+
+
+// Chuyển đổi $data từ mysqli_result sang mảng
+$dataArray = [];
+while ($row = mysqli_fetch_assoc($data)) {
+    $dataArray[] = $row;
+}
+
+// Gọi hàm sắp xếp
+sortData($dataArray, $sortField, $sortOrder);
 ?>
 
 <div id="toast"></div>
@@ -47,9 +64,20 @@ $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
                         <thead>
                             <tr>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">STT</th>
-                                <th class="text-center text-uppercase text-xs font-weight-bolder">Tên đăng nhập</th>
-                                <th class="text-center text-uppercase text-xs font-weight-bolder">Email</th>
-                                <th class="text-center text-uppercase text-xs font-weight-bolder">SĐT</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">
+                                    Tên đăng nhập
+                                    <a href="?page=<?= $current_page ?>&sort=username&order=<?= ($sortField === 'username' && $sortOrder === 'ASC') ? 'DESC' : 'ASC' ?>">
+                                        <?php if ($sortField === 'username'): ?>
+                                            <i class="bi <?= $sortOrder === 'ASC' ? 'bi-sort-alpha-down' : 'bi bi-sort-alpha-up' ?> fs-6"></i>
+                                        <?php endif; ?>
+                                    </a>
+                                </th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">
+                                    Email
+                                </th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">
+                                    SĐT
+                                </th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Ảnh</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Trạng thái</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Hành động</th>
@@ -57,13 +85,9 @@ $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
                         </thead>
                         <tbody>
                             <?php
-                            // Gọi hàm phân trang
-                            $pagination = paginate($conn, 'NguoiDung', $records_per_page, $current_page);
-                            $data = $pagination['data'];
                             $stt = 0;
-
-                            if (mysqli_num_rows($data) > 0) {
-                                foreach ($data as $userItem) {
+                            if (!empty($dataArray) > 0) {
+                                foreach ($dataArray as $userItem) {
                                     $stt++;
                             ?>
                                     <tr>
@@ -86,10 +110,27 @@ $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
                                                 href="../admin/user-edit.php?id=<?= $userItem['MaND'] ?>">
                                                 <i class="bi bi-pencil"></i> Sửa
                                             </a>
-                                            <a class="btn btn-danger m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                            <a class="btn btn-danger m-0 delete-btn" data-bs-toggle="modal" data-bs-target="#confirmModal" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                                 href="../admin/user-delete.php?id=<?= $userItem['MaND'] ?>">
-                                                <i class="bi bi-trash" onclick="return confirm('Bạn có chắc chắn muốn xóa?')"></i> Xoá
+                                                <i class="bi bi-trash"></i> Xoá
                                             </a>
+                                            <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog mt-10">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="confirmModalLabel">Xác Nhận Xóa</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body fs-5">
+                                                            Bạn có chắc chắn muốn xóa người dùng này?
+                                                        </div>
+                                                        <div class="modal-footer d-flex justify-content-center">
+                                                            <button type="button" class="btn btn-sm btn-success" id="confirmYes">Có</button>
+                                                            <button type="button" class="btn btn-sm btn-danger me-2" data-bs-dismiss="modal">Không</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php
@@ -140,5 +181,24 @@ $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         </div>
     </div>
 </div>
+<script>
+    document.querySelectorAll('.delete-btn').forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            event.preventDefault(); // Ngăn chặn hành vi mặc định
 
+            const popup = document.getElementById('confirmPopup');
+            popup.style.display = 'block'; // Hiển thị popup
+
+            // Xử lý nút "Có"
+            document.getElementById('confirmYes').onclick = function() {
+                window.location.href = button.href; // Chuyển hướng đến liên kết
+            };
+
+            // Xử lý nút "Không"
+            document.getElementById('confirmNo').onclick = function() {
+                popup.style.display = 'none'; // Ẩn popup
+            };
+        });
+    });
+</script>
 <?php include('includes/footer.php'); ?>

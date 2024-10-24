@@ -5,7 +5,7 @@
         <h2><?php echo htmlspecialchars($title); ?></h2>
         <!-- Nút quay lại nằm sát bên phải -->
         <div class="text-end mb-4">
-            <a class="btn btn-secondary" href="categories.php">
+            <a class="btn btn-secondary" href="menu.php">
                 Quay lại
             </a>
         </div>

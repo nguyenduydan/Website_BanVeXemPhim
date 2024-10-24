@@ -203,3 +203,14 @@ function paginate($conn, $table, $records_per_page, $current_page)
         'total_records' => $total_records
     ];
 }
+// Hàm sort
+function sortData(&$data, $sortField, $sortOrder = 'ASC')
+{
+    usort($data, function ($a, $b) use ($sortField, $sortOrder) {
+        if ($sortOrder === 'ASC') {
+            return strcmp($a[$sortField], $b[$sortField]);
+        } else {
+            return strcmp($b[$sortField], $a[$sortField]);
+        }
+    });
+}
