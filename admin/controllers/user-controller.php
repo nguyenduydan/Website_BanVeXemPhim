@@ -84,6 +84,7 @@ if (isset($_POST['saveUser'])) {
 }
 
 if (isset($_POST['editUser'])) {
+    $errors = [];
     $id = validate($_POST['mand']);
     $name = validate($_POST['name']);
     $username = validate($_POST['username']);
@@ -99,20 +100,16 @@ if (isset($_POST['editUser'])) {
     }
     if (empty($username)) {
         $errors['username'] = "Tên người dùng không được để trống.";
-    }
-
-    if (empty($password)) {
-        $errors['password'] = "Mật khẩu không được để trống.";
-    }
-
-    if (empty($re_password)) {
-        $errors['re_password'] = "Xác nhận mật khẩu không được để trống.";
+    } else if (isUsername($username)) {
+        $errors['username'] = "Tên người dùng đã tồn tại";
     }
     if (empty($ngay_sinh)) {
         $errors['ngay_sinh'] = "Ngày sinh không được để trống.";
     }
     if (empty($email)) {
         $errors['email'] = "Email không được để trống.";
+    } elseif (isEmail($email)) {
+        $errors['email'] = "Email đã tồn tại";
     }
 
 
@@ -151,12 +148,12 @@ if (isset($_POST['editUser'])) {
             exit();
         } else {
             $_SESSION['error'] = 'Cập nhật tài khoản thất bại';
-            header("Location: ../user-add.php");
+            header("Location: ../user-edit.php?id=" . $id);
             exit();
         }
     } else {
         $_SESSION['errors'] = $errors; // Lưu lỗi vào session
-        header("Location: ../user-add.php"); // Chuyển hướng về trang thêm người dùng
+        header("Location: ../user-edit.php?id=" . $id); // Chuyển hướng về trang thêm người dùng
         exit();
     }
 }

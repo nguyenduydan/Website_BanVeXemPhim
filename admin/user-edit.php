@@ -6,7 +6,6 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
 ?>
 
 <div id="toast"></div>
-<script src="/Website_BanVeXemPhim/assets/js/toast.js"></script>
 <?php alertMessage() ?>
 
 <div class="row">
@@ -25,18 +24,24 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
             $user = getByID('NguoiDung', 'MaND', check_valid_ID('id'));
             if ($user['status'] == 200) {
             ?>
-                <input type="hidden" name="mand" value=<?= $user['data']['MaND'] ?> required>
+                <input type="hidden" name="mand" value=<?= $user['data']['MaND'] ?>>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="name">Họ và tên người dùng(<span class="text-danger">*</span>)</label>
                             <input type="text" class="form-control" id="name" name="name" value="<?= $user['data']['TenND']; ?>" placeholder="Nhập họ và tên"
                                 value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>">
+                            <?php if (isset($errors['name'])): ?>
+                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($errors['name']) ?></small>
+                            <?php endif; ?>
                         </div>
                         <div class="form-group mb-3">
                             <label for="username">Tên đăng nhập (<span class="text-danger">*</span>)</label>
                             <input type="text" class="form-control" id="username" name="username" value="<?= $user['data']['username']; ?>" placeholder="Nhập tên đăng nhập"
                                 value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
+                            <?php if (isset($errors['username'])): ?>
+                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($errors['username']) ?></small>
+                            <?php endif; ?>
                         </div>
                         <div class="form-group mb-3">
                             <label for="gioi_tinh">Giới tính</label>
@@ -53,34 +58,37 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
                         <div class="form-group mb-3">
                             <label for="email">Email (<span class="text-danger">*</span>)</label>
                             <input type="email" class="form-control" id="email" name="email" value="<?= $user['data']['Email']; ?>" placeholder="Nhập email"
-                                value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" required>
+                                value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
+                            <?php if (isset($errors['email'])): ?>
+                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($errors['email']) ?></small>
+                            <?php endif; ?>
                         </div>
                         <div class="form-group mb-3">
                             <label for="ngay_sinh">Ngày sinh (<span class="text-danger">*</span>)</label>
                             <input type="date" class="form-control" id="ngay_sinh"
                                 value="<?= isset($user['data']['NgaySinh']) ? htmlspecialchars($user['data']['NgaySinh']) : ''; ?>"
-                                name="ngay_sinh" required>
+                                name="ngay_sinh">
                         </div>
 
                     </div>
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="role">Vai trò</label>
-                            <select class="form-control" id="role" name="role" required>
+                            <select class="form-control" id="role" name="role">
                                 <option value="1">Admin</option>
                                 <option value="0">User</option>
                             </select>
                         </div>
                         <div class="form-group mb-3">
                             <label for="status">Trạng thái</label>
-                            <select class="form-control" id="status" name="status" required>
+                            <select class="form-control" id="status" name="status">
                                 <option value="1">Online</option>
                                 <option value="0">Offline</option>
                             </select>
                         </div>
                         <div class="form-group mb-3">
                             <label for="avatar">Chọn ảnh</label>
-                            <input type="file" class="form-control" id="avatar" value="<?= $user['data']['Anh']; ?>" name="avatar" accept="image/*" required onchange="previewImage(event)">
+                            <input type="file" class="form-control" id="avatar" value="<?= $user['data']['Anh']; ?>" name="avatar" accept="image/*" onchange="previewImage(event)">
                         </div>
                         <div class="form-group mb-3">
                             <img id="preview" src="<?php echo isset($user['data']['Anh']) ? '../uploads/avatars/' . htmlspecialchars($user['data']['Anh']) : '#'; ?>" alt="Ảnh xem trước" class="img-fluid" style="display: <?php echo isset($user['data']['Anh']) ? 'block' : 'none'; ?>; max-width: 100%; max-height: 220px;" />

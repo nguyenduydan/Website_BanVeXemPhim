@@ -1,10 +1,6 @@
 <?php
 require '../config/function.php';
 include('includes/header.php');
-// $errors = [];
-// if (isset($_GET['errors'])) {
-//     $errors = $_GET['errors'];
-// }
 
 $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : []; // Lấy lỗi từ session
 unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
@@ -12,7 +8,6 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
 ?>
 
 <div id="toast"></div>
-<script src="/Website_BanVeXemPhim/assets/js/toast.js"></script>
 <?php alertMessage() ?>
 
 <div class="row">
