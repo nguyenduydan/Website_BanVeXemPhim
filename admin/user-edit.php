@@ -39,8 +39,8 @@ include('includes/header.php');
                             <div class="form-group mb-3">
                                 <label for="gioi_tinh">Giới tính</label>
                                 <select class="form-control" id="gioi_tinh" name="gioi_tinh">
-                                    <option value="Nam" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] === 'Nam') ? 'selected' : ''; ?>>Nam</option>
-                                    <option value="Nữ" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] === 'Nữ') ? 'selected' : ''; ?>>Nữ</option>
+                                    <option value="1" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] == '1') ? 'selected' : ($user['data']['GioiTinh'] == '1' ? 'selected' : ''); ?>>Nam</option>
+                                    <option value="0" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] == '0') ? 'selected' : ($user['data']['GioiTinh'] == '0' ? 'selected' : ''); ?>>Nữ</option>
                                 </select>
                             </div>
                             <div class="form-group mb-3">
@@ -57,7 +57,9 @@ include('includes/header.php');
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="ngay_sinh">Ngày sinh</label>
-                                <input type="date" class="form-control" id="ngay_sinh"  value="<?= $user['data']['NgaySinh']; ?> "name="ngay_sinh" required>
+                                <input type="date" class="form-control" id="ngay_sinh" 
+                                    value="<?= isset($user['data']['NgaySinh']) ? htmlspecialchars($user['data']['NgaySinh']) : ''; ?>" 
+                                    name="ngay_sinh" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="role">Vai trò</label>
@@ -69,16 +71,16 @@ include('includes/header.php');
                             <div class="form-group mb-3">
                                 <label for="status">Trạng thái</label>
                                 <select class="form-control" id="status" name="status" required>
-                                    <option value="1">Online</option>
-                                    <option value="0">Offline</option>
+                                    <option value="1" <?php echo (isset($_POST['status']) && $_POST['status'] == '1') ? 'selected' : ($user['data']['TrangThai'] == '1' ? 'selected' : ''); ?>>Online</option>
+                                    <option value="0" <?php echo (isset($_POST['status']) && $_POST['status'] == '0') ? 'selected' : ($user['data']['TrangThai'] == '0' ? 'selected' : ''); ?>>Offline</option>
                                 </select>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="avatar">Chọn ảnh</label>
-                                <input type="file" class="form-control" id="avatar"  value="<?= $user['data']['Anh']; ?> name="avatar" accept="image/*" required onchange="previewImage(event)">
+                                <input type="file" class="form-control" id="avatar" value="<?= $user['data']['Anh']; ?>" name="avatar" accept="image/*" required onchange="previewImage(event)">
                             </div>
                             <div class="form-group mb-3">
-                                <img id="preview" src="#" alt="Ảnh xem trước" class="img-fluid" style="display:none; max-width: 100%; max-height: 220px;" />
+                                <img id="preview" src="<?php echo isset($user['data']['Anh']) ? '../uploads/avatars/' . htmlspecialchars($user['data']['Anh']) : '#'; ?>" alt="Ảnh xem trước" class="img-fluid" style="display: <?php echo isset($user['data']['Anh']) ? 'block' : 'none'; ?>; max-width: 100%; max-height: 220px;" />
                             </div>
                         </div>
                     </div>
@@ -94,15 +96,21 @@ include('includes/header.php');
 </div>
 
 <script>
-    function previewImage(event) {
-        var reader = new FileReader();
-        reader.onload = function() {
-            var output = document.getElementById('preview');
-            output.src = reader.result;
-            output.style.display = 'block';
-        };
-        reader.readAsDataURL(event.target.files[0]);
+function previewImage(event) {
+    var preview = document.getElementById('preview');
+    var file = event.target.files[0];
+    var reader = new FileReader();
+    
+    reader.onload = function() {
+        preview.src = reader.result;
+        preview.style.display = 'block';
     }
+    
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        preview.src = '#';
+        preview.style.display = 'none';
+    }
+}
 </script>
-
-<?php include('includes/footer.php'); ?>
