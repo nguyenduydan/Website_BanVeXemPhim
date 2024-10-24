@@ -1,8 +1,7 @@
 <?php
-require '../config/function.php'; // This includes Validator.php
+require '../config/function.php'; 
 include('includes/header.php');
 
-$validator = new Validator(); // Instantiate Validator class
 ?>
 
 <div id="toast"></div>
@@ -15,72 +14,80 @@ $validator = new Validator(); // Instantiate Validator class
         <div class="text-end mb-4">
             <a class="btn btn-secondary" href="user.php">Quay lại</a>
         </div>
-        <form id="addUserForm" action="../admin/controllers/code.php" method="post" enctype="multipart/form-data">
+        <form id="addUserForm" action="../admin/controllers/user-controller.php" method="post" enctype="multipart/form-data">
             <?php
-            $id_result = check_valid_ID('id');
-            if (!is_numeric($id_result)) {
-                echo '<h5>' . $id_result . '</h5>';
-                return false;
-            }
+                $id_result = check_valid_ID('id');
+                if(!is_numeric($id_result)){
+                    echo '<h5>'.$id_result.'</h5>';
+                    return false;
+                }
+                $user = getByID('NguoiDung','MaND',check_valid_ID('id'));
+                if($user['status'] == 200){
+                    ?>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="name">Họ và tên người dùng</label>
+                                <input type="text" class="form-control" id="name" name="name" value="<?= $user['data']['TenND']; ?>" placeholder="Nhập họ và tên"
+                                    value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="username">Tên đăng nhập</label>
+                                <input type="text" class="form-control" id="username" name="username"  value="<?= $user['data']['username']; ?>" placeholder="Nhập tên đăng nhập"
+                                    value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="gioi_tinh">Giới tính</label>
+                                <select class="form-control" id="gioi_tinh" name="gioi_tinh">
+                                    <option value="Nam" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] === 'Nam') ? 'selected' : ''; ?>>Nam</option>
+                                    <option value="Nữ" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] === 'Nữ') ? 'selected' : ''; ?>>Nữ</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="sdt">Số điện thoại</label>
+                                <input type="number" class="form-control" id="sdt" name="sdt"  value="<?= $user['data']['SDT']; ?>" placeholder="Nhập số điện thoại"
+                                    value="<?php echo isset($_POST['sdt']) ? htmlspecialchars($_POST['sdt']) : ''; ?>">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email"  value="<?= $user['data']['Email']; ?>" placeholder="Nhập email"
+                                    value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="ngay_sinh">Ngày sinh</label>
+                                <input type="date" class="form-control" id="ngay_sinh"  value="<?= $user['data']['NgaySinh']; ?> "name="ngay_sinh" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="role">Vai trò</label>
+                                <select class="form-control" id="role" name="role" required>
+                                    <option value="1">Admin</option>
+                                    <option value="0">User</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="status">Trạng thái</label>
+                                <select class="form-control" id="status" name="status" required>
+                                    <option value="1">Online</option>
+                                    <option value="0">Offline</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="avatar">Chọn ảnh</label>
+                                <input type="file" class="form-control" id="avatar"  value="<?= $user['data']['Anh']; ?> name="avatar" accept="image/*" required onchange="previewImage(event)">
+                            </div>
+                            <div class="form-group mb-3">
+                                <img id="preview" src="#" alt="Ảnh xem trước" class="img-fluid" style="display:none; max-width: 100%; max-height: 220px;" />
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                }
+                else{
+                    echo '<h5>'.$user['message'].'</h5>';
+                }
             ?>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group mb-3">
-                        <label for="name">Họ và tên người dùng</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ và tên"
-                            value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="username">Tên người dùng</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên đăng nhập"
-                            value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="gioi_tinh">Giới tính</label>
-                        <select class="form-control" id="gioi_tinh" name="gioi_tinh">
-                            <option value="Nam" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] === 'Nam') ? 'selected' : ''; ?>>Nam</option>
-                            <option value="Nữ" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] === 'Nữ') ? 'selected' : ''; ?>>Nữ</option>
-                        </select>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="sdt">Số điện thoại</label>
-                        <input type="number" class="form-control" id="sdt" name="sdt" placeholder="Nhập số điện thoại"
-                            value="<?php echo isset($_POST['sdt']) ? htmlspecialchars($_POST['sdt']) : ''; ?>">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email"
-                            value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" required>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group mb-3">
-                        <label for="ngay_sinh">Ngày sinh</label>
-                        <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh" required>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="role">Vai trò</label>
-                        <select class="form-control" id="role" name="role" required>
-                            <option value="1">Admin</option>
-                            <option value="0">User</option>
-                        </select>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="status">Trạng thái</label>
-                        <select class="form-control" id="status" name="status" required>
-                            <option value="1">Online</option>
-                            <option value="0">Offline</option>
-                        </select>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="avatar">Chọn ảnh</label>
-                        <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*" required onchange="previewImage(event)">
-                    </div>
-                    <div class="form-group mb-3">
-                        <img id="preview" src="#" alt="Ảnh xem trước" class="img-fluid" style="display:none; max-width: 100%; max-height: 220px;" />
-                    </div>
-                </div>
-            </div>
             <button type="submit" name="editUser" class="btn btn-success w-15 mt-3">Lưu</button>
         </form>
     </div>

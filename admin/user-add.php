@@ -1,8 +1,7 @@
 <?php
-require '../config/function.php'; // This includes Validator.php
+require '../config/function.php';
 include('includes/header.php');
 
-$validator = new Validator(); // Instantiate Validator class
 ?>
 
 <div id="toast"></div>
@@ -15,7 +14,7 @@ $validator = new Validator(); // Instantiate Validator class
         <div class="text-end mb-4">
             <a class="btn btn-secondary" href="user.php">Quay lại</a>
         </div>
-        <form id="addUserForm" action="../admin/controllers/code.php" method="post" enctype="multipart/form-data">
+        <form id="addUserForm" action="../admin/controllers/user-controller.php" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group mb-3">

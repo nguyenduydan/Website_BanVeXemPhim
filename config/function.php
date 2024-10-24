@@ -160,11 +160,11 @@ function check_valid_ID($id){
         return 'Không tìm thấy ' .$id;
     }
 }
-function getByID($tableName,$id){
+function getByID($tableName,$colName,$id){
     global $conn;
     $table = validate($tableName);
     $id = validate($id);
-    $query = "SELECT * FROM $table WHERE id = '$id' LIMIT 1";
+    $query = "SELECT * FROM $table WHERE $colName = '$id' LIMIT 1";
     $result = mysqli_query($conn, $query);
     if($result){
         if(mysqli_num_rows($result) == 1){
@@ -173,7 +173,6 @@ function getByID($tableName,$id){
                 'status' => 200,
                 'message'=>'Fetched data',
                 'data' => $row
-
             ];
         }
         else{
@@ -191,4 +190,5 @@ function getByID($tableName,$id){
         ];
         return $response;
     }
+    return $response;
 }
