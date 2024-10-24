@@ -169,8 +169,15 @@ function getByID($tableName, $colName, $id)
     }
     return $response;
 }
-function deleteQuery() {}
-
+function deleteQuery($tableName, $colName, $id) {
+    global $conn;
+    $table = validate($tableName);
+    $col = validate($colName);
+    $id = validate($id);
+    $query = "DELETE FROM $table WHERE $colName ='$id' LIMIT 1";
+    $result = mysqli_query($conn,$query);
+    return $result;
+}
 
 //Phan trang
 function paginate($conn, $table, $records_per_page, $current_page)
