@@ -148,3 +148,47 @@ class Validator
         return '';
     }
 }
+
+function check_valid_ID($id){
+    if(isset($_GET[$id])){
+        if($_GET[$id] != NULL){
+            return $_GET[$id];
+        }else{
+            return 'Không tìm thấy ' .$id;
+        }
+    }else{
+        return 'Không tìm thấy ' .$id;
+    }
+}
+function getByID($tableName,$id){
+    global $conn;
+    $table = validate($tableName);
+    $id = validate($id);
+    $query = "SELECT * FROM $table WHERE id = '$id' LIMIT 1";
+    $result = mysqli_query($conn, $query);
+    if($result){
+        if(mysqli_num_rows($result) == 1){
+            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            $response =[
+                'status' => 200,
+                'message'=>'Fetched data',
+                'data' => $row
+
+            ];
+        }
+        else{
+            $response =[
+                'status' => 404,
+                'message'=>'Something Went Wrong'
+            ];
+            return $response;
+        }
+    }
+    else{
+        $response = [
+            'status' => 500,
+            'message' => 'Something Went Wrong'
+        ];
+        return $response;
+    }
+}
