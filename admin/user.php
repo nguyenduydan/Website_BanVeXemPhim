@@ -74,7 +74,7 @@ include('includes/header.php');
                             } else {
                                 ?>
                                 <tr>
-                                    <td colspan="6" class="text-center">Không có bản ghi nào</td>
+                                    <td colspan="7" class="text-center">Không có bản ghi nào</td>
                                 </tr>
                             <?php
                             }
