@@ -24,6 +24,7 @@ include('includes/header.php');
                 $user = getByID('NguoiDung','MaND',check_valid_ID('id'));
                 if($user['status'] == 200){
                     ?>
+                    <input type="hidden" name="mand" value=<?=$user['data']['MaND'] ?>" required>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group mb-3">

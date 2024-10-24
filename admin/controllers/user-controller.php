@@ -72,3 +72,62 @@ if (isset($_POST['saveUser'])) {
         exit();
     }
 }
+if(isset($_POST['editUser'])){
+    $id = validate($_POST['mand']);
+    $name = validate($_POST['name']);
+    $username = validate($_POST['username']);
+    $ngay_sinh = validate($_POST['ngay_sinh']);
+    $gioi_tinh = validate($_POST['gioi_tinh']);
+    $sdt = validate($_POST['sdt']);
+    $email = validate($_POST['email']);
+    $role = validate($_POST['role']);
+    $status = validate($_POST['status']);
+    $validator->validateRequired('name', $name, 'Tên không được để trống');
+    $validator->validateRequired('username', $username, 'Tên đăng nhập không được để trống');
+    $validator->validateUsernameAndEmail($username, $email);
+    $errors = $validator->getErrors();
+    $user = getByID('NguoiDung','MaND',$id);
+    if (empty($errors)) {
+        if (isset($_POST['deleteAvatar'])) {
+            $avatarPath = "../../uploads/avatars/" . $user['data']['Anh']; 
+            $deleteResult = deleteImage($avatarPath);
+        }
+        $avatar = '';
+        if (isset($_FILES['avatar'])) {
+            $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/");
+            if ($avatarResult['success']) {
+                $avatar =  $avatarResult['filename'];
+            } else {
+                $errors[] = $avatarResult['message'];
+            }
+        }
+        $ngay_tao = date('Y-m-d H:i:s');
+        $query = "UPDATE NguoiDung SET
+                TenND = '$name',
+                username = '$username',
+                NgaySinh = '$ngay_sinh',
+                GioiTinh = '$gioi_tinh',
+                SDT = '$sdt',
+                Anh = '$avatar',
+                Email = '$email',
+                Role = '$role',
+                NguoiTao = 1,
+                NgayTao = '$ngay_tao',
+                TrangThai = '$status'
+                WHERE MaND = '$id'";    
+
+        if (mysqli_query($conn, $query)) {
+            $_SESSION['success'] = 'Cập nhật tài khoản thành công';
+            header("Location: ../user.php");
+            exit();
+        } else {
+            $_SESSION['error'] = 'Cập nhật tài khoản thất bại';
+            header("Location: ../user-add.php");
+            exit();
+        }
+    } else {
+        $_SESSION['error'] = 'Có lỗi xảy ra, vui lòng kiểm tra lại';
+        header("Location: ../user-edit.php");
+        exit();
+    }
+}

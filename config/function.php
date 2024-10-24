@@ -9,7 +9,8 @@ if (session_status() === PHP_SESSION_NONE) {
 function validate($inpData)
 {
     global $conn;
-    return mysqli_real_escape_string($conn, $inpData);
+    $validatedData = mysqli_real_escape_string($conn, $inpData);
+    return trim($validatedData);
 }
 function uploadImage($file, $targetDir)
 {
@@ -44,7 +45,22 @@ function uploadImage($file, $targetDir)
     
     return $result;
 }
-
+function deleteImage($filePath) {
+    $result = ['success' => false, 'message' => ''];
+    if (file_exists($filePath)) {
+        // Thực hiện xóa tệp
+        if (unlink($filePath)) {
+            $result['success'] = true;
+            $result['message'] = 'Tệp đã được xóa thành công.';
+        } else {
+            $result['message'] = 'Có lỗi xảy ra khi xóa tệp.';
+        }
+    } else {
+        $result['message'] = 'Tệp không tồn tại.';
+    }
+    
+    return $result;
+}
 function redirect($url, $status)
 {
     $_SESSION['status'] = $status;
@@ -67,29 +83,6 @@ function alertMessage()
         unset($_SESSION['success']); // Xóa thông báo sau khi đã hiển thị
     }
 }
-
-// function uploadAvatar($file, $targetDir)
-// {
-//     if (isset($file) && $file['error'] === UPLOAD_ERR_OK) {
-//         $targetFile = $targetDir . basename($file["name"]);
-
-//         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-//         $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
-
-//         if (in_array($imageFileType, $allowedTypes)) {
-//             if (move_uploaded_file($file["tmp_name"], $targetFile)) {
-//                 return "Tệp đã được tải lên thành công: " . htmlspecialchars(basename($file["name"]));
-//             } else {
-//                 return "Có lỗi khi tải tệp lên.";
-//             }
-//         } else {
-//             return "Chỉ cho phép các tệp ảnh: JPG, JPEG, PNG, GIF.";
-//         }
-//     } else {
-//         return "Không có tệp nào được tải lên hoặc có lỗi xảy ra.";
-//     }
-// }
-
 function validateAndHashPassword($password, $re_password)
 {
     if ($password !== $re_password) {
