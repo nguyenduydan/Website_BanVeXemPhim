@@ -2,8 +2,7 @@
 session_start();
 require '../../config/function.php'; // This includes Validator.php
 
-$validator = new Validator(); // Instantiate the Validator class
-
+$errors = [];
 if (isset($_POST['saveUser'])) {
     // Validate and sanitize input
     $name = validate($_POST['name']);
@@ -15,29 +14,35 @@ if (isset($_POST['saveUser'])) {
     $sdt = validate($_POST['sdt']);
     $email = validate($_POST['email']);
     $role = validate($_POST['role']);
-    $status = validate($_POST['status']) == 1 ? 1: 0;
-    // Validate required fields
-    $validator->validateRequired('name', $name, 'Tên không được để trống');
-    $validator->validateRequired('username', $username, 'Tên đăng nhập không được để trống');
-    $validator->validateRequired('password', $password, 'Mật khẩu không được để trống');
-    if ($password !== $re_password) {
-        $validator->validateRequired('re_password', $re_password, 'Mật khẩu không khớp');
-    }
-    // Check for existing username/email
-    $validator->validateUsernameAndEmail($username, $email);
+    $status = validate($_POST['status']) == 1 ? 1 : 0;
 
-    
+    //Kiểm tra không được để trống
+    if (empty($name)) {
+        $errors['name'] = "Họ và tên không được để trống.";
+    }
+    if (empty($username)) {
+        $errors['username'] = "Tên người dùng không được để trống.";
+    }
+    if (empty($password)) {
+        $errors['password'] = "Mật khẩu không được để trống.";
+    }
+    if (empty($re_password)) {
+        $errors['re_password'] = "Xác nhận mật khẩu không được để trống.";
+    }
+    if (empty($ngay_sinh)) {
+        $errors['ngay_sinh'] = "Ngày sinh không được để trống.";
+    }
+    if (empty($email)) {
+        $errors['email'] = "Email không được để trống.";
+    }
 
 
     // Hash password
     $passwordDetails = validateAndHashPassword($password, $re_password);
     if (!$passwordDetails['status']) {
-        $validator->validateRequired('password', '', $passwordDetails['message']);
+        $errors['re_password'] = $passwordDetails['message'];
     }
     $hashedPassword = $passwordDetails['hashed'];
-
-    // Collect errors
-    $errors = $validator->getErrors();
 
     if (empty($errors)) {
         // Handle avatar upload
@@ -65,12 +70,13 @@ if (isset($_POST['saveUser'])) {
             exit();
         }
     } else {
-        $_SESSION['error'] = 'Có lỗi xảy ra, vui lòng kiểm tra lại';
-        header("Location: ../user-add.php");
+        $_SESSION['errors'] = $errors; // Lưu lỗi vào session
+        header("Location: ../user-add.php"); // Chuyển hướng về trang thêm người dùng
         exit();
     }
 }
-if(isset($_POST['editUser'])){
+
+if (isset($_POST['editUser'])) {
     $id = validate($_POST['mand']);
     $name = validate($_POST['name']);
     $username = validate($_POST['username']);
@@ -84,10 +90,10 @@ if(isset($_POST['editUser'])){
     $validator->validateRequired('username', $username, 'Tên đăng nhập không được để trống');
     $validator->validateUsernameAndEmail($username, $email);
     $errors = $validator->getErrors();
-    $user = getByID('NguoiDung','MaND',$id);
+    $user = getByID('NguoiDung', 'MaND', $id);
     if (empty($errors)) {
         if (isset($_POST['deleteAvatar'])) {
-            $avatarPath = "../../uploads/avatars/" . $user['data']['Anh']; 
+            $avatarPath = "../../uploads/avatars/" . $user['data']['Anh'];
             $deleteResult = deleteImage($avatarPath);
         }
         $avatar = $user['data']['Anh'];
@@ -111,7 +117,7 @@ if(isset($_POST['editUser'])){
                 Role = '$role',
                 NgayCapNhat = '$ngay_tao',
                 TrangThai = '$status'
-                WHERE MaND = '$id'";    
+                WHERE MaND = '$id'";
 
         if (mysqli_query($conn, $query)) {
             $_SESSION['success'] = 'Cập nhật tài khoản thành công';

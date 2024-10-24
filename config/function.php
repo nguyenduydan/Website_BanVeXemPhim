@@ -21,10 +21,10 @@ function uploadImage($file, $targetDir)
         $fileTmpName = $file["tmp_name"];
         $fileSize = $file["size"];
         $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-        
+
         // Allowed file types
         $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
-        
+
         // Validate file type
         if (!in_array($fileType, $allowedTypes)) {
             $result['message'] = "Chỉ các định dạng JPG, JPEG, PNG và GIF được chấp nhận.";
@@ -42,10 +42,11 @@ function uploadImage($file, $targetDir)
     } else {
         $result['message'] = "Không có tệp nào được tải lên hoặc có lỗi trong quá trình tải.";
     }
-    
+
     return $result;
 }
-function deleteImage($filePath) {
+function deleteImage($filePath)
+{
     $result = ['success' => false, 'message' => ''];
     if (file_exists($filePath)) {
         // Thực hiện xóa tệp
@@ -58,7 +59,7 @@ function deleteImage($filePath) {
     } else {
         $result['message'] = 'Tệp không tồn tại.';
     }
-    
+
     return $result;
 }
 function redirect($url, $status)
@@ -86,97 +87,78 @@ function alertMessage()
 function validateAndHashPassword($password, $re_password)
 {
     if ($password !== $re_password) {
-        return ['status' => false, 'message' => 'Mật khẩu và xác nhận mật khẩu không trùng khớp'];
+        return ['status' => false, 'message' => 'Mật khẩu không trùng khớp'];
     }
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     return ['status' => true, 'hashed' => $hashedPassword];
 }
 
-function isUsernameAndEmailExists($username, $email)
+function isUsername($username)
 {
     global $conn;
     $username = validate($username);
-    $email = validate($email);
 
-    $query = "SELECT * FROM NguoiDung WHERE Email = '$email' OR username = '$username'";
+    $query = "SELECT * FROM NguoiDung WHERE username = '$username'";
     $result = mysqli_query($conn, $query);
 
     return mysqli_num_rows($result) > 0;
 }
-function getAll($tableName) {
+
+function isEmail($email)
+{
+    global $conn;
+    $email = validate($email);
+
+    $query = "SELECT * FROM NguoiDung WHERE email = '$email'";
+    $result = mysqli_query($conn, $query);
+
+    return mysqli_num_rows($result) > 0;
+}
+
+function getAll($tableName)
+{
     global $conn;
     $table = validate($tableName);
     $query = "SELECT * FROM $table";
-    $result = mysqli_query($conn,$query);
+    $result = mysqli_query($conn, $query);
     return $result;
 }
-class Validator
+
+function check_valid_ID($id)
 {
-    private $errors = [];
-
-    public function validateRequired($field, $value, $message)
-    {
-        if (empty($value)) {
-            $this->errors[$field] = $message;
-        }
-    }
-
-    public function validateUsernameAndEmail($username, $email)
-    {
-        if (isUsernameAndEmailExists($username, $email)) {
-            $this->errors['username_email'] = 'Tên đăng nhập hoặc email đã tồn tại, vui lòng sử dụng tên khác';
-        }
-    }
-
-    public function getErrors()
-    {
-        return $this->errors;
-    }
-
-    public function displayError($field)
-    {
-        if (isset($this->errors[$field])) {
-            return '<small style="color: red;">' . $this->errors[$field] . '</small>';
-        }
-        return '';
-    }
-}
-
-function check_valid_ID($id){
-    if(isset($_GET[$id])){
-        if($_GET[$id] != NULL){
+    if (isset($_GET[$id])) {
+        if ($_GET[$id] != NULL) {
             return $_GET[$id];
-        }else{
-            return 'Không tìm thấy ' .$id;
+        } else {
+            return 'Không tìm thấy ' . $id;
         }
-    }else{
-        return 'Không tìm thấy ' .$id;
+    } else {
+        return 'Không tìm thấy ' . $id;
     }
 }
-function getByID($tableName,$colName,$id){
+function getByID($tableName, $colName, $id)
+{
     global $conn;
     $table = validate($tableName);
     $id = validate($id);
     $query = "SELECT * FROM $table WHERE $colName = '$id' LIMIT 1";
     $result = mysqli_query($conn, $query);
-    if($result){
-        if(mysqli_num_rows($result) == 1){
+    if ($result) {
+        if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-            $response =[
+            $response = [
                 'status' => 200,
-                'message'=>'Fetched data',
+                'message' => 'Fetched data',
                 'data' => $row
             ];
-        }
-        else{
-            $response =[
+        } else {
+            $response = [
                 'status' => 404,
-                'message'=>'Something Went Wrong'
+                'message' => 'Something Went Wrong'
             ];
             return $response;
         }
-    }
-    else{
+    } else {
         $response = [
             'status' => 500,
             'message' => 'Something Went Wrong'
@@ -185,6 +167,4 @@ function getByID($tableName,$colName,$id){
     }
     return $response;
 }
-function deleteQuery(){
-    
-}
+function deleteQuery() {}
