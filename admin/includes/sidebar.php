@@ -38,7 +38,7 @@
     <div class="collapse navbar-collapse w-auto h-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link <?php if (in_array($current_page, $base_pages['dashboard'])) echo 'active'; ?>" href="../admin/index.php" data-class="bg - transparent">
+                <a class="nav-link <?php if (in_array($current_page, $base_pages['dashboard']) || $current_page == 'admin') echo 'active'; ?>" href="../admin/index.php" data-class="bg - transparent">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
