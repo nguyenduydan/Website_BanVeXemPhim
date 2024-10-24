@@ -185,3 +185,6 @@ function getByID($tableName,$colName,$id){
     }
     return $response;
 }
+function deleteQuery(){
+    
+}

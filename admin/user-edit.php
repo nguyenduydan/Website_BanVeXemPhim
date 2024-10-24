@@ -72,8 +72,8 @@ include('includes/header.php');
                         <div class="form-group mb-3">
                             <label for="status">Trạng thái</label>
                             <select class="form-control" id="status" name="status" required>
-                                <option value="1" <?php echo (isset($_POST['status']) && $_POST['status'] == '1') ? 'selected' : ($user['data']['TrangThai'] == '1' ? 'selected' : ''); ?>>Online</option>
-                                <option value="0" <?php echo (isset($_POST['status']) && $_POST['status'] == '0') ? 'selected' : ($user['data']['TrangThai'] == '0' ? 'selected' : ''); ?>>Offline</option>
+                                <option value="1">Online</option>
+                                <option value="0">Offline</option>
                             </select>
                         </div>
                         <div class="form-group mb-3">

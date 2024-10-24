@@ -65,7 +65,7 @@ include('includes/header.php');
                                             </a>
                                             <a class="btn btn-danger m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                                 href="../admin/user-delete.php?id=<?= $userItem['MaND'] ?>">
-                                                <i class="bi bi-trash"></i> Xoá
+                                                <i class="bi bi-trash" onclick="return confirm('Bạn có chắc chắn muốn xóa?')"></i> Xoá
                                             </a>
                                         </td>
                                     </tr>

@@ -15,8 +15,7 @@ if (isset($_POST['saveUser'])) {
     $sdt = validate($_POST['sdt']);
     $email = validate($_POST['email']);
     $role = validate($_POST['role']);
-    $status = validate($_POST['status']);
-
+    $status = validate($_POST['status']) == 1 ? 1: 0;
     // Validate required fields
     $validator->validateRequired('name', $name, 'Tên không được để trống');
     $validator->validateRequired('username', $username, 'Tên đăng nhập không được để trống');
@@ -24,7 +23,6 @@ if (isset($_POST['saveUser'])) {
     if ($password !== $re_password) {
         $validator->validateRequired('re_password', $re_password, 'Mật khẩu không khớp');
     }
-
     // Check for existing username/email
     $validator->validateUsernameAndEmail($username, $email);
 
@@ -92,7 +90,7 @@ if(isset($_POST['editUser'])){
             $avatarPath = "../../uploads/avatars/" . $user['data']['Anh']; 
             $deleteResult = deleteImage($avatarPath);
         }
-        $avatar = '';
+        $avatar = $user['data']['Anh'];
         if (isset($_FILES['avatar'])) {
             $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/");
             if ($avatarResult['success']) {
