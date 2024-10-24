@@ -114,3 +114,5 @@ function previewImage(event) {
     }
 }
 </script>
+
+<?php include('includes/footer.php'); ?>
