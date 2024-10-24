@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-xl-12 col-lg-12 mx-auto">
-        <h2>Chi tiết phim</h2>
+        <h2><?= $title ?></h2>
         <!-- Nút quay lại nằm sát bên phải -->
         <div class="text-end mb-4">
             <a class="btn btn-secondary" href="film.php">

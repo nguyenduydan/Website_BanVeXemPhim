@@ -1,12 +1,12 @@
 <?php include('includes/header.php'); ?>
 
-<!-- Hiển thị nội dung danh sách slider -->
+<!-- Hiển thị nội dung danh sách suất chiếu -->
 <div class="row">
     <div class="col-12">
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center pb-0">
                 <h5><?php echo $title ?></h5>
-                <a href="../admin/slider-add.php" class="btn btn-lg me-5 btn-add"
+                <a href="../admin/showtime-add.php" class="btn btn-lg me-5 btn-add"
                     style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">Thêm</a>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
@@ -14,31 +14,47 @@
                     <table class="table table-striped table-borderless align-items-center mb-0">
                         <thead>
                             <tr>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên slider</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ảnh</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Giờ chiếu</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên phim</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Người tạo</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày tạo</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Người cập nhật</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày cập nhật</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td class="align-middle text-center text-sm">
-                                    <p class="text-xs font-weight-bolder mb-0">slider hành động</p>
+                                    <p class="text-xs font-weight-bolder mb-0">10:00</p>
                                 </td>
                                 <td class="align-middle text-center text-sm">
-                                    <img src="../uploads/product-images/curved5-small.jpg" class="img-fluid" style="width: 200px; height: auto;">
+                                    <p class="text-xs font-weight-bolder mb-0">Phim hành động</p>
                                 </td>
                                 <td class="align-middle text-center text-sm">
                                     <span class="badge badge-sm bg-gradient-success">Online</span>
                                 </td>
                                 <td class="align-middle text-center text-sm">
+                                    <p class="text-xs font-weight-bolder mb-0">Nguyễn Văn A</p>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    <p class="text-xs font-weight-bolder mb-0">2024-10-24</p>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    <p class="text-xs font-weight-bolder mb-0">Trần Thị B</p>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    <p class="text-xs font-weight-bolder mb-0">2024-10-24</p>
+                                </td>
+                                <td class="align-middle text-center text-sm">
                                     <a class="btn btn-info m-0"
                                         style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                        href="../admin/slider-edit.php">
+                                        href="../admin/showtime-edit.php">
                                         <i class="bi bi-pencil"></i> Sửa
                                     </a>
                                     <a class="btn btn-danger m-0"
-                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" href="../admin/slider-delete.php">
+                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" href="../admin/showtime-delete.php">
                                         <i class="bi bi-trash"></i> Xoá
                                     </a>
                                 </td>
@@ -61,16 +77,5 @@
         </div>
     </div>
 </div>
-<script>
-    function previewImage(event) {
-        var reader = new FileReader();
-        reader.onload = function() {
-            var output = document.getElementById('preview');
-            output.src = reader.result;
-            output.style.display = 'block';
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
-</script>
 
 <?php include('includes/footer.php'); ?>

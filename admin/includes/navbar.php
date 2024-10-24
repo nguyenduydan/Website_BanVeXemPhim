@@ -1,21 +1,3 @@
-<?php
-// Lấy đường dẫn URL
-$url_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$path_parts = explode('/', trim($url_path, '/'));
-
-// Giả sử bạn đang sử dụng tên file để xác định trang
-$current_page_name = end($path_parts); // Lấy phần cuối cùng của đường dẫn
-// Ánh xạ trang cha cho từng trang
-$parent_pages = [
-    'categories' => 'Dashboard', // Trang cha của categories
-    'categories-add' => 'categories',
-    'film' => 'Categories', // Trang cha của film
-];
-
-// Gán tên trang cha nếu có
-$parent_title = $parent_pages[$current_page_name] ?? null;
-?>
-
 <style>
     #searchBox {
         width: 300px;
@@ -69,10 +51,7 @@ $parent_title = $parent_pages[$current_page_name] ?? null;
     <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-                <?php if ($parent_title): ?>
-                    <li class="breadcrumb-item text-sm"><a class="text-dark" href="javascript:;"><?php echo htmlspecialchars($parent_title); ?></a></li>
-                <?php endif; ?>
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="../index.php">Dashboard</a></li>
                 <li class="breadcrumb-item text-sm text-dark active" aria-current="page"><?php echo htmlspecialchars($title); ?></li>
             </ol>
         </nav>

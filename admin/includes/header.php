@@ -6,6 +6,7 @@
     // Lấy tên trang hiện tại
     $page = pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME);
 
+    // Mảng chứa các tiêu đề cho các trang
     $page_titles = [
         'dashboard' => 'Dashboard',
         'film' => 'Danh sách phim',
@@ -18,12 +19,41 @@
         'user' => 'Danh sách người dùng',
         'room' => 'Danh sách phòng chiếu',
         'menu' => 'Danh sách menu',
-
     ];
 
-    // Sử dụng giá trị mặc định nếu không có ánh xạ
-    $title = $page_titles[$page] ?? 'Dashboard';
-    global $title;
+    // Hàm để lấy tiêu đề dựa trên tên trang
+    function getPageTitle($page, $titles)
+    {
+        // Kiểm tra nếu trang có đuôi -add
+        if (strpos($page, '-add') !== false) {
+            // Lấy tên trang gốc bằng cách loại bỏ -add
+            $basePage = str_replace('-add', '', $page);
+            if (isset($titles[$basePage])) {
+                // Thêm "THÊM" vào đầu và chuyển đổi toàn bộ tiêu đề thành chữ in hoa
+                return "Thêm " . strtolower($titles[$basePage]);
+            }
+            return 'Dashboard';
+        }
+        if (strpos($page, '-edit') !== false) {
+            $basePage = str_replace('-edit', '', $page);
+            if (isset($titles[$basePage])) {
+                return "Cập nhật " . strtolower($titles[$basePage]);
+            }
+            return 'Dashboard';
+        }
+        if (strpos($page, '-detail') !== false) {
+            $basePage = str_replace('-detail', '', $page);
+            if (isset($titles[$basePage])) {
+                return "Chi tiết " . strtolower($titles[$basePage]);
+            }
+            return 'Dashboard';
+        }
+        // Nếu không có đuôi -add, trả về tiêu đề gốc với chữ in hoa
+        return $titles[$page] ?? 'Dashboard';
+    }
+
+    // Lấy tiêu đề trang hiện tại
+    $title = getPageTitle($page, $page_titles);
     ?>
 
     <!-- Required meta tags -->
