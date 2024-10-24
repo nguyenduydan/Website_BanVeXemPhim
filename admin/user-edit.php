@@ -96,9 +96,4 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
         </form>
     </div>
 </div>
-
-<script>
-
-</script>
-
 <?php include('includes/footer.php'); ?>
