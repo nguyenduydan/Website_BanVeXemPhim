@@ -48,11 +48,23 @@ img
 {
    border-radius: 20px !important;
 }
+
+.page-item .page-link,
+.page-item{
+    padding: 2px;
+
+}
 .page-item .page-link,
 .page-item a{
     background-color: #ffffff;
-    width: 50px;
-    border-radius: 20px !important;
+    width: 36px;
+    border-radius: 55% !important;
+    transition: background-image ease-in-out 1s;
+}
+
+.page-item a:hover {
+    background-image: linear-gradient(310deg, #141727, #3a416f);
+    color: white;
 }
 
 .carousel-item
