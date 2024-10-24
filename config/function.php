@@ -110,7 +110,13 @@ function isUsernameAndEmailExists($username, $email)
 
     return mysqli_num_rows($result) > 0;
 }
-
+function getAll($tableName) {
+    global $conn;
+    $table = validate($tableName);
+    $query = "SELECT * FROM $table";
+    $result = mysqli_query($conn,$query);
+    return $result;
+}
 class Validator
 {
     private $errors = [];

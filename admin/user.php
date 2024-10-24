@@ -33,10 +33,38 @@ include('includes/header.php');
                             </tr>
                         </thead>
                         <tbody>
+                        <?php
+                                $users = getAll('NguoiDung');
+                                if(mysqli_num_rows($users) > 0){
+                                    foreach($users as $userItem){
+                                        ?>
+                                        <tr>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><?= $userItem['MaND']; ?></th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><?= $userItem['username']; ?></th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><?= $userItem['Email']; ?></th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><?= $userItem['SDT']; ?></th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+    <img src="../uploads/avatars/<?= htmlspecialchars($userItem['Anh']); ?>" alt="Ảnh đại diện" class="img-fluid" style="max-width: 100px;">
 
+</th>
+
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><?= $userItem['TrangThai'] == 1 ? 'ON': 'OFF'; ?></th>
+                                        </tr>
+                                        <?php
+                                    }
+                                }
+                                else{
+                                    ?>
+                                    <tr>
+                                        <td colspan="6" class="text-center">Không có bản ghi nào</td>
+                                    </tr>
+                                    <?php
+                                }
+                            ?>
                             <tr>
 
                             </tr>
+
 
                         </tbody>
                     </table>
