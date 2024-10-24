@@ -6,7 +6,7 @@
         <!-- Nút quay lại nằm sát bên phải -->
         <div class="text-end mb-4">
             <a class="btn btn-secondary" href="chair.php">
-                <i class="bi bi-arrow-left-short"></i> Quay lại
+                Quay lại
             </a>
         </div>
         <form id="editChairForm" action="../admin/controllers/code.php" method="post" enctype="multipart/form-data">

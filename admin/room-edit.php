@@ -5,7 +5,7 @@
         <h2><?php echo htmlspecialchars($title); ?></h2>
         <div class="text-end mb-4">
             <a class="btn btn-secondary" href="room.php">
-                <i class="bi bi-arrow-left-short"></i> Quay lại
+                Quay lại
             </a>
         </div>
         <form id="editRoomForm" action="../admin/controllers/code.php" method="post">
