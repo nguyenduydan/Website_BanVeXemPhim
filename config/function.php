@@ -169,6 +169,8 @@ function getByID($tableName, $colName, $id)
     }
     return $response;
 }
+
+
 function deleteQuery($tableName, $colName, $id)
 {
     global $conn;

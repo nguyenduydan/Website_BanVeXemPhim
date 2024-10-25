@@ -4,10 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <title>
-    Đăng nhập
-  </title>
+  <title>Đăng nhập</title>
   <?php require('../admin/includes/links.php'); ?>
   <style>
     .input-group .form-control {
@@ -15,23 +12,25 @@
       /* Để dành khoảng trống cho icon */
     }
 
+    .input-group {
+      position: relative;
+    }
+
     .input-group .icon {
       position: absolute;
       right: 20px;
       /* Đặt icon ở phía bên phải của ô input */
-      top: 50%;
+      top: 40%;
       transform: translateY(-50%);
       cursor: pointer;
-    }
-
-    .input-group {
-      position: relative;
+      z-index: 999;
+      /* Đảm bảo icon không bị che khuất */
     }
   </style>
 </head>
 
 <body class="">
-  <main class="main-content  mt-0">
+  <main class="main-content mt-0">
     <section>
       <div class="page-header min-vh-75">
         <div class="container">
@@ -39,8 +38,7 @@
             <div class="col-xl-6 col-lg-7 col-md-6 d-flex flex-column mx-auto">
               <div class="card card-plain mt-8">
                 <div class="card-header pb-0 text-left bg-transparent">
-                  <h1 class="fx- font-weight-bolder text-info text-gradient">Đăng nhập</h3>
-
+                  <h1 class="fx- font-weight-bolder text-info text-gradient">Đăng nhập</h1>
                 </div>
                 <div class="card-body">
                   <form role="form">
@@ -51,8 +49,8 @@
                     <label class="fs-5">Password</label>
                     <div class="input-group mb-3">
                       <input type="password" id="passwordInput" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
-                      <span class="icon d-flex" id="password-addon">
-                        <i class="fas fa-eye" id="togglePassword" style="cursor: pointer;"></i>
+                      <span class="icon" id="password-addon">
+                        <i class="fas fa-eye" id="togglePassword"></i>
                       </span>
                     </div>
                     <div class="form-check form-switch">
@@ -77,18 +75,25 @@
     </section>
   </main>
   <script>
-    const togglePassword = document.querySelector("#togglePassword");
-    const passwordInput = document.querySelector("#passwordInput");
+    document.getElementById('togglePassword').addEventListener('click', function() {
+      const passwordInput = document.getElementById('passwordInput');
+      const icon = this;
 
-    togglePassword.addEventListener("click", function() {
-      // Chuyển đổi thuộc tính type giữa password và text
-      const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
-      passwordInput.setAttribute("type", type);
-
-      // Đổi icon mắt
-      this.classList.toggle("fa-eye-slash");
+      // Chuyển đổi giữa mật khẩu và văn bản
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash'); // Thay đổi biểu tượng
+      } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye'); // Khôi phục biểu tượng
+      }
     });
   </script>
   <div class="mt-5">
     <?php include('includes/footer.php'); ?>
   </div>
+</body>
+
+</html>

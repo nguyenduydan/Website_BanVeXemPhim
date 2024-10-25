@@ -37,7 +37,12 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
                     </div>
                     <div class="form-group mb-3">
                         <label for="password">Mật khẩu (<span class="text-danger">*</span>)</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
+                            <span class="input-group-text iconEye" id="password-addon" style="cursor: pointer;">
+                                <i class="fas fa-eye-slash " id="togglePassword"></i>
+                            </span>
+                        </div>
                         <?php if (isset($errors['password'])): ?>
                             <small class="text-danger m-2 text-xs"><?= htmlspecialchars($errors['password']) ?></small>
                         <?php endif; ?>

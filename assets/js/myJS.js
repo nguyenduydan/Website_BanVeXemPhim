@@ -43,8 +43,29 @@ document.addEventListener('DOMContentLoaded', function () {
         confirmYesButton.onclick = function () {
             if (deleteId) {
                 // Chuyển hướng đến trang xóa người dùng
-                window.location.href = `../admin/user-delete.php?id=${deleteId}`;
+                window.location.href = `views/user/user-delete.php?id=${deleteId}`;
             }
         };
     }
+});
+
+function togglePasswordVisibility() {
+    const passwordInput = document.getElementById('password');
+    const icon = document.getElementById('togglePassword');
+
+    // Chuyển đổi giữa mật khẩu và văn bản
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    }
+}
+
+// Đăng ký sự kiện nhấp vào biểu tượng
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('togglePassword').addEventListener('click', togglePasswordVisibility);
 });

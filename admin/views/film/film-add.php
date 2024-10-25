@@ -1,15 +1,15 @@
-<?php include('includes/header.php'); ?>
+<?php include('../../includes/header.php'); ?>
 
 <div class="row">
     <div class="col-xl-12 col-lg-12 mx-auto">
         <h2><?php echo htmlspecialchars($title); ?></h2>
         <!-- Nút quay lại nằm sát bên phải -->
         <div class="text-end mb-4">
-            <a class="btn btn-secondary" href="film.php">
+            <a class="btn btn-secondary" href="../../film.php">
                 Quay lại
             </a>
         </div>
-        <form id="addFilmForm" action="../admin/controllers/code.php" method="post" enctype="multipart/form-data">
+        <form id="addFilmForm" action="" method="post" enctype="multipart/form-data">
             <div class="row">
                 <!-- Cột 1 -->
                 <div class="col-md-6">
@@ -105,16 +105,4 @@
     </div>
 </div>
 
-<script>
-    function previewImage(event) {
-        var reader = new FileReader();
-        reader.onload = function() {
-            var output = document.getElementById('preview');
-            output.src = reader.result;
-            output.style.display = 'block';
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
-</script>
-
-<?php include('includes/footer.php'); ?>
+<?php include('../../includes/footer.php'); ?>

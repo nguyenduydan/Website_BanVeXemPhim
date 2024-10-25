@@ -1,15 +1,15 @@
-<?php include('includes/header.php'); ?>
+<?php include('../../includes/header.php'); ?>
 
 <div class="row">
     <div class="col-xl-12 col-lg-12 mx-auto">
         <h2><?php echo htmlspecialchars($title); ?></h2>
         <!-- Nút quay lại nằm sát bên phải -->
         <div class="text-end mb-4">
-            <a class="btn btn-secondary" href="content.php">
+            <a class="btn btn-secondary" href="../../content.php">
                 Quay lại
             </a>
         </div>
-        <form id="addCategoryForm" action="../admin/controllers/code.php" method="post">
+        <form id="addCategoryForm" action="" method="post">
             <div class="row ">
                 <!-- Cột 1 -->
                 <div class="col-md-6 m-auto">
@@ -32,4 +32,4 @@
     </div>
 </div>
 
-<?php include('includes/footer.php'); ?>
+<?php include('../../includes/footer.php'); ?>
