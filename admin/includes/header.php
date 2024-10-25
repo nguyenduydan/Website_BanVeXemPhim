@@ -60,7 +60,7 @@
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <?php require('links.php'); ?>
+    <?php include('links.php'); ?>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">

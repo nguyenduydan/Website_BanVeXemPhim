@@ -73,12 +73,12 @@ if (isset($_POST['saveUser'])) {
             exit();
         } else {
             $_SESSION['error'] = 'Thêm tài khoản thất bại';
-            header("Location: ../user-add.php");
+            header("Location: ../views/user/user-add.php");
             exit();
         }
     } else {
         $_SESSION['errors'] = $errors; // Lưu lỗi vào session
-        header("Location: ../user-add.php"); // Chuyển hướng về trang thêm người dùng
+        header("Location: ../views/user/user-add.php"); // Chuyển hướng về trang thêm người dùng
         exit();
     }
 }
@@ -151,12 +151,12 @@ if (isset($_POST['editUser'])) {
             exit();
         } else {
             $_SESSION['error'] = 'Cập nhật tài khoản thất bại';
-            header("Location: ../user-edit.php?id=" . $id);
+            header("Location: ../views/user/user-edit.php?id=" . $id);
             exit();
         }
     } else {
         $_SESSION['errors'] = $errors; // Lưu lỗi vào session
-        header("Location: ../user-edit.php?id=" . $id); // Chuyển hướng về trang thêm người dùng
+        header("Location: ../views/user/user-edit.php?id=" . $id); // Chuyển hướng về trang thêm người dùng
         exit();
     }
 }

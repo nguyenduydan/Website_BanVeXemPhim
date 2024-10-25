@@ -18,13 +18,11 @@
 </div>
 </main>
 
-<script src="../assets/js/toast.js"></script>
-<script src="../assets/js/myJS.js"></script>
-<script src="../assets/js/core/popper.min.js"></script>
-<script src="../assets/js/core/bootstrap.min.js"></script>
-<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-<script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-<script src="../assets/js/plugins/chartjs.min.js"></script>
+<script src="<?php echo $baseURL; ?>assets/js/core/popper.min.js"></script>
+<script src="<?php echo $baseURL; ?>assets/js/core/bootstrap.min.js"></script>
+<script src="<?php echo $baseURL; ?>assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="<?php echo $baseURL; ?>assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="<?php echo $baseURL; ?>assets/js/plugins/chartjs.min.js"></script>
 
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
@@ -36,9 +34,8 @@
     }
 </script>
 
-
 <script async defer src="https://buttons.github.io/buttons.js"></script>
-<script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+<script src="<?php echo $baseURL; ?>assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
 </body>
 
 </html>

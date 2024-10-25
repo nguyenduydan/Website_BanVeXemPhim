@@ -55,7 +55,7 @@ sortData($dataArray, $sortField, $sortOrder);
                         <option value="20" <?= $records_per_page == 20 ? 'selected' : '' ?>>20</option>
                     </select>
                 </form>
-                <a href="user-add.php" class="btn btn-lg me-5 btn-add"
+                <a href="views/user/user-add.php" class="btn btn-lg me-5 btn-add"
                     style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">Thêm</a>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
@@ -103,11 +103,11 @@ sortData($dataArray, $sortField, $sortOrder);
                                         </th>
                                         <td class="align-middle text-center text-sm">
                                             <a class="btn btn-secondary m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="../admin/user-detail.php?id=<?= $userItem['MaND'] ?>">
+                                                href="views/user/user-detail.php?id=<?= $userItem['MaND'] ?>">
                                                 <i class="bi bi-info-circle"></i> Chi tiết
                                             </a>
                                             <a class="btn btn-info m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="../admin/user-edit.php?id=<?= $userItem['MaND'] ?>">
+                                                href="views/user/user-edit.php?id=<?= $userItem['MaND'] ?>">
                                                 <i class="bi bi-pencil"></i> Sửa
                                             </a>
                                             <a class="btn btn-danger m-0 delete-btn" data-id="<?= $userItem['MaND'] ?>"

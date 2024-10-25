@@ -1,8 +1,7 @@
 <?php
 
-require '../config/function.php';
-include('includes/header.php');
-
+require '../../../config/function.php';
+include('../../includes/header.php');
 ?>
 
 <div id="toast">
@@ -21,7 +20,7 @@ if ($user['status'] == 200) {
             <h2><?= $title ?></h2>
             <!-- Nút quay lại nằm sát bên phải -->
             <div class="text-end mb-4">
-                <a class="btn btn-secondary" href="user.php">
+                <a class="btn btn-secondary" href="../../user.php">
                     Quay lại
                 </a>
             </div>
@@ -86,7 +85,7 @@ if ($user['status'] == 200) {
                                 <span><?= $user['data']['NgayCapNhat']; ?></span>
                             </div>
                             <div class="form-group mb-3">
-                                <img id="preview" src="<?php echo isset($user['data']['Anh']) ? '../uploads/avatars/' . htmlspecialchars($user['data']['Anh']) : '#'; ?>" alt="Ảnh xem trước" class="img-fluid" style="display: <?php echo isset($user['data']['Anh']) ? 'block' : 'none'; ?>; max-width: 100%; max-height: 150px;" />
+                                <img id="preview" src="<?php echo isset($user['data']['Anh']) ? '../../../uploads/avatars/' . htmlspecialchars($user['data']['Anh']) : '#'; ?>" alt="Ảnh xem trước" class="img-fluid" style="display: <?php echo isset($user['data']['Anh']) ? 'block' : 'none'; ?>; max-width: 100%; max-height: 150px;" />
                                 <!-- Ảnh phim -->
                             </div>
                         </div>
@@ -101,4 +100,4 @@ if ($user['status'] == 200) {
 }
     ?>
 
-    <?php include('includes/footer.php'); ?>
+    <?php include('../../includes/footer.php'); ?>

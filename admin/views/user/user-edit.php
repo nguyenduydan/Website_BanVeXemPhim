@@ -1,6 +1,6 @@
 <?php
-require '../config/function.php';
-include('includes/header.php');
+require '../../../config/function.php';
+include('../../includes/header.php');
 $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : []; // Lấy lỗi từ session
 unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
 ?>
@@ -12,9 +12,9 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
     <div class="col-xl-12 col-lg-12 mx-auto">
         <h2><?= $title ?></h2>
         <div class="text-end mb-4">
-            <a class="btn btn-secondary" href="user.php">Quay lại</a>
+            <a class="btn btn-secondary" href="../../user.php">Quay lại</a>
         </div>
-        <form id="addUserForm" action="../admin/controllers/user-controller.php" method="post" enctype="multipart/form-data">
+        <form id="addUserForm" action="../../controllers/user-controller.php" method="post" enctype="multipart/form-data">
             <?php
             $id_result = check_valid_ID('id');
             if (!is_numeric($id_result)) {
@@ -91,7 +91,7 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
                             <input type="file" class="form-control" id="avatar" value="<?= $user['data']['Anh']; ?>" name="avatar" accept="image/*" onchange="previewImage(event)">
                         </div>
                         <div class="form-group mb-3">
-                            <img id="preview" src="<?php echo isset($user['data']['Anh']) ? '../uploads/avatars/' . htmlspecialchars($user['data']['Anh']) : '#'; ?>" alt="Ảnh xem trước" class="img-fluid" style="display: <?php echo isset($user['data']['Anh']) ? 'block' : 'none'; ?>; max-width: 100%; max-height: 220px;" />
+                            <img id="preview" src="<?php echo isset($user['data']['Anh']) ? '../../../uploads/avatars/' . htmlspecialchars($user['data']['Anh']) : '#'; ?>" alt="Ảnh xem trước" class="img-fluid" style="display: <?php echo isset($user['data']['Anh']) ? 'block' : 'none'; ?>; max-width: 100%; max-height: 220px;" />
                         </div>
                     </div>
                 </div>
@@ -104,4 +104,4 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
         </form>
     </div>
 </div>
-<?php include('includes/footer.php'); ?>
+<?php include('../../includes/footer.php'); ?>

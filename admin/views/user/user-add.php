@@ -1,6 +1,6 @@
 <?php
-require '../config/function.php';
-include('includes/header.php');
+require '../../../config/function.php';
+include('../../includes/header.php');
 
 $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : []; // Lấy lỗi từ session
 unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
@@ -14,9 +14,9 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
     <div class="col-xl-12 col-lg-12 mx-auto">
         <h2>Thêm người dùng</h2>
         <div class="text-end mb-4">
-            <a class="btn btn-secondary" href="user.php">Quay lại</a>
+            <a class="btn btn-secondary" href="../../user.php">Quay lại</a>
         </div>
-        <form id="addUserForm" action="../admin/controllers/user-controller.php" method="post" enctype="multipart/form-data">
+        <form id="addUserForm" action="../../controllers/user-controller.php" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group mb-3">
@@ -106,4 +106,4 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
     </div>
 </div>
 
-<?php include('includes/footer.php'); ?>
+<?php include('../../includes/footer.php'); ?>
