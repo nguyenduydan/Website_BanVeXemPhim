@@ -3,7 +3,7 @@
         <a class="navbar-brand fs-2 ms-5 p-0"
             style="
             font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            " href="#">D2P</a>
+            " href="#"> <img src="/Website_BanVeXemPhim/assets/imgs/logo-100x100.png" class="w-35 bg-dark" alt="Dashboard"> TICKET</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
