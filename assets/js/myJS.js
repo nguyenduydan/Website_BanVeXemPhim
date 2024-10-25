@@ -67,5 +67,8 @@ function togglePasswordVisibility() {
 
 // Đăng ký sự kiện nhấp vào biểu tượng
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('togglePassword').addEventListener('click', togglePasswordVisibility);
+    const togglePassword = document.getElementById('togglePassword');
+    if (togglePassword) {
+        togglePassword.addEventListener('click', togglePasswordVisibility);
+    }
 });
