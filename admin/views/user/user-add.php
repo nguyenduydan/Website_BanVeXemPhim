@@ -12,7 +12,7 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
 
 <div class="row">
     <div class="col-xl-12 col-lg-12 mx-auto">
-        <h2>Thêm người dùng</h2>
+        <h2><?php echo $title ?></h2>
         <div class="text-end mb-4">
             <a class="btn btn-secondary" href="../../user.php">Quay lại</a>
         </div>
