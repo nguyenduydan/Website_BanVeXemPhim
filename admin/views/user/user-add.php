@@ -57,8 +57,8 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
                     <div class="form-group mb-3">
                         <label for="gioi_tinh">Giới tính (<span class="text-danger">*</span>)</label>
                         <select class="form-control" id="gioi_tinh" name="gioi_tinh">
-                            <option value="Nam" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] === 'Nam') ? 'selected' : ''; ?>>Nam</option>
-                            <option value="Nữ" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] === 'Nữ') ? 'selected' : ''; ?>>Nữ</option>
+                            <option value="1" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] === 'Nam') ? 'selected' : ''; ?> selected>Nam</option>
+                            <option value="0" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] === 'Nữ') ? 'selected' : ''; ?>>Nữ</option>
                         </select>
                     </div>
                     <div class="form-group mb-3">
