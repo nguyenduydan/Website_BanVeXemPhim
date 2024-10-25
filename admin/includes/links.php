@@ -19,4 +19,4 @@ $baseURL = '/Website_BanVeXemPhim/'; // Đảm bảo rằng đường dẫn này
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/toast.css">
 
 <script src="<?php echo $baseURL; ?>assets/js/toast.js"></script>
-<script src="<?php echo $baseURL; ?>assets/js/myJS.js?1.0"></script>
+<script src="<?php echo $baseURL; ?>assets/js/myJS.js?1.1"></script>
