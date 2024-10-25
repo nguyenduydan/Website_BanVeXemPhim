@@ -10,7 +10,7 @@ if (isset($_POST['saveUser'])) {
     $password = validate($_POST['password']);
     $re_password = validate($_POST['re_password']);
     $ngay_sinh = validate($_POST['ngay_sinh']);
-    $gioi_tinh = validate($_POST['gioi_tinh']);
+    $gioi_tinh = validate($_POST['gioi_tinh']) == 1 ? 1 : 0;
     $sdt = validate($_POST['sdt']);
     $email = validate($_POST['email']);
     $role = validate($_POST['role']);
@@ -64,7 +64,7 @@ if (isset($_POST['saveUser'])) {
         }
         // Insert into database
         $ngay_tao = date('Y-m-d H:i:s');
-        $query = "INSERT INTO NguoiDung (TenND, username, NgaySinh, GioiTinh, SDT, Anh, Email, MatKhau, Role, NguoiTao, NgayTao,NguoiCapNhat, NgayCapNhat, TrangThai)
+        $query = "INSERT INTO nguoidung (TenND, username, NgaySinh, GioiTinh, SDT, Anh, Email, MatKhau, Role, NguoiTao, NgayTao,NguoiCapNhat, NgayCapNhat, TrangThai)
                   VALUES ('$name', '$username', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email', '$hashedPassword', '$role', '1', '$ngay_tao','1', '$ngay_tao', '$status')";
 
         if (mysqli_query($conn, $query)) {
