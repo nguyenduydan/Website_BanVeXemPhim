@@ -17,8 +17,9 @@
 </footer>
 </div>
 </main>
-<!-- Liên kết đến các file JS dùng chung -->
-<!--   Core JS Files   -->
+
+<script src="../assets/js/toast.js"></script>
+<script src="../assets/js/myJS.js"></script>
 <script src="../assets/js/core/popper.min.js"></script>
 <script src="../assets/js/core/bootstrap.min.js"></script>
 <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
@@ -35,7 +36,7 @@
     }
 </script>
 
-<!-- Github buttons -->
+
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
 </body>

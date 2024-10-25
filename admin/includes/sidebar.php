@@ -1,4 +1,3 @@
-<!--Start phần menu -->
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
     id="sidenav-main">
     <div class="sidenav-header">
@@ -11,10 +10,8 @@
     </div>
     <hr class="horizontal dark mt-0">
     <?php
-    // Lấy tên trang hiện tại từ REQUEST_URI
     $current_page = basename($_SERVER['REQUEST_URI']);
 
-    // Tạo danh sách trang chính và trang con
     $base_pages = [
         'dashboard' => ['index.php'],
         'film' => ['film.php', 'film-add.php', 'film-edit.php', 'film-detail.php'],
