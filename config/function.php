@@ -183,7 +183,7 @@ function deleteQuery($tableName, $colName, $id)
 }
 
 //Phan trang
-function paginate($conn, $table, $records_per_page, $current_page)
+function paginate($conn, $table, $rowPerPage, $current_page)
 {
     // Tính tổng số bản ghi
     $total_query = "SELECT COUNT(*) AS total FROM $table";
@@ -192,7 +192,7 @@ function paginate($conn, $table, $records_per_page, $current_page)
     $total_records = $total_row['total'];
 
     // Tính số trang
-    $total_pages = ceil($total_records / $records_per_page);
+    $total_pages = ceil($total_records / $rowPerPage);
 
     // Đảm bảo số trang không nhỏ hơn 1
     if ($current_page < 1) {
@@ -200,10 +200,10 @@ function paginate($conn, $table, $records_per_page, $current_page)
     }
 
     // Tính vị trí bắt đầu cho truy vấn
-    $start_from = ($current_page - 1) * $records_per_page;
+    $offset = ($current_page - 1) * $rowPerPage;
 
     // Truy vấn để lấy dữ liệu cho trang hiện tại
-    $query = "SELECT * FROM $table LIMIT $start_from, $records_per_page";
+    $query = "SELECT * FROM $table LIMIT $offset, $rowPerPage";
     $result = $conn->query($query);
 
     return [
@@ -226,4 +226,3 @@ function sortData(&$data, $sortField, $sortOrder = 'ASC')
 }
 
 //==============================================================================//
-
