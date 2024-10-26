@@ -100,7 +100,7 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
                 echo '<h5>' . $user['message'] . '</h5>';
             }
             ?>
-            <button type="submit" name="editUser" class="btn btn-success w-15 mt-3">Lưu</button>
+            <button type="submit" name="editUser" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
         </form>
     </div>
 </div>
