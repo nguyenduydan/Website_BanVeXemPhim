@@ -1,7 +1,6 @@
 <?php
-ob_start(); // Bắt đầu output buffering
-session_start(); // Bắt đầu session
-
+ob_start();
+session_start();
 require '../config/function.php';
 include('includes/header.php');
 
@@ -17,24 +16,12 @@ $records_per_page = isset($_SESSION['records_per_page']) ? $_SESSION['records_pe
 
 // Lấy số trang hiện tại từ URL, mặc định là 1
 $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
 // Gọi hàm phân trang
 $pagination = paginate($conn, 'NguoiDung', $records_per_page, $current_page);
 $data = $pagination['data'];
 
 
-// Thêm phần này để xử lý sắp xếp
-$sortField = isset($_GET['sort']) ? $_GET['sort'] : 'username'; // Trường sắp xếp mặc định
-$sortOrder = isset($_GET['order']) ? $_GET['order'] : 'ASC'; // Thứ tự sắp xếp mặc định
-
-
-// Chuyển đổi $data từ mysqli_result sang mảng
-$dataArray = [];
-while ($row = mysqli_fetch_assoc($data)) {
-    $dataArray[] = $row;
-}
-
-// Gọi hàm sắp xếp
-sortData($dataArray, $sortField, $sortOrder);
 ?>
 
 <div id="toast"></div>
@@ -65,14 +52,7 @@ sortData($dataArray, $sortField, $sortOrder);
                             <tr>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">STT</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Họ và tên</th>
-                                <th class="text-center text-uppercase text-xs font-weight-bolder">
-                                    Tên đăng nhập
-                                    <a href="?page=<?= $current_page ?>&sort=username&order=<?= ($sortField === 'username' && $sortOrder === 'ASC') ? 'DESC' : 'ASC' ?>">
-                                        <?php if ($sortField === 'username'): ?>
-                                            <i class="bi <?= $sortOrder === 'ASC' ? 'bi-sort-alpha-down' : 'bi bi-sort-alpha-up' ?> fs-6 fw-bolder"></i>
-                                        <?php endif; ?>
-                                    </a>
-                                </th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Tên đăng nhập</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Email</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">SĐT</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Ảnh</th>
@@ -83,8 +63,8 @@ sortData($dataArray, $sortField, $sortOrder);
                         <tbody>
                             <?php
                             $stt = 0;
-                            if (!empty($dataArray) > 0) {
-                                foreach ($dataArray as $userItem) {
+                            if (!empty($data)) {
+                                foreach ($data as $userItem) {
                                     $stt++;
                             ?>
                                     <tr>
