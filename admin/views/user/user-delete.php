@@ -8,6 +8,8 @@ if (is_numeric($result)) {
     $username = validate($user['data']['username']);
     if ($user['status'] == 200) {
         $userDelete = deleteQuery('NguoiDung', 'MaND', $userId);
+        $avatarPath = "../../uploads/avatars/" . $user['data']['Anh'];
+        deleteImage($avatarPath);
         if ($userDelete) {
             $_SESSION['success'] = 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($username) . '</span> thành công';
             header("Location: ../../user.php");
