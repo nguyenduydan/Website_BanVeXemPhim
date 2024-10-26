@@ -64,6 +64,7 @@ sortData($dataArray, $sortField, $sortOrder);
                         <thead>
                             <tr>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">STT</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Họ và tên</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">
                                     Tên đăng nhập
                                     <a href="?page=<?= $current_page ?>&sort=username&order=<?= ($sortField === 'username' && $sortOrder === 'ASC') ? 'DESC' : 'ASC' ?>">
@@ -72,12 +73,8 @@ sortData($dataArray, $sortField, $sortOrder);
                                         <?php endif; ?>
                                     </a>
                                 </th>
-                                <th class="text-center text-uppercase text-xs font-weight-bolder">
-                                    Email
-                                </th>
-                                <th class="text-center text-uppercase text-xs font-weight-bolder">
-                                    SĐT
-                                </th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Email</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">SĐT</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Ảnh</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Trạng thái</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Hành động</th>
@@ -92,6 +89,7 @@ sortData($dataArray, $sortField, $sortOrder);
                             ?>
                                     <tr>
                                         <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $userItem['TenND']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $userItem['username']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $userItem['Email']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $userItem['SDT']; ?></th>
