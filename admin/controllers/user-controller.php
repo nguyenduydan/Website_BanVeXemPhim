@@ -3,8 +3,8 @@ session_start();
 require '../../config/function.php';
 
 $errors = [];
+//====== user-add =======//
 if (isset($_POST['saveUser'])) {
-    // Validate and sanitize input
     $name = validate($_POST['name']);
     $username = validate($_POST['username']);
     $password = validate($_POST['password']);
@@ -83,6 +83,7 @@ if (isset($_POST['saveUser'])) {
     }
 }
 
+//====== user-edit =======//
 if (isset($_POST['editUser'])) {
     $errors = [];
     $id = validate($_POST['mand']);
