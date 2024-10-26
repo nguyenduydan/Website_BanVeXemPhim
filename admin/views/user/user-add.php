@@ -83,26 +83,30 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
                             <small class="text-danger m-2 text-xs"><?= htmlspecialchars($errors['ngay_sinh']) ?></small>
                         <?php endif; ?>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="role">Vai trò</label>
-                        <select class="form-control" id="role" name="role">
-                            <option value="1">Admin</option>
-                            <option value="0">User</option>
-                        </select>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="status">Trạng thái</label>
-                        <select class="form-control" id="status" name="status">
-                            <option value="1">Online</option>
-                            <option value="0">Offline</option>
-                        </select>
+                    <div class="form-group row mb-3">
+                        <div class="col-5 me-6">
+                            <label for="role">Vai trò</label>
+                            <select class="form-control" id="role" name="role">
+                                <option value="1">Admin</option>
+                                <option value="0">User</option>
+                            </select>
+
+                        </div>
+                        <div class="col-5">
+                            <label for="status">Trạng thái</label>
+                            <select class="form-control" id="status" name="status">
+                                <option value="1">Online</option>
+                                <option value="0">Offline</option>
+                            </select>
+                        </div>
+
                     </div>
                     <div class="form-group mb-3">
                         <label for="avatar">Chọn ảnh</label>
                         <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*" onchange="previewImageAdd(event)">
                     </div>
                     <div class="form-group mb-3">
-                        <img id="preview" src="#" alt="Ảnh xem trước" class="img-fluid" style="display:none; max-width: 100%; max-height: 220px;" />
+                        <img id="preview" src="#" alt="Ảnh xem trước" class="img-fluid" style="display:none; max-width: 100%; max-height: 300px;" />
                     </div>
                 </div>
             </div>
