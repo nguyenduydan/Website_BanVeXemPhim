@@ -54,17 +54,19 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
                             <small class="text-danger m-2 text-xs"><?= htmlspecialchars($errors['re_password']) ?></small>
                         <?php endif; ?>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="gioi_tinh">Giới tính (<span class="text-danger">*</span>)</label>
-                        <select class="form-control" id="gioi_tinh" name="gioi_tinh">
-                            <option value="1" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] === 'Nam') ? 'selected' : ''; ?> selected>Nam</option>
-                            <option value="0" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] === 'Nữ') ? 'selected' : ''; ?>>Nữ</option>
-                        </select>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="sdt">Số điện thoại</label>
-                        <input type="number" class="form-control" id="sdt" name="sdt" placeholder="Nhập số điện thoại"
-                            value="<?php echo isset($_POST['sdt']) ? htmlspecialchars($_POST['sdt']) : ''; ?>">
+                    <div class="form-group row mb-3">
+                        <div class="col">
+                            <label for="gioi_tinh">Giới tính (<span class="text-danger">*</span>)</label>
+                            <select class="form-control form-select" id="gioi_tinh" name="gioi_tinh">
+                                <option value="1" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] === 'Nam') ? 'selected' : ''; ?> selected>Nam</option>
+                                <option value="0" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] === 'Nữ') ? 'selected' : ''; ?>>Nữ</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="sdt">Số điện thoại</label>
+                            <input type="number" class="form-control" id="sdt" name="sdt" placeholder="Nhập số điện thoại"
+                                value="<?php echo isset($_POST['sdt']) ? htmlspecialchars($_POST['sdt']) : ''; ?>">
+                        </div>
                     </div>
                     <div class="form-group mb-3">
                         <label for="email">Email (<span class="text-danger">*</span>)</label>
@@ -84,17 +86,17 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
                         <?php endif; ?>
                     </div>
                     <div class="form-group row mb-3">
-                        <div class="col-5 me-6">
+                        <div class="col-6">
                             <label for="role">Vai trò</label>
-                            <select class="form-control" id="role" name="role">
+                            <select class=" form-select" id="role" name="role">
                                 <option value="1">Admin</option>
                                 <option value="0">User</option>
                             </select>
 
                         </div>
-                        <div class="col-5">
+                        <div class="col-6">
                             <label for="status">Trạng thái</label>
-                            <select class="form-control" id="status" name="status">
+                            <select class="form-select" id="status" name="status">
                                 <option value="1">Online</option>
                                 <option value="0">Offline</option>
                             </select>
@@ -105,12 +107,12 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
                         <label for="avatar">Chọn ảnh</label>
                         <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*" onchange="previewImageAdd(event)">
                     </div>
-                    <div class="form-group mb-3">
-                        <img id="preview" src="#" alt="Ảnh xem trước" class="img-fluid" style="display:none; max-width: 100%; max-height: 300px;" />
+                    <div class="form-group d-flex justify-content-center mb-3">
+                        <img id="preview" src="#" alt="Ảnh xem trước" class="img-fluid" style="display:none; max-width: 100%; max-height: 15rem;" />
                     </div>
                 </div>
             </div>
-            <button type="submit" name="saveUser" class="btn btn-success w-15 mt-3">Lưu</button>
+            <button type="submit" name="saveUser" class="btn btn-success mt-3">Lưu</button>
         </form>
     </div>
 </div>

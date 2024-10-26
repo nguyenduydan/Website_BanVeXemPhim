@@ -137,7 +137,7 @@ sortData($dataArray, $sortField, $sortOrder);
                             } else {
                                 ?>
                                 <tr>
-                                    <td colspan="7" class="text-center">Không có bản ghi nào</td>
+                                    <td colspan="8" class="text-center">Không có bản ghi nào</td>
                                 </tr>
                             <?php
                             }

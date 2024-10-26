@@ -45,7 +45,7 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
                         </div>
                         <div class="form-group mb-3">
                             <label for="gioi_tinh">Giới tính</label>
-                            <select class="form-control" id="gioi_tinh" name="gioi_tinh">
+                            <select class="form-select" id="gioi_tinh" name="gioi_tinh">
                                 <option value="1" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] == '1') ? 'selected' : ($user['data']['GioiTinh'] == '1' ? 'selected' : ''); ?>>Nam</option>
                                 <option value="0" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] == '0') ? 'selected' : ($user['data']['GioiTinh'] == '0' ? 'selected' : ''); ?>>Nữ</option>
                             </select>
@@ -74,14 +74,14 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="role">Vai trò</label>
-                            <select class="form-control" id="role" name="role">
+                            <select class="form-select" id="role" name="role">
                                 <option value="1">Admin</option>
                                 <option value="0">User</option>
                             </select>
                         </div>
                         <div class="form-group mb-3">
                             <label for="status">Trạng thái</label>
-                            <select class="form-control" id="status" name="status">
+                            <select class="form-select" id="status" name="status">
                                 <option value="1">Online</option>
                                 <option value="0">Offline</option>
                             </select>
