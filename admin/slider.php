@@ -1,48 +1,122 @@
-<?php include('includes/header.php'); ?>
+<?php
+ob_start();
+session_start();
+require '../config/function.php';
+include('includes/header.php');
 
-<!-- Hiển thị nội dung danh sách slider -->
+$pagination = setupPagination($conn, 'Slider');
+$data = $pagination['data'];
+$records_per_page = $pagination['records_per_page'];
+?>
+
+<div id="toast"></div>
+
+<?php alertMessage() ?>
+
 <div class="row">
     <div class="col-12">
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center pb-0">
                 <h5><?php echo $title ?></h5>
+                <form method="POST" class="d-inline">
+                    <label for="records_per_page" class="me-2 fs-6">Chọn hiển thị số bản ghi:</label>
+                    <select name="records_per_page" id="records_per_page" class="form-select" onchange="this.form.submit()">
+                        <option value="2" <?= $records_per_page == 2 ? 'selected' : '' ?>>2</option>
+                        <option value="5" <?= $records_per_page == 5 ? 'selected' : '' ?>>5</option>
+                        <option value="10" <?= $records_per_page == 10 ? 'selected' : '' ?>>10</option>
+                        <option value="20" <?= $records_per_page == 20 ? 'selected' : '' ?>>20</option>
+                    </select>
+                </form>
                 <a href="views/slider/slider-add.php" class="btn btn-lg me-5 btn-add"
-                    style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">Thêm</a>
+                    style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">
+                    <i class="bi bi-plus me-1 fs-3" style="margin-bottom: 5px;"></i>
+                    Thêm
+                </a>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
                     <table class="table table-striped table-borderless align-items-center mb-0">
                         <thead>
                             <tr>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên slider</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ảnh</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hành động</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">STT</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Tên slider</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Ảnh</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Sắp xếp</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Vị trí</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Tên chủ đề</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Trạng thái</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="align-middle text-center text-sm">
-                                    <p class="text-xs font-weight-bolder mb-0">slider hành động</p>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <img src="../uploads/product-images/curved5-small.jpg" class="img-fluid" style="width: 200px; height: auto;">
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-success">Online</span>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <a class="btn btn-info m-0"
-                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                        href="../admin/slider-edit.php">
-                                        <i class="bi bi-pencil"></i> Sửa
-                                    </a>
-                                    <a class="btn btn-danger m-0"
-                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" href="../admin/slider-delete.php">
-                                        <i class="bi bi-trash"></i> Xoá
-                                    </a>
-                                </td>
-                            </tr>
+                            <?php
+                            $stt = 0;
+                            if (!empty($data)) {
+                                foreach ($data as $userItem) {
+                                    $stt++;
+                            ?>
+                                    <tr>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $userItem['TenSlider']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder">
+                                            <img src="../uploads/avatars/<?= htmlspecialchars($userItem['Anh']); ?>" alt="Ảnh đại diện" class="img-fluid" style="max-width: 100px;">
+                                        </th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $userItem['SapXep']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $userItem['ViTri']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $userItem['TenChuDe']; ?></th>
+
+                                        <th class="text-center text-s font-weight-bolder">
+                                            <form action="controllers/user-controller.php" method="POST" style="display:inline;">
+                                                <input type="hidden" name="mand" value="<?= $userItem['MaND'] ?>">
+                                                <input type="hidden" name="status" value="<?= $userItem['TrangThai'] == 1 ? 0 : 1 ?>">
+                                                <button type="submit" name="changeStatus" class="badge badge-sm <?= $userItem['TrangThai'] == 1 ? 'bg-gradient-success' : 'bg-gradient-secondary' ?> text-uppercase" style="border: none; cursor: pointer;">
+                                                    <?= $userItem['TrangThai'] == 1 ? 'ON' : 'OFF' ?>
+                                                </button>
+                                            </form>
+                                        </th>
+                                        <td class="align-middle text-center text-sm">
+                                            <a class="btn btn-secondary m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                href="views/silder/slider-detail.php?id=<?= $userItem['Id'] ?>">
+                                                <i class="bi bi-info-circle"></i> Chi tiết
+                                            </a>
+                                            <a class="btn btn-info m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                href="views/slider/slider-edit.php?id=<?= $userItem['Id'] ?>">
+                                                <i class="bi bi-pencil"></i> Sửa
+                                            </a>
+                                            <a class="btn btn-danger m-0 delete-btn" data-id="<?= $userItem['Id'] ?>"
+                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                data-bs-toggle="modal" data-bs-target="#confirmModal">
+                                                <i class="bi bi-trash"></i> Xoá
+                                            </a>
+                                            <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog mt-10">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="confirmModalLabel">Xác Nhận Xóa</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body fs-5">
+                                                            Bạn có chắc chắn muốn xóa người dùng này?
+                                                        </div>
+                                                        <div class="modal-footer d-flex justify-content-center">
+                                                            <button type="button" class="btn btn-sm btn-success" id="confirmYes">Có</button>
+                                                            <button type="button" class="btn btn-sm btn-danger me-2" data-bs-dismiss="modal">Không</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php
+                                }
+                            } else {
+                                ?>
+                                <tr>
+                                    <td colspan="8" class="text-center">Không có bản ghi nào</td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -50,27 +124,36 @@
             <div class="card-footer">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item"><a class="page-link bg-dark text-light font-weight-bold" href="#">Trước</a></li>
-                        <li class="page-item active" aria-current="page"><a class="page-link mx-1" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link mx-1" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link mx-1" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link bg-dark text-light font-weight-bold" href="#">Tiếp</a></li>
+                        <?php if ($pagination['total_pages'] > 1): // Kiểm tra xem có nhiều hơn 1 trang
+                        ?>
+                            <?php if ($current_page > 1): ?>
+                                <li class="page-item">
+                                    <a class="page-link bg-gradient-dark text-white" href="?page=<?= $current_page - 1 ?>">
+                                        <i class="bi bi-chevron-left fs-6 fw-bolder"></i>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+
+                            <?php for ($i = 1; $i <= $pagination['total_pages']; $i++): ?>
+                                <li class="page-item <?= ($i == $current_page) ? 'active' : '' ?>">
+                                    <a class="page-link border-radius-xs" href="?page=<?= $i ?>"><?= $i ?></a>
+                                </li>
+                            <?php endfor; ?>
+
+                            <?php if ($current_page < $pagination['total_pages']): ?>
+                                <li class="page-item">
+                                    <a class="page-link bg-gradient-dark text-white" href="?page=<?= $current_page + 1 ?>">
+                                        <i class="bi bi-chevron-right fs-6 fw-bolder"></i>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                        <?php endif; // Kết thúc kiểm tra số trang
+                        ?>
                     </ul>
                 </nav>
             </div>
         </div>
     </div>
 </div>
-<script>
-    function previewImage(event) {
-        var reader = new FileReader();
-        reader.onload = function() {
-            var output = document.getElementById('preview');
-            output.src = reader.result;
-            output.style.display = 'block';
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
-</script>
 
 <?php include('includes/footer.php'); ?>
