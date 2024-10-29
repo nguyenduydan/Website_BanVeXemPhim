@@ -45,6 +45,7 @@ $records_per_page = $pagination['records_per_page'];
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Quốc gia</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Thể loại</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Phân loại</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Ngày tạo</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Trạng thái</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Hành động</th>
                             </tr>
@@ -63,6 +64,7 @@ $records_per_page = $pagination['records_per_page'];
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['QuocGia']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['NamPhatHanh']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['TenPhim']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['NgayTao']; ?></th>
                                         <th class="text-center text-s font-weight-bolder">
                                             <form action="controllers/film-controller.php" method="POST" style="display:inline;">
                                                 <input type="hidden" name="mand" value="<?= $item['MaPhim'] ?>">
