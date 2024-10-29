@@ -73,8 +73,25 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-//Time
 
-function currentTime(){
-    const time = new time
-}
+// $(document).ready(function () {
+//     // Lấy danh sách quốc gia từ API
+//     fetch('https://restcountries.com/v3.1/all')
+//         .then(response => response.json())
+//         .then(data => {
+//             // Sắp xếp danh sách quốc gia theo tên
+//             data.sort((a, b) => a.name.common.localeCompare(b.name.common));
+
+//             // Thêm từng quốc gia vào dropdown
+//             data.forEach(country => {
+//                 $('#quoc_gia').append(new Option(country.name.common, country.cca2));
+//             });
+
+//             // Khởi tạo Select2 sau khi thêm các tùy chọn
+//             $('#quoc_gia').select2({
+//                 placeholder: 'Chọn quốc gia',
+//                 allowClear: true
+//             });
+//         })
+//         .catch(error => console.error('Lỗi:', error));
+// });

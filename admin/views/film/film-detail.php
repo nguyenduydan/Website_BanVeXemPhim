@@ -1,4 +1,9 @@
-<?php include('../../includes/header.php'); ?>
+<?php
+
+require '../../../config/function.php';
+include('../../includes/header.php');
+?>
+
 
 <div class="row">
     <div class="col-xl-12 col-lg-12 mx-auto">
@@ -17,67 +22,70 @@
                     <!-- Cột 1 -->
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <strong>Mã phim:</strong>
-                            <p>PHIM001</p>
+                            <label class="fs-6">Mã phim:</label>
+                            <span>PHIM001</span>
                         </div>
                         <div class="mb-3">
-                            <strong>Tên phim:</strong>
-                            <p>Cuộc Chiến Sinh Tồn</p>
+                            <label class="fs-6">Tên phim:</label>
+                            <span>Cuộc Chiến Sinh Tồn</span>
                         </div>
                         <div class="mb-3">
-                            <strong>Thời lượng:</strong>
-                            <p>120 phút</p>
+                            <label class="fs-6">Thời lượng:</label>
+                            <span>120 phút</span>
                         </div>
                         <div class="mb-3">
-                            <strong>Quốc gia:</strong>
-                            <p>Việt Nam</p>
+                            <label class="fs-6">Quốc gia:</label>
+                            <span>Việt Nam</span>
                         </div>
                         <div class="mb-3">
-                            <strong>Đạo diễn:</strong>
-                            <p>Nguyễn Văn A</p>
+                            <label class="fs-6">Đạo diễn:</label>
+                            <span>Nguyễn Văn A</span>
                         </div>
                         <div class="mb-3">
-                            <strong>Diễn viên:</strong>
-                            <p>Trần Văn B, Lê Thị C, Phạm Văn D</p>
+                            <label class="fs-6">Diễn viên:</label>
+                            <span>Trần Văn B, Lê Thị C, Phạm Văn D</span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="fs-6">Phân loại:</label>
+                            <span>C13</span>
+                        </div>
+                        <!-- Ảnh phim -->
+                        <div class="mb-3">
+                            <img src="../../../uploads/film-imgs/curved5-small.jpg" class="img-fluid" alt="Ảnh phim" style="max-width: 100%; max-height: 300px;">
                         </div>
                     </div>
 
                     <!-- Cột 2 -->
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <strong>Thể loại:</strong>
-                            <p>Hành động, Phiêu lưu</p>
+                            <label class="fs-6">Thể loại:</label>
+                            <span>Hành động, Phiêu lưu</span>
                         </div>
                         <div class="mb-3">
-                            <strong>Phân loại:</strong>
-                            <p>C13</p>
+                            <label class="fs-6">Người tạo:</label>
+                            <span>Nguyễn Văn E</span>
                         </div>
                         <div class="mb-3">
-                            <strong>Mô tả:</strong>
-                            <p>Phim nói về cuộc chiến giữa con người và quái vật trong một thế giới hậu tận thế.</p>
+                            <label class="fs-6">Ngày tạo:</label>
+                            <span>01/01/2023</span>
                         </div>
                         <div class="mb-3">
-                            <strong>Người tạo:</strong>
-                            <p>Nguyễn Văn E</p>
+                            <label class="fs-6">Người cập nhật:</label>
+                            <span>Trần Văn F</span>
                         </div>
                         <div class="mb-3">
-                            <strong>Ngày tạo:</strong>
-                            <p>01/01/2023</p>
+                            <label class="fs-6">Ngày cập nhật:</label>
+                            <span>01/06/2023</span>
                         </div>
                         <div class="mb-3">
-                            <strong>Người cập nhật:</strong>
-                            <p>Trần Văn F</p>
-                        </div>
-                        <div class="mb-3">
-                            <strong>Ngày cập nhật:</strong>
-                            <p>01/06/2023</p>
+                            <label class="fs-6">Mô tả:</label>
+                            <p>Phim nói về cuộc chiến giữa con người và quái vật trong một thế giới hậu tận thế.
+                                Phim nói về cuộc chiến giữa con người và quái vật trong một thế giới hậu tận thế.
+                                Phim nói về cuộc chiến giữa con người và quái vật trong một thế giới hậu tận thế.</p>
                         </div>
                     </div>
 
-                    <!-- Ảnh phim -->
-                    <div class="col-md-12 text-center">
-                        <img src="../uploads/film-images/sample-movie.jpg" class="img-fluid" alt="Ảnh phim" style="max-width: 300px; max-height: 400px;">
-                    </div>
+
                 </div>
             </div>
         </div>

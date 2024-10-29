@@ -90,8 +90,8 @@ $records_per_page = $pagination['records_per_page'];
                                                             <h5 class="modal-title" id="confirmModalLabel">Xác Nhận Xóa</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body fs-5">
-                                                            Bạn có chắc chắn muốn xóa người dùng này không?
+                                                        <div class="modal-body">
+                                                            <p class="p-2 fs-5">Bạn có muốn xóa người dùng này không?</p>
                                                         </div>
                                                         <div class="modal-footer d-flex justify-content-center">
                                                             <button type="button" class="btn btn-sm btn-success" id="confirmYes">Có</button>
@@ -118,7 +118,7 @@ $records_per_page = $pagination['records_per_page'];
             </div>
             <!-- Phân trang -->
             <div class="card-footer">
-                <?php echo paginate_html($pagination['total_pages'], $pagination['current_page']);?>
+                <?php echo paginate_html($pagination['total_pages'], $pagination['current_page']); ?>
             </div>
         </div>
     </div>
