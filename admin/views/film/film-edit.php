@@ -12,6 +12,7 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
         <h2><?php echo htmlspecialchars($title); ?></h2>
         <!-- Nút quay lại nằm sát bên phải -->
         <div class="text-end mb-4">
+            <a class="btn btn-info" href="film-edit.php?id=<?= $id_result; ?>"><i class="bi bi-pencil me-2"></i>Sửa</a>
             <a class="btn btn-secondary" href="../../film.php">
                 Quay lại
             </a>

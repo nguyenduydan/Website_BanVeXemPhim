@@ -3,10 +3,16 @@ ob_start();
 session_start();
 require '../config/function.php';
 include('includes/header.php');
+
+$pagination = setupPagination($conn, 'TheLoai');
+$data = $pagination['data'];
+$records_per_page = $pagination['records_per_page'];
 ?>
-<div id="toast">
-</div>
+
+<div id="toast"></div>
+
 <?php alertMessage() ?>
+
 <div class="row">
     <div class="col-12">
         <div class="card mb-4">
@@ -34,30 +40,57 @@ include('includes/header.php');
                         </thead>
                         <tbody>
                             <?php
-                            $categories = getAll('TheLoai');
                             $stt = 0;
-                            if (mysqli_num_rows($categories) > 0) {
-                                foreach ($categories as $categoryItem) {
+                            if (!empty($data)) {
+                                foreach ($data as $item) {
                                     $stt++;
                             ?>
                                     <tr>
                                         <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $categoryItem['TenTheLoai']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $categoryItem['NguoiTao']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $categoryItem['NgayTao']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $categoryItem['NgayCapNhat']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['TenND']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['username']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['Email']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['SDT']; ?></th>
                                         <th class="text-center text-s font-weight-bolder">
-                                            <?= $categoryItem['TrangThai'] == 1 ? '<span class="badge badge-sm bg-gradient-success text-uppercase">ON</span>' : '<span class="badge badge-sm bg-gradient-success text-uppercase text-secondary">ON</span>'; ?>
+                                            <form action="controllers/category-controller.php" method="POST" style="display:inline;">
+                                                <input type="hidden" name="mand" value="<?= $item['MaND'] ?>">
+                                                <input type="hidden" name="status" value="<?= $item['TrangThai'] == 1 ? 0 : 1 ?>">
+                                                <button type="submit" name="changeStatus" class="badge badge-sm <?= $item['TrangThai'] == 1 ? 'bg-gradient-success' : 'bg-gradient-secondary' ?> text-uppercase" style="border: none; cursor: pointer;">
+                                                    <?= $item['TrangThai'] == 1 ? 'ON' : 'OFF' ?>
+                                                </button>
+                                            </form>
                                         </th>
                                         <td class="align-middle text-center text-sm">
+                                            <a class="btn btn-secondary m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                href="views/user/user-detail.php?id=<?= $item['MaND'] ?>">
+                                                <i class="bi bi-info-circle"></i> Chi tiết
+                                            </a>
                                             <a class="btn btn-info m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="../admin/categories-edit.php?id=<?= $categoryItem['MaTheLoai'] ?>">
+                                                href="views/user/user-edit.php?id=<?= $item['MaND'] ?>">
                                                 <i class="bi bi-pencil"></i> Sửa
                                             </a>
-                                            <a class="btn btn-danger m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="../admin/categories-delete.php?id=<?= $categoryItem['MaTheLoai'] ?>">
+                                            <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['MaND'] ?>"
+                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                data-bs-toggle="modal" data-bs-target="#confirmModal">
                                                 <i class="bi bi-trash"></i> Xoá
                                             </a>
+                                            <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog mt-10">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="confirmModalLabel">Xác Nhận Xóa</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p class="p-2 fs-5">Bạn có muốn xóa người dùng này không?</p>
+                                                        </div>
+                                                        <div class="modal-footer d-flex justify-content-center">
+                                                            <button type="button" class="btn btn-sm btn-success" id="confirmYes">Có</button>
+                                                            <button type="button" class="btn btn-sm btn-danger me-2" data-bs-dismiss="modal">Không</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php
@@ -65,7 +98,7 @@ include('includes/header.php');
                             } else {
                                 ?>
                                 <tr>
-                                    <td colspan="7" class="text-center">Không có bản ghi nào</td>
+                                    <td colspan="8" class="text-center">Không có bản ghi nào</td>
                                 </tr>
                             <?php
                             }

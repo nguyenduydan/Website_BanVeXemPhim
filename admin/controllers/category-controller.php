@@ -28,13 +28,14 @@ if (isset($_POST['saveGenres'])) {
     $result = mysqli_query($conn, $query);
     // Thực thi câu lệnh
     if ($result) {
-        redirect('categories.php', 'Thêm tài khoản thành công');
+        redirect('../categories.php', 'success', 'Thêm tài khoản thành công');
     } else {
-        redirect('categories.php', 'Thêm tài khoản thất bại');
+        redirect('../categories.php', 'error', 'Thêm tài khoản thất bại');
     }
 } else {
-    redirect('categories.php', 'Vui lòng điền đầy đủ thông tin');
+    redirect('../categories.php', 'messages', 'Vui lòng điền đầy đủ thông tin');
 }
+
 $category_list = 'SELECT * FROM theloai';
 $result = mysqli_query($conn, $category_list);
 if (isset($_POST['saveUser'])) {

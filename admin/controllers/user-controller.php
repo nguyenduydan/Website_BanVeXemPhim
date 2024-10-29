@@ -68,13 +68,13 @@ if (isset($_POST['saveUser'])) {
                   VALUES ('$name', '$username', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email', '$hashedPassword', '$role', '1', '$ngay_tao','1', '$ngay_tao', '$status')";
 
         if (mysqli_query($conn, $query)) {
-            redirect('../user.php','success','Thêm tài khoản thành công');
+            redirect('../user.php', 'success', 'Thêm tài khoản thành công');
         } else {
-            redirect('../views/user/user-add.php','error','Thêm tài khoản thất bại');
+            redirect('../views/user/user-add.php', 'error', 'Thêm tài khoản thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/user/user-add.php','messages',$messages);
+        redirect('../views/user/user-add.php', 'messages', $messages);
     }
 }
 
@@ -142,12 +142,12 @@ if (isset($_POST['editUser'])) {
                 WHERE MaND = '$id'";
 
         if (mysqli_query($conn, $query)) {
-            redirect('../user.php','success','Cập nhật tài khoản thành công');
+            redirect('../user.php', 'success', 'Cập nhật tài khoản thành công');
         } else {
-            redirect('../views/user/user-edit.php?id=" '. $id,'error','Cập nhật tài khoản thất bại');
+            redirect('../views/user/user-edit.php?id=" ' . $id, 'error', 'Cập nhật tài khoản thất bại');
         }
     } else {
-        redirect('../views/user/user-edit.php?id=" '. $id,'errors',$messages);
+        redirect('../views/user/user-edit.php?id=" ' . $id, 'errors', $messages);
         $_SESSION['form_data'] = $_POST;
     }
 }
@@ -160,8 +160,8 @@ if (isset($_POST['changeStatus'])) {
     $edit_query = "UPDATE NguoiDung SET TrangThai = '$status' WHERE MaND = '$id'";
 
     if (mysqli_query($conn, $edit_query)) {
-        redirect('../user.php','success','Cập nhật trạng thái thành công');
+        redirect('../user.php', 'success', 'Cập nhật trạng thái thành công');
     } else {
-        redirect('../user.php','error','Cập nhật trạng thái thất bại');
+        redirect('../user.php', 'error', 'Cập nhật trạng thái thất bại');
     }
 }
