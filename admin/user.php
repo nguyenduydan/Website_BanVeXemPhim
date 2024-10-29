@@ -58,7 +58,6 @@ $data = $pagination['data'];
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Tên đăng nhập</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Email</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">SĐT</th>
-                                <th class="text-center text-uppercase text-xs font-weight-bolder">Ảnh</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Trạng thái</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Hành động</th>
                             </tr>
@@ -76,9 +75,6 @@ $data = $pagination['data'];
                                         <th class="text-center text-xs font-weight-bolder"><?= $userItem['username']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $userItem['Email']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $userItem['SDT']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder">
-                                            <img src="../uploads/avatars/<?= htmlspecialchars($userItem['Anh']); ?>" alt="Ảnh đại diện" class="img-fluid" style="max-width: 100px;">
-                                        </th>
                                         <th class="text-center text-s font-weight-bolder">
                                             <form action="controllers/user-controller.php" method="POST" style="display:inline;">
                                                 <input type="hidden" name="mand" value="<?= $userItem['MaND'] ?>">
