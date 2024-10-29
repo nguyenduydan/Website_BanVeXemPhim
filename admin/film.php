@@ -1,5 +1,13 @@
-<?php include('includes/header.php'); ?>
+<?php
 
+require '../config/function.php';
+include('includes/header.php');
+
+?>
+
+<div id="toast">
+</div>
+<?php alertMessage() ?>
 <!-- Hiển thị nội dung danh sách phim -->
 <div class="row">
     <div class="col-12">
@@ -16,18 +24,58 @@
                             <tr>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên phim</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thời lượng</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ảnh</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Quốc gia</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Năm phát hành</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phân loại</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-
-                            </tr>
+                            <?php
+                            $films = getAll('phim');
+                            $stt = 0;
+                            if (mysqli_num_rows($films) > 0) {
+                                foreach ($films as $filmItem) {
+                                    $stt++;
+                            ?>
+                                    <tr>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $filmItem['TenPhim']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $filmItem['ThoiLuong']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $filmItem['QuocGia']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $filmItem['NamPhatHanh']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $filmItem['PhanLoai']; ?></th>
+                                        <th class="text-center text-s font-weight-bolder">
+                                            <form action="controllers/user-controller.php" method="POST" style="display:inline;">
+                                                <input type="hidden" name="mand" value="<?= $filmItem['MaPhim'] ?>">
+                                                <input type="hidden" name="status" value="<?= $filmItem['TrangThai'] == 1 ? 0 : 1 ?>">
+                                                <button type="submit" name="changeStatus" class="badge badge-sm <?= $filmItem['TrangThai'] == 1 ? 'bg-gradient-success' : 'bg-gradient-secondary' ?> text-uppercase" style="border: none; cursor: pointer;">
+                                                    <?= $filmItem['TrangThai'] == 1 ? 'ON' : 'OFF' ?>
+                                                </button>
+                                            </form>
+                                        </th>
+                                        <td class="align-middle text-center text-sm">
+                                            <a class="btn btn-info m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                href="../admin/film-edit.php?id=<?= $filmItem['MaTheLoai'] ?>">
+                                                <i class="bi bi-pencil"></i> Sửa
+                                            </a>
+                                            <a class="btn btn-danger m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                href="../admin/film-delete.php?id=<?= $filmItem['MaTheLoai'] ?>">
+                                                <i class="bi bi-trash"></i> Xoá
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php
+                                }
+                            } else {
+                                ?>
+                                <tr>
+                                    <td colspan="8" class="text-center">Không có bản ghi nào</td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>

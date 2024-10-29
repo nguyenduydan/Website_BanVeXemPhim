@@ -12,7 +12,6 @@ function validate($inpData)
     $validatedData = mysqli_real_escape_string($conn, $inpData);
     return trim($validatedData);
 }
-
 function uploadImage($file, $targetDir)
 {
     $result = ['success' => false, 'message' => '', 'filename' => ''];
@@ -63,9 +62,9 @@ function deleteImage($filePath)
 
     return $result;
 }
-function redirect($url, $status,$message)
+function redirect($url, $status)
 {
-    $_SESSION[$status] = $message;
+    $_SESSION['status'] = $status;
     header('Location: ' . $url);
     exit(0);
 }
