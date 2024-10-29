@@ -102,11 +102,11 @@ $data = $pagination['data'];
                                                 <div class="modal-dialog mt-10">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="confirmModalLabel">Xác Nhận Xóa</h5>
+                                                            <h5 class="modal-title " id="confirmModalLabel">Xác Nhận Xóa</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body fs-5">
-                                                            Bạn có chắc chắn muốn xóa <?= $userItem['username'] ?> này?
+                                                            Bạn có chắc chắn muốn xóa người dùng <span class="text-danger fw-bolder"><?= $userItem['TenND'] ?></span> này?
                                                         </div>
                                                         <div class="modal-footer d-flex justify-content-center">
                                                             <button type="button" class="btn btn-sm btn-success" id="confirmYes">Có</button>
