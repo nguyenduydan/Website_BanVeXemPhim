@@ -6,12 +6,13 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-    function validate($inpData)
-    {
-        global $conn;
-        $validatedData = mysqli_real_escape_string($conn, $inpData);
-        return trim($validatedData);
-    }
+function validate($inpData)
+{
+    global $conn;
+    $validatedData = mysqli_real_escape_string($conn, $inpData);
+    return trim($validatedData);
+}
+
 function uploadImage($file, $targetDir)
 {
     $result = ['success' => false, 'message' => '', 'filename' => ''];
