@@ -54,8 +54,8 @@ $records_per_page = $pagination['records_per_page'];
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['NguoiCapNhat']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['NgayCapNhat']; ?></th>
                                         <th class="text-center text-s font-weight-bolder">
-                                            <form action="controllers/user-controller.php" method="POST" style="display:inline;">
-                                                <input type="hidden" name="mand" value="<?= $item['MaND'] ?>">
+                                            <form action="controllers/chair-controller.php" method="POST" style="display:inline;">
+                                                <input type="hidden" name="mand" value="<?= $item['MaGhe'] ?>">
                                                 <input type="hidden" name="status" value="<?= $item['TrangThai'] == 1 ? 0 : 1 ?>">
                                                 <button type="submit" name="changeStatus" class="badge badge-sm <?= $item['TrangThai'] == 1 ? 'bg-gradient-success' : 'bg-gradient-secondary' ?> text-uppercase" style="border: none; cursor: pointer;">
                                                     <?= $item['TrangThai'] == 1 ? 'ON' : 'OFF' ?>
@@ -64,14 +64,14 @@ $records_per_page = $pagination['records_per_page'];
                                         </th>
                                         <td class="align-middle text-center text-sm">
                                             <a class="btn btn-secondary m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="views/user/user-detail.php?id=<?= $item['MaND'] ?>">
+                                                href="views/chair/chair-detail.php?id=<?= $item['MaGhe'] ?>">
                                                 <i class="bi bi-info-circle"></i> Chi tiết
                                             </a>
                                             <a class="btn btn-info m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="views/user/user-edit.php?id=<?= $item['MaND'] ?>">
+                                                href="views/chair/chair-edit.php?id=<?= $item['MaGhe'] ?>">
                                                 <i class="bi bi-pencil"></i> Sửa
                                             </a>
-                                            <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['MaND'] ?>"
+                                            <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['MaGhe'] ?>"
                                                 style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                                 data-bs-toggle="modal" data-bs-target="#confirmModal">
                                                 <i class="bi bi-trash"></i> Xoá
@@ -100,7 +100,7 @@ $records_per_page = $pagination['records_per_page'];
                             } else {
                                 ?>
                                 <tr>
-                                    <td colspan="8" class="text-center">Không có bản ghi nào</td>
+                                    <td colspan="9" class="text-center">Không có bản ghi nào</td>
                                 </tr>
                             <?php
                             }
