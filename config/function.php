@@ -96,7 +96,7 @@ function validateAndHashPassword($password, $re_password)
 function isUsername($username, $currentId = null)
 {
     global $conn; // Kết nối CSDL
-    $query = "SELECT COUNT(*) as count FROM NguoiDung WHERE username = '$username'";
+    $query = "SELECT COUNT(*) as count FROM nguoidung WHERE username = '$username'";
     if ($currentId) {
         $query .= " AND MaND != '$currentId'"; // Bỏ qua người dùng hiện tại nếu ID được cung cấp
     }
@@ -182,38 +182,70 @@ function deleteQuery($tableName, $colName, $id)
     return $result;
 }
 
-//Phan trang
-function paginate($conn, $table, $rowPerPage, $current_page)
+// Hàm phân trang
+function paginate($conn, $table, $recordsPerPage, $currentPage)
 {
-    // Tính tổng số bản ghi
-    $total_query = "SELECT COUNT(*) AS total FROM $table";
-    $total_result = $conn->query($total_query);
-    $total_row = $total_result->fetch_assoc();
-    $total_records = $total_row['total'];
+    $totalQuery = "SELECT COUNT(*) AS total FROM $table";
+    $totalResult = $conn->query($totalQuery);
+    $totalRow = $totalResult->fetch_assoc();
+    $totalRecords = $totalRow['total'];
 
-    // Tính số trang
-    $total_pages = ceil($total_records / $rowPerPage);
+    $totalPages = ceil($totalRecords / $recordsPerPage);
+    $currentPage = max(1, min($currentPage, $totalPages));
 
-    // Đảm bảo số trang không nhỏ hơn 1
-    if ($current_page < 1) {
-        $current_page = 1;
-    }
+    $offset = ($currentPage - 1) * $recordsPerPage;
 
-    // Tính vị trí bắt đầu cho truy vấn
-    $offset = ($current_page - 1) * $rowPerPage;
-
-    // Truy vấn để lấy dữ liệu cho trang hiện tại
-    $query = "SELECT * FROM $table LIMIT $offset, $rowPerPage";
+   
+    $query = "SELECT * FROM $table LIMIT $offset, $recordsPerPage";
     $result = $conn->query($query);
 
+
+    $data = [];
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
     return [
-        'data' => $result,
-        'total_pages' => $total_pages,
-        'current_page' => $current_page,
-        'total_records' => $total_records
+        'data' => $data,
+        'total_pages' => $totalPages,
+        'current_page' => $currentPage,
+        'total_records' => $totalRecords
     ];
 }
+function paginate_html($totalPages, $currentPage, $url = "?page=")
+{
+    if ($totalPages <= 1) {
+        return '';
+    }
 
+    $paginationHtml = '<nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">';
+
+    if ($currentPage > 1) {
+        $paginationHtml .= '<li class="page-item">
+                                <a class="page-link bg-gradient-dark text-white" href="' . $url . ($currentPage - 1) . '">
+                                    <i class="bi bi-chevron-left fs-6 fw-bolder"></i>
+                                </a>
+                            </li>';
+    }
+    for ($i = 1; $i <= $totalPages; $i++) {
+        $activeClass = ($i == $currentPage) ? 'active' : '';
+        $paginationHtml .= '<li class="page-item ' . $activeClass . '">
+                                <a class="page-link border-radius-xs" href="' . $url . $i . '">' . $i . '</a>
+                            </li>';
+    }
+
+    if ($currentPage < $totalPages) {
+        $paginationHtml .= '<li class="page-item">
+                                <a class="page-link bg-gradient-dark text-white" href="' . $url . ($currentPage + 1) . '">
+                                    <i class="bi bi-chevron-right fs-6 fw-bolder"></i>
+                                </a>
+                            </li>';
+    }
+
+    $paginationHtml .= '</ul></nav>';
+
+    return $paginationHtml;
+}
 // Hàm sort
 function sortData(&$data, $sortField, $sortOrder = 'ASC')
 {
@@ -226,4 +258,3 @@ function sortData(&$data, $sortField, $sortOrder = 'ASC')
     });
 }
 
-//==============================================================================//
