@@ -182,6 +182,21 @@ function deleteQuery($tableName, $colName, $id)
     return $result;
 }
 
+function setupPagination($conn, $table, $record = 5)
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['records_per_page'])) {
+        $_SESSION['records_per_page'] = (int)$_POST['records_per_page'];
+        header("Location: " . $_SERVER['PHP_SELF'] . "?page=1"); // Redirect to page 1
+        exit;
+    }
+    $records_per_page = isset($_SESSION['records_per_page']) ? $_SESSION['records_per_page'] : $record;
+
+    $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $data = paginate($conn, $table, $records_per_page, $current_page);
+    $data['records_per_page'] = $records_per_page;
+    return $data;
+}
+
 // Hàm phân trang
 function paginate($conn, $table, $recordsPerPage, $currentPage)
 {

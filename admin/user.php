@@ -4,27 +4,9 @@ session_start();
 require '../config/function.php';
 include('includes/header.php');
 
-// Xử lý biểu mẫu
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['records_per_page'])) {
-    $_SESSION['records_per_page'] = (int)$_POST['records_per_page'];
-    header("Location: " . $_SERVER['PHP_SELF'] . "?page=1"); // Chuyển hướng
-    exit; // Dừng thực thi mã
-}
-
-// Lấy số trang hiện tại từ URL, mặc định là 1
-$current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-
-// Gọi hàm lấy tất cả người dùng
-$users = getAll('NguoiDung');
-
-// Gán giá trị cho $records_per_page từ session hoặc mặc định là 5
-$records_per_page = isset($_SESSION['records_per_page']) ? $_SESSION['records_per_page'] : 5;
-if (!empty($users)) {
-    $pagination = paginate($conn, 'NguoiDung', $records_per_page, $current_page);
-    $data = $pagination['data'];
-} else {
-    $data = []; // Đảm bảo $data luôn có giá trị
-}
+$pagination = setupPagination($conn, 'NguoiDung');
+$data = $pagination['data'];
+$records_per_page = $pagination['records_per_page'];
 ?>
 
 <div id="toast"></div>
