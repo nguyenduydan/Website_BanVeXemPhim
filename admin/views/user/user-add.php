@@ -3,8 +3,9 @@ require '../../../config/function.php';
 include('../../includes/header.php');
 
 $messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy lỗi từ session
+$formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
 unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
-
+unset($_SESSION['form_data']);
 ?>
 
 <div id="toast"></div>
@@ -22,7 +23,7 @@ unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
                     <div class="form-group mb-3">
                         <label for="name">Họ và tên người dùng (<span class="text-danger">*</span>)</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ và tên"
-                            value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>">
+                            value="<?php echo isset($formData['name']) ? htmlspecialchars($formData['name']) : ''; ?>">
                         <?php if (isset($messages['name'])): ?>
                             <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
                         <?php endif; ?>
@@ -30,7 +31,7 @@ unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
                     <div class="form-group mb-3">
                         <label for="username">Tên người dùng (<span class="text-danger">*</span>)</label>
                         <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên đăng nhập"
-                            value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
+                            value="<?php echo isset($formData['username']) ? htmlspecialchars($formData['username']) : ''; ?>">
                         <?php if (isset($messages['username'])): ?>
                             <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['username']) ?></small>
                         <?php endif; ?>
@@ -58,20 +59,20 @@ unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
                         <div class="col">
                             <label for="gioi_tinh">Giới tính (<span class="text-danger">*</span>)</label>
                             <select class="form-control form-select" id="gioi_tinh" name="gioi_tinh">
-                                <option value="1" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] === 'Nam') ? 'selected' : ''; ?> selected>Nam</option>
-                                <option value="0" <?php echo (isset($_POST['gioi_tinh']) && $_POST['gioi_tinh'] === 'Nữ') ? 'selected' : ''; ?>>Nữ</option>
+                                <option value="1" <?php echo (isset($formData['gioi_tinh']) && $formData['gioi_tinh'] === 'Nam') ? 'selected' : ''; ?> selected>Nam</option>
+                                <option value="0" <?php echo (isset($formData['gioi_tinh']) && $formData['gioi_tinh'] === 'Nữ') ? 'selected' : ''; ?>>Nữ</option>
                             </select>
                         </div>
                         <div class="col">
                             <label for="sdt">Số điện thoại</label>
                             <input type="number" class="form-control" id="sdt" name="sdt" placeholder="Nhập số điện thoại"
-                                value="<?php echo isset($_POST['sdt']) ? htmlspecialchars($_POST['sdt']) : ''; ?>">
+                                value="<?php echo isset($formData['sdt']) ? htmlspecialchars($formData['sdt']) : ''; ?>">
                         </div>
                     </div>
                     <div class="form-group mb-3">
                         <label for="email">Email (<span class="text-danger">*</span>)</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email"
-                            value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
+                            value="<?php echo isset($formData['email']) ? htmlspecialchars($formData['email']) : ''; ?>">
                         <?php if (isset($messages['email'])): ?>
                             <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['email']) ?></small>
                         <?php endif; ?>
@@ -80,7 +81,7 @@ unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="ngay_sinh">Ngày sinh (<span class="text-danger">*</span>)</label>
-                        <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh">
+                        <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh"  value="<?php echo isset($formData['ngay_sinh']) ? htmlspecialchars($formData['ngay_sinh']) : ''; ?>">
                         <?php if (isset($messages['ngay_sinh'])): ?>
                             <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ngay_sinh']) ?></small>
                         <?php endif; ?>

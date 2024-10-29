@@ -78,6 +78,7 @@ if (isset($_POST['saveUser'])) {
         }
     } else {
         $_SESSION['messages'] = $messages; // Lưu lỗi vào session
+        $_SESSION['form_data'] = $_POST;
         header("Location: ../views/user/user-add.php"); // Chuyển hướng về trang thêm người dùng
         exit();
     }
