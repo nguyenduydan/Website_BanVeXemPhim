@@ -12,8 +12,11 @@ include('includes/header.php');
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center pb-0">
                 <h5><?php echo $title ?></h5>
-                <a href="views/category/categories-add.php" class="btn btn-lg me-5 btn-add"
-                    style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">Thêm</a>
+                <a href="views/user/user-add.php" class="btn btn-lg me-5 btn-add"
+                    style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">
+                    <i class="bi bi-plus me-1 fs-3" style="margin-bottom: 5px;"></i>
+                    Thêm
+                </a>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0 ">
