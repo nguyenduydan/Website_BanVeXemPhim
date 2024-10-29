@@ -10,16 +10,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['records_per_page'])) 
     header("Location: " . $_SERVER['PHP_SELF'] . "?page=1"); // Chuyển hướng
     exit; // Dừng thực thi mã
 }
+$users = getAll('NguoiDung');
+if(!empty($users)){
+// Gọi hàm phân trang
+$pagination = paginate($conn, 'NguoiDung', $records_per_page, $current_page);
+$data = $pagination['data'];
 
+}
 // Gán giá trị cho $records_per_page từ session hoặc mặc định là 5
 $records_per_page = isset($_SESSION['records_per_page']) ? $_SESSION['records_per_page'] : 5;
 
 // Lấy số trang hiện tại từ URL, mặc định là 1
 $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
-// Gọi hàm phân trang
-$pagination = paginate($conn, 'NguoiDung', $records_per_page, $current_page);
-$data = $pagination['data'];
 
 
 ?>
@@ -135,30 +138,34 @@ $data = $pagination['data'];
             <div class="card-footer">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
-                        <?php if ($pagination['total_pages'] > 1): // Kiểm tra xem có nhiều hơn 1 trang
-                        ?>
-                            <?php if ($current_page > 1): ?>
-                                <li class="page-item">
-                                    <a class="page-link bg-gradient-dark text-white" href="?page=<?= $current_page - 1 ?>">
-                                        <i class="bi bi-chevron-left fs-6 fw-bolder"></i>
-                                    </a>
-                                </li>
-                            <?php endif; ?>
-
-                            <?php for ($i = 1; $i <= $pagination['total_pages']; $i++): ?>
-                                <li class="page-item <?= ($i == $current_page) ? 'active' : '' ?>">
-                                    <a class="page-link border-radius-xs" href="?page=<?= $i ?>"><?= $i ?></a>
-                                </li>
-                            <?php endfor; ?>
-
-                            <?php if ($current_page < $pagination['total_pages']): ?>
-                                <li class="page-item">
-                                    <a class="page-link bg-gradient-dark text-white" href="?page=<?= $current_page + 1 ?>">
-                                        <i class="bi bi-chevron-right fs-6 fw-bolder"></i>
-                                    </a>
-                                </li>
-                            <?php endif; ?>
-                        <?php endif; // Kết thúc kiểm tra số trang
+                        <?php 
+                        if(!empty($users)){
+                            if ($pagination['total_pages'] > 1): // Kiểm tra xem có nhiều hơn 1 trang
+                                ?>
+                                    <?php if ($current_page > 1): ?>
+                                        <li class="page-item">
+                                            <a class="page-link bg-gradient-dark text-white" href="?page=<?= $current_page - 1 ?>">
+                                                <i class="bi bi-chevron-left fs-6 fw-bolder"></i>
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+        
+                                    <?php for ($i = 1; $i <= $pagination['total_pages']; $i++): ?>
+                                        <li class="page-item <?= ($i == $current_page) ? 'active' : '' ?>">
+                                            <a class="page-link border-radius-xs" href="?page=<?= $i ?>"><?= $i ?></a>
+                                        </li>
+                                    <?php endfor; ?>
+        
+                                    <?php if ($current_page < $pagination['total_pages']): ?>
+                                        <li class="page-item">
+                                            <a class="page-link bg-gradient-dark text-white" href="?page=<?= $current_page + 1 ?>">
+                                                <i class="bi bi-chevron-right fs-6 fw-bolder"></i>
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+                                <?php endif; // Kết thúc kiểm tra số trang
+                        }
+                        
                         ?>
                     </ul>
                 </nav>
