@@ -72,10 +72,7 @@ $records_per_page = $pagination['records_per_page'];
                                             </form>
                                         </th>
                                         <td class="align-middle text-center text-sm">
-                                            <a class="btn btn-secondary m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="views/chair/chair-detail.php?id=<?= $item['MaGhe'] ?>">
-                                                <i class="bi bi-info-circle"></i> Chi tiết
-                                            </a>
+
                                             <a class="btn btn-info m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                                 href="views/chair/chair-edit.php?id=<?= $item['MaGhe'] ?>">
                                                 <i class="bi bi-pencil"></i> Sửa
@@ -93,7 +90,7 @@ $records_per_page = $pagination['records_per_page'];
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p class="p-2 fs-5">Bạn có muốn xóa người dùng này không?</p>
+                                                            <p class="p-2 fs-5">Bạn có muốn xóa không?</p>
                                                         </div>
                                                         <div class="modal-footer d-flex justify-content-center">
                                                             <button type="button" class="btn btn-sm btn-success" id="confirmYes">Có</button>

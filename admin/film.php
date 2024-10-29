@@ -64,7 +64,7 @@ $records_per_page = $pagination['records_per_page'];
                                         <th class="text-center text-xs font-weight-bolder"><?= $filmItem['NamPhatHanh']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $filmItem['PhanLoai']; ?></th>
                                         <th class="text-center text-s font-weight-bolder">
-                                            <form action="controllers/user-controller.php" method="POST" style="display:inline;">
+                                            <form action="controllers/film-controller.php" method="POST" style="display:inline;">
                                                 <input type="hidden" name="mand" value="<?= $filmItem['MaPhim'] ?>">
                                                 <input type="hidden" name="status" value="<?= $filmItem['TrangThai'] == 1 ? 0 : 1 ?>">
                                                 <button type="submit" name="changeStatus" class="badge badge-sm <?= $filmItem['TrangThai'] == 1 ? 'bg-gradient-success' : 'bg-gradient-secondary' ?> text-uppercase" style="border: none; cursor: pointer;">
@@ -89,8 +89,8 @@ $records_per_page = $pagination['records_per_page'];
                                                             <h5 class="modal-title" id="confirmModalLabel">Xác Nhận Xóa</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body fs-5">
-                                                            Bạn có chắc chắn muốn xóa người dùng này không?
+                                                        <div class="modal-body">
+                                                            <p class="p-2 fs-5">Bạn có muốn xóa không?</p>
                                                         </div>
                                                         <div class="modal-footer d-flex justify-content-center">
                                                             <button type="button" class="btn btn-sm btn-success" id="confirmYes">Có</button>

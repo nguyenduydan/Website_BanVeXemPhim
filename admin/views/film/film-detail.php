@@ -4,12 +4,20 @@ require '../../../config/function.php';
 include('../../includes/header.php');
 ?>
 
-
+<div id="toast">
+</div>
+<?php
+// $id_result = check_valid_ID('id');
+// if (!is_numeric($id_result)) {
+//     echo '<h5>' . $id_result . '</h5>';
+//     return false;
+// }
+?>
 <div class="row">
     <div class="col-xl-12 col-lg-12 mx-auto">
         <h2><?= $title ?></h2>
-        <!-- Nút quay lại nằm sát bên phải -->
         <div class="text-end mb-4">
+            <a class="btn btn-info" href="film-edit.php?id=<?= $id_result; ?>"><i class="bi bi-pencil me-2"></i>Sửa</a>
             <a class="btn btn-secondary" href="../../film.php">
                 Quay lại
             </a>

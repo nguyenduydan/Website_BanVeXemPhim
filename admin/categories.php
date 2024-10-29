@@ -27,7 +27,7 @@ $records_per_page = $pagination['records_per_page'];
                         <option value="20" <?= $records_per_page == 20 ? 'selected' : '' ?>>20</option>
                     </select>
                 </form>
-                <a href="views/user/user-add.php" class="btn btn-lg me-5 btn-add"
+                <a href="views/category/categories-add.php" class="btn btn-lg me-5 btn-add"
                     style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">
                     <i class="bi bi-plus me-1 fs-3" style="margin-bottom: 5px;"></i>
                     Thêm
@@ -42,6 +42,7 @@ $records_per_page = $pagination['records_per_page'];
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thể loại phim</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Người tạo</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày tạo</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Người cập nhật</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày cập nhật</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hành động</th>
@@ -56,10 +57,11 @@ $records_per_page = $pagination['records_per_page'];
                             ?>
                                     <tr>
                                         <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $item['TenND']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $item['username']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $item['Email']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $item['SDT']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['TenTheLoai']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['NguoiTao']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['NgayTao']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['NguoiCapNhat']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['NgayCapNhat']; ?></th>
                                         <th class="text-center text-s font-weight-bolder">
                                             <form action="controllers/category-controller.php" method="POST" style="display:inline;">
                                                 <input type="hidden" name="mand" value="<?= $item['MaND'] ?>">
@@ -70,12 +72,8 @@ $records_per_page = $pagination['records_per_page'];
                                             </form>
                                         </th>
                                         <td class="align-middle text-center text-sm">
-                                            <a class="btn btn-secondary m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="views/user/user-detail.php?id=<?= $item['MaND'] ?>">
-                                                <i class="bi bi-info-circle"></i> Chi tiết
-                                            </a>
                                             <a class="btn btn-info m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="views/user/user-edit.php?id=<?= $item['MaND'] ?>">
+                                                href="views/category/categories-edit.php?id=<?= $item['MaND'] ?>">
                                                 <i class="bi bi-pencil"></i> Sửa
                                             </a>
                                             <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['MaND'] ?>"
@@ -91,7 +89,7 @@ $records_per_page = $pagination['records_per_page'];
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p class="p-2 fs-5">Bạn có muốn xóa người dùng này không?</p>
+                                                            <p class="p-2 fs-5">Bạn có muốn xóa không?</p>
                                                         </div>
                                                         <div class="modal-footer d-flex justify-content-center">
                                                             <button type="button" class="btn btn-sm btn-success" id="confirmYes">Có</button>
