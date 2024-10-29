@@ -131,6 +131,7 @@ $data = $pagination['data'];
                     </table>
                 </div>
             </div>
+            <!-- Phân trang -->
             <div class="card-footer">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
