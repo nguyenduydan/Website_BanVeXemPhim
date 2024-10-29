@@ -19,6 +19,15 @@ $records_per_page = $pagination['records_per_page'];
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center pb-0">
                 <h5><?php echo $title ?></h5>
+                <form method="POST" class="d-inline">
+                    <label for="records_per_page" class="me-2 fs-6">Chọn hiển thị số bản ghi:</label>
+                    <select name="records_per_page" id="records_per_page" class="form-select" onchange="this.form.submit()">
+                        <option value="2" <?= $records_per_page == 2 ? 'selected' : '' ?>>2</option>
+                        <option value="5" <?= $records_per_page == 5 ? 'selected' : '' ?>>5</option>
+                        <option value="10" <?= $records_per_page == 10 ? 'selected' : '' ?>>10</option>
+                        <option value="20" <?= $records_per_page == 20 ? 'selected' : '' ?>>20</option>
+                    </select>
+                </form>
                 <a href="views/chair/chair-add.php" class="btn btn-lg me-5 btn-add"
                     style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">Thêm</a>
             </div>

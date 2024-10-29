@@ -1,12 +1,17 @@
 <?php
-
+ob_start();
+session_start();
 require '../config/function.php';
 include('includes/header.php');
 
+$pagination = setupPagination($conn, 'Phim');
+$data = $pagination['data'];
+$records_per_page = $pagination['records_per_page'];
 ?>
 
-<div id="toast">
-</div>
+<div id="toast"></div>
+
+<?php alertMessage() ?>
 <?php alertMessage() ?>
 <!-- Hiển thị nội dung danh sách phim -->
 <div class="row">
@@ -14,6 +19,15 @@ include('includes/header.php');
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center pb-0">
                 <h5><?php echo $title ?></h5>
+                <form method="POST" class="d-inline">
+                    <label for="records_per_page" class="me-2 fs-6">Chọn hiển thị số bản ghi:</label>
+                    <select name="records_per_page" id="records_per_page" class="form-select" onchange="this.form.submit()">
+                        <option value="2" <?= $records_per_page == 2 ? 'selected' : '' ?>>2</option>
+                        <option value="5" <?= $records_per_page == 5 ? 'selected' : '' ?>>5</option>
+                        <option value="10" <?= $records_per_page == 10 ? 'selected' : '' ?>>10</option>
+                        <option value="20" <?= $records_per_page == 20 ? 'selected' : '' ?>>20</option>
+                    </select>
+                </form>
                 <a href="views/film/film-add.php" class="btn btn-lg me-5 btn-add"
                     style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">
                     <i class="bi bi-plus me-1 fs-3" style="margin-bottom: 5px;"></i>
@@ -100,6 +114,10 @@ include('includes/header.php');
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <!-- Phân trang -->
+            <div class="card-footer">
+                <?php echo paginate_html($pagination['total_pages'], $pagination['current_page']); ?>
             </div>
         </div>
     </div>
