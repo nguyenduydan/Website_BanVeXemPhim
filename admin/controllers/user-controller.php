@@ -158,6 +158,7 @@ if (isset($_POST['editUser'])) {
         }
     } else {
         $_SESSION['errors'] = $messages; // Lưu lỗi vào session
+        $_SESSION['form_data'] = $_POST;
         header("Location: ../views/user/user-edit.php?id=" . $id); // Chuyển hướng về trang thêm người dùng
         exit();
     }
