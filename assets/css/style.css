@@ -95,3 +95,8 @@ transition: background-image ease-in-out 1s;
      z-index: 999;
      /* Đảm bảo icon không bị che khuất */
  }
+.btn:hover {
+
+    background-position: right center;
+    /* change the direction of the change here */
+}

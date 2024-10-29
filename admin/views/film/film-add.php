@@ -25,6 +25,18 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
                         <label for="ten_phim">Tên phim</label>
                         <input type="text" class="form-control" id="ten_phim" name="ten_phim" placeholder="Nhập tên phim" required>
                     </div>
+
+                    <!-- Phân loại phim bằng dropdown -->
+                    <div class="form-group mb-3">
+                        <label for="phan_loai">Phân loại</label>
+                        <select class="form-select" id="phan_loai" name="phan_loai" required>
+                            <option value="P">Phổ thông</option>
+                            <option value="C13">C13</option>
+                            <option value="C16">C16</option>
+                            <option value="C18">C18</option>
+                        </select>
+                    </div>
+
                     <!-- Nhập đạo diễn -->
                     <div class="form-group mb-3">
                         <label for="dao_dien">Đạo diễn</label>
@@ -38,7 +50,21 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
                     <!-- Nhập quốc gia -->
                     <div class="form-group mb-3">
                         <label for="quoc_gia">Quốc gia</label>
-                        <input type="text" class="form-control" id="quoc_gia" name="quoc_gia" placeholder="Nhập quốc gia sản xuất" required>
+                        <div class="d-flex flex-wrap">
+                            <?php
+                            $nation = ['Âu Mỹ', 'Hàn Quốc', 'Trung Quốc', 'Anh', 'Việt Nam'];
+                            foreach ($nation as $nation): ?>
+                                <div class="form-check me-3">
+                                    <input class="form-check-input" type="checkbox" name="quoc_gia[]" value="<?= $nation ?>" id="quoc_gia<?= strtolower($nation) ?>">
+                                    <label class="form-check-label" for="quoc_gia<?= strtolower($nation) ?>"><?= $nation ?></label>
+                                </div>
+                            <?php endforeach; ?>
+                            <div class="d-flex align-items-center">
+                                <label for="quoc_gia" class="me-2">Khác: </label>
+                                <input class="form-control w-60" type="text" name="quoc_gia[]" placeholder=" Nhập khác...">
+                            </div>
+                        </div>
+
                     </div>
                     <!-- Nhập mô tả phim -->
                     <div class="form-group mb-3">
@@ -64,21 +90,10 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
                         </div>
                         <!-- Nút thêm thể loại nằm cạnh -->
                         <div class="mt-3">
-                            <a href="../admin/categories.php" class="btn btn-success btn-sm">
-                                <i class="fas fa-plus"></i> Thêm thể loại
+                            <a href="../category/categories-add.php" class="btn btn-success btn-sm">
+                                <i class="fas fa-plus me-1"></i> Thêm thể loại
                             </a>
                         </div>
-                    </div>
-
-                    <!-- Phân loại phim bằng dropdown -->
-                    <div class="form-group mb-3">
-                        <label for="phan_loai">Phân loại</label>
-                        <select class="form-control" id="phan_loai" name="phan_loai" required>
-                            <option value="P">Phổ thông</option>
-                            <option value="C13">C13</option>
-                            <option value="C16">C16</option>
-                            <option value="C18">C18</option>
-                        </select>
                     </div>
 
                     <!-- Năm phát hành -->
@@ -100,8 +115,8 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
                     </div>
 
                     <!-- Hiển thị ảnh đã chọn -->
-                    <div class="form-group mb-3">
-                        <img id="preview" src="#" alt="Ảnh xem trước" class="img-fluid" style="display:none; max-width: 100%; max-height: 220px;" />
+                    <div class="form-group d-flex justify-content-center mb-3">
+                        <img id="preview" src="#" alt="Ảnh xem trước" class="img-fluid" style="display:none; max-width: 100%; max-height: 17rem;" />
                     </div>
                 </div>
             </div>
