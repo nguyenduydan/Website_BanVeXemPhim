@@ -14,8 +14,11 @@ include('includes/header.php');
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center pb-0">
                 <h5><?php echo $title ?></h5>
-                <a href="views/film/film-add.php" class="btn btn-lg me-5 btn-add"
-                    style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">Thêm</a>
+                <a href="views/user/user-add.php" class="btn btn-lg me-5 btn-add"
+                    style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">
+                    <i class="bi bi-plus me-1 fs-3" style="margin-bottom: 5px;"></i>
+                    Thêm
+                </a>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
@@ -57,13 +60,31 @@ include('includes/header.php');
                                         </th>
                                         <td class="align-middle text-center text-sm">
                                             <a class="btn btn-info m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="../admin/film-edit.php?id=<?= $filmItem['MaTheLoai'] ?>">
+                                                href="views/film/film-edit.php?id=<?= $filmItem['MaPhim'] ?>">
                                                 <i class="bi bi-pencil"></i> Sửa
                                             </a>
-                                            <a class="btn btn-danger m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="../admin/film-delete.php?id=<?= $filmItem['MaTheLoai'] ?>">
+                                            <a class="btn btn-danger m-0 delete-btn" data-id="<?= $userItem['MaPhim'] ?>"
+                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                data-bs-toggle="modal" data-bs-target="#confirmModal">
                                                 <i class="bi bi-trash"></i> Xoá
                                             </a>
+                                            <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog mt-10">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="confirmModalLabel">Xác Nhận Xóa</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body fs-5">
+                                                            Bạn có chắc chắn muốn xóa người dùng này không?
+                                                        </div>
+                                                        <div class="modal-footer d-flex justify-content-center">
+                                                            <button type="button" class="btn btn-sm btn-success" id="confirmYes">Có</button>
+                                                            <button type="button" class="btn btn-sm btn-danger me-2" data-bs-dismiss="modal">Không</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php
@@ -83,8 +104,6 @@ include('includes/header.php');
         </div>
     </div>
 </div>
-<script>
 
-</script>
 
 <?php include('includes/footer.php'); ?>

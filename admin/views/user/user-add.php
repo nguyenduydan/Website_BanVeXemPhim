@@ -112,7 +112,7 @@ unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
                     </div>
                 </div>
             </div>
-            <button type="submit" name="saveUser" class="btn bg-gradient-info px-5 mt-3"><i class="bi bi-floppy"></i>Lưu</button>
+            <button type="submit" name="saveUser" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
         </form>
     </div>
 </div>

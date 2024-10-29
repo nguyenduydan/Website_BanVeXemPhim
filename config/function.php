@@ -213,6 +213,7 @@ function paginate($conn, $table, $rowPerPage, $current_page)
         'total_records' => $total_records
     ];
 }
+
 // Hàm sort
 function sortData(&$data, $sortField, $sortOrder = 'ASC')
 {

@@ -1,4 +1,11 @@
-<?php include('../../includes/header.php'); ?>
+<?php
+require '../../../config/function.php';
+include('../../includes/header.php');
+
+$errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : []; // Lấy lỗi từ session
+unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
+
+?>
 
 <div class="row">
     <div class="col-xl-12 col-lg-12 mx-auto">
@@ -100,7 +107,7 @@
             </div>
 
             <!-- Nút submit -->
-            <button type="submit" name="saveFilm" class="btn btn-success w-15 mt-3">Lưu</button>
+            <button type="submit" name="saveFilm" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
         </form>
     </div>
 </div>
