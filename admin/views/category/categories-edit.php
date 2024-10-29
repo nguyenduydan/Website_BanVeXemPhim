@@ -25,7 +25,7 @@
                             <option value="0">Offline</option>
                         </select>
                     </div>
-                    <button type="submit" name="editCate" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
+                    <button type="submit" name="editCategory" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
                 </div>
             </div>
         </form>

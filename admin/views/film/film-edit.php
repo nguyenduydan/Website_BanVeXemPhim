@@ -123,7 +123,7 @@ unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
             </div>
 
             <!-- Nút submit -->
-            <button type="submit" name="saveFilm" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
+            <button type="submit" name="editFilm" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
         </form>
     </div>
 </div>

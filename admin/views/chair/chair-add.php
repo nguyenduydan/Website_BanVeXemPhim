@@ -1,5 +1,15 @@
-<?php include('../../includes/header.php'); ?>
+<?php
+require '../../../config/function.php';
+include('../../includes/header.php');
 
+$messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy lỗi từ session
+$formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
+unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
+unset($_SESSION['form_data']);
+?>
+
+<div id="toast"></div>
+<?php alertMessage() ?>
 <div class="row">
     <div class="col-xl-12 col-lg-12 mx-auto">
         <h2><?php echo htmlspecialchars($title); ?></h2>
@@ -25,7 +35,7 @@
                     <!-- Chọn phòng -->
                     <div class="form-group mb-3">
                         <label for="ten_phong">Tên phòng</label>
-                        <select class="form-control" id="ten_phong" name="ten_phong" required>
+                        <select class="form-select" id="ten_phong" name="ten_phong" required>
                             <option value="" disabled selected>Chọn phòng</option>
                             <option value="Phòng A">Phòng A</option>
                             <option value="Phòng B">Phòng B</option>
@@ -40,19 +50,17 @@
                     <!-- Chọn loại ghế -->
                     <div class="form-group mb-3">
                         <label for="loai_ghe">Loại ghế</label>
-                        <select class="form-control" id="loai_ghe" name="loai_ghe" required>
+                        <select class="form-select" id="loai_ghe" name="loai_ghe" required>
                             <option value="" disabled selected>Chọn loại ghế</option>
-                            <option value="Ghế xoay">Ghế xoay</option>
-                            <option value="Ghế cố định">Ghế cố định</option>
-                            <option value="Ghế bành">Ghế bành</option>
-                            <option value="Ghế sofa">Ghế sofa</option>
+                            <option value="Ghế xoay">Ghế đôi</option>
+                            <option value="Ghế cố định">Ghế đơn</option>
+                            <option value="Ghế bành">Ghế vip</option>
                         </select>
                     </div>
                 </div>
             </div>
 
-            <!-- Nút submit -->
-            <button type="submit" name="saveChair" class="btn btn-success w-15 mt-3">Lưu</button>
+            <button type="submit" name="saveChair" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
         </form>
     </div>
 </div>
