@@ -2,7 +2,7 @@
 session_start();
 require '../../config/function.php';
 
-$errors = [];
+$messages = [];
 //====== user-add =======//
 if (isset($_POST['saveUser'])) {
     $name = validate($_POST['name']);
@@ -18,40 +18,40 @@ if (isset($_POST['saveUser'])) {
 
     //Kiểm tra không được để trống
     if (empty($name)) {
-        $errors['name'] = "Họ và tên không được để trống.";
+        $messages['name'] = "Họ và tên không được để trống.";
     }
     if (empty($username)) {
-        $errors['username'] = "Tên người dùng không được để trống.";
+        $messages['username'] = "Tên người dùng không được để trống.";
     } else if (isUsername($username)) {
-        $errors['username'] = "Tên người dùng đã tồn tại";
+        $messages['username'] = "Tên người dùng đã tồn tại";
     }
 
     if (empty($password)) {
-        $errors['password'] = "Mật khẩu không được để trống.";
+        $messages['password'] = "Mật khẩu không được để trống.";
     } elseif (strlen($password) < 6) {
-        $errors['password'] = "Mật khẩu phải từ 6 kí tự trở lên";
+        $messages['password'] = "Mật khẩu phải từ 6 kí tự trở lên";
     }
     if (empty($re_password)) {
-        $errors['re_password'] = "Xác nhận mật khẩu không được để trống.";
+        $messages['re_password'] = "Xác nhận mật khẩu không được để trống.";
     }
     if (empty($ngay_sinh)) {
-        $errors['ngay_sinh'] = "Ngày sinh không được để trống.";
+        $messages['ngay_sinh'] = "Ngày sinh không được để trống.";
     }
     if (empty($email)) {
-        $errors['email'] = "Email không được để trống.";
+        $messages['email'] = "Email không được để trống.";
     } elseif (isEmail($email)) {
-        $errors['email'] = "Email đã tồn tại";
+        $messages['email'] = "Email đã tồn tại";
     }
 
 
     // Hash password
     $passwordDetails = validateAndHashPassword($password, $re_password);
     if (!$passwordDetails['status']) {
-        $errors['re_password'] = $passwordDetails['message'];
+        $messages['re_password'] = $passwordDetails['message'];
     }
     $hashedPassword = $passwordDetails['hashed'];
 
-    if (empty($errors)) {
+    if (empty($messages)) {
         // Handle avatar upload
         $avatar = '';
         if (isset($_FILES['avatar'])) {
@@ -59,7 +59,7 @@ if (isset($_POST['saveUser'])) {
             if ($avatarResult['success']) {
                 $avatar =  $avatarResult['filename'];
             } else {
-                $errors[] = $avatarResult['message'];
+                $messages[] = $avatarResult['message'];
             }
         }
         // Insert into database
@@ -77,7 +77,7 @@ if (isset($_POST['saveUser'])) {
             exit();
         }
     } else {
-        $_SESSION['error'] = $errors; // Lưu lỗi vào session
+        $_SESSION['messages'] = $messages; // Lưu lỗi vào session
         header("Location: ../views/user/user-add.php"); // Chuyển hướng về trang thêm người dùng
         exit();
     }
@@ -85,7 +85,7 @@ if (isset($_POST['saveUser'])) {
 
 //====== user-edit =======//
 if (isset($_POST['editUser'])) {
-    $errors = [];
+    $messages = [];
     $id = validate($_POST['mand']);
     $name = validate($_POST['name']);
     $username = validate($_POST['username']);
@@ -98,27 +98,27 @@ if (isset($_POST['editUser'])) {
 
     // Kiểm tra tên người dùng
     if (empty($name)) {
-        $errors['name'] = "Họ và tên không được để trống.";
+        $messages['name'] = "Họ và tên không được để trống.";
     }
     if (empty($username)) {
-        $errors['username'] = "Tên người dùng không được để trống.";
+        $messages['username'] = "Tên người dùng không được để trống.";
     } else {
         // Kiểm tra tính duy nhất của username
         if (isUsername($username, $id)) {
-            $errors['username'] = "Tên người dùng đã tồn tại";
+            $messages['username'] = "Tên người dùng đã tồn tại";
         }
     }
     if (empty($ngay_sinh)) {
-        $errors['ngay_sinh'] = "Ngày sinh không được để trống.";
+        $messages['ngay_sinh'] = "Ngày sinh không được để trống.";
     }
     if (empty($email)) {
-        $errors['email'] = "Email không được để trống.";
+        $messages['email'] = "Email không được để trống.";
     } elseif (isEmail($email, $id)) {
-        $errors['email'] = "Email đã tồn tại";
+        $messages['email'] = "Email đã tồn tại";
     }
 
     $user = getByID('NguoiDung', 'MaND', $id);
-    if (empty($errors)) {
+    if (empty($messages)) {
         if (isset($_POST['deleteAvatar'])) {
             $avatarPath = "../../uploads/avatars/" . $user['data']['Anh'];
             $deleteResult = deleteImage($avatarPath);
@@ -129,7 +129,7 @@ if (isset($_POST['editUser'])) {
             if ($avatarResult['success']) {
                 $avatar =  $avatarResult['filename'];
             } else {
-                $errors[] = $avatarResult['message'];
+                $messages[] = $avatarResult['message'];
             }
         }
         $ngay_tao = date('Y-m-d H:i:s');
@@ -156,7 +156,7 @@ if (isset($_POST['editUser'])) {
             exit();
         }
     } else {
-        $_SESSION['errors'] = $errors; // Lưu lỗi vào session
+        $_SESSION['errors'] = $messages; // Lưu lỗi vào session
         header("Location: ../views/user/user-edit.php?id=" . $id); // Chuyển hướng về trang thêm người dùng
         exit();
     }
