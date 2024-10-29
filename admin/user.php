@@ -43,7 +43,10 @@ $data = $pagination['data'];
                     </select>
                 </form>
                 <a href="views/user/user-add.php" class="btn btn-lg me-5 btn-add"
-                    style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">Thêm</a>
+                    style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">
+                    <i class="bi bi-plus me-1 fs-3" style="margin-bottom: 5px;"></i>
+                    Thêm
+                </a>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
@@ -77,7 +80,13 @@ $data = $pagination['data'];
                                             <img src="../uploads/avatars/<?= htmlspecialchars($userItem['Anh']); ?>" alt="Ảnh đại diện" class="img-fluid" style="max-width: 100px;">
                                         </th>
                                         <th class="text-center text-s font-weight-bolder">
-                                            <?= $userItem['TrangThai'] == 1 ? '<span class="badge badge-sm bg-gradient-success text-uppercase">ON</span>' : '<span class="badge badge-sm bg-gradient-secondary text-uppercase">OFF</span>'; ?>
+                                            <form action="controllers/user-controller.php" method="POST" style="display:inline;">
+                                                <input type="hidden" name="mand" value="<?= $userItem['MaND'] ?>">
+                                                <input type="hidden" name="status" value="<?= $userItem['TrangThai'] == 1 ? 0 : 1 ?>">
+                                                <button type="submit" name="changeStatus" class="badge badge-sm <?= $userItem['TrangThai'] == 1 ? 'bg-gradient-success' : 'bg-gradient-secondary' ?> text-uppercase" style="border: none; cursor: pointer;">
+                                                    <?= $userItem['TrangThai'] == 1 ? 'ON' : 'OFF' ?>
+                                                </button>
+                                            </form>
                                         </th>
                                         <td class="align-middle text-center text-sm">
                                             <a class="btn btn-secondary m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"

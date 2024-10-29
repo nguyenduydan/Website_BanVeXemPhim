@@ -1,6 +1,6 @@
 <?php
 // Định nghĩa đường dẫn gốc của dự án
-$baseURL = '/Website_BanVeXemPhim/'; // Đảm bảo rằng đường dẫn này là chính xác
+$baseURL = '/Website_BanVeXemPhim/';
 ?>
 <link rel="shortcut icon" href="<?php echo $baseURL; ?>assets/imgs/favicon-32x32.png" type="image/x-icon">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -18,5 +18,5 @@ $baseURL = '/Website_BanVeXemPhim/'; // Đảm bảo rằng đường dẫn này
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/toast.css">
 
-<script src="<?php echo $baseURL; ?>assets/js/toast.js"></script>
+<script src="<?php echo $baseURL; ?>assets/js/toast.js?1.0"></script>
 <script src="<?php echo $baseURL; ?>assets/js/myJS.js?1.1"></script>

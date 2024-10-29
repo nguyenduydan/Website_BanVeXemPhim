@@ -20,6 +20,7 @@ if ($user['status'] == 200) {
             <h2><?= $title ?></h2>
             <!-- Nút quay lại nằm sát bên phải -->
             <div class="text-end mb-4">
+                <a class="btn btn-info" href="user-edit.php?id=<?= $id_result; ?>"><i class="bi bi-pencil me-2"></i>Sửa</a>
                 <a class="btn btn-secondary" href="../../user.php">
                     Quay lại
                 </a>

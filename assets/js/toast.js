@@ -3,7 +3,7 @@ function showSuccessToast(message) {
         title: "Thành công!",
         message: message,
         type: "success",
-        duration: 3000
+        duration: 2000
     });
 }
 
@@ -12,7 +12,7 @@ function showErrorToast(message) {
         title: "Thất bại!",
         message: message,
         type: "error",
-        duration: 3000
+        duration: 2000
     });
 }
 

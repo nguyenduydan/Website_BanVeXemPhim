@@ -72,3 +72,9 @@ document.addEventListener('DOMContentLoaded', function () {
         togglePassword.addEventListener('click', togglePasswordVisibility);
     }
 });
+
+//Time
+
+function currentTime(){
+    const time = new time
+}

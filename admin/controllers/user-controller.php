@@ -161,3 +161,21 @@ if (isset($_POST['editUser'])) {
         exit();
     }
 }
+
+//====== changeStatus ======//
+if (isset($_POST['changeStatus'])) {
+    $id = validate($_POST['mand']);
+    $status = validate($_POST['status']) == 1 ? 1 : 0;
+
+    $edit_query = "UPDATE NguoiDung SET TrangThai = '$status' WHERE MaND = '$id'";
+
+    if (mysqli_query($conn, $edit_query)) {
+        $_SESSION['success'] = 'Cập nhật trạng thái thành công';
+        header("Location: ../user.php");
+        exit();
+    } else {
+        $_SESSION['error'] = 'Cập nhật trạng thái thất bại';
+        header("Location: ../user.php");
+        exit();
+    }
+}
