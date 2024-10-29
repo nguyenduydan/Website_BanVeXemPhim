@@ -56,7 +56,7 @@
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                <div id="clock" class="fs-5 fw-bold me-5 bg-gradient-primary text-white p-2"></div>
+                <div id="clock" class="fs-5 fw-bold me-5 bg-gradient-primary text-white p-2" style="border-radius: 10px;"></div>
                 <div class="input-group">
                     <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                     <input type="text" class="form-control" id="searchBox" placeholder="Tìm kiếm..." onkeyup="searchData()">

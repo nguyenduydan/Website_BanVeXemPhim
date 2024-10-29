@@ -106,7 +106,7 @@ $data = $pagination['data'];
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body fs-5">
-                                                            Bạn có chắc chắn muốn xóa người dùng này?
+                                                            Bạn có chắc chắn muốn xóa <?= $userItem['username'] ?> này?
                                                         </div>
                                                         <div class="modal-footer d-flex justify-content-center">
                                                             <button type="button" class="btn btn-sm btn-success" id="confirmYes">Có</button>
