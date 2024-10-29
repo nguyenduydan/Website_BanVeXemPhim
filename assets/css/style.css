@@ -97,6 +97,6 @@ transition: background-image ease-in-out 1s;
  }
 .btn:hover {
 
-    background-position: right center;
+    background-position: center right;
     /* change the direction of the change here */
 }
