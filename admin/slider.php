@@ -52,38 +52,34 @@ $records_per_page = $pagination['records_per_page'];
                             <?php
                             $stt = 0;
                             if (!empty($data)) {
-                                foreach ($data as $userItem) {
+                                foreach ($data as $item) {
                                     $stt++;
                             ?>
                                     <tr>
                                         <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $userItem['TenSlider']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['TenSlider']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder">
-                                            <img src="../uploads/avatars/<?= htmlspecialchars($userItem['Anh']); ?>" alt="Ảnh đại diện" class="img-fluid" style="max-width: 100px;">
+                                            <img src="../uploads/slider-imgs/?= htmlspecialchars($item['Anh']); ?>" alt="Ảnh đại diện" class="img-fluid" style="max-width: 100px;">
                                         </th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $userItem['SapXep']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $userItem['ViTri']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $userItem['TenChuDe']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['SapXep']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['ViTri']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['TenChuDe']; ?></th>
 
                                         <th class="text-center text-s font-weight-bolder">
-                                            <form action="controllers/user-controller.php" method="POST" style="display:inline;">
-                                                <input type="hidden" name="mand" value="<?= $userItem['MaND'] ?>">
-                                                <input type="hidden" name="status" value="<?= $userItem['TrangThai'] == 1 ? 0 : 1 ?>">
-                                                <button type="submit" name="changeStatus" class="badge badge-sm <?= $userItem['TrangThai'] == 1 ? 'bg-gradient-success' : 'bg-gradient-secondary' ?> text-uppercase" style="border: none; cursor: pointer;">
-                                                    <?= $userItem['TrangThai'] == 1 ? 'ON' : 'OFF' ?>
+                                            <form action="controllers/slider-controller.php" method="POST" style="display:inline;">
+                                                <input type="hidden" name="mand" value="<?= $item['Id'] ?>">
+                                                <input type="hidden" name="status" value="<?= $item['TrangThai'] == 1 ? 0 : 1 ?>">
+                                                <button type="submit" name="changeStatus" class="badge badge-sm <?= $item['TrangThai'] == 1 ? 'bg-gradient-success' : 'bg-gradient-secondary' ?> text-uppercase" style="border: none; cursor: pointer;">
+                                                    <?= $item['TrangThai'] == 1 ? 'ON' : 'OFF' ?>
                                                 </button>
                                             </form>
                                         </th>
                                         <td class="align-middle text-center text-sm">
-                                            <a class="btn btn-secondary m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="views/silder/slider-detail.php?id=<?= $userItem['Id'] ?>">
-                                                <i class="bi bi-info-circle"></i> Chi tiết
-                                            </a>
                                             <a class="btn btn-info m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="views/slider/slider-edit.php?id=<?= $userItem['Id'] ?>">
+                                                href="views/slider/slider-edit.php?id=<?= $item['Id'] ?>">
                                                 <i class="bi bi-pencil"></i> Sửa
                                             </a>
-                                            <a class="btn btn-danger m-0 delete-btn" data-id="<?= $userItem['Id'] ?>"
+                                            <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['Id'] ?>"
                                                 style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                                 data-bs-toggle="modal" data-bs-target="#confirmModal">
                                                 <i class="bi bi-trash"></i> Xoá
