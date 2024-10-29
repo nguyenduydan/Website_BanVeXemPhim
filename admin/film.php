@@ -39,45 +39,49 @@ $records_per_page = $pagination['records_per_page'];
                     <table class="table table-striped table-borderless align-items-center mb-0">
                         <thead>
                             <tr>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên phim</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thời lượng</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Quốc gia</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Năm phát hành</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phân loại</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hành động</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">STT</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Tên phim</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Thời lượng</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Quốc gia</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Thể loại</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Phân loại</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Trạng thái</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $films = getAll('phim');
                             $stt = 0;
-                            if (mysqli_num_rows($films) > 0) {
-                                foreach ($films as $filmItem) {
+                            if (!empty($data)) {
+                                foreach ($data as $item) {
                                     $stt++;
                             ?>
                                     <tr>
                                         <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $filmItem['TenPhim']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $filmItem['ThoiLuong']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $filmItem['QuocGia']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $filmItem['NamPhatHanh']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $filmItem['PhanLoai']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['TenPhim']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['ThoiLuong']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['QuocGia']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['NamPhatHanh']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['TenPhim']; ?></th>
                                         <th class="text-center text-s font-weight-bolder">
                                             <form action="controllers/film-controller.php" method="POST" style="display:inline;">
-                                                <input type="hidden" name="mand" value="<?= $filmItem['MaPhim'] ?>">
-                                                <input type="hidden" name="status" value="<?= $filmItem['TrangThai'] == 1 ? 0 : 1 ?>">
-                                                <button type="submit" name="changeStatus" class="badge badge-sm <?= $filmItem['TrangThai'] == 1 ? 'bg-gradient-success' : 'bg-gradient-secondary' ?> text-uppercase" style="border: none; cursor: pointer;">
-                                                    <?= $filmItem['TrangThai'] == 1 ? 'ON' : 'OFF' ?>
+                                                <input type="hidden" name="mand" value="<?= $item['MaPhim'] ?>">
+                                                <input type="hidden" name="status" value="<?= $item['TrangThai'] == 1 ? 0 : 1 ?>">
+                                                <button type="submit" name="changeStatus" class="badge badge-sm <?= $item['TrangThai'] == 1 ? 'bg-gradient-success' : 'bg-gradient-secondary' ?> text-uppercase" style="border: none; cursor: pointer;">
+                                                    <?= $item['TrangThai'] == 1 ? 'ON' : 'OFF' ?>
                                                 </button>
                                             </form>
                                         </th>
                                         <td class="align-middle text-center text-sm">
+                                            <a class="btn btn-secondary m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                href="views/film/film-detail.php?id=<?= $item['MaPhim'] ?>">
+                                                <i class="bi bi-info-circle"></i> Chi tiết
+                                            </a>
                                             <a class="btn btn-info m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="views/film/film-edit.php?id=<?= $filmItem['MaPhim'] ?>">
+                                                href="views/film/film-edit.php?id=<?= $item['MaPhim'] ?>">
                                                 <i class="bi bi-pencil"></i> Sửa
                                             </a>
-                                            <a class="btn btn-danger m-0 delete-btn" data-id="<?= $userItem['MaPhim'] ?>"
+                                            <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['MaPhim'] ?>"
                                                 style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                                 data-bs-toggle="modal" data-bs-target="#confirmModal">
                                                 <i class="bi bi-trash"></i> Xoá
@@ -90,7 +94,7 @@ $records_per_page = $pagination['records_per_page'];
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p class="p-2 fs-5">Bạn có muốn xóa không?</p>
+                                                            <p class="p-2 fs-5">Bạn có muốn xóa người dùng này không?</p>
                                                         </div>
                                                         <div class="modal-footer d-flex justify-content-center">
                                                             <button type="button" class="btn btn-sm btn-success" id="confirmYes">Có</button>

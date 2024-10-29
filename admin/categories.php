@@ -38,14 +38,14 @@ $records_per_page = $pagination['records_per_page'];
                     <table class="table table-striped table-borderless align-items-center mb-0">
                         <thead>
                             <tr>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">STT</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Thể loại phim</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Người tạo</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày tạo</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Người cập nhật</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày cập nhật</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trạng thái</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hành động</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">STT</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Thể loại phim</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Người tạo</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Ngày tạo</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Người cập nhật</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Ngày cập nhật</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Trạng thái</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,7 +64,7 @@ $records_per_page = $pagination['records_per_page'];
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['NgayCapNhat']; ?></th>
                                         <th class="text-center text-s font-weight-bolder">
                                             <form action="controllers/category-controller.php" method="POST" style="display:inline;">
-                                                <input type="hidden" name="mand" value="<?= $item['MaND'] ?>">
+                                                <input type="hidden" name="matl" value="<?= $item['MaTheLoai'] ?>">
                                                 <input type="hidden" name="status" value="<?= $item['TrangThai'] == 1 ? 0 : 1 ?>">
                                                 <button type="submit" name="changeStatus" class="badge badge-sm <?= $item['TrangThai'] == 1 ? 'bg-gradient-success' : 'bg-gradient-secondary' ?> text-uppercase" style="border: none; cursor: pointer;">
                                                     <?= $item['TrangThai'] == 1 ? 'ON' : 'OFF' ?>
@@ -73,10 +73,10 @@ $records_per_page = $pagination['records_per_page'];
                                         </th>
                                         <td class="align-middle text-center text-sm">
                                             <a class="btn btn-info m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="views/category/categories-edit.php?id=<?= $item['MaND'] ?>">
+                                                href="views/category/categories-edit.php?id=<?= $item['MaTheLoai'] ?>">
                                                 <i class="bi bi-pencil"></i> Sửa
                                             </a>
-                                            <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['MaND'] ?>"
+                                            <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['MaTheLoai'] ?>"
                                                 style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                                 data-bs-toggle="modal" data-bs-target="#confirmModal">
                                                 <i class="bi bi-trash"></i> Xoá
