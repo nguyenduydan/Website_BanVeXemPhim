@@ -25,7 +25,7 @@
                             <option value="0">Offline</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn bg-gradient-success px-5 mt-3">Lưu</button>
+                    <button type="submit" name="saveUser" class="btn bg-gradient-info px-5 mt-3"><i class="bi bi-floppy"></i>Lưu</button>
                 </div>
             </div>
         </form>
