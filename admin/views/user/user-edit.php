@@ -92,8 +92,8 @@ unset($_SESSION['form_data']);
                             <label for="avatar">Chọn ảnh</label>
                             <input type="file" class="form-control" id="avatar" value="<?= $user['data']['Anh']; ?>" name="avatar" accept="image/*" onchange="previewImage(event)">
                         </div>
-                        <div class="form-group mb-3">
-                            <img id="preview" src="<?php echo isset($user['data']['Anh']) ? '../../../uploads/avatars/' . htmlspecialchars($user['data']['Anh']) : '#'; ?>" alt="Ảnh xem trước" class="img-fluid" style="display: <?php echo isset($user['data']['Anh']) ? 'block' : 'none'; ?>; max-width: 100%; max-height: 220px;" />
+                        <div class="form-group d-flex justify-content-center mb-3">
+                            <img id="preview" src="#" alt="Ảnh xem trước" class="img-fluid" style="display:none; max-width: 100%; max-height: 15rem;" />
                         </div>
                     </div>
                 </div>

@@ -5,6 +5,7 @@ require '../../config/function.php';
 $messages = [];
 //====== user-add =======//
 if (isset($_POST['saveUser'])) {
+    $messages = []; // Initialize messages array
     $name = validate($_POST['name']);
     $username = validate($_POST['username']);
     $password = validate($_POST['password']);
@@ -16,13 +17,13 @@ if (isset($_POST['saveUser'])) {
     $role = validate($_POST['role']);
     $status = validate($_POST['status']) == 1 ? 1 : 0;
 
-    //Kiểm tra không được để trống
+    // Kiểm tra không được để trống
     if (empty($name)) {
         $messages['name'] = "Họ và tên không được để trống.";
     }
     if (empty($username)) {
         $messages['username'] = "Tên người dùng không được để trống.";
-    } else if (isUsername($username)) {
+    } elseif (isUsername($username)) {
         $messages['username'] = "Tên người dùng đã tồn tại";
     }
 
@@ -43,7 +44,6 @@ if (isset($_POST['saveUser'])) {
         $messages['email'] = "Email đã tồn tại";
     }
 
-
     // Hash password
     $passwordDetails = validateAndHashPassword($password, $re_password);
     if (!$passwordDetails['status']) {
@@ -55,17 +55,19 @@ if (isset($_POST['saveUser'])) {
         // Handle avatar upload
         $avatar = '';
         if (isset($_FILES['avatar'])) {
-            $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/");
+            // Use username as filename for the avatar
+            $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/", $username); 
             if ($avatarResult['success']) {
-                $avatar =  $avatarResult['filename'];
+                $avatar = $avatarResult['filename'];
             } else {
                 $messages[] = $avatarResult['message'];
             }
         }
+
         // Insert into database
         $ngay_tao = date('Y-m-d H:i:s');
-        $query = "INSERT INTO nguoidung (TenND, username, NgaySinh, GioiTinh, SDT, Anh, Email, MatKhau, Role, NguoiTao, NgayTao,NguoiCapNhat, NgayCapNhat, TrangThai)
-                  VALUES ('$name', '$username', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email', '$hashedPassword', '$role', '1', '$ngay_tao','1', '$ngay_tao', '$status')";
+        $query = "INSERT INTO nguoidung (TenND, username, NgaySinh, GioiTinh, SDT, Anh, Email, MatKhau, Role, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
+                  VALUES ('$name', '$username', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email', '$hashedPassword', '$role', '1', '$ngay_tao', '1', '$ngay_tao', '$status')";
 
         if (mysqli_query($conn, $query)) {
             redirect('../user.php', 'success', 'Thêm tài khoản thành công');
@@ -113,16 +115,22 @@ if (isset($_POST['editUser'])) {
     }
 
     $user = getByID('NguoiDung', 'MaND', $id);
+    $avatar = $user['data']['Anh'];
     if (empty($messages)) {
-        if (isset($_POST['deleteAvatar'])) {
-            $avatarPath = "../../uploads/avatars/" . $user['data']['Anh'];
-            $deleteResult = deleteImage($avatarPath);
-        }
-        $avatar = $user['data']['Anh'];
-        if (isset($_FILES['avatar'])) {
-            $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/");
+        if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] == 0) {
+            // If a new avatar is uploaded, delete the old one
+            $avatarPath = "../../uploads/avatars/" . $avatar;
+            if (!empty($avatar) && file_exists($avatarPath)) {
+                $deleteResult = deleteImage($avatarPath);
+                if (!$deleteResult['success']) {
+                    $messages[] = $deleteResult['message'];
+                }
+            }
+
+            // Upload the avatar with the username as the filename
+            $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/", $username); // Pass username
             if ($avatarResult['success']) {
-                $avatar =  $avatarResult['filename'];
+                $avatar = $avatarResult['filename']; 
             } else {
                 $messages[] = $avatarResult['message'];
             }
@@ -151,6 +159,7 @@ if (isset($_POST['editUser'])) {
         $_SESSION['form_data'] = $_POST;
     }
 }
+
 
 //====== changeStatus ======//
 if (isset($_POST['changeStatus'])) {

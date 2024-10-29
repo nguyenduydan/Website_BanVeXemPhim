@@ -49,7 +49,6 @@ function deleteImage($filePath)
 {
     $result = ['success' => false, 'message' => ''];
     if (file_exists($filePath)) {
-        // Thực hiện xóa tệp
         if (unlink($filePath)) {
             $result['success'] = true;
             $result['message'] = 'Tệp đã được xóa thành công.';

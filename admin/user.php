@@ -51,34 +51,34 @@ $records_per_page = $pagination['records_per_page'];
                             <?php
                             $stt = 0;
                             if (!empty($data)) {
-                                foreach ($data as $userItem) {
+                                foreach ($data as $item) {
                                     $stt++;
                             ?>
                                     <tr>
                                         <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $userItem['TenND']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $userItem['username']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $userItem['Email']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $userItem['SDT']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['TenND']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['username']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['Email']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['SDT']; ?></th>
                                         <th class="text-center text-s font-weight-bolder">
                                             <form action="controllers/user-controller.php" method="POST" style="display:inline;">
-                                                <input type="hidden" name="mand" value="<?= $userItem['MaND'] ?>">
-                                                <input type="hidden" name="status" value="<?= $userItem['TrangThai'] == 1 ? 0 : 1 ?>">
-                                                <button type="submit" name="changeStatus" class="badge badge-sm <?= $userItem['TrangThai'] == 1 ? 'bg-gradient-success' : 'bg-gradient-secondary' ?> text-uppercase" style="border: none; cursor: pointer;">
-                                                    <?= $userItem['TrangThai'] == 1 ? 'ON' : 'OFF' ?>
+                                                <input type="hidden" name="mand" value="<?= $item['MaND'] ?>">
+                                                <input type="hidden" name="status" value="<?= $item['TrangThai'] == 1 ? 0 : 1 ?>">
+                                                <button type="submit" name="changeStatus" class="badge badge-sm <?= $item['TrangThai'] == 1 ? 'bg-gradient-success' : 'bg-gradient-secondary' ?> text-uppercase" style="border: none; cursor: pointer;">
+                                                    <?= $item['TrangThai'] == 1 ? 'ON' : 'OFF' ?>
                                                 </button>
                                             </form>
                                         </th>
                                         <td class="align-middle text-center text-sm">
                                             <a class="btn btn-secondary m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="views/user/user-detail.php?id=<?= $userItem['MaND'] ?>">
+                                                href="views/user/user-detail.php?id=<?= $item['MaND'] ?>">
                                                 <i class="bi bi-info-circle"></i> Chi tiết
                                             </a>
                                             <a class="btn btn-info m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="views/user/user-edit.php?id=<?= $userItem['MaND'] ?>">
+                                                href="views/user/user-edit.php?id=<?= $item['MaND'] ?>">
                                                 <i class="bi bi-pencil"></i> Sửa
                                             </a>
-                                            <a class="btn btn-danger m-0 delete-btn" data-id="<?= $userItem['MaND'] ?>"
+                                            <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['MaND'] ?>"
                                                 style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                                 data-bs-toggle="modal" data-bs-target="#confirmModal">
                                                 <i class="bi bi-trash"></i> Xoá

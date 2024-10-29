@@ -1,31 +1,29 @@
 <?php
 session_start();
 require '../../../config/function.php';
+
 $result = check_valid_ID('id');
 if (is_numeric($result)) {
     $userId = validate($result);
     $user = getByID('NguoiDung', 'MaND', $userId);
-    $username = validate($user['data']['username']);
+
     if ($user['status'] == 200) {
+        $username = validate($user['data']['username']);
+        $avatarPath = "../../../uploads/avatars/" . $user['data']['Anh'];
         $userDelete = deleteQuery('NguoiDung', 'MaND', $userId);
-        $avatarPath = "../../uploads/avatars/" . $user['data']['Anh'];
-        deleteImage($avatarPath);
+
+       
         if ($userDelete) {
-            $_SESSION['success'] = 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($username) . '</span> thành công';
-            header("Location: ../../user.php");
-            exit();
+            if (!empty($user['data']['Anh']) && file_exists($avatarPath)) {
+                $deleteResult = deleteImage($avatarPath);
+            }
+            redirect('../../user.php','success','Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($username) . '</span> thành công');
         } else {
-            $_SESSION['error'] = 'Xóa ' . $username . ' thất bại';
-            header("Location: ../../user.php");
-            exit();
+            redirect('../../user.php','error','Xóa ' . htmlspecialchars($username) . ' thất bại');
         }
     } else {
-        $_SESSION['error'] = $result['message'];
-        header("Location: ../../user.php");
-        exit();
+        redirect('../../user.php','error',$user['message']);
     }
 } else {
-    $_SESSION['error'] = $result;
-    header("Location: ../../user.php");
-    exit();
+    redirect('../../user.php','error',$result);
 }
