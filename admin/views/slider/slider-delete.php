@@ -1,26 +1,29 @@
-<?php include('../../includes/header.php'); ?>
+<?php
+session_start();
+require '../../../config/function.php';
 
-<div class="row">
-    <div class="col-xl-12 col-lg-12 mx-auto">
-        <h2>Xoá slider</h2>
-        <!-- Nút quay lại nằm sát bên phải -->
-        <div class="text-end mb-4">
-            <a class="btn btn-secondary" href="../../slider.php">
-                Quay lại
-            </a>
-        </div>
+$result = check_valid_ID('id');
+if (is_numeric($result)) {
+    $userId = validate($result);
+    $user = getByID('Slider', 'id', $userId);
 
-        <div class="alert alert-warning" role="alert">
-            Bạn có chắc chắn muốn xoá slider "<strong><?php echo htmlspecialchars($title); ?></strong>" không?
-        </div>
+    if ($user['status'] == 200) {
+        $username = validate($user['data']['username']);
+        $avatarPath = "../../../uploads/sliders/" . $user['data']['Anh'];
+        $userDelete = deleteQuery('NguoiDung', 'MaND', $userId);
 
-        <!-- Nút xác nhận xoá slider -->
-        <form action="../admin/controllers/code.php" method="post" class="d-flex justify-content-center">
-            <input type="hidden" name="slider_id" value="<?php echo htmlspecialchars($slider_id); ?>">
-            <a href="javascript:window.history.back(-1);" class="btn btn-danger me-3">Huỷ</a>
-            <button type="submit" name="confirmDelete" class="btn btn-success">Đồng ý</button>
-        </form>
-    </div>
-</div>
-
-<?php include('../../includes/footer.php'); ?>
+       
+        if ($userDelete) {
+            if (!empty($user['data']['Anh']) && file_exists($avatarPath)) {
+                $deleteResult = deleteImage($avatarPath);
+            }
+            redirect('../../user.php','success','Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($username) . '</span> thành công');
+        } else {
+            redirect('../../user.php','error','Xóa ' . htmlspecialchars($username) . ' thất bại');
+        }
+    } else {
+        redirect('../../user.php','error',$user['message']);
+    }
+} else {
+    redirect('../../user.php','error',$result);
+}
