@@ -12,7 +12,7 @@ function validate($inpData)
     $validatedData = mysqli_real_escape_string($conn, $inpData);
     return trim($validatedData);
 }
-function uploadImage($file, $targetDir)
+function uploadImage($file, $targetDir, $fileName)
 {
     $result = ['success' => false, 'message' => '', 'filename' => ''];
 
@@ -22,20 +22,17 @@ function uploadImage($file, $targetDir)
         $fileSize = $file["size"];
         $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
-        // Allowed file types
         $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
 
-        // Validate file type
         if (!in_array($fileType, $allowedTypes)) {
             $result['message'] = "Chỉ các định dạng JPG, JPEG, PNG và GIF được chấp nhận.";
             return $result;
         }
-
-        $newFileName = uniqid() . "." . $fileType;
-        $filePath = $targetDir . $newFileName;
+        $finalFileName = $fileName . '.' . $fileType;
+        $filePath = $targetDir . $finalFileName;
         if (move_uploaded_file($fileTmpName, $filePath)) {
             $result['success'] = true;
-            $result['filename'] = $newFileName;
+            $result['filename'] = $finalFileName; 
         } else {
             $result['message'] = "Có lỗi xảy ra khi tải tệp lên.";
         }
@@ -45,6 +42,7 @@ function uploadImage($file, $targetDir)
 
     return $result;
 }
+
 function deleteImage($filePath)
 {
     $result = ['success' => false, 'message' => ''];
