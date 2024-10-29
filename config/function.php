@@ -62,9 +62,9 @@ function deleteImage($filePath)
 
     return $result;
 }
-function redirect($url, $status)
+function redirect($url, $status,$message)
 {
-    $_SESSION['status'] = $status;
+    $_SESSION[$status] = $message;
     header('Location: ' . $url);
     exit(0);
 }

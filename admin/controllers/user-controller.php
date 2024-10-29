@@ -68,19 +68,13 @@ if (isset($_POST['saveUser'])) {
                   VALUES ('$name', '$username', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email', '$hashedPassword', '$role', '1', '$ngay_tao','1', '$ngay_tao', '$status')";
 
         if (mysqli_query($conn, $query)) {
-            $_SESSION['success'] = 'Thêm tài khoản thành công';
-            header("Location: ../user.php");
-            exit();
+            redirect('../user.php','success','Thêm tài khoản thành công');
         } else {
-            $_SESSION['error'] = 'Thêm tài khoản thất bại';
-            header("Location: ../views/user/user-add.php");
-            exit();
+            redirect('../views/user/user-add.php','error','Thêm tài khoản thất bại');
         }
     } else {
-        $_SESSION['messages'] = $messages; // Lưu lỗi vào session
         $_SESSION['form_data'] = $_POST;
-        header("Location: ../views/user/user-add.php"); // Chuyển hướng về trang thêm người dùng
-        exit();
+        redirect('../views/user/user-add.php','messages',$messages);
     }
 }
 
@@ -148,19 +142,13 @@ if (isset($_POST['editUser'])) {
                 WHERE MaND = '$id'";
 
         if (mysqli_query($conn, $query)) {
-            $_SESSION['success'] = 'Cập nhật tài khoản thành công';
-            header("Location: ../user.php");
-            exit();
+            redirect('../user.php','success','Cập nhật tài khoản thành công');
         } else {
-            $_SESSION['error'] = 'Cập nhật tài khoản thất bại';
-            header("Location: ../views/user/user-edit.php?id=" . $id);
-            exit();
+            redirect('../views/user/user-edit.php?id=" '. $id,'error','Cập nhật tài khoản thất bại');
         }
     } else {
-        $_SESSION['errors'] = $messages; // Lưu lỗi vào session
+        redirect('../views/user/user-edit.php?id=" '. $id,'errors',$messages);
         $_SESSION['form_data'] = $_POST;
-        header("Location: ../views/user/user-edit.php?id=" . $id); // Chuyển hướng về trang thêm người dùng
-        exit();
     }
 }
 
@@ -172,12 +160,8 @@ if (isset($_POST['changeStatus'])) {
     $edit_query = "UPDATE NguoiDung SET TrangThai = '$status' WHERE MaND = '$id'";
 
     if (mysqli_query($conn, $edit_query)) {
-        $_SESSION['success'] = 'Cập nhật trạng thái thành công';
-        header("Location: ../user.php");
-        exit();
+        redirect('../user.php','success','Cập nhật trạng thái thành công');
     } else {
-        $_SESSION['error'] = 'Cập nhật trạng thái thất bại';
-        header("Location: ../user.php");
-        exit();
+        redirect('../user.php','error','Cập nhật trạng thái thất bại');
     }
 }
