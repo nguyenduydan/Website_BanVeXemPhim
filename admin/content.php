@@ -4,7 +4,7 @@ session_start();
 require '../config/function.php';
 include('includes/header.php');
 
-$pagination = setupPagination($conn, 'NguoiDung');
+$pagination = setupPagination($conn, 'BaiViet');
 $data = $pagination['data'];
 $records_per_page = $pagination['records_per_page'];
 ?>
