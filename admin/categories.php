@@ -72,28 +72,32 @@ $records_per_page = $pagination['records_per_page'];
                                             </form>
                                         </th>
                                         <td class="align-middle text-center text-sm">
-                                            <a class="btn btn-info m-0" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                            <a class="btn btn-info m-0"
+                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                                 href="views/category/categories-edit.php?id=<?= $item['MaTheLoai'] ?>">
                                                 <i class="bi bi-pencil"></i> Sửa
                                             </a>
-                                            <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['MaTheLoai'] ?>"
+                                            <a class="btn btn-danger m-0 delete-btn"
                                                 style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                                 data-bs-toggle="modal" data-bs-target="#confirmModal">
                                                 <i class="bi bi-trash"></i> Xoá
                                             </a>
-                                            <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="confirmModal" tabindex="-1"
+                                                aria-labelledby="confirmModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog mt-10">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="confirmModalLabel">Xác Nhận Xóa</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p class="p-2 fs-5">Bạn có muốn xóa không?</p>
+                                                            <p class="p-2 fs-5">Bạn có muốn xóa người dùng này không?</p>
                                                         </div>
                                                         <div class="modal-footer d-flex justify-content-center">
-                                                            <button type="button" class="btn btn-sm btn-success" id="confirmYes">Có</button>
-                                                            <button type="button" class="btn btn-sm btn-danger me-2" data-bs-dismiss="modal">Không</button>
+                                                            <a href="views/category/categories-delete.php?id=<?= $item['MaTheLoai'] ?>"><button type="button" class="btn btn-sm btn-success">Có</button></a>
+                                                            <button type="button" class="btn btn-sm btn-danger me-2"
+                                                                data-bs-dismiss="modal">Không</button>
                                                         </div>
                                                     </div>
                                                 </div>
