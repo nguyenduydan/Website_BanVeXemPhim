@@ -7,11 +7,11 @@ include('../../includes/header.php');
 <div id="toast">
 </div>
 <?php
-// $id_result = check_valid_ID('id');
-// if (!is_numeric($id_result)) {
-//     echo '<h5>' . $id_result . '</h5>';
-//     return false;
-// }
+$id_result = check_valid_ID('id');
+if (!is_numeric($id_result)) {
+    echo '<h5>' . $id_result . '</h5>';
+    return false;
+}
 ?>
 <div class="row">
     <div class="col-xl-12 col-lg-12 mx-auto">
@@ -59,7 +59,8 @@ include('../../includes/header.php');
                         </div>
                         <!-- Ảnh phim -->
                         <div class="mb-3">
-                            <img src="../../../uploads/film-imgs/curved5-small.jpg" class="img-fluid" alt="Ảnh phim" style="max-width: 100%; max-height: 300px;">
+                            <img src="../../../uploads/film-imgs/curved5-small.jpg" class="img-fluid" alt="Ảnh phim"
+                                style="max-width: 100%; max-height: 300px;">
                         </div>
                     </div>
 
