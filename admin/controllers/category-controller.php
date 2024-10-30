@@ -24,3 +24,16 @@ if (isset($_POST['saveCategory'])) {
         redirect('../views/category/category-add.php', 'messages', $messages);
     }
 }
+if (isset($_POST['changeStatus'])) {
+    $id = validate($_POST['matl']);
+    $status = validate($_POST['status']) == 1 ? 1 : 0;
+
+    $edit_query = "UPDATE TheLoai SET TrangThai = '$status' WHERE MaND = '$id'";
+
+    if (mysqli_query($conn, $edit_query)) {
+        redirect('../categories.php', 'success', 'Cập nhật trạng thái thành công');
+    } else {
+        redirect('../categories.php', 'error', 'Cập nhật trạng thái thất bại');
+    }
+}
+
