@@ -45,12 +45,21 @@ unset($_SESSION['form_data']);
                                 <small class="text-danger m-2 text-xs"><?= htmlspecialchars($errors['username']) ?></small>
                             <?php endif; ?>
                         </div>
-                        <div class="form-group mb-3">
-                            <label for="gioi_tinh">Giới tính</label>
-                            <select class="form-select" id="gioi_tinh" name="gioi_tinh">
-                                <option value="1" <?php echo (isset($formData['gioi_tinh']) && $formData['gioi_tinh'] == '1') ? 'selected' : ($user['data']['GioiTinh'] == '1' ? 'selected' : ''); ?>>Nam</option>
-                                <option value="0" <?php echo (isset($formData['gioi_tinh']) && $formData['gioi_tinh'] == '0') ? 'selected' : ($user['data']['GioiTinh'] == '0' ? 'selected' : ''); ?>>Nữ</option>
-                            </select>
+                        <div class="form-group row mb-3">
+                            <div class="col-6">
+                                <label for="gioi_tinh">Giới tính</label>
+                                <select class="form-select" id="gioi_tinh" name="gioi_tinh">
+                                    <option value="1" <?php echo (isset($formData['gioi_tinh']) && $formData['gioi_tinh'] == '1') ? 'selected' : ($user['data']['GioiTinh'] == '1' ? 'selected' : ''); ?>>Nam</option>
+                                    <option value="0" <?php echo (isset($formData['gioi_tinh']) && $formData['gioi_tinh'] == '0') ? 'selected' : ($user['data']['GioiTinh'] == '0' ? 'selected' : ''); ?>>Nữ</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label for="ngay_sinh">Ngày sinh (<span class="text-danger">*</span>)</label>
+                                <input type="date" class="form-control" id="ngay_sinh"
+                                    value="<?= isset($user['data']['NgaySinh']) ? htmlspecialchars($user['data']['NgaySinh']) : ''; ?>"
+                                    name="ngay_sinh">
+                            </div>
+
                         </div>
                         <div class="form-group mb-3">
                             <label for="sdt">Số điện thoại</label>
@@ -65,28 +74,23 @@ unset($_SESSION['form_data']);
                                 <small class="text-danger m-2 text-xs"><?= htmlspecialchars($errors['email']) ?></small>
                             <?php endif; ?>
                         </div>
-                        <div class="form-group mb-3">
-                            <label for="ngay_sinh">Ngày sinh (<span class="text-danger">*</span>)</label>
-                            <input type="date" class="form-control" id="ngay_sinh"
-                                value="<?= isset($user['data']['NgaySinh']) ? htmlspecialchars($user['data']['NgaySinh']) : ''; ?>"
-                                name="ngay_sinh">
-                        </div>
-
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group mb-3">
-                            <label for="role">Vai trò</label>
-                            <select class="form-select" id="role" name="role">
-                                <option value="1">Admin</option>
-                                <option value="0">User</option>
-                            </select>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="status">Trạng thái</label>
-                            <select class="form-select" id="status" name="status">
-                                <option value="1">Online</option>
-                                <option value="0">Offline</option>
-                            </select>
+                        <div class="form-group row mb-3">
+                            <div class="col-6">
+                                <label for="role">Vai trò</label>
+                                <select class="form-select" id="role" name="role">
+                                    <option value="1">Admin</option>
+                                    <option value="0">User</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label for="status">Trạng thái</label>
+                                <select class="form-select" id="status" name="status">
+                                    <option value="1">Online</option>
+                                    <option value="0">Offline</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group mb-3">
                             <label for="avatar">Chọn ảnh</label>
