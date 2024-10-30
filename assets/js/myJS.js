@@ -49,9 +49,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-function togglePasswordVisibility() {
-    const passwordInput = document.getElementById('password');
-    const icon = document.getElementById('togglePassword');
+function togglePasswordVisibility(passwordFieldId, iconId) {
+    const passwordInput = document.getElementById(passwordFieldId);
+    const icon = document.getElementById(iconId);
 
     // Chuyển đổi giữa mật khẩu và văn bản
     if (passwordInput.type === 'password') {
@@ -65,11 +65,20 @@ function togglePasswordVisibility() {
     }
 }
 
-// Đăng ký sự kiện nhấp vào biểu tượng
 document.addEventListener('DOMContentLoaded', function () {
     const togglePassword = document.getElementById('togglePassword');
+    const toggleRePassword = document.getElementById('toggleRePassword');
+
     if (togglePassword) {
-        togglePassword.addEventListener('click', togglePasswordVisibility);
+        togglePassword.addEventListener('click', function () {
+            togglePasswordVisibility('password', 'togglePassword');
+        });
+    }
+
+    if (toggleRePassword) {
+        toggleRePassword.addEventListener('click', function () {
+            togglePasswordVisibility('re_password', 'toggleRePassword');
+        });
     }
 });
 

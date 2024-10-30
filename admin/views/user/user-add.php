@@ -40,8 +40,8 @@ unset($_SESSION['form_data']);
                         <label for="password">Mật khẩu (<span class="text-danger">*</span>)</label>
                         <div class="input-group">
                             <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
-                            <span class="input-group-text iconEye" id="password-addon" style="cursor: pointer;">
-                                <i class="fas fa-eye-slash " id="togglePassword"></i>
+                            <span class="input-group-text iconEye" style="cursor: pointer;">
+                                <i class="fas fa-eye-slash" id="togglePassword"></i>
                             </span>
                         </div>
                         <?php if (isset($messages['password'])): ?>
@@ -50,7 +50,12 @@ unset($_SESSION['form_data']);
                     </div>
                     <div class="form-group mb-3">
                         <label for="re_password">Nhập lại mật khẩu (<span class="text-danger">*</span>)</label>
-                        <input type="password" class="form-control" id="re_password" name="re_password" placeholder="Nhập lại mật khẩu">
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="re_password" name="re_password" placeholder="Nhập lại mật khẩu">
+                            <span class="input-group-text iconEye" style="cursor: pointer;">
+                                <i class="fas fa-eye-slash" id="toggleRePassword"></i>
+                            </span>
+                        </div>
                         <?php if (isset($messages['re_password'])): ?>
                             <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['re_password']) ?></small>
                         <?php endif; ?>
@@ -81,7 +86,7 @@ unset($_SESSION['form_data']);
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="ngay_sinh">Ngày sinh (<span class="text-danger">*</span>)</label>
-                        <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh"  value="<?php echo isset($formData['ngay_sinh']) ? htmlspecialchars($formData['ngay_sinh']) : ''; ?>">
+                        <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh" value="<?php echo isset($formData['ngay_sinh']) ? htmlspecialchars($formData['ngay_sinh']) : ''; ?>">
                         <?php if (isset($messages['ngay_sinh'])): ?>
                             <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ngay_sinh']) ?></small>
                         <?php endif; ?>
