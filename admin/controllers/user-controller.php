@@ -64,10 +64,8 @@ if (isset($_POST['saveUser'])) {
             }
         }
 
-        // Insert into database
-        $ngay_tao = date('Y-m-d H:i:s');
         $query = "INSERT INTO nguoidung (TenND, username, NgaySinh, GioiTinh, SDT, Anh, Email, MatKhau, Role, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
-                  VALUES ('$name', '$username', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email', '$hashedPassword', '$role', '1', '$ngay_tao', NULL, NULL, '$status')";
+                  VALUES ('$name', '$username', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email', '$hashedPassword', '$role', '1', CURRENT_TIMESTAMP, NULL, NULL, '$status')";
 
         if (mysqli_query($conn, $query)) {
             redirect('../user.php', 'success', 'Thêm tài khoản thành công');
@@ -101,7 +99,7 @@ if (isset($_POST['editUser'])) {
         $messages['username'] = "Tên người dùng không được để trống.";
     } else {
         // Kiểm tra tính duy nhất của username
-        if (isExistValue('NguoiDung', 'username', $username)) {
+        if (isExistValue('NguoiDung', 'username', $username, 'MaND', $id)) {
             $messages['username'] = "Tên người dùng đã tồn tại";
         }
     }
@@ -110,7 +108,7 @@ if (isset($_POST['editUser'])) {
     }
     if (empty($email)) {
         $messages['email'] = "Email không được để trống.";
-    } elseif (isExistValue('NguoiDung', 'Email', $email)) {
+    } elseif (isExistValue('NguoiDung', 'Email', $email, 'MaND', $id)) {
         $messages['email'] = "Email đã tồn tại";
     }
 
@@ -135,7 +133,6 @@ if (isset($_POST['editUser'])) {
                 $messages[] = $avatarResult['message'];
             }
         }
-        $ngay_tao = date('Y-m-d H:i:s');
         $query = "UPDATE NguoiDung SET
                 TenND = '$name',
                 username = '$username',
@@ -145,7 +142,8 @@ if (isset($_POST['editUser'])) {
                 Anh = '$avatar',
                 Email = '$email',
                 Role = '$role',
-                NgayCapNhat = '$ngay_tao',
+                NguoiCapNhat = '1',
+                NgayCapNhat = CURRENT_TIMESTAMP,
                 TrangThai = '$status'
                 WHERE MaND = '$id'";
 

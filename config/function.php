@@ -32,7 +32,7 @@ function uploadImage($file, $targetDir, $fileName)
         $filePath = $targetDir . $finalFileName;
         if (move_uploaded_file($fileTmpName, $filePath)) {
             $result['success'] = true;
-            $result['filename'] = $finalFileName; 
+            $result['filename'] = $finalFileName;
         } else {
             $result['message'] = "Có lỗi xảy ra khi tải tệp lên.";
         }
@@ -59,7 +59,7 @@ function deleteImage($filePath)
 
     return $result;
 }
-function redirect($url, $status,$message)
+function redirect($url, $status, $message)
 {
     $_SESSION[$status] = $message;
     header('Location: ' . $url);
@@ -90,7 +90,7 @@ function validateAndHashPassword($password, $re_password)
     return ['status' => true, 'hashed' => $hashedPassword];
 }
 
-function isExistValue($tableName, $colName, $value)
+function isExistValue($tableName, $colName, $value, $idColName = null, $currentId = null)
 {
     global $conn; // Kết nối CSDL
     $tableName = mysqli_real_escape_string($conn, $tableName);
@@ -98,11 +98,15 @@ function isExistValue($tableName, $colName, $value)
     $value = mysqli_real_escape_string($conn, $value);
 
     $query = "SELECT COUNT(*) as count FROM `$tableName` WHERE `$colName` = '$value'";
+
+    if ($currentId) {
+        $query .= " AND `$idColName` != '$currentId'";  //bỏ qua id hiện tại
+    }
     $result = mysqli_query($conn, $query);
 
     if ($result) {
         $data = mysqli_fetch_assoc($result);
-        return $data['count'] > 0; 
+        return $data['count'] > 0;
     } else {
         return false;
     }
@@ -200,7 +204,7 @@ function paginate($conn, $table, $recordsPerPage, $currentPage)
 
     $offset = ($currentPage - 1) * $recordsPerPage;
 
-   
+
     $query = "SELECT * FROM $table LIMIT $offset, $recordsPerPage";
     $result = $conn->query($query);
 
@@ -262,4 +266,3 @@ function sortData(&$data, $sortField, $sortOrder = 'ASC')
         }
     });
 }
-
