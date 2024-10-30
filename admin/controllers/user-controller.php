@@ -23,7 +23,7 @@ if (isset($_POST['saveUser'])) {
     }
     if (empty($username)) {
         $messages['username'] = "Tên người dùng không được để trống.";
-    } elseif (isExistValue('NguoiDung','username',$username)) {
+    } elseif (isExistValue('NguoiDung', 'username', $username)) {
         $messages['username'] = "Tên người dùng đã tồn tại";
     }
 
@@ -40,7 +40,7 @@ if (isset($_POST['saveUser'])) {
     }
     if (empty($email)) {
         $messages['email'] = "Email không được để trống.";
-    } elseif (isExistValue('NguoiDung','Email',$email)) {
+    } elseif (isExistValue('NguoiDung', 'Email', $email)) {
         $messages['email'] = "Email đã tồn tại";
     }
 
@@ -56,7 +56,7 @@ if (isset($_POST['saveUser'])) {
         $avatar = '';
         if (isset($_FILES['avatar'])) {
             // Use username as filename for the avatar
-            $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/", $username); 
+            $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/", $username);
             if ($avatarResult['success']) {
                 $avatar = $avatarResult['filename'];
             } else {
@@ -67,7 +67,7 @@ if (isset($_POST['saveUser'])) {
         // Insert into database
         $ngay_tao = date('Y-m-d H:i:s');
         $query = "INSERT INTO nguoidung (TenND, username, NgaySinh, GioiTinh, SDT, Anh, Email, MatKhau, Role, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
-                  VALUES ('$name', '$username', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email', '$hashedPassword', '$role', '1', '$ngay_tao', '1', '$ngay_tao', '$status')";
+                  VALUES ('$name', '$username', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email', '$hashedPassword', '$role', '1', '$ngay_tao', NULL, NULL, '$status')";
 
         if (mysqli_query($conn, $query)) {
             redirect('../user.php', 'success', 'Thêm tài khoản thành công');
@@ -101,7 +101,7 @@ if (isset($_POST['editUser'])) {
         $messages['username'] = "Tên người dùng không được để trống.";
     } else {
         // Kiểm tra tính duy nhất của username
-        if (isExistValue('NguoiDung','username',$username)) {
+        if (isExistValue('NguoiDung', 'username', $username)) {
             $messages['username'] = "Tên người dùng đã tồn tại";
         }
     }
@@ -110,7 +110,7 @@ if (isset($_POST['editUser'])) {
     }
     if (empty($email)) {
         $messages['email'] = "Email không được để trống.";
-    } elseif (isExistValue('NguoiDung','Email',$email)) {
+    } elseif (isExistValue('NguoiDung', 'Email', $email)) {
         $messages['email'] = "Email đã tồn tại";
     }
 
@@ -130,7 +130,7 @@ if (isset($_POST['editUser'])) {
             // Upload the avatar with the username as the filename
             $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/", $username); // Pass username
             if ($avatarResult['success']) {
-                $avatar = $avatarResult['filename']; 
+                $avatar = $avatarResult['filename'];
             } else {
                 $messages[] = $avatarResult['message'];
             }
@@ -152,7 +152,7 @@ if (isset($_POST['editUser'])) {
         if (mysqli_query($conn, $query)) {
             redirect('../user.php', 'success', 'Cập nhật tài khoản thành công');
         } else {
-            redirect('../views/user/user-edit.php?id='. $id, 'error', 'Cập nhật tài khoản thất bại');
+            redirect('../views/user/user-edit.php?id=' . $id, 'error', 'Cập nhật tài khoản thất bại');
         }
     } else {
         redirect('../views/user/user-edit.php?id=' . $id, 'errors', $messages);
