@@ -18,7 +18,8 @@ unset($_SESSION['form_data']);
                 Quay lại
             </a>
         </div>
-        <form id="addCategoryForm" action="../../controllers/category-controller.php" method="post" enctype="multipart/form-data">
+        <form id="addCategoryForm" action="../../controllers/category-controller.php" method="post"
+            enctype="multipart/form-data">
             <?php
             $id_result = check_valid_ID('id');
             if (!is_numeric($id_result)) {
@@ -28,16 +29,18 @@ unset($_SESSION['form_data']);
             $category = getByID('TheLoai', 'MaTheLoai', check_valid_ID('id'));
             if ($category['status'] == 200) {
             ?>
-                <input type="hidden" name="matl" value=<?= $category['data']['MaTheLoai'] ?>>
-                <div class="row">
+            <input type="hidden" name="matl" value=<?= $category['data']['MaTheLoai'] ?>>
+            <div class="row">
                 <!-- Cột 1 -->
                 <div class="col-md-6 m-auto">
                     <!-- Nhập tên thể loại -->
                     <div class="form-group mb-3">
                         <label for="ten_the_loai">Tên thể loại (<span class="text-danger">*</span>)</label>
-                        <input type="text" value="<?= $category['data']['TenTheLoai']; ?>" value="<?php echo isset($formData['ten_the_loai']) ? htmlspecialchars($formData['ten_the_loai']) : ''; ?>" class="form-control" id="ten_the_loai" name="ten_the_loai" placeholder="Nhập tên thể loại">
+                        <input type="text" value="<?= $category['data']['TenTheLoai']; ?>"
+                            value="<?php echo isset($formData['ten_the_loai']) ? htmlspecialchars($formData['ten_the_loai']) : ''; ?>"
+                            class="form-control" id="ten_the_loai" name="ten_the_loai" placeholder="Nhập tên thể loại">
                         <?php if (isset($messages['name'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
@@ -47,16 +50,15 @@ unset($_SESSION['form_data']);
                             <option value="0">Offline</option>
                         </select>
                     </div>
-                    
+                    <button type="submit" name="editCategory" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
                 </div>
             </div>
-            <button type="submit" name="editCategory" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
             <?php
             } else {
                 echo '<h5>' . $category['message'] . '</h5>';
             }
             ?>
-            
+
         </form>
     </div>
 </div>
