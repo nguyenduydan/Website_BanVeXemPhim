@@ -18,7 +18,7 @@ unset($_SESSION['form_data']);
                 Quay lại
             </a>
         </div>
-        <form id="addChairForm" action="../../controllers/chair-controller.php" method="post"
+        <form id="editChairForm" action="../../controllers/chair-controller.php" method="post"
             enctype="multipart/form-data">
             <div class="row">
                 <!-- Cột 1 -->

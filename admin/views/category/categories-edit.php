@@ -18,7 +18,7 @@ unset($_SESSION['form_data']);
                 Quay lại
             </a>
         </div>
-        <form id="addCategoryForm" action="../../controllers/category-controller.php" method="post"
+        <form id="editCategoryForm" action="../../controllers/category-controller.php" method="post"
             enctype="multipart/form-data">
             <?php
             $id_result = check_valid_ID('id');

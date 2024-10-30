@@ -20,7 +20,7 @@ unset($_SESSION['form_data']);
                 Quay lại
             </a>
         </div>
-        <form id="addRoomForm" action="../../controllers/room-controller.php" method="post">
+        <form id="editRoomForm" action="../../controllers/room-controller.php" method="post">
             <div class="row">
                 <!-- Cột -->
                 <div class="col-md-4 m-auto">
@@ -30,7 +30,7 @@ unset($_SESSION['form_data']);
                         <input type="text" class="form-control" id="ten_phong" name="ten_phong"
                             placeholder="Nhập tên phòng" required>
                         <?php if (isset($messages['TenPhong'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['TenPhong']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['TenPhong']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">

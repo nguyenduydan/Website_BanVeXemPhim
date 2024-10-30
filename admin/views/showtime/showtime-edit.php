@@ -20,7 +20,7 @@ unset($_SESSION['form_data']);
         </div>
 
         <!-- Form thêm suất chiếu -->
-        <form id="addShowtimeForm" action="../../controllers/showtime-controller.php" method="post">
+        <form id="editShowtimeForm" action="../../controllers/showtime-controller.php" method="post">
             <div class="row">
                 <!-- Giờ chiếu -->
                 <div class="col-md-4 m-auto">
@@ -35,9 +35,9 @@ unset($_SESSION['form_data']);
                             <?php
                             // Giả sử bạn có một mảng $films chứa danh sách phim
                             foreach ($films as $film): ?>
-                                <option value="<?php echo htmlspecialchars($film['id']); ?>">
-                                    <?php echo htmlspecialchars($film['ten_phim']); ?>
-                                </option>
+                            <option value="<?php echo htmlspecialchars($film['id']); ?>">
+                                <?php echo htmlspecialchars($film['ten_phim']); ?>
+                            </option>
                             <?php endforeach; ?>
                         </select>
                     </div>
