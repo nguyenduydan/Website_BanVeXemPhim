@@ -164,7 +164,11 @@ if (isset($_POST['changeStatus'])) {
     $id = validate($_POST['mand']);
     $status = validate($_POST['status']) == 1 ? 1 : 0;
 
-    $edit_query = "UPDATE NguoiDung SET TrangThai = '$status' WHERE MaND = '$id'";
+    $edit_query = "UPDATE NguoiDung SET
+                TrangThai = '$status',
+                NguoiCapNhat = '1',
+                NgayCapNhat = CURRENT_TIMESTAMP
+                WHERE MaND = '$id'";
 
     if (mysqli_query($conn, $edit_query)) {
         redirect('../user.php', 'success', 'Cập nhật trạng thái thành công');
