@@ -15,12 +15,12 @@ if (isset($_POST['saveCategory'])) {
     }
     if (empty($messages)) {
         $ngay_tao = date('Y-m-d H:i:s');
-        $query = "INSERT INTO theloai (TenTheLoai,NguoiTao,NgayTao,NguoiCapNhat,NgayCapNhat,status)
+        $query = "INSERT INTO theloai (TenTheLoai,NguoiTao,NgayTao,NguoiCapNhat,NgayCapNhat,TrangThai)
             VALUES ('$name',1,'$ngay_tao',1,'$ngay_tao','$status')";
         if (mysqli_query($conn, $query)) {
-            redirect('../categories.php','success','Thêm tài khoản thành công');
+            redirect('../categories.php','success','Thêm thể loại thành công');
         } else {
-            redirect('../views/category/categories-add.php','error','Thêm tài khoản thất bại');
+            redirect('../views/category/categories-add.php','error','Thêm thể loại thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
