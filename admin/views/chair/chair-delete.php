@@ -15,7 +15,7 @@
         </div>
 
         <!-- Nút xác nhận xóa ghế -->
-        <form action="../admin/controllers/code.php" method="post" class="d-flex justify-content-center">
+        <form action="../../controllers/chair-controller.php" method="post" class="d-flex justify-content-center">
             <input type="hidden" name="ghe_id" value="<?php echo htmlspecialchars($ghe_id); ?>"> <!-- ID ghế để xóa -->
             <a href="javascript:window.history.back(-1);" class="btn btn-danger me-3">Huỷ</a>
             <button type="submit" name="confirmDeleteChair" class="btn btn-success">Đồng ý</button>
