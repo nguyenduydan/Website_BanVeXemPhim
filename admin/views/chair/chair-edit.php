@@ -18,14 +18,16 @@ unset($_SESSION['form_data']);
                 Quay lại
             </a>
         </div>
-        <form id="addChairForm" action="../admin/controllers/code.php" method="post" enctype="multipart/form-data">
+        <form id="addChairForm" action="../../controllers/chair-controller.php" method="post"
+            enctype="multipart/form-data">
             <div class="row">
                 <!-- Cột 1 -->
                 <div class="col-md-4">
                     <!-- Nhập tên ghế -->
                     <div class="form-group mb-3">
                         <label for="ten_ghe">Tên ghế</label>
-                        <input type="text" class="form-control" id="ten_ghe" name="ten_ghe" placeholder="Nhập tên ghế" required>
+                        <input type="text" class="form-control" id="ten_ghe" name="ten_ghe" placeholder="Nhập tên ghế"
+                            required>
                     </div>
                 </div>
 
