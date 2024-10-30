@@ -21,16 +21,27 @@ unset($_SESSION['form_data']);
             </a>
         </div>
         <form id="editRoomForm" action="../../controllers/room-controller.php" method="post">
+            <?php
+            $id_result = check_valid_ID('id');
+            if (!is_numeric($id_result)) {
+                echo '<h5>' . $id_result . '</h5>';
+                return false;
+            }
+            $room = getByID('Phong', 'MaPhong', check_valid_ID('id'));
+            if ($room['status'] == 200) {
+            ?>
+            <input type="hidden" name="maphong" value=<?= $room['data']['MaPhong'] ?>>
             <div class="row">
                 <!-- Cột -->
                 <div class="col-md-4 m-auto">
                     <!-- Nhập tên phòng -->
                     <div class="form-group mb-3">
                         <label for="ten_phong">Tên phòng</label>
-                        <input type="text" class="form-control" id="ten_phong" name="ten_phong"
-                            placeholder="Nhập tên phòng" required>
-                        <?php if (isset($messages['TenPhong'])): ?>
-                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['TenPhong']) ?></small>
+                        <input type="text" value="<?= $room['data']['TenPhong']; ?>"
+                            value="<?php echo isset($formData['ten_phong']) ? htmlspecialchars($formData['ten_phong']) : ''; ?>"
+                            class="form-control" id="ten_phong" name="ten_phong" placeholder="Nhập tên phòng">
+                        <?php if (isset($messages['ten_phong'])): ?>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ten_phong']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
@@ -43,6 +54,11 @@ unset($_SESSION['form_data']);
                     <button type="submit" name="editRoom" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
                 </div>
             </div>
+            <?php
+            } else {
+                echo '<h5>' . $room['message'] . '</h5>';
+            }
+            ?>
         </form>
     </div>
 </div>

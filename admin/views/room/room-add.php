@@ -24,11 +24,12 @@ unset($_SESSION['form_data']);
                 <div class="col-md-4 m-auto">
                     <!-- Nhập tên phòng -->
                     <div class="form-group mb-3">
-                        <label for="ten_phong">Tên phòng</label>
+                        <label for="ten_phong">Tên phòng (<span class="text-danger">*</span>)</label>
                         <input type="text" class="form-control" id="ten_phong" name="ten_phong"
-                            placeholder="Nhập tên phòng" required>
-                        <?php if (isset($messages['TenPhong'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['TenPhong']) ?></small>
+                            placeholder="Nhập tên phòng"
+                            value="<?php echo isset($formData['ten_phong']) ? htmlspecialchars($formData['ten_phong']) : ''; ?>">
+                        <?php if (isset($messages['ten_phong'])): ?>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ten_phong']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
