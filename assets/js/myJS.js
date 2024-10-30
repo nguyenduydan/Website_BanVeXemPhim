@@ -27,28 +27,6 @@ function previewImage(event) {
     }
 }
 
-// document.addEventListener('DOMContentLoaded', function () {
-//     let deleteId = null; // Biến để lưu ID người dùng
-
-//     // Lắng nghe sự kiện cho tất cả các nút xóa
-//     document.querySelectorAll('.delete-btn').forEach(function (button) {
-//         button.addEventListener('click', function () {
-//             deleteId = this.getAttribute('data-id'); // Lưu ID người dùng vào biến
-//         });
-//     });
-
-//     // Kiểm tra xem nút "Có" trong modal có tồn tại không
-//     const confirmYesButton = document.getElementById('confirmYes');
-//     if (confirmYesButton) {
-//         confirmYesButton.onclick = function () {
-//             if (deleteId) {
-//                 // Chuyển hướng đến trang xóa người dùng
-//                 window.location.href = `views/user/user-delete.php?id=${deleteId}`;
-//             }
-//         };
-//     }
-// });
-
 function togglePasswordVisibility(passwordFieldId, iconId) {
     const passwordInput = document.getElementById(passwordFieldId);
     const icon = document.getElementById(iconId);
@@ -81,26 +59,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-
-
-// $(document).ready(function () {
-//     // Lấy danh sách quốc gia từ API
-//     fetch('https://restcountries.com/v3.1/all')
-//         .then(response => response.json())
-//         .then(data => {
-//             // Sắp xếp danh sách quốc gia theo tên
-//             data.sort((a, b) => a.name.common.localeCompare(b.name.common));
-
-//             // Thêm từng quốc gia vào dropdown
-//             data.forEach(country => {
-//                 $('#quoc_gia').append(new Option(country.name.common, country.cca2));
-//             });
-
-//             // Khởi tạo Select2 sau khi thêm các tùy chọn
-//             $('#quoc_gia').select2({
-//                 placeholder: 'Chọn quốc gia',
-//                 allowClear: true
-//             });
-//         })
-//         .catch(error => console.error('Lỗi:', error));
-// });
