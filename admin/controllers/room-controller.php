@@ -3,7 +3,7 @@ session_start();
 require '../../config/function.php';
 
 $messages = [];
-//====== user-add =======//
+//====== room-add =======//
 if (isset($_POST['saveRoom'])) {
     $messages = []; // Initialize messages array
     $ten_phong = validate($_POST['ten_phong']);
