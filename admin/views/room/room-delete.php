@@ -1,26 +1,23 @@
-<?php include('../../includes/header.php'); ?>
+<?php
+session_start();
+require '../../../config/function.php';
 
-<div class="row">
-    <div class="col-xl-12 col-lg-12 mx-auto">
-        <h2>Xoá phòng</h2>
-        <!-- Nút quay lại nằm sát bên phải -->
-        <div class="text-end mb-4">
-            <a class="btn btn-secondary" href="../../room.php">
-                Quay lại
-            </a>
-        </div>
+$result = check_valid_ID('id');
+if (is_numeric($result)) {
+    $roomId = validate($result);
+    $room = getByID('Phong', 'MaPhong', $roomId);
 
-        <div class="alert alert-warning" role="alert">
-            Bạn có chắc chắn muốn xoá phòng "<strong><?php echo htmlspecialchars($title); ?></strong>" không?
-        </div>
-
-        <!-- Nút xác nhận xoá phòng -->
-        <form action="../admin/controllers/code.php" method="post" class="d-flex justify-content-center">
-            <input type="hidden" name="room_id" value="<?php echo htmlspecialchars($room_id); ?>">
-            <a href="javascript:window.history.back(-1);" class="btn btn-danger me-3">Huỷ</a>
-            <button type="submit" name="confirmDelete" class="btn btn-success">Đồng ý</button>
-        </form>
-    </div>
-</div>
-
-<?php include('../../includes/footer.php'); ?>
+    if ($room['status'] == 200) {
+        $name = validate($room['data']['TenPhong']);
+        $roomDelete = deleteQuery('Phong', 'MaPhong', $roomId);
+        if ($roomDelete) {
+            redirect('../../room.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($name) . '</span> thành công');
+        } else {
+            redirect('../../room.php', 'error', 'Xóa ' . htmlspecialchars($name) . ' thất bại');
+        }
+    } else {
+        redirect('../../room.php', 'error', $room['message']);
+    }
+} else {
+    redirect('../../room.php', 'error', $result);
+}

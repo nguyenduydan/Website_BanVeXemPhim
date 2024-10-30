@@ -1,26 +1,25 @@
-<?php include('../../includes/header.php'); ?>
+<?php
+session_start();
+require '../../../config/function.php';
 
-<div class="row">
-    <div class="col-xl-12 col-lg-12 mx-auto">
-        <h2>Xóa ghế</h2>
-        <!-- Nút quay lại nằm sát bên phải -->
-        <div class="text-end mb-4">
-            <a class="btn btn-secondary" href="chair.php">
-                Quay lại
-            </a>
-        </div>
+$result = check_valid_ID('id');
+if (is_numeric($result)) {
+    $chairId = validate($result);
+    $chair = getByID('Ghe', 'MaGhe', $chairId);
 
-        <div class="alert alert-warning" role="alert">
-            Bạn có chắc chắn muốn xóa ghế "<strong><?php echo htmlspecialchars($ten_ghe); ?></strong>" không?
-        </div>
+    if ($chair['status'] == 200) {
+        $name = validate($chair['data']['TenGhe']);
+        $chairDelete = deleteQuery('Ghe', 'MaGhe', $chairId);
 
-        <!-- Nút xác nhận xóa ghế -->
-        <form action="../../controllers/chair-controller.php" method="post" class="d-flex justify-content-center">
-            <input type="hidden" name="ghe_id" value="<?php echo htmlspecialchars($ghe_id); ?>"> <!-- ID ghế để xóa -->
-            <a href="javascript:window.history.back(-1);" class="btn btn-danger me-3">Huỷ</a>
-            <button type="submit" name="confirmDeleteChair" class="btn btn-success">Đồng ý</button>
-        </form>
-    </div>
-</div>
 
-<?php include('../../includes/footer.php'); ?>
+        if ($chairDelete) {
+            redirect('../../chair.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($name) . '</span> thành công');
+        } else {
+            redirect('../../chair.php', 'error', 'Xóa ' . htmlspecialchars($name) . ' thất bại');
+        }
+    } else {
+        redirect('../../chair.php', 'error', $chair['message']);
+    }
+} else {
+    redirect('../../chair.php', 'error', $result);
+}

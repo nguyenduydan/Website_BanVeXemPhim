@@ -20,19 +20,27 @@ unset($_SESSION['form_data']);
                 Quay lại
             </a>
         </div>
-        <form id="addRoomForm" action="" method="post">
+        <form id="addRoomForm" action="../../controllers/room-controller.php" method="post">
             <div class="row">
                 <!-- Cột -->
                 <div class="col-md-4 m-auto">
                     <!-- Nhập tên phòng -->
                     <div class="form-group mb-3">
                         <label for="ten_phong">Tên phòng</label>
-                        <input type="text" class="form-control" id="ten_phong" name="ten_phong" placeholder="Nhập tên phòng" required>
+                        <input type="text" class="form-control" id="ten_phong" name="ten_phong"
+                            placeholder="Nhập tên phòng" required>
                         <?php if (isset($messages['TenPhong'])): ?>
                             <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['TenPhong']) ?></small>
                         <?php endif; ?>
                     </div>
-                    <button type="submit" name="saveRoom" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
+                    <div class="form-group mb-3">
+                        <label for="status">Trạng thái</label>
+                        <select class="form-select" id="status" name="status">
+                            <option value="1">Online</option>
+                            <option value="0">Offline</option>
+                        </select>
+                    </div>
+                    <button type="submit" name="editRoom" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
                 </div>
             </div>
         </form>

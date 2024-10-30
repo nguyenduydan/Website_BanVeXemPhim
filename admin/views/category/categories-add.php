@@ -19,12 +19,13 @@ unset($_SESSION['form_data']);
         </div>
         <form id="addCategoryForm" action="../../controllers/category-controller.php" method="post">
             <div class="row">
-                <!-- Cột 1 -->
                 <div class="col-md-6 m-auto">
                     <!-- Nhập tên thể loại -->
                     <div class="form-group mb-3">
                         <label for="ten_the_loai">Tên thể loại (<span class="text-danger">*</span>)</label>
-                        <input type="text" value="<?php echo isset($formData['ten_the_loai']) ? htmlspecialchars($formData['ten_the_loai']) : ''; ?>" class="form-control" id="ten_the_loai" name="ten_the_loai" placeholder="Nhập tên thể loại">
+                        <input type="text"
+                            value="<?php echo isset($formData['ten_the_loai']) ? htmlspecialchars($formData['ten_the_loai']) : ''; ?>"
+                            class="form-control" id="ten_the_loai" name="ten_the_loai" placeholder="Nhập tên thể loại">
                         <?php if (isset($messages['name'])): ?>
                             <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
                         <?php endif; ?>

@@ -61,7 +61,7 @@ unset($_SESSION['form_data']);
 
                 </div>
             </div>
-            <button type="submit" name="saveChair" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
+            <button type="submit" name="editChair" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
         </form>
     </div>
 </div>

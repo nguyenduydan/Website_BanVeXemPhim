@@ -1,26 +1,22 @@
-<?php include('../../includes/header.php'); ?>
+<?php
+session_start();
+require '../../../config/function.php';
 
-<div class="row">
-    <div class="col-xl-12 col-lg-12 mx-auto">
-        <h2>Xoá suất chiếu</h2>
-        <!-- Nút quay lại nằm sát bên phải -->
-        <div class="text-end mb-4">
-            <a class="btn btn-secondary" href="showtime.php">
-                Quay lại
-            </a>
-        </div>
+$result = check_valid_ID('id');
+if (is_numeric($result)) {
+    $showtimeId = validate($result);
+    $showtime = getByID('SuatChieu', 'MaSuatChieu', $showtimeId);
 
-        <div class="alert alert-warning" role="alert">
-            Bạn có chắc chắn muốn xoá suất chiếu "<strong><?php echo htmlspecialchars($showtime_title); ?></strong>" không?
-        </div>
-
-        <!-- Nút xác nhận xoá suất chiếu -->
-        <form action="../admin/controllers/code.php" method="post" class="d-flex justify-content-center">
-            <input type="hidden" name="showtime_id" value="<?php echo htmlspecialchars($showtime_id); ?>">
-            <a href="javascript:window.history.back(-1);" class="btn btn-danger me-3">Huỷ</a>
-            <button type="submit" name="confirmDeleteShowtime" class="btn btn-success">Đồng ý</button>
-        </form>
-    </div>
-</div>
-
-<?php include('../../includes/footer.php'); ?>
+    if ($showtime['status'] == 200) {
+        $showtimeDelete = deleteQuery('SuatChieu', 'MaSuatChieu', $showtimeId);
+        if ($showtimeDelete) {
+            redirect('../../showtime.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($showtimeId) . '</span> thành công');
+        } else {
+            redirect('../../showtime.php', 'error', 'Xóa ' . htmlspecialchars($showtimeId) . ' thất bại');
+        }
+    } else {
+        redirect('../../showtime.php', 'error', $showtime['message']);
+    }
+} else {
+    redirect('../../showtime.php', 'error', $result);
+}
