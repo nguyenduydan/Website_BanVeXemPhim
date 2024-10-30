@@ -23,16 +23,22 @@ unset($_SESSION['form_data']);
             enctype="multipart/form-data">
             <div class="row">
                 <!-- Cột 1 -->
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <!-- Nhập tên ghế -->
                     <div class="form-group mb-3">
                         <label for="ten_ghe">Tên ghế</label>
                         <input type="text" class="form-control" id="ten_ghe" name="ten_ghe" placeholder="Nhập tên ghế"
                             required>
                     </div>
+                    <div class="form-group mb-3">
+                        <label for="ten_ghe">Giá ghế</label>
+                        <input type="text" class="form-control" id="gia_ghe" name="gia_ghe" placeholder="Nhập giá ghế"
+                            required>
+                    </div>
+
                 </div>
                 <!-- Cột 2 -->
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <!-- Chọn phòng -->
                     <div class="form-group mb-3">
                         <label for="ten_phong">Tên phòng</label>
@@ -44,20 +50,16 @@ unset($_SESSION['form_data']);
                             <option value="Phòng D">Phòng D</option>
                         </select>
                     </div>
-                </div>
-
-                <!-- Cột 3 -->
-                <div class="col-md-4">
-                    <!-- Chọn loại ghế -->
                     <div class="form-group mb-3">
                         <label for="loai_ghe">Loại ghế</label>
                         <select class="form-select" id="loai_ghe" name="loai_ghe" required>
                             <option value="" disabled selected>Chọn loại ghế</option>
-                            <option value="Ghế xoay">Ghế đôi</option>
-                            <option value="Ghế cố định">Ghế đơn</option>
-                            <option value="Ghế bành">Ghế vip</option>
+                            <option value="ghe_doi">Ghế đôi</option>
+                            <option value="ghe_don">Ghế đơn</option>
+                            <option value="ghe_vip">Ghế vip</option>
                         </select>
                     </div>
+
                 </div>
             </div>
 
