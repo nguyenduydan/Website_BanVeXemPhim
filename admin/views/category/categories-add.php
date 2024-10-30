@@ -9,7 +9,7 @@
                 Quay lại
             </a>
         </div>
-        <form id="addCategoryForm" action="../admin/controllers/code.php" method="post">
+        <form id="addCategoryForm" action="../../controllers/category-controller.php" method="post">
             <div class="row">
                 <!-- Cột 1 -->
                 <div class="col-md-6 m-auto">
