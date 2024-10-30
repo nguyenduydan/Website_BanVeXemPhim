@@ -41,7 +41,7 @@ unset($_SESSION['form_data']);
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <button type="submit" name="saveShowtime" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
+                    <button type="submit" name="editShowtime" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
                 </div>
             </div>
         </form>
