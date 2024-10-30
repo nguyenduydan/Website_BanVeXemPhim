@@ -3,8 +3,7 @@
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href="/Website_BanVeXemPhim/admin/index.php"
-            target="_blank">
+        <a class="navbar-brand m-0" href="/Website_BanVeXemPhim/admin/index.php" target="_blank">
             <span class="ms-1 font-weight-bold fs-4 font-monospace">
                 <img src="/Website_BanVeXemPhim/assets/imgs/logo-100x100.png" class="w-25 bg-dark" alt="Dashboard">
                 DashBoard</span>
@@ -53,8 +52,10 @@
     <div class="collapse navbar-collapse w-auto h-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'dashboard') || $current_page == 'admin') echo 'active'; ?>" href="/Website_BanVeXemPhim/admin/index.php" data-class="bg - transparent">
-                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'dashboard') || $current_page == 'admin') echo 'active'; ?>"
+                    href="/Website_BanVeXemPhim/admin/index.php" data-class="bg - transparent">
+                    <div
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>shop </title>
@@ -78,7 +79,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'categories')) echo 'active'; ?>" href="/Website_BanVeXemPhim/admin/categories.php" data-class="bg-white">
+                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'categories')) echo 'active'; ?>"
+                    href="/Website_BanVeXemPhim/admin/categories.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 640 512" version="1.1"
@@ -99,7 +101,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'film')) echo 'active'; ?>" href="/Website_BanVeXemPhim/admin/film.php" data-class="bg-white">
+                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'film')) echo 'active'; ?>"
+                    href="/Website_BanVeXemPhim/admin/film.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 16 16" version="1.1"
@@ -120,7 +123,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'room')) echo 'active'; ?>" href="/Website_BanVeXemPhim/admin/room.php" data-class="bg-white">
+                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'room')) echo 'active'; ?>"
+                    href="/Website_BanVeXemPhim/admin/room.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 640 512" version="1.1"
@@ -142,7 +146,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'chair')) echo 'active'; ?>" href="/Website_BanVeXemPhim/admin/chair.php" data-class="bg-white">
+                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'chair')) echo 'active'; ?>"
+                    href="/Website_BanVeXemPhim/admin/chair.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 640 512" version="1.1"
@@ -165,7 +170,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'showtime')) echo 'active'; ?>" href="/Website_BanVeXemPhim/admin/showtime.php" data-class="bg-white">
+                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'showtime')) echo 'active'; ?>"
+                    href="/Website_BanVeXemPhim/admin/showtime.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -190,7 +196,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'topic')) echo 'active'; ?>" href="/Website_BanVeXemPhim/admin/topic.php" data-class="bg-white">
+                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'topic')) echo 'active'; ?>"
+                    href="/Website_BanVeXemPhim/admin/topic.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -215,7 +222,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'content')) echo 'active'; ?>" href="/Website_BanVeXemPhim/admin/content.php" data-class="bg-white">
+                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'content')) echo 'active'; ?>"
+                    href="/Website_BanVeXemPhim/admin/content.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -240,7 +248,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'slider')) echo 'active'; ?>" href="/Website_BanVeXemPhim/admin/slider.php" data-class="bg-white">
+                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'slider')) echo 'active'; ?>"
+                    href="/Website_BanVeXemPhim/admin/slider.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -265,7 +274,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'menu')) echo 'active'; ?>" href="/Website_BanVeXemPhim/admin/menu.php" data-class="bg-white">
+                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'menu')) echo 'active'; ?>"
+                    href="/Website_BanVeXemPhim/admin/menu.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -290,7 +300,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'user')) echo 'active'; ?>" href="/Website_BanVeXemPhim/admin/user.php" data-class="bg-white">
+                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'user')) echo 'active'; ?>"
+                    href="/Website_BanVeXemPhim/admin/user.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1"
@@ -319,9 +330,9 @@
                 </a>
             </li>
             <li class="sidenav-footer mx-3">
-                <a class="btn bg-gradient-primary mt-3 w-100" href="/Website_BanVeXemPhim/admin/sign-in.php">Đăng xuất</a>
+                <a class="btn bg-gradient-primary mt-3 w-100" href="/Website_BanVeXemPhim/admin/sign-in.php">Đăng
+                    xuất</a>
             </li>
         </ul>
     </div>
 </aside>
-<!-- End phần menu -->

@@ -52,11 +52,11 @@
 #clock {
     border-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    font-family: 'Keania One';
+    font-family: "Iceberg", sans-serif;
+    pointer-events: none;
 }
 </style>
 
-<!-- Navbar -->
 <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none sticky-top" style="background-color: #f8f9fa;"
     navbar-scroll="true">
     <div class="container-fluid py-1 px-3">
@@ -82,7 +82,7 @@
                 </div>
             </div>
 
-            <!-- Danh sách liên kết ẩn để JavaScript xử lý -->
+
             <div id="linkContainer" style="display: none;">
                 <a class="nav-link-text" href="https://www.google.com">Google</a>
                 <a href="https://www.facebook.com">Facebook</a>
@@ -160,6 +160,3 @@ function searchData() {
     }
 }
 </script>
-
-
-<!-- End Navbar -->
