@@ -60,7 +60,7 @@ $records_per_page = $pagination['records_per_page'];
                                 <th class="text-center text-s font-weight-bolder">
                                     <form action="controllers/topic-controller.php" method="POST"
                                         style="display:inline;">
-                                        <input type="hidden" name="mand" value="<?= $item['Id'] ?>">
+                                        <input type="hidden" name="id" value="<?= $item['Id'] ?>">
                                         <input type="hidden" name="status"
                                             value="<?= $item['TrangThai'] == 1 ? 0 : 1 ?>">
                                         <button type="submit" name="changeStatus"
@@ -82,6 +82,7 @@ $records_per_page = $pagination['records_per_page'];
                                         <i class="bi bi-pencil"></i> Sửa
                                     </a>
                                     <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['Id'] ?>"
+                                        data-url="views/topic/topic-delete.php"
                                         style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                         data-bs-toggle="modal" data-bs-target="#confirmModal">
                                         <i class="bi bi-trash"></i> Xoá

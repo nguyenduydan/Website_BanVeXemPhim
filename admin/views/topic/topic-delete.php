@@ -4,26 +4,21 @@ require '../../../config/function.php';
 
 $result = check_valid_ID('id');
 if (is_numeric($result)) {
-    $userId = validate($result);
-    $user = getByID('NguoiDung', 'MaND', $userId);
+    $topicId = validate($result);
+    $topic = getByID('ChuDe', 'Id', $topicId);
 
-    if ($user['status'] == 200) {
-        $username = validate($user['data']['username']);
-        $avatarPath = "../../../uploads/avatars/" . $user['data']['Anh'];
-        $userDelete = deleteQuery('NguoiDung', 'MaND', $userId);
+    if ($topic['status'] == 200) {
+        $name = validate($topic['data']['TenChuDe']);
+        $topicDelete = deleteQuery('ChuDe', 'Id', $topicId);
 
-       
-        if ($userDelete) {
-            if (!empty($user['data']['Anh']) && file_exists($avatarPath)) {
-                $deleteResult = deleteImage($avatarPath);
-            }
-            redirect('../../topic.php','success','Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($username) . '</span> thành công');
+        if ($topicDelete) {
+            redirect('../../topic.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($name) . '</span> thành công');
         } else {
-            redirect('../../topic.php','error','Xóa ' . htmlspecialchars($username) . ' thất bại');
+            redirect('../../topic.php', 'error', 'Xóa ' . htmlspecialchars($name) . ' thất bại');
         }
     } else {
-        redirect('../../topic.php','error',$user['message']);
+        redirect('../../topic.php', 'error', $topic['message']);
     }
 } else {
-    redirect('../../topic.php','error',$result);
+    redirect('../../topic.php', 'error', $result);
 }
