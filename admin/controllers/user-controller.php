@@ -152,10 +152,10 @@ if (isset($_POST['editUser'])) {
         if (mysqli_query($conn, $query)) {
             redirect('../user.php', 'success', 'Cập nhật tài khoản thành công');
         } else {
-            redirect('../views/user/user-edit.php?id=" ' . $id, 'error', 'Cập nhật tài khoản thất bại');
+            redirect('../views/user/user-edit.php?id='. $id, 'error', 'Cập nhật tài khoản thất bại');
         }
     } else {
-        redirect('../views/user/user-edit.php?id=" ' . $id, 'errors', $messages);
+        redirect('../views/user/user-edit.php?id=' . $id, 'errors', $messages);
         $_SESSION['form_data'] = $_POST;
     }
 }

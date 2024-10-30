@@ -1,4 +1,12 @@
-<?php include('../../includes/header.php'); ?>
+<?php
+require '../../../config/function.php';
+include('../../includes/header.php');
+
+$messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy lỗi từ session
+$formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
+unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
+unset($_SESSION['form_data']);
+?>
 
 <div class="row">
     <div class="col-xl-12 col-lg-12 mx-auto">
@@ -16,7 +24,10 @@
                     <!-- Nhập tên thể loại -->
                     <div class="form-group mb-3">
                         <label for="ten_the_loai">Tên thể loại (<span class="text-danger">*</span>)</label>
-                        <input type="text" class="form-control" id="ten_the_loai" name="ten_the_loai" placeholder="Nhập tên thể loại">
+                        <input type="text" value="<?php echo isset($formData['ten_the_loai']) ? htmlspecialchars($formData['ten_the_loai']) : ''; ?>" class="form-control" id="ten_the_loai" name="ten_the_loai" placeholder="Nhập tên thể loại">
+                        <?php if (isset($messages['name'])): ?>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
+                        <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
                         <label for="status">Trạng thái</label>
