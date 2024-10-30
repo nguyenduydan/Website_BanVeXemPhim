@@ -85,7 +85,8 @@ $records_per_page = $pagination['records_per_page'];
                                         href="views/user/user-edit.php?id=<?= $item['MaND'] ?>">
                                         <i class="bi bi-pencil"></i> Sửa
                                     </a>
-                                    <a class="btn btn-danger m-0 delete-btn"
+                                    <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['MaND'] ?>"
+                                        data-url="views/user/user-delete.php"
                                         style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                         data-bs-toggle="modal" data-bs-target="#confirmModal">
                                         <i class="bi bi-trash"></i> Xoá
@@ -103,7 +104,8 @@ $records_per_page = $pagination['records_per_page'];
                                                     <p class="p-2 fs-5">Bạn có muốn xóa người dùng này không?</p>
                                                 </div>
                                                 <div class="modal-footer d-flex justify-content-center">
-                                                    <a href="views/user/user-delete.php?id=<?= $item['MaND'] ?>"><button type="button" class="btn btn-sm btn-success">Có</button></a>
+                                                    <button type="button" id="confirmYes"
+                                                        class="btn btn-sm btn-success">Có</button>
                                                     <button type="button" class="btn btn-sm btn-danger me-2"
                                                         data-bs-dismiss="modal">Không</button>
                                                 </div>

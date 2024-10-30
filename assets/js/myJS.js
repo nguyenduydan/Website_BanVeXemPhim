@@ -27,6 +27,30 @@ function previewImage(event) {
     }
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    let deleteId = null; // Lưu ID người dùng
+    let deleteUrl = null; // Lưu URL của trang xóa
+
+    // Lắng nghe sự kiện cho tất cả các nút xóa
+    document.querySelectorAll('.delete-btn').forEach(function (button) {
+        button.addEventListener('click', function () {
+            deleteId = this.getAttribute('data-id'); // Lưu ID người dùng
+            deleteUrl = this.getAttribute('data-url'); // Lưu URL trang xóa
+        });
+    });
+
+    // Xác nhận xóa
+    const confirmYesButton = document.getElementById('confirmYes');
+    if (confirmYesButton) {
+        confirmYesButton.onclick = function () {
+            if (deleteId && deleteUrl) {
+                // Chuyển hướng đến trang xóa với ID từ data-id
+                window.location.href = `${deleteUrl}?id=${deleteId}`;
+            }
+        };
+    }
+});
+
 function togglePasswordVisibility(passwordFieldId, iconId) {
     const passwordInput = document.getElementById(passwordFieldId);
     const icon = document.getElementById(iconId);
@@ -59,3 +83,5 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+
