@@ -7,20 +7,19 @@ if (isset($_POST['saveCategory'])) {
     $ngay_tao = new DateTime();
     $name = validate($_POST['ten_the_loai']);
     $status = validate($_POST['status']);
-    if(empty($name)){
+    if (empty($name)) {
         $messages['name'] = 'Tên thể loại không được để trống';
     }
-    if(isExistValue('TheLoai','TenTheLoai',$name)){
+    if (isExistValue('TheLoai', 'TenTheLoai', $name)) {
         $messages['name'] = 'Tên thể loại đã tồn tại';
     }
     if (empty($messages)) {
-        $ngay_tao = date('Y-m-d H:i:s');
         $query = "INSERT INTO theloai (TenTheLoai,NguoiTao,NgayTao,NguoiCapNhat,NgayCapNhat,TrangThai)
-            VALUES ('$name',1,'$ngay_tao',1,'$ngay_tao','$status')";
+            VALUES ('$name',1,CURRENT_TIMESTAMP,NULL,NULL,'$status')";
         if (mysqli_query($conn, $query)) {
-            redirect('../categories.php','success','Thêm thể loại thành công');
+            redirect('../categories.php', 'success', 'Thêm thể loại thành công');
         } else {
-            redirect('../views/category/categories-add.php','error','Thêm thể loại thất bại');
+            redirect('../views/category/categories-add.php', 'error', 'Thêm thể loại thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
@@ -36,23 +35,22 @@ if (isset($_POST['editCategory'])) {
     $name = validate($_POST['ten_the_loai']);
     $id = validate($_POST['matl']);
     $status = validate($_POST['status']);
-    if(empty($name)){
+    if (empty($name)) {
         $messages['name'] = 'Tên thể loại không được để trống';
     }
-    if(isExistValue('TheLoai','TenTheLoai',$name)){
+    if (isExistValue('TheLoai', 'TenTheLoai', $name, 'MaTheLoai', $id)) {
         $messages['name'] = 'Tên thể loại đã tồn tại';
     }
     if (empty($messages)) {
-        $ngay_capnhat = date('Y-m-d H:i:s');
         $query = "UPDATE TheLoai SET
                 TenTheLoai = '$name',
                 NguoiCapNhat = 1,
-                NgayCapNhat = '$ngay_capnhat',
+                NgayCapNhat = CURRENT_TIMESTAMP,
                 TrangThai = '$status'
                 WHERE MaTheLoai = '$id'
                 ";
         if (mysqli_query($conn, $query)) {
-            redirect('../categories.php','success','Cập nhật thể loại thành công');
+            redirect('../categories.php', 'success', 'Cập nhật thể loại thành công');
         } else {
             redirect('../views/category/categories-edit.php?id=' . $id, 'errors', 'Cập nhật thể loại thất bại');
         }
@@ -65,7 +63,11 @@ if (isset($_POST['changeStatus'])) {
     $id = validate($_POST['matl']);
     $status = validate($_POST['status']) == 1 ? 1 : 0;
 
-    $edit_query = "UPDATE TheLoai SET TrangThai = '$status' WHERE MaTheLoai = '$id'";
+    $edit_query = "UPDATE TheLoai SET
+                TrangThai = '$status',
+                NguoiCapNhat = '1',
+                NgayCapNhat = CURRENT_TIMESTAMP
+                WHERE MaTheLoai = '$id'";
 
     if (mysqli_query($conn, $edit_query)) {
         redirect('../categories.php', 'success', 'Cập nhật trạng thái thành công');
@@ -73,4 +75,3 @@ if (isset($_POST['changeStatus'])) {
         redirect('../categories.php', 'error', 'Cập nhật trạng thái thất bại');
     }
 }
-
