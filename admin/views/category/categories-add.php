@@ -9,14 +9,15 @@
                 Quay lại
             </a>
         </div>
-        <form id="addCategoryForm" action="../admin/controllers/code.php" method="post">
+        <form id="addCategoryForm" action="../../controllers/category-controller.php" method="post">
             <div class="row">
                 <!-- Cột 1 -->
                 <div class="col-md-6 m-auto">
                     <!-- Nhập tên thể loại -->
                     <div class="form-group mb-3">
                         <label for="ten_the_loai">Tên thể loại (<span class="text-danger">*</span>)</label>
-                        <input type="text" class="form-control" id="ten_the_loai" name="ten_the_loai" placeholder="Nhập tên thể loại">
+                        <input type="text" class="form-control" id="ten_the_loai" name="ten_the_loai"
+                            placeholder="Nhập tên thể loại">
                     </div>
                     <div class="form-group mb-3">
                         <label for="status">Trạng thái</label>

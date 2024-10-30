@@ -23,7 +23,7 @@ if (isset($_POST['saveUser'])) {
     }
     if (empty($username)) {
         $messages['username'] = "Tên người dùng không được để trống.";
-    } elseif (isUsername($username)) {
+    } elseif (isExistValue('NguoiDung','username',$username)) {
         $messages['username'] = "Tên người dùng đã tồn tại";
     }
 
@@ -40,7 +40,7 @@ if (isset($_POST['saveUser'])) {
     }
     if (empty($email)) {
         $messages['email'] = "Email không được để trống.";
-    } elseif (isEmail($email)) {
+    } elseif (isExistValue('NguoiDung','Email',$email)) {
         $messages['email'] = "Email đã tồn tại";
     }
 
@@ -101,7 +101,7 @@ if (isset($_POST['editUser'])) {
         $messages['username'] = "Tên người dùng không được để trống.";
     } else {
         // Kiểm tra tính duy nhất của username
-        if (isUsername($username, $id)) {
+        if (isExistValue('NguoiDung','username',$username)) {
             $messages['username'] = "Tên người dùng đã tồn tại";
         }
     }
@@ -110,7 +110,7 @@ if (isset($_POST['editUser'])) {
     }
     if (empty($email)) {
         $messages['email'] = "Email không được để trống.";
-    } elseif (isEmail($email, $id)) {
+    } elseif (isExistValue('NguoiDung','Email',$email)) {
         $messages['email'] = "Email đã tồn tại";
     }
 

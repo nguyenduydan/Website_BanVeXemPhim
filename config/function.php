@@ -90,30 +90,23 @@ function validateAndHashPassword($password, $re_password)
     return ['status' => true, 'hashed' => $hashedPassword];
 }
 
-function isUsername($username, $currentId = null)
+function isExistValue($tableName, $colName, $value)
 {
     global $conn; // Kết nối CSDL
-    $query = "SELECT COUNT(*) as count FROM nguoidung WHERE username = '$username'";
-    if ($currentId) {
-        $query .= " AND MaND != '$currentId'"; // Bỏ qua người dùng hiện tại nếu ID được cung cấp
-    }
-    $result = mysqli_query($conn, $query);
-    $data = mysqli_fetch_assoc($result);
-    return $data['count'] > 0; // Trả về true nếu username đã tồn tại
-}
+    $tableName = mysqli_real_escape_string($conn, $tableName);
+    $colName = mysqli_real_escape_string($conn, $colName);
+    $value = mysqli_real_escape_string($conn, $value);
 
-function isEmail($email, $currentId = null)
-{
-    global $conn; // Kết nối CSDL
-    $query = "SELECT COUNT(*) as count FROM NguoiDung WHERE Email = '$email'";
-    if ($currentId) {
-        $query .= " AND MaND != '$currentId'"; // Bỏ qua người dùng hiện tại nếu ID được cung cấp
-    }
+    $query = "SELECT COUNT(*) as count FROM `$tableName` WHERE `$colName` = '$value'";
     $result = mysqli_query($conn, $query);
-    $data = mysqli_fetch_assoc($result);
-    return $data['count'] > 0; // Trả về true nếu email đã tồn tại
-}
 
+    if ($result) {
+        $data = mysqli_fetch_assoc($result);
+        return $data['count'] > 0; 
+    } else {
+        return false;
+    }
+}
 function getAll($tableName)
 {
     global $conn;
