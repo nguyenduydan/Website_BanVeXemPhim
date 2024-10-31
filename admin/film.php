@@ -76,7 +76,7 @@ $phanloai = [
                                                     FROM PHIM
                                                     JOIN THELOAI_FILM ON PHIM.MAPHIM = THELOAI_FILM.MAPHIM
                                                     JOIN THELOAI ON THELOAI_FILM.MATHELOAI = THELOAI.MATHELOAI
-                                                    WHERE PHIM.MAPHIM = {$item['MaPhim']} 
+                                                    WHERE PHIM.MAPHIM = {$item['MaPhim']}
                                                     GROUP BY PHIM.MAPHIM";
                                             $result = $conn->query($query);
                                             $genres = $result->fetch_assoc()['TheLoai'];
@@ -135,15 +135,17 @@ $phanloai = [
                                                     </div>
                                                 </div>
                                             </div>
-                                        </td>
-                                    </tr>
-                                <?php
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php
                                 }
                             } else {
                                 ?>
-                                <tr>
-                                    <td colspan="10" class="text-center">Không có bản ghi nào</td>
-                                </tr>
+                            <tr>
+                                <td colspan="10" class="text-center">Không có bản ghi nào</td>
+                            </tr>
                             <?php
                             }
                             ?>
