@@ -2,6 +2,9 @@
 <!--     Fonts and icons     -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+
 <!-- Nucleo Icons -->
 <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
 <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
