@@ -1,9 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
 
 /* CSS */
-html{
-    scroll-behavior: smooth;
-}
+
 .btn-add{
     align-items: center;
     appearance: none;
@@ -103,14 +101,6 @@ transition: background-image ease-in-out 1s;
     /* change the direction of the change here */
 }
 
-
-/* show film */
-
-.vertical-bar {
-    color: #333;
-    font-weight: bold;
-    margin-right: 8px;
-}
 .movie-card {
     height: 25rem;
     position: relative;
@@ -120,7 +110,7 @@ transition: background-image ease-in-out 1s;
 }
 .movie-card img {
     width: 100%;
-    height: 100%;
+    height: auto;
     border-radius: 8px;
 }
 .movie-info {
@@ -132,6 +122,7 @@ transition: background-image ease-in-out 1s;
     font-weight: bold;
     color: #333;
 }
+
 .movie-age {
     position: absolute;
     bottom: 10px;
@@ -142,7 +133,6 @@ transition: background-image ease-in-out 1s;
     border-radius: 3px;
     color: white;
 }
-
 
 .vertical-bar {
     color: #333;
