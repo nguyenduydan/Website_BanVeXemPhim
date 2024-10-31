@@ -60,54 +60,64 @@ if (isset($_POST['editFilm'])) {
     $phanloai = validate($_POST['phan_loai']);
     $dao_dien = validate($_POST['dao_dien']);
     $dien_vien = validate($_POST['dien_vien']);
+    
     $quoc_gia = $_POST['quoc_gia'] ?? [];
     if (!empty($_POST['other_nation'])) {
         $quoc_gia[] = validate($_POST['other_nation']);
     }
     $quoc_gia = implode(', ', $quoc_gia);
+    
     $mota = validate($_POST['mo_ta']);
     $theloai = $_POST['the_loai'] ?? [];
     $namphathanh = validate($_POST['nam_phat_hanh']);
     $thoiluong = validate($_POST['thoi_luong']);
     $status = validate($_POST['status']) == 1 ? 1 : 0; 
-    $film = getByID('Phim','MaPhim',$id);
+    
+    $film = getByID('Phim', 'MaPhim', $id);
     $anh_phim = $film['data']['Anh'];
+
     if (isset($_FILES['anh_phim']) && $_FILES['anh_phim']['error'] == 0) {
         $filmPath = "../../uploads/film-imgs/" . $anh_phim;
+
         if (!empty($anh_phim) && file_exists($filmPath)) {
             $deleteResult = deleteImage($filmPath);
             if (!$deleteResult['success']) {
                 $messages[] = $deleteResult['message'];
             }
         }
-        $unique = uniqid('film_',false);
-        // Upload the avatar with the username as the filename
-        $filmResult = uploadImage($_FILES['anh_phim'], "../../uploads/film-imgs/", $unique); // Pass username
+
+        $unique = uniqid('film_', false);
+        
+        $filmResult = uploadImage($_FILES['anh_phim'], "../../uploads/film-imgs/", $unique);
         if ($filmResult['success']) {
-            $avatar = $avatarResult['filename'];
+            $anh_phim = $filmResult['filename'];
         } else {
-            $messages[] = $avatarResult['message'];
+            $messages[] = $filmResult['message'];
         }
     }
+
     if (empty($messages)) {
         $deleteQuery = "DELETE FROM THELOAI_FILM WHERE MAPHIM = '$id'";
         mysqli_query($conn, $deleteQuery);
+
         $slug = str_slug($name);
+
         $query = "UPDATE PHIM SET
                 TenPhim = '$name',
-                TenRutGon ='$slug',
-                ThoiLuong ='$thoiluong',
+                TenRutGon = '$slug',
+                ThoiLuong = '$thoiluong',
                 Anh = '$anh_phim',
                 DaoDien = '$dao_dien',
                 DienVien = '$dien_vien',
                 QuocGia = '$quoc_gia',
-                NamPhatHanh ='$namphathanh',
+                NamPhatHanh = '$namphathanh',
                 PhanLoai = '$phanloai',
                 MoTa = '$mota',
                 NguoiCapNhat = '1', 
                 NgayCapNhat = CURRENT_TIMESTAMP, 
                 TrangThai = '$status'
                 WHERE MaPhim = '$id'";
+
         if (mysqli_query($conn, $query)) {
             foreach ($theloai as $maTheLoai) {
                 $insertQuery = "INSERT INTO TheLoai_Film (MaTheLoai, MaPhim) VALUES ('$maTheLoai', '$id')";
@@ -115,14 +125,14 @@ if (isset($_POST['editFilm'])) {
             }
             redirect('../film.php', 'success', 'Cập nhật phim thành công'); 
         } else {
-            redirect('../views/film/film-edit.php?id='.$id, 'error', 'Cập nhật phim thất bại');
+            redirect('../views/film/film-edit.php?id=' . $id, 'error', 'Cập nhật phim thất bại');
         }
-    } 
-    else {
+    } else {
         $_SESSION['form_data'] = $_POST;
         redirect('../views/film/film-add.php', 'messages', $messages);
     }
 }
+
 //====== changeStatus ======//
 if (isset($_POST['changeStatus'])) {
     $id = validate($_POST['ma_phim']);
