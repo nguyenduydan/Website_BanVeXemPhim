@@ -103,6 +103,14 @@ transition: background-image ease-in-out 1s;
     /* change the direction of the change here */
 }
 
+
+/* show film */
+
+.vertical-bar {
+    color: #333;
+    font-weight: bold;
+    margin-right: 8px;
+}
 .movie-card {
     height: 25rem;
     position: relative;
@@ -128,9 +136,16 @@ transition: background-image ease-in-out 1s;
     position: absolute;
     bottom: 10px;
     right: 10px;
-    font-size: 0.9em;
+    font-size: 0.7em;
     background: #dc3545;
     padding: 2px 5px;
     border-radius: 3px;
     color: white;
+}
+
+
+.vertical-bar {
+    color: #333;
+    font-weight: bold;
+    margin-right: 8px;
 }
