@@ -8,22 +8,24 @@ if (is_numeric($result)) {
     $film = getByID('Phim', 'MaPhim', $id);
 
     if ($film['status'] == 200) {
-        $name = validate($user['data']['TenPhim']);
+        $id_film = $film['data']['MaPhim'];
+        global $conn;
+        $query = "DELETE FROM THELOAI_FILM WHERE MAPHIM = '$id_film'";
+        mysqli_query($conn, $query);
+        $name = validate($film['data']['TenPhim']);
         $filmPath = "../../../uploads/film-imgs/" . $film['data']['Anh'];
-        $filmDelete = deleteQuery('NguoiDung', 'MaND', $id);
-
-
+        $filmDelete = deleteQuery('Phim', 'MaPhim', $id);
         if ($filmDelete) {
-            if (!empty($film['data']['Anh']) && file_exists($avatarPath)) {
+            if (!empty($film['data']['Anh']) && file_exists($filmPath)) {
                 $deleteResult = deleteImage($filmPath);
             }
-            redirect('../../user.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($username) . '</span> thành công');
+            redirect('../../film.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($name) . '</span> thành công');
         } else {
-            redirect('../../user.php', 'error', 'Xóa ' . htmlspecialchars($username) . ' thất bại');
+            redirect('../../film.php', 'error', 'Xóa ' . htmlspecialchars($name) . ' thất bại');
         }
     } else {
-        redirect('../../user.php', 'error', $user['message']);
+        redirect('../../film.php', 'error', $film['message']);
     }
 } else {
-    redirect('../../user.php', 'error', $result);
+    redirect('../../film.php', 'error', $result);
 }
