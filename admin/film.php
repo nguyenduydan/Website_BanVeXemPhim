@@ -7,6 +7,12 @@ include('includes/header.php');
 $pagination = setupPagination($conn, 'Phim');
 $data = $pagination['data'];
 $records_per_page = $pagination['records_per_page'];
+$phanloai = [
+    0 => 'Phổ thông',
+    13 => 'T13',
+    16 => 'T16',
+    18 => 'T18'
+];
 ?>
 
 <div id="toast"></div>
@@ -64,6 +70,7 @@ $records_per_page = $pagination['records_per_page'];
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['ThoiLuong']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['QuocGia']; ?></th>
                                         <?php
+                                        
                                             global $conn;
                                             $query = "SELECT GROUP_CONCAT(Theloai.TenTheLoai SEPARATOR ', ') AS TheLoai
                                                     FROM PHIM
@@ -76,8 +83,7 @@ $records_per_page = $pagination['records_per_page'];
                                             $conn->close();
                                         ?>
                                         <th class="text-center text-xs font-weight-bolder"><?= $genres; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $item['TenPhim']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $item['PhanLoai']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $phanloai[$item['PhanLoai']] ?? 'Chưa xác định'; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['NgayTao']; ?></th>
                                         <th class="text-center text-s font-weight-bolder">
                                             <form action="controllers/film-controller.php" method="POST"

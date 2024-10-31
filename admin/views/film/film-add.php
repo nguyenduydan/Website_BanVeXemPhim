@@ -5,6 +5,8 @@ $messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy 
 $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
 unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
 unset($_SESSION['form_data']);
+
+?>
 ?>
 <div id="toast"></div>
 <?php alertMessage() ?>
@@ -29,10 +31,10 @@ unset($_SESSION['form_data']);
                     <div class="form-group mb-3">
                         <label for="phan_loai">Phân loại</label>
                         <select class="form-select" id="phan_loai" name="phan_loai" required>
-                            <option value="P">Phổ thông</option>
-                            <option value="T13">T13</option>
-                            <option value="T16">T16</option>
-                            <option value="T18">T18</option>
+                            <option value="0">Phổ thông</option>
+                            <option value="13">T13</option>
+                            <option value="16">T16</option>
+                            <option value="18">T18</option>
                         </select>
                     </div>
 
