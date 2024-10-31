@@ -1,10 +1,11 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-info p-3">
-    <div class="container-fluid">
-        <a class="navbar-brand fs-2 ms-5 p-0"
-            style="
+    <div class="container-fluid mx-10">
+        <a class="navbar-brand fs-2 ms-5 p-0" style="
             font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            " href="#"> <img src="/Website_BanVeXemPhim/assets/imgs/logo-100x100.png" class="w-35 bg-dark" alt="Dashboard"> TICKET</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            " href="#"> <img src="/Website_BanVeXemPhim/assets/imgs/logo-100x100.png" class="w-35 bg-dark"
+                alt="Dashboard"> TICKET</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -20,7 +21,8 @@
                     <a class="nav-link mx-2 fs-5" href="#">Pricing</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link mx-2 fs-5 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link mx-2 fs-5 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         Company
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
