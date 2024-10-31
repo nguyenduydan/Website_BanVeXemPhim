@@ -4,7 +4,8 @@
     <div class="row">
         <!-- Phần ảnh phim -->
         <div class="col-lg-4">
-            <img src="uploads/film-imgs/anhphim.jpg" alt="Thiên Đường Quả Báo" class="img-fluid movie-poster rounded">
+            <img src="../uploads/film-imgs/anhphim.jpg" alt="Thiên Đường Quả Báo"
+                class="img-fluid movie-poster rounded">
         </div>
 
         <!-- Thông tin chi tiết phim -->
