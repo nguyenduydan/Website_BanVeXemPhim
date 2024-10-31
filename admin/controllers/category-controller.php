@@ -60,7 +60,7 @@ if (isset($_POST['editCategory'])) {
     }
 }
 if (isset($_POST['changeStatus'])) {
-    $id = validate($_POST['matl']);
+    $id = validate($_POST['ma_phim']);
     $status = validate($_POST['status']) == 1 ? 1 : 0;
 
     $edit_query = "UPDATE TheLoai SET

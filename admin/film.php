@@ -63,13 +63,26 @@ $records_per_page = $pagination['records_per_page'];
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['TenPhim']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['ThoiLuong']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['QuocGia']; ?></th>
+                                        <?php
+                                            global $conn;
+                                            $query = "SELECT GROUP_CONCAT(Theloai.TenTheLoai SEPARATOR ', ') AS TheLoai
+                                                    FROM PHIM
+                                                    JOIN THELOAI_FILM ON PHIM.MAPHIM = THELOAI_FILM.MAPHIM
+                                                    JOIN THELOAI ON THELOAI_FILM.MATHELOAI = THELOAI.MATHELOAI
+                                                    WHERE PHIM.MAPHIM = {$item['MaPhim']} 
+                                                    GROUP BY PHIM.MAPHIM";
+                                            $result = $conn->query($query);
+                                            $genres = $result->fetch_assoc()['TheLoai'];
+                                            $conn->close();
+                                        ?>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $genres; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['TenPhim']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['PhanLoai']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['NgayTao']; ?></th>
                                         <th class="text-center text-s font-weight-bolder">
                                             <form action="controllers/film-controller.php" method="POST"
                                                 style="display:inline;">
-                                                <input type="hidden" name="maphim" value="<?= $item['MaPhim'] ?>">
+                                                <input type="hidden" name="ma_phim" value="<?= $item['MaPhim'] ?>">
                                                 <input type="hidden" name="status"
                                                     value="<?= $item['TrangThai'] == 1 ? 0 : 1 ?>">
                                                 <button type="submit" name="changeStatus"

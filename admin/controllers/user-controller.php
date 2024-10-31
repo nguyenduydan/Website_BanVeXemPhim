@@ -90,7 +90,8 @@ if (isset($_POST['editUser'])) {
     $email = validate($_POST['email']);
     $role = validate($_POST['role']);
     $status = validate($_POST['status']);
-
+    $user = getByID('NguoiDung', 'MaND', $id);
+    $avatar = $user['data']['Anh'];
     // Kiểm tra tên người dùng
     if (empty($name)) {
         $messages['name'] = "Họ và tên không được để trống.";
@@ -111,28 +112,26 @@ if (isset($_POST['editUser'])) {
     } elseif (isExistValue('NguoiDung', 'Email', $email, 'MaND', $id)) {
         $messages['email'] = "Email đã tồn tại";
     }
-
-    $user = getByID('NguoiDung', 'MaND', $id);
-    $avatar = $user['data']['Anh'];
-    if (empty($messages)) {
-        if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] == 0) {
-            // If a new avatar is uploaded, delete the old one
-            $avatarPath = "../../uploads/avatars/" . $avatar;
-            if (!empty($avatar) && file_exists($avatarPath)) {
-                $deleteResult = deleteImage($avatarPath);
-                if (!$deleteResult['success']) {
-                    $messages[] = $deleteResult['message'];
-                }
-            }
-
-            // Upload the avatar with the username as the filename
-            $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/", $username); // Pass username
-            if ($avatarResult['success']) {
-                $avatar = $avatarResult['filename'];
-            } else {
-                $messages[] = $avatarResult['message'];
+    if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] == 0) {
+        // If a new avatar is uploaded, delete the old one
+        $avatarPath = "../../uploads/avatars/" . $avatar;
+        if (!empty($avatar) && file_exists($avatarPath)) {
+            $deleteResult = deleteImage($avatarPath);
+            if (!$deleteResult['success']) {
+                $messages[] = $deleteResult['message'];
             }
         }
+
+        // Upload the avatar with the username as the filename
+        $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/", $username); // Pass username
+        if ($avatarResult['success']) {
+            $avatar = $avatarResult['filename'];
+        } else {
+            $messages[] = $avatarResult['message'];
+        }
+    }
+    if (empty($messages)) {
+        
         $query = "UPDATE NguoiDung SET
                 TenND = '$name',
                 username = '$username',
