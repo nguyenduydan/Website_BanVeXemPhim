@@ -100,42 +100,50 @@ transition: background-image ease-in-out 1s;
     background-position: center right;
     /* change the direction of the change here */
 }
-
-.movie-card {
-    height: 25rem;
-    position: relative;
-    overflow: hidden;
-    border: none;
-    background-color: #f8f9fa;
-}
-.movie-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-.movie-info {
-    text-align: center;
-    margin-top: 10px;
-}
-.movie-title {
-    font-size: 1em;
-    font-weight: bold;
-    color: #333;
-}
-
-.movie-age {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    font-size: 0.7em;
-    background: #dc3545;
-    padding: 2px 5px;
-    border-radius: 3px;
-    color: white;
-}
+/* show film */
 
 .vertical-bar {
     color: #333;
     font-weight: bold;
     margin-right: 8px;
+}
+
+.movie-card {
+    position: relative;
+    overflow: hidden;
+    border: none;
+    background-color: #f8f9fa;
+}
+
+.movie-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.movie-info {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.movie-title {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.movie-rating {
+    color: #ffc107;
+}
+
+.movie-age {
+    font-size: 0.9em;
+    background: #dc3545;
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: white;
 }
