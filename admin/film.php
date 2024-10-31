@@ -69,7 +69,7 @@ $records_per_page = $pagination['records_per_page'];
                                         <th class="text-center text-s font-weight-bolder">
                                             <form action="controllers/film-controller.php" method="POST"
                                                 style="display:inline;">
-                                                <input type="hidden" name="mand" value="<?= $item['MaPhim'] ?>">
+                                                <input type="hidden" name="maphim" value="<?= $item['MaPhim'] ?>">
                                                 <input type="hidden" name="status"
                                                     value="<?= $item['TrangThai'] == 1 ? 0 : 1 ?>">
                                                 <button type="submit" name="changeStatus"

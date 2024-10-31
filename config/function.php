@@ -12,15 +12,15 @@ function validate($inpData)
     $validatedData = mysqli_real_escape_string($conn, $inpData);
     return trim($validatedData);
 }
-function uploadImage($file, $targetDir, $fileName)
+function uploadImage($file, $targetDir, $id)
 {
     $result = ['success' => false, 'message' => '', 'filename' => ''];
 
     if (isset($file) && $file['error'] == 0) {
-        $fileName = basename($file["name"]);
+        $originalFileName = basename($file["name"]);
         $fileTmpName = $file["tmp_name"];
         $fileSize = $file["size"];
-        $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+        $fileType = strtolower(pathinfo($originalFileName, PATHINFO_EXTENSION));
 
         $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
 
@@ -28,8 +28,9 @@ function uploadImage($file, $targetDir, $fileName)
             $result['message'] = "Chỉ các định dạng JPG, JPEG, PNG và GIF được chấp nhận.";
             return $result;
         }
-        $finalFileName = $fileName . '.' . $fileType;
+        $finalFileName = $id . '.' . $fileType;
         $filePath = $targetDir . $finalFileName;
+
         if (move_uploaded_file($fileTmpName, $filePath)) {
             $result['success'] = true;
             $result['filename'] = $finalFileName;
@@ -115,7 +116,7 @@ function getAll($tableName)
 {
     global $conn;
     $table = validate($tableName);
-    $query = "SELECT * FROM $table";
+    $query = "SELECT * FROM $table WHERE TrangThai = 1";
     $result = mysqli_query($conn, $query);
     return $result;
 }
@@ -265,4 +266,29 @@ function sortData(&$data, $sortField, $sortOrder = 'ASC')
             return strcmp($b[$sortField], $a[$sortField]);
         }
     });
+}
+function str_slug($s) {
+    $symbols = [
+        ['/[áàảãạâấầẩẫậăắằẳẵặ]/u', 'a'],
+        ['/[đ]/u', 'd'],
+        ['/[éèẻẽẹêếềểễệ]/u', 'e'],
+        ['/[íìỉĩị]/u', 'i'],
+        ['/[óòỏõọôốồổỗộơớờởỡợ]/u', 'o'],
+        ['/[úùủũụưứừửữự]/u', 'u'],
+        ['/[ýỳỷỹỵ]/u', 'y'],
+        ['/[\\s\'";,]/u', '-']
+    ];
+
+   
+    $s = strtolower($s);
+
+   
+    foreach ($symbols as $pair) {
+        $s = preg_replace($pair[0], $pair[1], $s);
+    }
+
+
+    $s = preg_replace('/-+/', '-', $s);
+    $s = trim($s, '-'); 
+    return $s;
 }
