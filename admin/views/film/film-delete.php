@@ -1,26 +1,29 @@
-<?php include('includes/header.php'); ?>
+<?php
+session_start();
+require '../../../config/function.php';
 
-<div class="row">
-    <div class="col-xl-12 col-lg-12 mx-auto">
-        <h2>Xoá phim</h2>
-        <!-- Nút quay lại nằm sát bên phải -->
-        <div class="text-end mb-4">
-            <a class="btn btn-secondary" href="film.php">
-                Quay lại
-            </a>
-        </div>
+$result = check_valid_ID('id');
+if (is_numeric($result)) {
+    $id = validate($result);
+    $film = getByID('Phim', 'MaPhim', $id);
 
-        <div class="alert alert-warning" role="alert">
-            Bạn có chắc chắn muốn xoá phim "<strong><?php echo htmlspecialchars($title); ?></strong>" không?
-        </div>
+    if ($film['status'] == 200) {
+        $name = validate($user['data']['TenPhim']);
+        $filmPath = "../../../uploads/film-imgs/" . $film['data']['Anh'];
+        $filmDelete = deleteQuery('NguoiDung', 'MaND', $id);
 
-        <!-- Nút xác nhận xoá phim -->
-        <form action="../admin/controllers/code.php" method="post" class="d-flex justify-content-center">
-            <input type="hidden" name="film_id" value="<?php echo htmlspecialchars($film_id); ?>">
-            <a href="javascript:window.history.back(-1);" class="btn btn-danger me-3">Huỷ</a>
-            <button type="submit" name="confirmDelete" class="btn btn-success">Đồng ý</button>
-        </form>
-    </div>
-</div>
 
-<?php include('../../includes/footer.php'); ?>
+        if ($filmDelete) {
+            if (!empty($film['data']['Anh']) && file_exists($avatarPath)) {
+                $deleteResult = deleteImage($filmPath);
+            }
+            redirect('../../user.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($username) . '</span> thành công');
+        } else {
+            redirect('../../user.php', 'error', 'Xóa ' . htmlspecialchars($username) . ' thất bại');
+        }
+    } else {
+        redirect('../../user.php', 'error', $user['message']);
+    }
+} else {
+    redirect('../../user.php', 'error', $result);
+}

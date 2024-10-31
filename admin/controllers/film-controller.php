@@ -5,7 +5,7 @@ require '../../config/function.php';
 $messages = [];
 //====== film-add =======//
 if (isset($_POST['saveFilm'])) {
-    $messages = []; 
+    $messages = [];
     $name = validate($_POST['ten_phim']);
     $phanloai = validate($_POST['phan_loai']);
     $dao_dien = validate($_POST['dao_dien']);
@@ -22,17 +22,17 @@ if (isset($_POST['saveFilm'])) {
     $status = validate($_POST['status']) == 1 ? 1 : 0;
     $id = uniqid('film_', false);
     $anh_phim = '';
-        if (isset($_FILES['anh_phim'])) {
-            // Use filmname as filename for the img
-            $imgResult = uploadImage($_FILES['anh_phim'], "../../uploads/film-imgs/", $id); 
-            if ($imgResult['success']) {
-                $anh_phim = $imgResult['filename'];
-            } else {
-                $messages[] = $imgResult['message'];
-            }
+    if (isset($_FILES['anh_phim'])) {
+        // Use filmname as filename for the img
+        $imgResult = uploadImage($_FILES['anh_phim'], "../../uploads/film-imgs/", $id);
+        if ($imgResult['success']) {
+            $anh_phim = $imgResult['filename'];
+        } else {
+            $messages[] = $imgResult['message'];
         }
+    }
     if (empty($messages)) {
-        
+
         $slug = str_slug($name);
         $query = "INSERT INTO PHIM (TenPhim,TenRutGon,ThoiLuong,Anh,DaoDien,DienVien,QuocGia,NamPhatHanh,PhanLoai,MoTa, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
                   VALUES ('$name','$slug','$thoiluong','$anh_phim','$dao_dien','$dien_vien','$quoc_gia','$namphathanh','$phanloai','$mota', '1',CURRENT_TIMESTAMP, '1',CURRENT_TIMESTAMP, '$status')";
@@ -42,37 +42,36 @@ if (isset($_POST['saveFilm'])) {
                 $insertQuery = "INSERT INTO TheLoai_Film (MaTheLoai, MaPhim) VALUES ('$maTheLoai', '$maPhim')";
                 mysqli_query($conn, $insertQuery);
             }
-            redirect('../film.php', 'success', 'Thêm phim thành công'); 
+            redirect('../film.php', 'success', 'Thêm phim thành công');
         } else {
             redirect('../views/film/film-add.php', 'error', 'Thêm phim thất bại');
         }
-    } 
-    else {
+    } else {
         $_SESSION['form_data'] = $_POST;
         redirect('../views/film/film-add.php', 'messages', $messages);
     }
 }
 
 if (isset($_POST['editFilm'])) {
-    $messages = []; 
+    $messages = [];
     $name = validate($_POST['ten_phim']);
     $id = validate($_POST['ma_phim']);
     $phanloai = validate($_POST['phan_loai']);
     $dao_dien = validate($_POST['dao_dien']);
     $dien_vien = validate($_POST['dien_vien']);
-    
+
     $quoc_gia = $_POST['quoc_gia'] ?? [];
     if (!empty($_POST['other_nation'])) {
         $quoc_gia[] = validate($_POST['other_nation']);
     }
     $quoc_gia = implode(', ', $quoc_gia);
-    
+
     $mota = validate($_POST['mo_ta']);
     $theloai = $_POST['the_loai'] ?? [];
     $namphathanh = validate($_POST['nam_phat_hanh']);
     $thoiluong = validate($_POST['thoi_luong']);
-    $status = validate($_POST['status']) == 1 ? 1 : 0; 
-    
+    $status = validate($_POST['status']) == 1 ? 1 : 0;
+
     $film = getByID('Phim', 'MaPhim', $id);
     $anh_phim = $film['data']['Anh'];
 
@@ -87,7 +86,7 @@ if (isset($_POST['editFilm'])) {
         }
 
         $unique = uniqid('film_', false);
-        
+
         $filmResult = uploadImage($_FILES['anh_phim'], "../../uploads/film-imgs/", $unique);
         if ($filmResult['success']) {
             $anh_phim = $filmResult['filename'];
@@ -123,7 +122,7 @@ if (isset($_POST['editFilm'])) {
                 $insertQuery = "INSERT INTO TheLoai_Film (MaTheLoai, MaPhim) VALUES ('$maTheLoai', '$id')";
                 mysqli_query($conn, $insertQuery);
             }
-            redirect('../film.php', 'success', 'Cập nhật phim thành công'); 
+            redirect('../film.php', 'success', 'Cập nhật phim thành công');
         } else {
             redirect('../views/film/film-edit.php?id=' . $id, 'error', 'Cập nhật phim thất bại');
         }
@@ -143,6 +142,7 @@ if (isset($_POST['changeStatus'])) {
     if (mysqli_query($conn, $edit_query)) {
         redirect('../film.php', 'success', 'Cập nhật trạng thái thành công');
     } else {
+
         redirect('../film.php', 'error', 'Cập nhật trạng thái thất bại');
     }
 }
