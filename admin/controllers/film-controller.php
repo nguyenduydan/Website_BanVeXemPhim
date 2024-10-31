@@ -69,12 +69,10 @@ if (isset($_POST['editFilm'])) {
     $theloai = $_POST['the_loai'] ?? [];
     $namphathanh = validate($_POST['nam_phat_hanh']);
     $thoiluong = validate($_POST['thoi_luong']);
-    $status = validate($_POST['status']) == 1 ? 1 : 0;
-    $id = uniqid('film_', false);
+    $status = validate($_POST['status']) == 1 ? 1 : 0; 
     $film = getByID('Phim','MaPhim',$id);
     $anh_phim = $film['data']['Anh'];
     if (isset($_FILES['anh_phim']) && $_FILES['anh_phim']['error'] == 0) {
-        // If a new avatar is uploaded, delete the old one
         $filmPath = "../../uploads/film-imgs/" . $anh_phim;
         if (!empty($anh_phim) && file_exists($filmPath)) {
             $deleteResult = deleteImage($filmPath);
@@ -84,15 +82,16 @@ if (isset($_POST['editFilm'])) {
         }
         $unique = uniqid('film_',false);
         // Upload the avatar with the username as the filename
-        $filmResult = uploadImage($_FILES['anh_film'], "../../uploads/film-imgs/", $unique); // Pass username
-        if ($avatarResult['success']) {
+        $filmResult = uploadImage($_FILES['anh_phim'], "../../uploads/film-imgs/", $unique); // Pass username
+        if ($filmResult['success']) {
             $avatar = $avatarResult['filename'];
         } else {
             $messages[] = $avatarResult['message'];
         }
     }
     if (empty($messages)) {
-        
+        $deleteQuery = "DELETE FROM THELOAI_FILM WHERE MAPHIM = '$id'";
+        mysqli_query($conn, $deleteQuery);
         $slug = str_slug($name);
         $query = "UPDATE PHIM SET
                 TenPhim = '$name',
@@ -107,7 +106,8 @@ if (isset($_POST['editFilm'])) {
                 MoTa = '$mota',
                 NguoiCapNhat = '1', 
                 NgayCapNhat = CURRENT_TIMESTAMP, 
-                TrangThai = '$status'";
+                TrangThai = '$status'
+                WHERE MaPhim = '$id'";
         if (mysqli_query($conn, $query)) {
             foreach ($theloai as $maTheLoai) {
                 $insertQuery = "INSERT INTO TheLoai_Film (MaTheLoai, MaPhim) VALUES ('$maTheLoai', '$id')";

@@ -50,20 +50,18 @@ if (isset($_POST['saveUser'])) {
         $messages['re_password'] = $passwordDetails['message'];
     }
     $hashedPassword = $passwordDetails['hashed'];
-
-    if (empty($messages)) {
-        // Handle avatar upload
-        $avatar = '';
-        if (isset($_FILES['avatar'])) {
-            // Use username as filename for the avatar
-            $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/", $username);
-            if ($avatarResult['success']) {
-                $avatar = $avatarResult['filename'];
-            } else {
-                $messages[] = $avatarResult['message'];
-            }
+    // Handle avatar upload
+    $avatar = '';
+    if (isset($_FILES['avatar'])) {
+        // Use username as filename for the avatar
+        $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/", $username);
+        if ($avatarResult['success']) {
+            $avatar = $avatarResult['filename'];
+        } else {
+            $messages[] = $avatarResult['message'];
         }
-
+    }
+    if (empty($messages)) {
         $query = "INSERT INTO nguoidung (TenND, username, NgaySinh, GioiTinh, SDT, Anh, Email, MatKhau, Role, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
                   VALUES ('$name', '$username', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email', '$hashedPassword', '$role', '1', CURRENT_TIMESTAMP, NULL, NULL, '$status')";
 
