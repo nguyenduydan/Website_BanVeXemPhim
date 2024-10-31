@@ -50,7 +50,8 @@ $phanloai = [
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Tên phim</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Thời lượng</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Quốc gia</th>
-                                <th class="text-center text-uppercase text-xs font-weight-bolder">Thể loại</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder"
+                                    style="max-width: 150px;">Thể loại</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Phân loại</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Ngày tạo</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Trạng thái</th>
@@ -70,20 +71,23 @@ $phanloai = [
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['ThoiLuong']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['QuocGia']; ?></th>
                                         <?php
-                                        
-                                            global $conn;
-                                            $query = "SELECT GROUP_CONCAT(Theloai.TenTheLoai SEPARATOR ', ') AS TheLoai
+
+                                        global $conn;
+                                        $query = "SELECT GROUP_CONCAT(Theloai.TenTheLoai SEPARATOR ', ') AS TheLoai
                                                     FROM PHIM
                                                     JOIN THELOAI_FILM ON PHIM.MAPHIM = THELOAI_FILM.MAPHIM
                                                     JOIN THELOAI ON THELOAI_FILM.MATHELOAI = THELOAI.MATHELOAI
                                                     WHERE PHIM.MAPHIM = {$item['MaPhim']}
                                                     GROUP BY PHIM.MAPHIM";
-                                            $result = $conn->query($query);
-                                            $genres = $result->fetch_assoc()['TheLoai'];
-                                            
+                                        $result = $conn->query($query);
+                                        $genres = $result->fetch_assoc()['TheLoai'];
+
                                         ?>
-                                        <th class="text-center text-xs font-weight-bolder text-ellipsis"><?= $genres; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $phanloai[$item['PhanLoai']] ?? 'Chưa xác định'; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"
+                                            style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                            <?= $genres; ?></th>
+                                        <th class=" text-center text-xs font-weight-bolder">
+                                            <?= $phanloai[$item['PhanLoai']] ?? 'Chưa xác định'; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['NgayTao']; ?></th>
                                         <th class="text-center text-s font-weight-bolder">
                                             <form action="controllers/film-controller.php" method="POST"
@@ -135,30 +139,30 @@ $phanloai = [
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <?php
-                                }
-                            } else {
-                                ?>
-                            <tr>
-                                <td colspan="10" class="text-center">Không có bản ghi nào</td>
-                            </tr>
-                            <?php
-                            }
-                            ?>
-                        </tbody>
-                    </table>
                 </div>
             </div>
-            <!-- Phân trang -->
-            <div class="card-footer">
-                <?php echo paginate_html($pagination['total_pages'], $pagination['current_page']); ?>
-            </div>
+            </td>
+            </tr>
+        <?php
+                                }
+                            } else {
+        ?>
+        <tr>
+            <td colspan="10" class="text-center">Không có bản ghi nào</td>
+        </tr>
+    <?php
+                            }
+    ?>
+    </tbody>
+    </table>
         </div>
     </div>
+    <!-- Phân trang -->
+    <div class="card-footer">
+        <?php echo paginate_html($pagination['total_pages'], $pagination['current_page']); ?>
+    </div>
+</div>
+</div>
 </div>
 <?php include('includes/footer.php');
 $conn->close(); ?>
