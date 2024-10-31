@@ -50,8 +50,11 @@
 }
 
 #clock {
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    border: 5px solid snow;
+    box-shadow:
+        0px 4px 6px rgba(0, 0, 0, 0.2),
+        -2px 5px 0px rgba(0, 0, 0, 0.2);
     font-family: "Iceberg", sans-serif;
     pointer-events: none;
 }
