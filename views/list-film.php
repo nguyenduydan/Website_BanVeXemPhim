@@ -18,10 +18,11 @@
 
         // Lặp qua từng phim để hiển thị
         foreach ($movies as $movie) {
-            echo '<div class="col-md-3 mb-4">';
+            echo '<div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">'; // Thay đổi cấu trúc cột
             echo '    <div class="movie-card card">';
             echo '        <img class="img-fluid" src="' . $movie['img'] . '" alt="' . $movie['title'] . '">';
             echo '        <span class="movie-age">' . $movie['age'] . '</span>';
+            echo '        <a href="views/detail-film.php" class="buy-ticket"><i class="bi bi-ticket-perforated"></i> Mua Vé</a>';
             echo '    </div>';
             echo '    <div class="movie-info">';
             echo '        <div class="movie-title">' . $movie['title'] . '</div>';
