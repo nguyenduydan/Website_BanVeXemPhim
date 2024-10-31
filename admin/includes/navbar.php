@@ -50,7 +50,7 @@
 }
 
 #clock {
-    border-radius: 20px;
+    border-radius: 30px;
     border: 5px solid snow;
     box-shadow:
         0px 4px 6px rgba(0, 0, 0, 0.2),
@@ -58,26 +58,53 @@
     font-family: "Iceberg", sans-serif;
     pointer-events: none;
 }
+
+#avatar-container {
+    width: 60px;
+    height: 60px;
+    padding: 4px;
+    margin-left: 5px;
+    background: linear-gradient(45deg, #7928ca, #ff0080);
+    display: inline-block;
+    box-shadow:
+        0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#avatar {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 1px solid snow;
+}
 </style>
 
-<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none sticky-top" style="background-color: #f8f9fa;"
-    navbar-scroll="true">
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none sticky-top" style="background-color: #f8f9fa;">
     <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+            aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="d-none d-lg-block">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" id="dashboard"
-                        href="../index.php">Dashboard</a>
+                <li class="breadcrumb-item text-sm">
+                    <a class="opacity-5 text-dark" id="dashboard" href="../index.php">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-                    <?php echo htmlspecialchars($title); ?></li>
+                    <?php echo htmlspecialchars($title); ?>
+                </li>
             </ol>
         </nav>
+
+        <!-- Navbar Collapse -->
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <!-- Clock and Search only on large screens -->
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                <!-- Show clock -->
-                <div id="clock" class="fs-4 fw-bold me-5 bg-gradient-info text-white p-2">
+                <div id="clock" class="fs-4 fw-bold me-5 bg-gradient-info text-white p-2 d-none d-lg-block">
+                    <!-- Clock content -->
                 </div>
-                <div class="input-group">
+                <div class="input-group d-none d-lg-flex">
                     <span class="input-group-text border"><i class="fas fa-search" aria-hidden="true"></i></span>
                     <input type="text" class="form-control" id="searchBox" placeholder="Tìm kiếm..."
                         onkeyup="searchData()">
@@ -85,6 +112,17 @@
                 </div>
             </div>
 
+            <!-- Welcome Message and Avatar -->
+            <div class="ms-3 d-flex align-items-center">
+                <small for="username" class="d-none d-lg-inline">Welcome,
+                    <span class="fs-5 text-info text-gradient fw-bolder">username</span>
+                </small>
+                <div id="avatar-container" class="rounded-circle">
+                    <img id="avatar" src="../uploads/avatars/christmas-9095.gif" class="rounded-circle" alt="Avatar">
+                </div>
+            </div>
+
+            <!-- External Links and Sidenav Icon -->
 
             <div id="linkContainer" style="display: none;">
                 <a class="nav-link-text" href="https://www.google.com">Google</a>
@@ -93,8 +131,8 @@
                 <a href="https://www.twitter.com">Twitter</a>
                 <a href="https://www.linkedin.com">LinkedIn</a>
             </div>
-            <ul class="navbar-nav justify-content-end">
 
+            <ul class="navbar-nav justify-content-end">
                 <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                         <div class="sidenav-toggler-inner">
@@ -108,6 +146,7 @@
         </div>
     </div>
 </nav>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
