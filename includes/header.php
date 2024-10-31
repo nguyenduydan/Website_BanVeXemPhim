@@ -15,4 +15,3 @@
         <?php include('includes/navbar.php'); ?>
         <div class="container-fluid py-4 ">
             <?php include('includes/slider.php'); ?>
-            <button id="back-to-top" style="display: block;">Quay Lại Đầu Trang</button>
