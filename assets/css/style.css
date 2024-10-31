@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
 
 /* CSS */
-
+html{
+    scroll-behavior: smooth;
+}
 .btn-add{
     align-items: center;
     appearance: none;
@@ -131,11 +133,4 @@ transition: background-image ease-in-out 1s;
     padding: 2px 5px;
     border-radius: 3px;
     color: white;
-}
-
-
-.vertical-bar {
-    color: #333;
-    font-weight: bold;
-    margin-right: 8px;
 }
