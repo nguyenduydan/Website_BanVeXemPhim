@@ -80,9 +80,9 @@ $phanloai = [
                                                     GROUP BY PHIM.MAPHIM";
                                             $result = $conn->query($query);
                                             $genres = $result->fetch_assoc()['TheLoai'];
-                                            $conn->close();
+                                            
                                         ?>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $genres; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder text-ellipsis"><?= $genres; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $phanloai[$item['PhanLoai']] ?? 'Chưa xác định'; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['NgayTao']; ?></th>
                                         <th class="text-center text-s font-weight-bolder">
@@ -160,6 +160,5 @@ $phanloai = [
         </div>
     </div>
 </div>
-
-
-<?php include('includes/footer.php'); ?>
+<?php include('includes/footer.php');
+$conn->close(); ?>
