@@ -177,3 +177,39 @@ transition: background-image ease-in-out 1s;
 }
 
 
+/* detail-film */
+.movie-poster {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.movie-title-detail {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.movie-age-detail {
+    font-size: 0.9rem;
+    background-color: #ff6b6b;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.movie-meta {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+.movie-info p {
+    margin: 0.5rem 0;
+    text-align: left;
+}
+
+.movie-content {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+}
