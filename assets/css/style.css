@@ -101,7 +101,6 @@ transition: background-image ease-in-out 1s;
     /* change the direction of the change here */
 }
 /* show film */
-
 .vertical-bar {
     color: #333;
     font-weight: bold;
@@ -113,37 +112,34 @@ transition: background-image ease-in-out 1s;
     overflow: hidden;
     border: none;
     background-color: #f8f9fa;
+    border-radius: 8px;
 }
 
 .movie-card img {
     width: 100%;
-    height: auto;
+    height: 400px;
     border-radius: 8px;
 }
 
-.movie-info {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    color: white;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 5px 10px;
-    border-radius: 4px;
-}
-
-.movie-title {
-    font-size: 1.1em;
-    font-weight: bold;
-}
-
-.movie-rating {
-    color: #ffc107;
-}
-
 .movie-age {
-    font-size: 0.9em;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.6em;
     background: #dc3545;
     padding: 2px 5px;
     border-radius: 3px;
     color: white;
+    font-weight: bold;
+}
+
+.movie-info {
+    text-align: center;
+    margin-top: 10px;
+    color: #333;
+    font-size: 1em;
+}
+
+.movie-title {
+    font-weight: bold;
 }
