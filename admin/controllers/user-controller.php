@@ -176,3 +176,4 @@ if (isset($_POST['changeStatus'])) {
         redirect('../user.php', 'error', 'Cập nhật trạng thái thất bại');
     }
 }
+$conn->close();
