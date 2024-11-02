@@ -113,11 +113,6 @@ transition: background-image ease-in-out 1s;
     transition: transform 0.3s ease;
 }
 
-.movie-card:hover {
-    transform: scale(1.05);
-    /* Phóng to nhẹ khi hover */
-}
-
 .movie-card img {
     width: 100%;
     height: auto;
@@ -163,19 +158,24 @@ transition: background-image ease-in-out 1s;
     transform: translate(-50%, -50%);
     display: none;
     /* Mặc định ẩn cho các kích thước lớn */
-    background-color: #344090;
+    background: linear-gradient(90deg, var(--c1, #15036c), var(--c2, #7f33ff) 51%, var(--c1, #15036c)) var(--x, 0)/ 200%;
     color: white;
     padding: 8px 16px;
     border-radius: 5px;
     font-size: 1em;
     font-weight: bold;
     text-decoration: none;
-    transition: 0.3s ease;
+    transition: 0.3s ease-in-out;
 }
 
 .movie-card:hover .buy-ticket {
     display: block;
+
     /* Chỉ hiển thị khi hover ở lg */
+}
+
+.buy-ticket:hover{
+    --x: 100%;
 }
 
 /* Luôn hiển thị nút "Mua Vé" ở md và sm */
@@ -250,6 +250,6 @@ transition: background-image ease-in-out 1s;
 
 
 .small-image {
-    max-width: 40%; 
+    max-width: 40%;
     height: auto;
 }
