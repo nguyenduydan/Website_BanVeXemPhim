@@ -10,9 +10,9 @@ if (is_numeric($result)) {
     if ($showtime['status'] == 200) {
         $showtimeDelete = deleteQuery('SuatChieu', 'MaSuatChieu', $showtimeId);
         if ($showtimeDelete) {
-            redirect('../../showtime.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($showtimeId) . '</span> thành công');
+            redirect('../../showtime.php', 'success', 'Xóa suất chiếu thành công');
         } else {
-            redirect('../../showtime.php', 'error', 'Xóa ' . htmlspecialchars($showtimeId) . ' thất bại');
+            redirect('../../showtime.php', 'error', 'Xóa suất chiếu thất bại');
         }
     } else {
         redirect('../../showtime.php', 'error', $showtime['message']);

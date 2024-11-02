@@ -77,7 +77,7 @@ $records_per_page = $pagination['records_per_page'];
                                         <th class="text-center text-s font-weight-bolder">
                                             <form action="controllers/showtime-controller.php" method="POST"
                                                 style="display:inline;">
-                                                <input type="hidden" name="masuatchieu" value="<?= $item['MaSuatChieu'] ?>">
+                                                <input type="hidden" name="masc" value="<?= $item['MaSuatChieu'] ?>">
                                                 <input type="hidden" name="status"
                                                     value="<?= $item['TrangThai'] == 1 ? 0 : 1 ?>">
                                                 <button type="submit" name="changeStatus"
