@@ -7,7 +7,7 @@ unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
 unset($_SESSION['form_data']);
 
 ?>
-?>
+
 <div id="toast"></div>
 <?php alertMessage() ?>
 
@@ -20,13 +20,15 @@ unset($_SESSION['form_data']);
                 Quay lại
             </a>
         </div>
-        <form id="addFilmForm" action="../../controllers/film-controller.php" method="post" enctype="multipart/form-data">
+        <form id="addFilmForm" action="../../controllers/film-controller.php" method="post"
+            enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="ten_phim">Tên phim</label>
                         <input type="text" class="form-control" id="ten_phim" name="ten_phim"
-                        value="<?php echo isset($formData['ten_phim']) ? htmlspecialchars($formData['ten_phim']) : ''; ?>" placeholder="Nhập tên phim" required>
+                            value="<?php echo isset($formData['ten_phim']) ? htmlspecialchars($formData['ten_phim']) : ''; ?>"
+                            placeholder="Nhập tên phim" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="phan_loai">Phân loại</label>
@@ -41,12 +43,14 @@ unset($_SESSION['form_data']);
                     <div class="form-group mb-3">
                         <label for="dao_dien">Đạo diễn</label>
                         <input type="text" class="form-control" id="dao_dien" name="dao_dien"
-                        value="<?php echo isset($formData['dao_dien']) ? htmlspecialchars($formData['dao_dien']) : ''; ?>" placeholder="Nhập tên đạo diễn" required>
+                            value="<?php echo isset($formData['dao_dien']) ? htmlspecialchars($formData['dao_dien']) : ''; ?>"
+                            placeholder="Nhập tên đạo diễn" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="dien_vien">Diễn viên</label>
                         <input type="text" class="form-control" id="dien_vien" name="dien_vien"
-                        value="<?php echo isset($formData['dien_vien']) ? htmlspecialchars($formData['dien_vien']) : ''; ?>" placeholder="Nhập tên diễn viên" required>
+                            value="<?php echo isset($formData['dien_vien']) ? htmlspecialchars($formData['dien_vien']) : ''; ?>"
+                            placeholder="Nhập tên diễn viên" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="quoc_gia">Quốc gia</label>
@@ -72,7 +76,8 @@ unset($_SESSION['form_data']);
                     <div class="form-group mb-3">
                         <label for="mo_ta">Mô tả phim</label>
                         <textarea class="form-control" id="mo_ta" name="mo_ta" rows="10" placeholder="Nhập mô tả phim"
-                        value="<?php echo isset($formData['mo_ta']) ? htmlspecialchars($formData['mo_ta']) : ''; ?>" required></textarea>
+                            value="<?php echo isset($formData['mo_ta']) ? htmlspecialchars($formData['mo_ta']) : ''; ?>"
+                            required></textarea>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -83,7 +88,8 @@ unset($_SESSION['form_data']);
                             $genres = getAll('TheLoai');
                             foreach ($genres as $genre): ?>
                                 <div class="form-check me-3">
-                                    <input class="form-check-input" type="checkbox" name="the_loai[]" value="<?= $genre['MaTheLoai'] ?>"
+                                    <input class="form-check-input" type="checkbox" name="the_loai[]"
+                                        value="<?= $genre['MaTheLoai'] ?>"
                                         id="the_loai_<?= strtolower($genre['TenTheLoai']) ?>">
                                     <label class="form-check-label"
                                         for="the_loai_<?= strtolower($genre['TenTheLoai']) ?>"><?= $genre['TenTheLoai'] ?></label>
@@ -108,12 +114,12 @@ unset($_SESSION['form_data']);
                             placeholder="Nhập thời lượng phim" required>
                     </div>
                     <div class="col-6">
-                            <label for="status">Trạng thái</label>
-                            <select class="form-select" id="status" name="status">
-                                <option value="1">Online</option>
-                                <option value="0">Offline</option>
-                            </select>
-                        </div>
+                        <label for="status">Trạng thái</label>
+                        <select class="form-select" id="status" name="status">
+                            <option value="1">Online</option>
+                            <option value="0">Offline</option>
+                        </select>
+                    </div>
                     <div class="form-group mb-3">
                         <label for="anh_phim">Chọn ảnh phim</label>
                         <input type="file" class="form-control" id="anh_phim" name="anh_phim" accept="image/*" required
