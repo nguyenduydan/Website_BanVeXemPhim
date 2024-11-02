@@ -29,6 +29,9 @@ unset($_SESSION['form_data']);
                         <input type="text" class="form-control" id="ten_phim" name="ten_phim"
                             value="<?php echo isset($formData['ten_phim']) ? htmlspecialchars($formData['ten_phim']) : ''; ?>"
                             placeholder="Nhập tên phim" required>
+                            <?php if (isset($messages['ten_phim'])): ?>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ten_phim']) ?></small>
+                        <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
                         <label for="phan_loai">Phân loại</label>

@@ -43,7 +43,7 @@ unset($_SESSION['form_data']);
                         </div>
                         <div class="form-group mb-3">
                             <label for="phan_loai">Phân loại</label>
-                            <select class="form-select" id="phan_loai" name="phan_loai" required>
+                            <select class="form-select" id="phan_loai" name="phan_loai">
                                 <option value="0" <?= $film['data']['PhanLoai'] == 0 ? 'selected' : ''; ?>>Phổ thông</option>
                                 <option value="13" <?= $film['data']['PhanLoai'] == 13 ? 'selected' : ''; ?>>T13</option>
                                 <option value="16" <?= $film['data']['PhanLoai'] == 16 ? 'selected' : ''; ?>>T16</option>
@@ -54,12 +54,12 @@ unset($_SESSION['form_data']);
                         <div class="form-group mb-3">
                             <label for="dao_dien">Đạo diễn</label>
                             <input type="text" class="form-control" id="dao_dien" name="dao_dien" value="<?= $film['data']['DaoDien'] ?>"
-                                value="<?php echo isset($formData['dao_dien']) ? htmlspecialchars($formData['dao_dien']) : ''; ?>" placeholder="Nhập tên đạo diễn" required>
+                                value="<?php echo isset($formData['dao_dien']) ? htmlspecialchars($formData['dao_dien']) : ''; ?>" placeholder="Nhập tên đạo diễn">
                         </div>
                         <div class="form-group mb-3">
                             <label for="dien_vien">Diễn viên</label>
                             <input type="text" class="form-control" id="dien_vien" name="dien_vien" value="<?= $film['data']['DienVien'] ?>"
-                                value="<?php echo isset($formData['dien_vien']) ? htmlspecialchars($formData['dien_vien']) : ''; ?>" placeholder="Nhập tên diễn viên" required>
+                                value="<?php echo isset($formData['dien_vien']) ? htmlspecialchars($formData['dien_vien']) : ''; ?>" placeholder="Nhập tên diễn viên">
                         </div>
                         <?php
                         // Danh sách quốc gia đã định nghĩa
