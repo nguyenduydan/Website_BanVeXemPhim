@@ -3,7 +3,8 @@
         <a class="navbar-brand fs-2 ms-5 p-0" style="
             font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             " href="http://localhost/Website_BanVeXemPhim/index.php"> <img
-                src="/Website_BanVeXemPhim/assets/imgs/logo-100x100.png" class="w-35 bg-dark" alt="Dashboard">
+                src="/Website_BanVeXemPhim/assets/imgs/logo-100x100.png" class="w-25 bg-dark rounded-circle"
+                alt="Dashboard">
             TICKET</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

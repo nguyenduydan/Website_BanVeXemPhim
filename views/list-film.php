@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5 w-75">
     <h4 class="mb-4 fw-bolder">
         <span class="vertical-bar">|</span> Phim
     </h4>

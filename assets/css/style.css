@@ -44,10 +44,6 @@
     transform: translateY(2px);
 }
 
-img
-{
-   border-radius: 20px !important;
-}
 .page-item .page-link{
 transition: background-image ease-in-out 1s;
 }
