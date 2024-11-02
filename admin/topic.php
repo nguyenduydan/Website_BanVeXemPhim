@@ -55,25 +55,16 @@ $records_per_page = $pagination['records_per_page'];
                             ?>
                                     <tr>
                                         <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
+                                        <th class="text-center text-xs font-weight-bolder">
                                         <?php
-                                        global $conn;
-                                        $tenphim = ""; // Khởi tạo biến $tenphim
-                                        $query = "SELECT PHIM.TENPHIM
-                                        FROM CHUDE
-                                        JOIN PHIM ON PHIM.MAPHIM = CHUDE.MAPHIM
-                                        WHERE PHIM.MAPHIM = {$item['MaPhim']}
-                                        GROUP BY PHIM.MAPHIM";
-
-                                        $result = $conn->query($query);
-
-                                        // Kiểm tra xem có kết quả trả về không
-                                        if ($result && $result->num_rows > 0) {
-                                            // Lấy tên phim từ kết quả
-                                            $row = $result->fetch_assoc();
-                                            $tenphim = $row['TENPHIM']; // Gán tên phim vào biến $tenphim
-                                        }
+                                            $query = "SELECT TenPhim FROM Phim WHERE MaPhim = {$item['MaPhim']}";
+                                            $result = $conn->query($query);
+                                            if ($result && $film = $result->fetch_assoc()) {
+                                                echo htmlspecialchars($film['TenPhim']);
+                                            } else {
+                                                echo "Không tìm thấy tên phim";
+                                            }
                                         ?>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $tenphim; ?>
                                         </th>
 
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['TenChuDe']; ?></th>

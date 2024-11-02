@@ -30,13 +30,6 @@ unset($_SESSION['form_data']);
                             <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name_topic']) ?></small>
                         <?php endif; ?>
                     </div>
-
-                    <div class="form-group mb-3">
-                        <label for="tenrutgon">Tên rút gọn</label>
-                        <input type="text" class="form-control" id="tenrutgon" name="tenrutgon"
-                            placeholder="Nhập tên rút gọn"
-                            value="<?php echo isset($formData['tenrutgon']) ? htmlspecialchars($formData['tenrutgon']) : ''; ?>">
-                    </div>
                     <div class="form-group mb-3">
                         <label for="tukhoa">Từ khóa</label>
                         <input type="text" class="form-control" id="tukhoa" name="tukhoa" placeholder="Nhập từ khóa"
@@ -48,19 +41,17 @@ unset($_SESSION['form_data']);
                 </div>
                 <div class="col-md-6">
                     <div class="form-group row mb-3">
-                        <div class="col">
-                            <label for="maphim">Phim</label>
-
-                            <select class="form-select" id="maphim" name="maphim">
-                                <option>Chọn phim</option>
-                                <?php
-                                $phims = getAll('Phim');
-                                foreach ($phims as $phim): ?>
-                                    <option value="<?= $phim['MaPhim'] ?? '' ?>"><?= $phim['TenPhim'] ?? '' ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
+                        <select class="form-control" id="maphim" name="maphim">
+                            <option value="">Chọn tên phim</option>
+                            <?php
+                            $films = getAll('Phim');
+                            foreach ($films as $film): ?>
+                                <option value="<?php echo htmlspecialchars($film['MaPhim']); ?>"
+                                    <?php echo (isset($formData['maphim']) && $formData['maphim'] == $film['MaPhim']) ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($film['TenPhim']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
                         <div class="col">
                             <label for="status">Trạng thái</label>
                             <select class="form-select" id="status" name="status">

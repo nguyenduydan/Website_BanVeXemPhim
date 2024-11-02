@@ -5,7 +5,6 @@ require '../../config/function.php';
 $messages = [];
 if (isset($_POST['saveTopic'])) {
     $name_topic = validate($_POST['name_topic']);
-    $name_short = validate($_POST['tenrutgon']);
     $tukhoa = validate($_POST['tukhoa']);
     $phim = validate($_POST['maphim']);
     $status = validate($_POST['status']);
@@ -16,11 +15,11 @@ if (isset($_POST['saveTopic'])) {
     if (empty($tukhoa)) {
         $messages['tukhoa'] = 'Từ khóa không được để trống';
     }
-
+    $slug = str_slug($name_topic);
 
     if (empty($messages)) {
         $query = "INSERT INTO chude (MaPhim,TenRutGon,MoTa,TuKhoa,TenChuDe,NguoiTao,NgayTao,NguoiCapNhat,NgayCapNhat,TrangThai)
-            VALUES ('$phim','$name_short','$mota','$tukhoa','$name_topic',1,CURRENT_TIMESTAMP,NULL,NULL,'$status')";
+            VALUES ('$phim','$slug','$mota','$tukhoa','$name_topic',1,CURRENT_TIMESTAMP,NULL,NULL,'$status')";
         if (mysqli_query($conn, $query)) {
             redirect('../topic.php', 'success', 'Thêm chủ đề thành công');
         } else {
@@ -39,7 +38,7 @@ if (isset($_POST['editTopic'])) {
     $messages = [];
     $id = validate($_POST['id']);
     $name_topic = validate($_POST['name_topic']);
-    $name_short = validate($_POST['tenrutgon']);
+    $slug = validate($_POST['tenrutgon']);
     $tukhoa = validate($_POST['tukhoa']);
     $phim = validate($_POST['maphim']);
     $status = validate($_POST['status']);
@@ -54,7 +53,7 @@ if (isset($_POST['editTopic'])) {
     if (empty($messages)) {
         $query = "UPDATE ChuDe SET
                 MaPhim = '$phim',
-                TenRutGon = '$name_short',
+                TenRutGon = '$slug',
                 MoTa = '$mota',
                 TuKhoa = '$tukhoa',
                 TenChuDe = '$name_topic',
