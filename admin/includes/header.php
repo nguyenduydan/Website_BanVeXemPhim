@@ -19,6 +19,7 @@
         'user' => 'Danh sách người dùng',
         'room' => 'Danh sách phòng chiếu',
         'menu' => 'Danh sách menu',
+        'parameter' => 'Danh sách tham số',
     ];
 
     // Hàm để lấy tiêu đề dựa trên tên trang
@@ -57,9 +58,7 @@
     ?>
     <title><?php echo $title; ?></title>
     <meta charset="utf-8" />
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <?php include('links.php'); ?>
 </head>
 
