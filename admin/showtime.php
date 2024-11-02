@@ -39,8 +39,8 @@ $records_per_page = $pagination['records_per_page'];
                         <thead>
                             <tr>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">STT</th>
-                                <th class="text-center text-uppercase text-xs font-weight-bolder">Giờ chiếu</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Tên phim</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Giờ chiếu</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Người tạo</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Ngày tạo</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Người cập nhật</th>
@@ -58,9 +58,9 @@ $records_per_page = $pagination['records_per_page'];
                             ?>
                                     <tr>
                                         <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $item['GioChieu']; ?></th>
+
                                         <th class="text-center text-xs font-weight-bolder">
-                                        <?php
+                                            <?php
                                             $query = "SELECT TenPhim FROM Phim WHERE MaPhim = {$item['MaPhim']}";
                                             $result = $conn->query($query);
                                             if ($result && $film = $result->fetch_assoc()) {
@@ -68,8 +68,9 @@ $records_per_page = $pagination['records_per_page'];
                                             } else {
                                                 echo "Không tìm thấy tên phim";
                                             }
-                                        ?>
+                                            ?>
                                         </th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['GioChieu']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['NguoiTao']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['NgayTao']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['NguoiCapNhat']; ?></th>

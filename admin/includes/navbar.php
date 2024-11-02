@@ -1,84 +1,85 @@
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Iceberg&family=Keania+One&family=Rampart+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Iceberg&family=Keania+One&family=Rampart+One&display=swap');
 
-    #searchBox {
-        width: 300px;
-        padding: 10px;
-        font-size: 16px;
-    }
+#searchBox {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+}
 
-    #results {
-        position: absolute;
-        top: 100%;
-        /* Hiển thị ngay dưới ô tìm kiếm */
-        left: 20;
-        right: 0;
-        background-color: #fff;
-        max-height: 200px;
-        margin-top: 0.5rem;
-        overflow-y: auto;
-        z-index: 1000;
-        width: 90%;
-        border: 0.2px solid #17ad37;
-        border-radius: 10px;
-        display: none;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    }
+#results {
+    position: absolute;
+    top: 100%;
+    /* Hiển thị ngay dưới ô tìm kiếm */
+    left: 20;
+    right: 0;
+    background-color: #fff;
+    max-height: 200px;
+    margin-top: 0.5rem;
+    overflow-y: auto;
+    z-index: 1000;
+    width: 90%;
+    border: 0.2px solid #17ad37;
+    border-radius: 10px;
+    display: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
 
-    #results a {
-        padding: 5px 15px;
-        font-weight: 900;
-        border: none;
-    }
+#results a {
+    padding: 5px 15px;
+    font-weight: 900;
+    border: none;
+}
 
 
-    .result-item {
-        padding: 10px;
+.result-item {
+    padding: 10px;
 
-        border-bottom: 1px solid #ddd;
-        text-decoration: none;
-        color: #17ad37;
-        display: block;
-        width: 100%;
-        transition: ease-in-out .05s;
-    }
+    border-bottom: 1px solid #ddd;
+    text-decoration: none;
+    color: #17ad37;
+    display: block;
+    width: 100%;
+    transition: ease-in-out .05s;
+}
 
-    /* Thêm viền và hiệu ứng khi di chuột qua vùng kết quả */
-    #results .result-item:hover {
-        background-image: linear-gradient(310deg, #98ec2d 0%, #17ad37 100%);
-        color: #fff;
-    }
+/* Thêm viền và hiệu ứng khi di chuột qua vùng kết quả */
+#results .result-item:hover {
+    background-image: linear-gradient(310deg, #98ec2d 0%, #17ad37 100%);
+    color: #fff;
+}
 
-    #clock {
-        border-radius: 30px;
-        border: 5px solid snow;
-        box-shadow:
-            0px 4px 6px rgba(0, 0, 0, 0.2),
-            -2px 5px 0px rgba(0, 0, 0, 0.2);
-        font-family: "Iceberg", sans-serif;
-        pointer-events: none;
-    }
+#clock {
+    border-radius: 30px;
+    border: 5px solid snow;
+    box-shadow:
+        0px 4px 6px rgba(0, 0, 0, 0.2),
+        -2px 5px 0px rgba(0, 0, 0, 0.2);
+    font-family: "Iceberg", sans-serif;
+    pointer-events: none;
+}
 
-    #avatar-container {
-        width: 60px;
-        height: 60px;
-        padding: 4px;
-        margin-left: 5px;
-        background: linear-gradient(45deg, #7928ca, #ff0080);
-        display: inline-block;
-        box-shadow:
-            0px 4px 6px rgba(0, 0, 0, 0.2);
-    }
+#avatar-container {
+    width: 60px;
+    height: 60px;
+    padding: 4px;
+    margin-left: 5px;
+    background: linear-gradient(45deg, #7928ca, #ff0080);
+    display: inline-block;
+    box-shadow:
+        0px 4px 6px rgba(0, 0, 0, 0.2);
+}
 
-    #avatar {
-        width: 100%;
-        height: 100%;
-        display: block;
-        border: 1px solid snow;
-    }
+#avatar {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 1px solid snow;
+}
 </style>
 
-<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none sticky-top" style="background-color: #f8f9fa;">
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 border-radius-xl position-sticky blur shadow-blur mt-4 left-auto top-1 z-index-sticky"
+    style="background-color: #f8f9fa;">
     <div class="container-fluid py-1 px-3">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
             aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -150,56 +151,56 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        function updateClock() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
+$(document).ready(function() {
+    function updateClock() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
 
-            $('#clock').text(`${hours}:${minutes}:${seconds}`);
-        }
+        $('#clock').text(`${hours}:${minutes}:${seconds}`);
+    }
 
-        // Cập nhật đồng hồ ngay lập tức
-        updateClock();
-        // Cập nhật đồng hồ mỗi giây
-        setInterval(updateClock, 1000);
-    });
+    // Cập nhật đồng hồ ngay lập tức
+    updateClock();
+    // Cập nhật đồng hồ mỗi giây
+    setInterval(updateClock, 1000);
+});
 </script>
 <script>
-    function searchData() {
-        let query = document.getElementById("searchBox").value.toLowerCase();
-        let links = document.querySelectorAll("#linkContainer a");
-        let results = document.getElementById("results");
+function searchData() {
+    let query = document.getElementById("searchBox").value.toLowerCase();
+    let links = document.querySelectorAll("#linkContainer a");
+    let results = document.getElementById("results");
 
-        // Xóa kết quả hiện tại
-        results.innerHTML = "";
+    // Xóa kết quả hiện tại
+    results.innerHTML = "";
 
-        if (query.length > 0) {
-            // Hiển thị vùng kết quả
-            results.style.display = "block";
+    if (query.length > 0) {
+        // Hiển thị vùng kết quả
+        results.style.display = "block";
 
-            // Lọc và hiển thị các thẻ <a> có chứa từ khóa tìm kiếm
-            links.forEach(function(link) {
-                let linkText = link.textContent.toLowerCase();
-                if (linkText.includes(query)) {
-                    let resultLink = document.createElement("a");
-                    resultLink.href = link.href;
-                    resultLink.textContent = link.textContent;
-                    resultLink.classList.add("result-item");
+        // Lọc và hiển thị các thẻ <a> có chứa từ khóa tìm kiếm
+        links.forEach(function(link) {
+            let linkText = link.textContent.toLowerCase();
+            if (linkText.includes(query)) {
+                let resultLink = document.createElement("a");
+                resultLink.href = link.href;
+                resultLink.textContent = link.textContent;
+                resultLink.classList.add("result-item");
 
-                    results.appendChild(resultLink);
-                }
-            });
-
-            // Nếu không có kết quả phù hợp, ẩn vùng kết quả
-            if (results.innerHTML.trim() === "") {
-                results.style.display = "none";
+                results.appendChild(resultLink);
             }
+        });
 
-        } else {
-            // Ẩn vùng kết quả nếu không có dữ liệu tìm kiếm
+        // Nếu không có kết quả phù hợp, ẩn vùng kết quả
+        if (results.innerHTML.trim() === "") {
             results.style.display = "none";
         }
+
+    } else {
+        // Ẩn vùng kết quả nếu không có dữ liệu tìm kiếm
+        results.style.display = "none";
     }
+}
 </script>
