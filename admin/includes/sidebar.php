@@ -5,7 +5,8 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="/Website_BanVeXemPhim/admin/index.php" target="_blank">
             <span class="ms-1 font-weight-bold fs-4 font-monospace">
-                <img src="/Website_BanVeXemPhim/assets/imgs/logo-100x100.png" class="w-25 bg-dark" alt="Dashboard">
+                <img src="/Website_BanVeXemPhim/admin/assets/icon/logo-100x100.png" class="w-25 bg-dark"
+                    alt="Dashboard">
                 DashBoard</span>
         </a>
     </div>
