@@ -100,23 +100,29 @@ transition: background-image ease-in-out 1s;
     background-position: center right;
     /* change the direction of the change here */
 }
-/* show film */
+/* Show film styles */
 .vertical-bar {
     color: #333;
     font-weight: bold;
     margin-right: 8px;
 }
 
+/* Show film styles */
 .movie-card {
     position: relative;
     overflow: hidden;
     border: none;
     background-color: #f8f9fa;
     border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+    /* Phóng to nhẹ khi hover */
 }
 
 .movie-card img {
-    height: 500px;
     width: 100%;
     height: auto;
     border-radius: 8px;
@@ -124,8 +130,9 @@ transition: background-image ease-in-out 1s;
 }
 
 .movie-card:hover img,
-.movie-card:hover .movie-age { /* Làm mờ cả ảnh và độ tuổi */
+.movie-card:hover .movie-age {
     filter: blur(2px) brightness(0.7);
+    /* Mờ ảnh và làm tối khi hover */
 }
 
 .movie-age {
@@ -152,12 +159,14 @@ transition: background-image ease-in-out 1s;
     font-weight: bold;
 }
 
+/* Nút Mua Vé chung */
 .buy-ticket {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: none;
+    /* Mặc định ẩn cho các kích thước lớn */
     background-color: #344090;
     color: white;
     padding: 8px 16px;
@@ -169,15 +178,29 @@ transition: background-image ease-in-out 1s;
 }
 
 .movie-card:hover .buy-ticket {
-    display: block; /* Hiển thị nút "Mua Vé" khi hover */
+    display: block;
+    /* Chỉ hiển thị khi hover ở lg */
 }
-.buy-ticket:hover{
-    color: #fff;
+
+/* Luôn hiển thị nút "Mua Vé" ở md và sm */
+@media (max-width: 991px) {
+    .buy-ticket {
+        display: block;
+        /* Luôn hiển thị ở md và sm */
+        position: static;
+        margin-top: 10px;
+        transform: none;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.buy-ticket:hover {
     background-color: #4d5fd1;
+    color: white;
 }
 
-
-/* detail-film */
+/* Detail film styles */
 .movie-poster {
     max-width: 100%;
     border-radius: 8px;

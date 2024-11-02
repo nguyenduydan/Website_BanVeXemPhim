@@ -15,20 +15,25 @@
             ["title" => "Ác Quỷ Truy Hồn", "age" => "T18", "img" => "uploads/film-imgs/anhphim.jpg"],
             ["title" => "Trò Chơi Nhân Tính", "age" => "T16", "img" => "uploads/film-imgs/anhphim.jpg"],
         ];
-
-        // Lặp qua từng phim để hiển thị
-        foreach ($movies as $movie) {
-            echo '<div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">'; // Thay đổi cấu trúc cột
-            echo '    <div class="movie-card card">';
-            echo '        <img class="img-fluid" src="' . $movie['img'] . '" alt="' . $movie['title'] . '">';
-            echo '        <span class="movie-age">' . $movie['age'] . '</span>';
-            echo '        <a href="views/detail-film.php" class="buy-ticket"><i class="bi bi-ticket-perforated"></i> Mua Vé</a>';
-            echo '    </div>';
-            echo '    <div class="movie-info">';
-            echo '        <div class="movie-title">' . $movie['title'] . '</div>';
-            echo '    </div>';
-            echo '</div>';
-        }
         ?>
+        <div class="container">
+            <div class="row">
+                <?php foreach ($movies as $movie): ?>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-4">
+                        <div class="movie-card card">
+                            <img class="img-fluid" src="<?= $movie['img'] ?>" alt="<?= $movie['title'] ?>">
+                            <span class="movie-age"><?= $movie['age'] ?></span>
+                            <!-- Nút "Mua Vé" luôn hiển thị ở md và sm, và chỉ hiển thị khi hover ở lg -->
+                            <a href="views/detail-film.php" class="buy-ticket">
+                                <i class="bi bi-ticket-perforated"></i> Mua Vé
+                            </a>
+                        </div>
+                        <div class="movie-info">
+                            <div class="movie-title"><?= $movie['title'] ?></div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
     </div>
 </div>
