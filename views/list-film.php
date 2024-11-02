@@ -4,7 +4,6 @@
     </h4>
     <div class="row">
         <?php
-        // Mảng chứa danh sách phim
         $movies = [
             ["title" => "Thiên Đường Quả Báo", "age" => "T18", "img" => "uploads/film-imgs/anhphim.jpg"],
             ["title" => "Venom: Kèo Cuối", "age" => "T13", "img" => "uploads/film-imgs/anhphim.jpg"],
@@ -12,9 +11,6 @@
             ["title" => "Tee Yod: Quỷ Ẩn Tang Phần 2", "age" => "T18", "img" => "uploads/film-imgs/anhphim.jpg"],
             ["title" => "Ngày Xưa Có Một Chuyện Tình", "age" => "T16", "img" => "uploads/film-imgs/anhphim.jpg"],
             ["title" => "Vùng Đất Bị Nguyền Rủa", "age" => "T18", "img" => "uploads/film-imgs/anhphim.jpg"],
-            ["title" => "Ác Quỷ Truy Hồn", "age" => "T18", "img" => "uploads/film-imgs/anhphim.jpg"],
-            ["title" => "Trò Chơi Nhân Tính", "age" => "T16", "img" => "uploads/film-imgs/anhphim.jpg"],
-            ["title" => "Phim Thêm 1", "age" => "T18", "img" => "uploads/film-imgs/anhphim.jpg"],
             ["title" => "Ác Quỷ Truy Hồn", "age" => "T18", "img" => "uploads/film-imgs/anhphim.jpg"],
             ["title" => "Trò Chơi Nhân Tính", "age" => "T16", "img" => "uploads/film-imgs/anhphim.jpg"],
             ["title" => "Phim Thêm 1", "age" => "T18", "img" => "uploads/film-imgs/anhphim.jpg"],
@@ -40,7 +36,7 @@
                 <?php endforeach; ?>
             </div>
             <div class="text-center mt-3">
-                <button class="btn btn-outline-primary" onclick="showMoreMovies()">Xem Thêm</button>
+                <button id="showMoreBtn" class="btn btn-outline-primary" onclick="showMoreMovies()">Xem Thêm</button>
             </div>
         </div>
     </div>
@@ -50,7 +46,7 @@
 function showMoreMovies() {
     const hiddenMovies = document.querySelectorAll('.movie-item.hidden');
     hiddenMovies.forEach(movie => movie.classList.remove('hidden'));
-    document.querySelector('button').style.display = 'none';
+    document.getElementById('showMoreBtn').style.display = 'none'; // Ẩn nút "Xem Thêm"
 }
 </script>
 
