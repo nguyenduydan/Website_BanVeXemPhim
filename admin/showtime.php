@@ -59,7 +59,17 @@ $records_per_page = $pagination['records_per_page'];
                                     <tr>
                                         <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['GioChieu']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $item['GioChieu']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder">
+                                        <?php
+                                            $query = "SELECT TenPhim FROM Phim WHERE MaPhim = {$item['MaPhim']}";
+                                            $result = $conn->query($query);
+                                            if ($result && $film = $result->fetch_assoc()) {
+                                                echo htmlspecialchars($film['TenPhim']);
+                                            } else {
+                                                echo "Không tìm thấy tên phim";
+                                            }
+                                        ?>
+                                        </th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['NguoiTao']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['NgayTao']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['NguoiCapNhat']; ?></th>
