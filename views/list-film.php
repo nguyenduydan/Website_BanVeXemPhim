@@ -40,7 +40,7 @@
                 <?php endforeach; ?>
             </div>
             <div class="text-center mt-3">
-                <button class="btn btn-primary" onclick="showMoreMovies()">Xem Thêm</button>
+                <button class="btn btn-outline-primary" onclick="showMoreMovies()">Xem Thêm</button>
             </div>
         </div>
     </div>
