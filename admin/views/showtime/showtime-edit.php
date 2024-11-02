@@ -79,10 +79,9 @@ unset($_SESSION['form_data']);
             </div>
             <?php
             } else {
-                echo '<h5>' . $user['message'] . '</h5>';
+                echo '<h5>' . $sc['message'] . '</h5>';
             }
             ?>
-            <button type="submit" name="editUser" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
             </form>
     </div>
 </div>
