@@ -14,7 +14,7 @@ if (isset($_POST['saveTopic'])) {
         $messages['name_topic'] = 'Tên chủ đề không được để trống';
     }
     if (empty($tukhoa)) {
-        $messages['name_topic'] = 'Từ khóa không được để trống';
+        $messages['tukhoa'] = 'Từ khóa không được để trống';
     }
 
 
@@ -35,33 +35,42 @@ if (isset($_POST['saveTopic'])) {
 
 //====== topic-edit =======//
 
-if (isset($_POST['editCategory'])) {
+if (isset($_POST['editTopic'])) {
     $messages = [];
-    $name = validate($_POST['ten_the_loai']);
-    $id = validate($_POST['matl']);
+    $id = validate($_POST['id']);
+    $name_topic = validate($_POST['name_topic']);
+    $name_short = validate($_POST['tenrutgon']);
+    $tukhoa = validate($_POST['tukhoa']);
+    $phim = validate($_POST['maphim']);
     $status = validate($_POST['status']);
-    if (empty($name)) {
-        $messages['name'] = 'Tên thể loại không được để trống';
+    $mota = validate($_POST['mo_ta']);
+    if (empty($name_topic)) {
+        $messages['name_topic'] = 'Tên chủ đề không được để trống';
     }
-    if (isExistValue('TheLoai', 'TenTheLoai', $name, 'MaTheLoai', $id)) {
-        $messages['name'] = 'Tên thể loại đã tồn tại';
+    if (empty($tukhoa)) {
+        $messages['name_topic'] = 'Từ khóa không được để trống';
     }
+
     if (empty($messages)) {
-        $query = "UPDATE TheLoai SET
-                TenTheLoai = '$name',
+        $query = "UPDATE ChuDe SET
+                MaPhim = '$phim',
+                TenRutGon = '$name_short',
+                MoTa = '$mota',
+                TuKhoa = '$tukhoa',
+                TenChuDe = '$name_topic',
                 NguoiCapNhat = 1,
                 NgayCapNhat = CURRENT_TIMESTAMP,
                 TrangThai = '$status'
-                WHERE MaTheLoai = '$id'
+                WHERE Id = '$id'
                 ";
         if (mysqli_query($conn, $query)) {
-            redirect('../topic.php', 'success', 'Cập nhật thể loại thành công');
+            redirect('../topic.php', 'success', 'Cập nhật chủ đề thành công');
         } else {
-            redirect('../views/category/topic-edit.php?id=' . $id, 'errors', 'Cập nhật thể loại thất bại');
+            redirect('../views/topic/topic-edit.php?id=' . $id, 'errors', 'Cập nhật chủ đề thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/category/topic-edit.php?id=' . $id, 'errors', $messages);
+        redirect('../views/topic/topic-edit.php?id=' . $id, 'errors', $messages);
     }
 }
 

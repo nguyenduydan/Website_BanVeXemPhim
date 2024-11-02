@@ -41,6 +41,9 @@ unset($_SESSION['form_data']);
                         <label for="tukhoa">Từ khóa</label>
                         <input type="text" class="form-control" id="tukhoa" name="tukhoa" placeholder="Nhập từ khóa"
                             value="<?php echo isset($formData['tukhoa']) ? htmlspecialchars($formData['tukhoa']) : ''; ?>">
+                        <?php if (isset($messages['tukhoa'])): ?>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tukhoa']) ?></small>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="col-md-6">
