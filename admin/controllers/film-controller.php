@@ -112,8 +112,8 @@ if (isset($_POST['editFilm'])) {
                 NamPhatHanh = '$namphathanh',
                 PhanLoai = '$phanloai',
                 MoTa = '$mota',
-                NguoiCapNhat = '1', 
-                NgayCapNhat = CURRENT_TIMESTAMP, 
+                NguoiCapNhat = '1',
+                NgayCapNhat = CURRENT_TIMESTAMP,
                 TrangThai = '$status'
                 WHERE MaPhim = '$id'";
 

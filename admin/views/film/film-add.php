@@ -29,7 +29,7 @@ unset($_SESSION['form_data']);
                         <input type="text" class="form-control" id="ten_phim" name="ten_phim"
                             value="<?php echo isset($formData['ten_phim']) ? htmlspecialchars($formData['ten_phim']) : ''; ?>"
                             placeholder="Nhập tên phim" required>
-                            <?php if (isset($messages['ten_phim'])): ?>
+                        <?php if (isset($messages['ten_phim'])): ?>
                             <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ten_phim']) ?></small>
                         <?php endif; ?>
                     </div>
@@ -37,9 +37,9 @@ unset($_SESSION['form_data']);
                         <label for="phan_loai">Phân loại</label>
                         <select class="form-select" id="phan_loai" name="phan_loai" required>
                             <option value="0">Phổ thông</option>
-                            <option value="13">T13</option>
-                            <option value="16">T16</option>
-                            <option value="18">T18</option>
+                            <option value="T13">T13</option>
+                            <option value="T16">T16</option>
+                            <option value="T18">T18</option>
                         </select>
                     </div>
 

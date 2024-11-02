@@ -2,7 +2,7 @@
     <div class="container-fluid mx-5">
         <div class="container">
             <div class="d-flex align-items-center justify-content-center justify-content-lg-start">
-                <a href="#" class="me-5">
+                <a href="http://localhost/Website_BanVeXemPhim/index.php" class="me-5">
                     <img src="/Website_BanVeXemPhim/assets/imgs/logo-100x100.png" style="width: 50px;"
                         class="bg-dark rounded-3 h-50">
                 </a>
