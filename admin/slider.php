@@ -129,35 +129,7 @@ $records_per_page = $pagination['records_per_page'];
                 </div>
             </div>
             <div class="card-footer">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
-                        <?php if ($pagination['total_pages'] > 1): // Kiểm tra xem có nhiều hơn 1 trang
-                        ?>
-                        <?php if ($current_page > 1): ?>
-                        <li class="page-item">
-                            <a class="page-link bg-gradient-dark text-white" href="?page=<?= $current_page - 1 ?>">
-                                <i class="bi bi-chevron-left fs-6 fw-bolder"></i>
-                            </a>
-                        </li>
-                        <?php endif; ?>
-
-                        <?php for ($i = 1; $i <= $pagination['total_pages']; $i++): ?>
-                        <li class="page-item <?= ($i == $current_page) ? 'active' : '' ?>">
-                            <a class="page-link border-radius-xs" href="?page=<?= $i ?>"><?= $i ?></a>
-                        </li>
-                        <?php endfor; ?>
-
-                        <?php if ($current_page < $pagination['total_pages']): ?>
-                        <li class="page-item">
-                            <a class="page-link bg-gradient-dark text-white" href="?page=<?= $current_page + 1 ?>">
-                                <i class="bi bi-chevron-right fs-6 fw-bolder"></i>
-                            </a>
-                        </li>
-                        <?php endif; ?>
-                        <?php endif; // Kết thúc kiểm tra số trang
-                        ?>
-                    </ul>
-                </nav>
+                <?php echo paginate_html($pagination['total_pages'], $pagination['current_page']); ?>
             </div>
         </div>
     </div>

@@ -161,7 +161,11 @@ if (isset($_POST['changeStatus'])) {
     $id = validate($_POST['maslider']);
     $status = validate($_POST['status']) == 1 ? 1 : 0;
 
-    $edit_query = "UPDATE Slider SET TrangThai = '$status' WHERE Id = '$id'";
+    $edit_query = "UPDATE Slider SET
+            NguoiCapNhat = '1',
+            NgayCapNhat = CURRENT_TIMESTAMP,
+            TrangThai = '$status'
+            WHERE Id = '$id'";
 
     if (mysqli_query($conn, $edit_query)) {
         redirect('../slider.php', 'success', 'Cập nhật trạng thái thành công');
