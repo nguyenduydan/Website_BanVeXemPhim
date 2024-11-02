@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
+
+/* CSS */
+
+.btn-add{
+    align-items: center;
+    appearance: none;
+    background-color: #6a00ff;
+    border-radius: 4px;
+    border-width: 0;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    height: 48px;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow, transform;
+    font-size: 18px;
+}
+
+
+.button-30:focus {
+    box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.button-30:hover {
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    transform: translateY(-2px);
+}
+
+.button-30:active {
+    box-shadow: #D6D6E7 0 3px 7px inset;
+    transform: translateY(2px);
+}
+
+img
+{
+   border-radius: 20px !important;
+}
+.page-item .page-link{
+transition: background-image ease-in-out 1s;
+}
+.page-item .page-link,
+.page-item{
+    padding: 2px;
+
+}
+.page-item .page-link,
+.page-item a{
+    background-color: #ffffff;
+    width: 36px;
+    border-radius: 55% !important;
+
+}
+
+.page-item .page-link:hover {
+    background-image: linear-gradient(310deg, #141727, #3a416f);
+    color: white;
+}
+.page-item.active .page-link{
+    border: 2px solid black !important;
+}
+
+.carousel-item
+{
+    height: 30rem;
+
+}
+ .input-group-text{
+    border: none;
+ }
+ .input-group .iconEye {
+     position: absolute;
+     border: none;
+     background: transparent;
+     padding: 10px;
+     right: 0;
+     font-size: 15px;
+     box-shadow: none;
+     /* Đặt icon ở phía bên phải của ô input */
+     top: 50%;
+     transform: translateY(-50%);
+     cursor: pointer;
+     z-index: 999;
+     /* Đảm bảo icon không bị che khuất */
+ }
+.btn:hover {
+
+    background-position: center right;
+    /* change the direction of the change here */
+}
+/* Show film styles */
+.vertical-bar {
+    color: #333;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+/* Show film styles */
+.movie-card {
+    position: relative;
+    overflow: hidden;
+    border: none;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+    /* Phóng to nhẹ khi hover */
+}
+
+.movie-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: 0.3s ease;
+}
+
+.movie-card:hover img,
+.movie-card:hover .movie-age {
+    filter: blur(2px) brightness(0.7);
+    /* Mờ ảnh và làm tối khi hover */
+}
+
+.movie-age {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.9em;
+    background: #dc3545;
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.movie-info {
+    text-align: center;
+    margin-top: 10px;
+    color: #333;
+    font-size: 1.1em;
+}
+
+.movie-title {
+    font-weight: bold;
+}
+
+/* Nút Mua Vé chung */
+.buy-ticket {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    /* Mặc định ẩn cho các kích thước lớn */
+    background-color: #344090;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.movie-card:hover .buy-ticket {
+    display: block;
+    /* Chỉ hiển thị khi hover ở lg */
+}
+
+/* Luôn hiển thị nút "Mua Vé" ở md và sm */
+@media (max-width: 991px) {
+    .buy-ticket {
+        display: block;
+        /* Luôn hiển thị ở md và sm */
+        position: static;
+        margin-top: 10px;
+        transform: none;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.buy-ticket:hover {
+    background-color: #4d5fd1;
+    color: white;
+}
+
+/* Detail film styles */
+.movie-poster {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.movie-title-detail {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.movie-age-detail {
+    font-size: 0.9rem;
+    background-color: #ff6b6b;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.movie-meta {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+.movie-info p {
+    margin: 0.5rem 0;
+    text-align: left;
+}
+
+.movie-content {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+}

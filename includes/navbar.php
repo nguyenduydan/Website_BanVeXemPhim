@@ -1,5 +1,5 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-info p-3">
-    <div class="container-fluid mx-10">
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light p-3">
+    <div class="container-fluid mx-5">
         <a class="navbar-brand fs-2 ms-5 p-0" style="
             font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             " href="http://localhost/Website_BanVeXemPhim/index.php"> <img

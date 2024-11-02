@@ -10,6 +10,6 @@
 </head>
 
 <body>
-    <main class="main-content position-relative overflow-scroll max-height-vh-100 h-100 ">
+    <main class="main-content position-relative max-height-vh-100 h-100 ">
         <?php include('navbar.php'); ?>
         <div class="container-fluid py-4 ">
