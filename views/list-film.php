@@ -22,7 +22,7 @@
             echo '    <div class="movie-card card">';
             echo '        <img class="img-fluid" src="' . $movie['img'] . '" alt="' . $movie['title'] . '">';
             echo '        <span class="movie-age">' . $movie['age'] . '</span>';
-            echo '        <a href="views/detail-film.php" class="buy-ticket"><i class="bi bi-ticket-perforated"></i> Mua Vé</a>';
+            echo '        <a href="views/detail-film.php" class="buy-ticket"><i class="bi bi-ticket"></i> Mua Vé</a>';
             echo '    </div>';
             echo '    <div class="movie-info">';
             echo '        <div class="movie-title">' . $movie['title'] . '</div>';
