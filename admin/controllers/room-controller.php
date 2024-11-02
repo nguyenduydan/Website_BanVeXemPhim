@@ -16,7 +16,6 @@ if (isset($_POST['saveRoom'])) {
     }
 
     if (empty($messages)) {
-
         $query = "INSERT INTO phong (TenPhong, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
                   VALUES ('$ten_phong', '1', CURRENT_TIMESTAMP, NULL, NULL, '$status')";
 
@@ -44,8 +43,6 @@ if (isset($_POST['editRoom'])) {
     } elseif (isExistValue('Phong', 'TenPhong', $ten_phong, 'MaPhong', $id)) {
         $messages['ten_phong'] = "Tên phòng đã tồn tại";
     }
-
-    $room = getByID('Phong', 'MaPhong', $id);
     if (empty($messages)) {
         $query = "UPDATE phong SET
                 TenPhong = '$ten_phong',
