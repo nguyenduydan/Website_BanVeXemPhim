@@ -232,3 +232,24 @@ transition: background-image ease-in-out 1s;
     padding: 20px;
     border-radius: 8px;
 }
+
+/* Tạo hiệu ứng phóng to khi hover */
+.hover-zoom .card-img-top {
+    transition: transform 0.3s ease;
+}
+
+.hover-zoom:hover .card-img-top {
+    transform: scale(1.02);
+}
+
+/* Đặt màu sắc và style cho thẻ liên kết */
+.card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.small-image {
+    max-width: 40%; 
+    height: auto;
+}

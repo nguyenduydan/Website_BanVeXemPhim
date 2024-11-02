@@ -19,19 +19,19 @@
         <div class="container">
             <div class="row">
                 <?php foreach ($movies as $movie): ?>
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-4">
-                        <div class="movie-card card">
-                            <img class="img-fluid" src="<?= $movie['img'] ?>" alt="<?= $movie['title'] ?>">
-                            <span class="movie-age"><?= $movie['age'] ?></span>
-                            <!-- Nút "Mua Vé" luôn hiển thị ở md và sm, và chỉ hiển thị khi hover ở lg -->
-                            <a href="views/detail-film.php" class="buy-ticket">
-                                <i class="bi bi-ticket-perforated"></i> Mua Vé
-                            </a>
-                        </div>
-                        <div class="movie-info">
-                            <div class="movie-title"><?= $movie['title'] ?></div>
-                        </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-4">
+                    <div class="movie-card card">
+                        <img class="img-fluid" src="<?= $movie['img'] ?>" alt="<?= $movie['title'] ?>">
+                        <span class="movie-age"><?= $movie['age'] ?></span>
+                        <!-- Nút "Mua Vé" luôn hiển thị ở md và sm, và chỉ hiển thị khi hover ở lg -->
+                        <a href="views/detail-film.php" class="buy-ticket">
+                            <i class="bi bi-ticket-perforated"></i> Mua Vé
+                        </a>
                     </div>
+                    <div class="movie-info">
+                        <div class="movie-title"><?= $movie['title'] ?></div>
+                    </div>
+                </div>
                 <?php endforeach; ?>
             </div>
         </div>

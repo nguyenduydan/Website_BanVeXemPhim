@@ -1,6 +1,6 @@
 <?php include('../includes/header.php'); ?>
 
-<div class="container mt-5">
+<div class="container mt-5 w-75">
     <div class="row">
         <!-- Phần ảnh phim -->
         <div class="col-lg-4">
