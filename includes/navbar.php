@@ -1,41 +1,39 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light p-3">
     <div class="container-fluid mx-5">
-        <a class="navbar-brand fs-2 ms-5 p-0" style="
-            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            " href="#"> <img src="/Website_BanVeXemPhim/assets/imgs/logo-100x100.png"
-                class="w-25 bg-dark rounded-circle" alt="Dashboard">
-            TICKET</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center justify-content-lg-start">
+                <a href="#" class="me-5">
+                    <img src="/Website_BanVeXemPhim/assets/imgs/logo-100x100.png" style="width: 50px;"
+                        class="bg-dark rounded-3 h-50">
+                </a>
 
-        <div class=" collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ms-auto fs-5">
-                <li class="nav-item">
-                    <a class="nav-link mx-2 active fs-5" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link mx-2 fs-5" href="#">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link mx-2 fs-5" href="#">Pricing</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link mx-2 fs-5 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
+                    <li><a href="#" class="nav-link px-2 link-body-emphasis">Inventory</a></li>
+                    <li><a href="#" class="nav-link px-2 link-body-emphasis">Customers</a></li>
+                    <li><a href="#" class="nav-link px-2 link-body-emphasis">Products</a></li>
+                </ul>
+
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                    <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+                </form>
+
+                <div class="dropdown text-end">
+                    <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Company
+                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Blog</a></li>
-                        <li><a class="dropdown-item" href="#">About Us</a></li>
-                        <li><a class="dropdown-item" href="#">Contact us</a></li>
+                    <ul class="dropdown-menu text-small">
+                        <li><a class="dropdown-item" href="#">New project...</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
                     </ul>
-                </li>
-            </ul>
-            <ul class="navbar-nav ms-auto d-none d-lg-inline-flex">
-
-            </ul>
+                </div>
+            </div>
         </div>
     </div>
 </nav>
