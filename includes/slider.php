@@ -1,8 +1,8 @@
 <style>
-.carousel-item {
-    height: 20rem !important;
-    width: 100% !important;
-}
+    .carousel-item {
+        height: 20rem !important;
+        width: 100% !important;
+    }
 </style>
 
 <div class=" d-flex justify-content-center">
@@ -15,13 +15,13 @@
         </div>
         <div class="carousel-inner border-radius-2xl">
             <div class="carousel-item active" data-bs-interval="10000">
-                <img src="uploads/slider-imgs/doraemon-va-ban-giao-huong-dia-cau.jpg" class="d-block w-100" alt="...">
+                <img src="uploads/slider-imgs/john-wick-4.jpg" class="d-block w-100 h-100" alt="...">
             </div>
             <div class="carousel-item" data-bs-interval="2000">
-                <img src="uploads/slider-imgs/doraemon-va-ban-giao-huong-dia-cau.jpg" class="d-block w-100" alt="...">
+                <img src="uploads/slider-imgs/slide_1.jpg" class="d-block w-100 h-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="uploads/slider-imgs/doraemon-va-ban-giao-huong-dia-cau.jpg" class="d-block w-100" alt="...">
+                <img src="uploads/slider-imgs/slide_2.jpg" class="d-block w-100 h-100" alt="...">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
