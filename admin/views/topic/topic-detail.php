@@ -37,8 +37,26 @@ if ($item['status'] == 200) {
                             <span><?= $item['data']['Id']; ?></span>
                         </div>
                         <div class="mb-3">
+                            <?php
+                                global $conn;
+                                $tenphim = ""; // Khởi tạo biến $tenphim
+                                $query = "SELECT PHIM.TENPHIM
+                                        FROM CHUDE
+                                        JOIN PHIM ON PHIM.MAPHIM = CHUDE.MAPHIM
+                                        WHERE PHIM.MAPHIM = {$item['data']['MaPhim']}
+                                        GROUP BY PHIM.MAPHIM";
+
+                                $result = $conn->query($query);
+
+                                // Kiểm tra xem có kết quả trả về không
+                                if ($result && $result->num_rows > 0) {
+                                    // Lấy tên phim từ kết quả
+                                    $row = $result->fetch_assoc();
+                                    $tenphim = $row['TENPHIM']; // Gán tên phim vào biến $tenphim
+                                }
+                                ?>
                             <label class="fs-6">Phim: </label>
-                            <span><?= $item['data']['MaPhim']; ?></span>
+                            <span><?= $tenphim; ?></span>
                         </div>
                         <div class="mb-3">
                             <label class="fs-6">Tên chủ đề: </label>
