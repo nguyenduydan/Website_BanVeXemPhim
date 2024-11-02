@@ -1,5 +1,5 @@
 <?php
-require "config/function.php";
+require_once 'config/function.php';
 ?>
 
 <div class="container mt-5 w-75">

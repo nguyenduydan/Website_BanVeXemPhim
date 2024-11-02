@@ -17,81 +17,73 @@ unset($_SESSION['form_data']);
         <div class="text-end mb-4">
             <a class="btn btn-secondary" href="../../slider.php">Quay lại</a>
         </div>
-        <form id="addUserForm" action="../../controllers/slider-controller.php" method="post" enctype="multipart/form-data">
+        <form id="addUserForm" action="../../controllers/slider-controller.php" method="post"
+            enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group mb-3">
-                        <label for="name">Họ và tên người dùng (<span class="text-danger">*</span>)</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ và tên"
+                        <label for="name">Tên slider (<span class="text-danger">*</span>)</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên slider"
                             value="<?php echo isset($formData['name']) ? htmlspecialchars($formData['name']) : ''; ?>">
                         <?php if (isset($messages['name'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="username">Tên người dùng (<span class="text-danger">*</span>)</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên đăng nhập"
-                            value="<?php echo isset($formData['username']) ? htmlspecialchars($formData['username']) : ''; ?>">
-                        <?php if (isset($messages['username'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['username']) ?></small>
+                        <label for="nametopic">Tên chủ đề (<span class="text-danger">*</span>)</label>
+                        <input type="text" class="form-control" id="nametopic" name="nametopic"
+                            placeholder="Nhập tên đăng nhập"
+                            value="<?php echo isset($formData['nametopic']) ? htmlspecialchars($formData['nametopic']) : ''; ?>">
+                        <?php if (isset($messages['nametopic'])): ?>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['nametopic']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="password">Mật khẩu (<span class="text-danger">*</span>)</label>
-                        <div class="input-group">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
-                            <span class="input-group-text iconEye" id="password-addon" style="cursor: pointer;">
-                                <i class="fas fa-eye-slash " id="togglePassword"></i>
-                            </span>
-                        </div>
-                        <?php if (isset($messages['password'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['password']) ?></small>
+                        <label for="url">Url(<span class="text-danger">*</span>)</label>
+                        <input type="text" class="form-control" id="url" name="url" placeholder="Nhập đường dẫn"
+                            value="<?php echo isset($formData['url']) ? htmlspecialchars($formData['url']) : ''; ?>">
+                        <?php if (isset($messages['url'])): ?>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['url']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="re_password">Nhập lại mật khẩu (<span class="text-danger">*</span>)</label>
-                        <input type="password" class="form-control" id="re_password" name="re_password" placeholder="Nhập lại mật khẩu">
-                        <?php if (isset($messages['re_password'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['re_password']) ?></small>
+                        <label for="tukhoa">Từ khóa (<span class="text-danger">*</span>)</label>
+                        <input type="text" class="form-control" id="tukhoa" name="tukhoa" placeholder="Nhập từ khóa"
+                            value="<?php echo isset($formData['tukhoa']) ? htmlspecialchars($formData['tukhoa']) : ''; ?>">
+                        <?php if (isset($messages['tukhoa'])): ?>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tukhoa']) ?></small>
                         <?php endif; ?>
                     </div>
-                    <div class="form-group row mb-3">
-                        <div class="col">
-                            <label for="gioi_tinh">Giới tính (<span class="text-danger">*</span>)</label>
-                            <select class="form-control form-select" id="gioi_tinh" name="gioi_tinh">
-                                <option value="1" <?php echo (isset($formData['gioi_tinh']) && $formData['gioi_tinh'] === 'Nam') ? 'selected' : ''; ?> selected>Nam</option>
-                                <option value="0" <?php echo (isset($formData['gioi_tinh']) && $formData['gioi_tinh'] === 'Nữ') ? 'selected' : ''; ?>>Nữ</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <label for="sdt">Số điện thoại</label>
-                            <input type="number" class="form-control" id="sdt" name="sdt" placeholder="Nhập số điện thoại"
-                                value="<?php echo isset($formData['sdt']) ? htmlspecialchars($formData['sdt']) : ''; ?>">
-                        </div>
-                    </div>
                     <div class="form-group mb-3">
-                        <label for="email">Email (<span class="text-danger">*</span>)</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email"
-                            value="<?php echo isset($formData['email']) ? htmlspecialchars($formData['email']) : ''; ?>">
-                        <?php if (isset($messages['email'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['email']) ?></small>
+                        <label for="mota">Mô tả (<span class="text-danger">*</span>)</label>
+                        <textarea class="form-control" id="mota" name="mota" rows="5"><?php echo isset($formData['mota']) ? htmlspecialchars($formData['mota']) : ''; ?>
+                        </textarea>
+                        <?php if (isset($messages['mota'])): ?>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['mota']) ?></small>
                         <?php endif; ?>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group mb-3">
-                        <label for="ngay_sinh">Ngày sinh (<span class="text-danger">*</span>)</label>
-                        <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh"  value="<?php echo isset($formData['ngay_sinh']) ? htmlspecialchars($formData['ngay_sinh']) : ''; ?>">
-                        <?php if (isset($messages['ngay_sinh'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ngay_sinh']) ?></small>
+                        <label for="vitri">Vị trí(<span class="text-danger">*</span>)</label>
+                        <select class=" form-select" id="vitri" name="vitri">
+                            <option>Vị trí</option>
+                            <option value="header">Header</option>
+                            <option value="footer">Footer</option>
+                            <option value="aside">aside</option>
+                        </select>
+                        <?php if (isset($messages['vitri'])): ?>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['vitri']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group row mb-3">
                         <div class="col-6">
-                            <label for="role">Vai trò</label>
-                            <select class=" form-select" id="role" name="role">
-                                <option value="1">Admin</option>
-                                <option value="0">User</option>
+                            <label for="sapxep">Sắp xếp</label>
+                            <select class=" form-select" id="sapxep" name="sapxep">
+                                <option>Thứ tự</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
                             </select>
 
                         </div>
@@ -105,15 +97,17 @@ unset($_SESSION['form_data']);
 
                     </div>
                     <div class="form-group mb-3">
-                        <label for="avatar">Chọn ảnh</label>
-                        <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*" onchange="previewImageAdd(event)">
+                        <label for="anh_slider">Chọn ảnh</label>
+                        <input type="file" class="form-control" id="anh_slider" name="anh_slider" accept="image/*"
+                            onchange="previewImageAdd(event)">
                     </div>
                     <div class="form-group d-flex justify-content-center mb-3">
-                        <img id="preview" src="#" alt="Ảnh xem trước" class="img-fluid" style="display:none; max-width: 100%; max-height: 15rem;" />
+                        <img id="preview" src="#" alt="Ảnh xem trước" class="img-fluid"
+                            style="display:none; max-width: 100%; max-height: 15rem;" />
                     </div>
                 </div>
             </div>
-            <button type="submit" name="saveUser" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
+            <button type="submit" name="saveSlider" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
         </form>
     </div>
 </div>

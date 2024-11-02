@@ -13,4 +13,4 @@
 <body>
     <main class="main-content position-relative max-height-vh-100 h-100 ">
         <?php include('navbar.php'); ?>
-        <div class="container-fluid py-4 ">
+        <div>

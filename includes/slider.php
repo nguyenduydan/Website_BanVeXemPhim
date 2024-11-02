@@ -1,28 +1,35 @@
+<?php
+require 'config/function.php';
+?>
 <style>
     .carousel-item {
-        height: 20rem !important;
+        height: 28rem !important;
         width: 100% !important;
     }
 </style>
+<?php
+$items = getHeaderSliders($conn); // Lấy các slider có vị trí là header
+?>
 
-<div class=" d-flex justify-content-center">
-    <div id="carousel" class="carousel slide  w-75" data-bs-ride="carousel" data-bs-touch="true">
+<div class="d-flex justify-content-center bg-black">
+    <div id="carousel" class="carousel slide w-75" data-bs-ride="carousel" data-bs-touch="true">
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true"
-                aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <?php foreach ($items as $index => $item): ?>
+                <button type="button" data-bs-target="#carousel" data-bs-slide-to="<?= $index ?>"
+                    class="<?= $index === 0 ? 'active' : '' ?>" aria-current="<?= $index === 0 ? 'true' : 'false' ?>"
+                    aria-label="Slide <?= $index + 1 ?>"></button>
+            <?php endforeach; ?>
         </div>
         <div class="carousel-inner border-radius-2xl">
-            <div class="carousel-item active" data-bs-interval="10000">
-                <img src="uploads/slider-imgs/john-wick-4.jpg" class="d-block w-100 h-100" alt="...">
-            </div>
-            <div class="carousel-item" data-bs-interval="2000">
-                <img src="uploads/slider-imgs/slide_1.jpg" class="d-block w-100 h-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="uploads/slider-imgs/slide_2.jpg" class="d-block w-100 h-100" alt="...">
-            </div>
+            <?php foreach ($items as $index => $item): ?>
+                <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>" data-bs-interval="5000">
+                    <a class="link" href="<?= htmlspecialchars($item['URL']) ?>" target="_blank">
+                        <!-- Thêm target="_blank" nếu bạn muốn mở trong tab mới -->
+                        <img src="uploads/slider-imgs/<?= htmlspecialchars($item['Anh']) ?>" class="d-block w-100 h-100"
+                            alt="<?= htmlspecialchars($item['TenSlider']) ?>">
+                    </a>
+                </div>
+            <?php endforeach; ?>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -33,5 +40,4 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-
 </div>

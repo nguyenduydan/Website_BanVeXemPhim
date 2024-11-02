@@ -1,6 +1,6 @@
 <?php include('includes/header.php'); ?>
 <?php include('includes/slider.php'); ?>
-<div class="mx-10 content">
+<div class="container mx-10 py-3 content">
     <?php include('views/list-film.php'); ?>
     <?php include('views/list-content.php'); ?>
 </div>

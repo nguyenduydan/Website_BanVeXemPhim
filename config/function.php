@@ -267,7 +267,8 @@ function sortData(&$data, $sortField, $sortOrder = 'ASC')
         }
     });
 }
-function str_slug($s) {
+function str_slug($s)
+{
     $symbols = [
         ['/[áàảãạâấầẩẫậăắằẳẵặ]/u', 'a'],
         ['/[đ]/u', 'd'],
@@ -279,16 +280,31 @@ function str_slug($s) {
         ['/[\\s\'";,]/u', '-']
     ];
 
-   
+
     $s = strtolower($s);
 
-   
+
     foreach ($symbols as $pair) {
         $s = preg_replace($pair[0], $pair[1], $s);
     }
 
 
     $s = preg_replace('/-+/', '-', $s);
-    $s = trim($s, '-'); 
+    $s = trim($s, '-');
     return $s;
+}
+
+function getHeaderSliders($conn)
+{
+    $query = "SELECT * FROM SLIDER WHERE ViTri = 'header'and TrangThai = '1' ORDER BY SapXep ASC"; // Sắp xếp theo trường SapXep
+    $result = mysqli_query($conn, $query);
+    $sliders = [];
+
+    if ($result) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $sliders[] = $row;
+        }
+    }
+
+    return $sliders;
 }
