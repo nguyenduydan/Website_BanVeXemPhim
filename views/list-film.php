@@ -3,29 +3,30 @@ require_once 'config/function.php';
 ?>
 
 <div class="container mt-5 w-75">
-    <h4 class="mb-4 text-uppercase ps-3" style="border-left: 4px solid black;">
-        Phim
-    </h4>
+    <div class="d-flex align-items-center">
+        <h4 class="mb-4 text-uppercase ps-3" style="border-left: 4px solid black;">
+            Phim
+        </h4>
+        <ul class="nav ms-5 mb-4 d-flex justify-content-center " id="filmTabs">
+            <li class="nav-item">
+                <a class="nav-link active" id="currently-showing-tab" href="javascript:void(0);"
+                    onclick="showTab('currently-showing')">Đang Chiếu</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="coming-soon-tab" href="javascript:void(0);" onclick="showTab('coming-soon')">Sắp
+                    Chiếu</a>
+            </li>
+        </ul>
 
-    <!-- Navigation Menu -->
-    <ul class="nav nav-tabs mb-4" id="filmTabs">
-        <li class="nav-item">
-            <a class="nav-link active" id="currently-showing-tab" href="#" onclick="showTab('currently-showing')">Đang
-                Chiếu</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="coming-soon-tab" href="#" onclick="showTab('coming-soon')">Sắp Chiếu</a>
-        </li>
-    </ul>
+    </div>
+
 
     <div class="tab-content">
         <div id="currently-showing" class="tab-pane fade show active">
             <div class="row">
                 <?php
-                $items = getAll('Phim');
+                $items = getFilm('1'); //Nhập trạng thái muốn hiển thị
                 foreach ($items as $value => $item): ?>
-                <?php if ($item['TrangThai'] == 1): // Only show currently showing
-                    ?>
                 <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-4 movie-item <?= $value >= 8 ? 'hidden' : '' ?>">
                     <div class="movie-card card">
                         <img class="img-fluid" src="uploads/film-imgs/<?= $item['Anh'] ?>"
@@ -37,12 +38,8 @@ require_once 'config/function.php';
                     </div>
                     <div class="movie-info">
                         <div class="movie-title"><?= $item['TenPhim'] ?></div>
-                        <div class="movie-status">
-                            <span class="badge bg-success">Đang chiếu</span>
-                        </div>
                     </div>
                 </div>
-                <?php endif; ?>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -50,17 +47,13 @@ require_once 'config/function.php';
         <div id="coming-soon" class="tab-pane fade">
             <div class="row">
                 <?php
+                $items = getFilm('2');
                 foreach ($items as $value => $item): ?>
-                <?php if ($item['TrangThai'] == 2): // Only show coming soon
-                    ?>
                 <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-4 movie-item <?= $value >= 8 ? 'hidden' : '' ?>">
                     <div class="movie-card card">
                         <img class="img-fluid" src="uploads/film-imgs/<?= $item['Anh'] ?>"
                             alt="<?= $item['TenPhim'] ?>">
                         <span class="movie-age"><?= $item['PhanLoai'] ?></span>
-                        <a href="views/detail-film.php" class="buy-ticket">
-                            <i class="bi bi-ticket-perforated"></i> Mua Vé
-                        </a>
                     </div>
                     <div class="movie-info">
                         <div class="movie-title"><?= $item['TenPhim'] ?></div>
@@ -69,7 +62,6 @@ require_once 'config/function.php';
                         </div>
                     </div>
                 </div>
-                <?php endif; ?>
                 <?php endforeach; ?>
             </div>
         </div>

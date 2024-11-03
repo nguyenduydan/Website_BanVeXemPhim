@@ -251,3 +251,42 @@ transition: background-image ease-in-out 1s;
     max-width: 40%;
     height: auto;
 }
+
+/* Menu-tabs */
+#filmTabs {
+    display: flex;
+    gap: 10px;
+    position: relative;
+}
+
+#filmTabs .nav-link {
+    position: relative;
+    padding: 10px 10px;
+    color: #6c757d;
+    font-weight: bolder;
+    text-align: center;
+    transition: color 0.3s;
+}
+
+#filmTabs .nav-link.active {
+
+    color: #18009e;
+}
+
+/* Thanh gạch chân động cho tab active */
+#filmTabs .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: #18009e;
+    transition: width 0.3s ease-in-out;
+}
+
+/* Khi tab được kích hoạt, thanh gạch chân mở rộng */
+#filmTabs .nav-link.active::after {
+    width: 60px;
+}

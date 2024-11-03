@@ -144,6 +144,15 @@ function getAll($tableName)
     return $result;
 }
 
+function getFilm($trangthai)
+{
+    global $conn;
+    $trangthai = validate($trangthai);
+    $query = "SELECT * FROM PHIM WHERE TrangThai = '$trangthai'";
+    $result = mysqli_query($conn, $query);
+    return $result;
+}
+
 function check_valid_ID($id)
 {
     if (isset($_GET[$id])) {
