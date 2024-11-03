@@ -203,13 +203,11 @@ transition: background-image ease-in-out 1s;
 }
 
 .movie-title-detail {
-    font-size: 2rem;
     font-weight: bold;
     margin: 0;
 }
 
 .movie-age-detail {
-    font-size: 0.9rem;
     background-color: #ff6b6b;
     color: white;
     padding: 2px 8px;
@@ -218,12 +216,12 @@ transition: background-image ease-in-out 1s;
 }
 
 .movie-meta {
-    font-size: 1rem;
     color: #6c757d;
 }
 
 .movie-info p {
-    margin: 0.5rem 0;
+    font-size: 15px;
+    margin: 1.4rem 0;
     text-align: left;
 }
 
