@@ -3,6 +3,35 @@ session_start();
 require '../../config/function.php';
 
 
+if (isset($_POST['addMenuTuyChon'])) {
+    $name = validate($_POST['name']);
+    $lienket = validate($_POST['lienket']);
+
+    if (empty($name)) {
+        $messages['name'] = 'Tên menu không được để trống';
+    } else if (isExistValue('Menu', 'TenMenu', $name)) {
+        $messages['name'] = 'Tên menu đã tồn tại';
+    }
+    if (empty($lienket)) {
+        $messages['lienket'] = 'Liên kết không được để trống';
+    } else if (isExistValue('Menu', 'LienKet', $lienket)) {
+        $messages['lienket'] = 'Liên kết đã tồn tại';
+    }
+
+    if (empty($messages)) {
+        $query = "INSERT INTO Menu (TenMenu, LienKet,TrangThai, NguoiTao, NgayTao)
+                  VALUES ('$name','$lienket',0, '1',CURRENT_TIMESTAMP)";
+        if (mysqli_query($conn, $query)) {
+            redirect('../menu.php', 'success', 'Thêm menu thành công');
+        } else {
+            redirect('../menu.php', 'error', 'Thêm menu thất bại');
+        }
+    } else {
+        $_SESSION['form_data'] = $_POST;
+        redirect('../menu.php', 'messages', $messages);
+    }
+}
+
 // Xử lý thêm menu
 if (isset($_POST['saveMenu'])) {
     $messages = [];

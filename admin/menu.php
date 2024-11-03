@@ -3,7 +3,10 @@ ob_start();
 session_start();
 require '../config/function.php';
 include('includes/header.php');
-
+$messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy lỗi từ session
+$formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
+unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
+unset($_SESSION['form_data']);
 $pagination = setupPagination($conn, 'Menu'); // Sửa tên bảng thành 'Menu'
 $data = $pagination['data'];
 $records_per_page = $pagination['records_per_page'];
@@ -23,12 +26,6 @@ li {
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center pb-0">
                 <h5><?php echo $title ?></h5>
-
-                <a href="views/menu/menu-add.php" class="btn btn-lg me-5 btn-add"
-                    style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">
-                    <i class="bi bi-plus me-1 fs-3" style="margin-bottom: 5px;"></i>
-                    Thêm
-                </a>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="row px-4">
@@ -67,7 +64,44 @@ li {
                                             <?php endforeach; ?>
                                         </ul>
                                     </li>
-
+                                    <li class="dropdown form-control w-100 mb-3 border shadow">
+                                        <div class="border-bottom">
+                                            <label class="mt-2 fs-6" for="">Tùy chọn</label>
+                                            <a class="float-end mt-1 me-2 fs-3" data-bs-toggle="collapse"
+                                                data-bs-target="#random" aria-expanded="false"><i
+                                                    class="bi bi-plus-square-fill text-success"></i>
+                                            </a>
+                                        </div>
+                                        <ul class="treeview collapse mt-3 ps-0" id="random">
+                                            <form action="controllers/menu-controller.php" method="post">
+                                                <li class="mb-3 fs-6 fw-bold">
+                                                    <div class="align-items-center ps-0 mb-3">
+                                                        <label for="name">Nhập tên menu</label>
+                                                        <input class="form-control" type="text" name="name" id="name">
+                                                        <?php if (isset($messages['name'])): ?>
+                                                        <small
+                                                            class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                    <div class="align-items-center ps-0">
+                                                        <label for="lienket">Nhập đường link</label>
+                                                        <input class="form-control" type="text" name="lienket"
+                                                            id="lienket">
+                                                        <?php if (isset($messages['lienket'])): ?>
+                                                        <small
+                                                            class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['lienket']) ?></small>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </li>
+                                                <li class="fs-6 fw-bold d-flex justify-content-center">
+                                                    <button
+                                                        class="btn btn-sm py-2 px-3 bg-gradient-success d-flex align-items-center"
+                                                        name="addMenuTuyChon">Thêm<i
+                                                            class="bi bi-plus ms-1 text-lg"></i></button>
+                                                </li>
+                                            </form>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -108,7 +142,9 @@ li {
                                     <tr>
                                         <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['TenMenu']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $item['LienKet']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"
+                                            style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                            <?= $item['LienKet']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['Order']; ?></th>
                                         <th class="text-center text-s font-weight-bolder">
                                             <form action="controllers/menu-controller.php" method="POST"
@@ -125,16 +161,21 @@ li {
                                         </th>
 
                                         <td class="align-middle text-center text-sm">
+                                            <a class="btn btn-success m-0"
+                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                href="views/menu/menu-detail.php?id=<?= $item['Id'] ?>">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
                                             <a class="btn btn-info m-0"
                                                 style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                                 href="views/menu/menu-edit.php?id=<?= $item['Id'] ?>">
-                                                <i class="bi bi-pencil"></i> Sửa
+                                                <i class="bi bi-pencil"></i>
                                             </a>
                                             <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['Id'] ?>"
                                                 data-url="views/menu/menu-delete.php"
                                                 style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                                 data-bs-toggle="modal" data-bs-target="#confirmModal">
-                                                <i class="bi bi-trash"></i> Xoá
+                                                <i class="bi bi-trash"></i>
                                             </a>
                                         </td>
                                     </tr>
