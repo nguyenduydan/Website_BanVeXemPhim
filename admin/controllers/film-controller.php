@@ -135,14 +135,26 @@ if (isset($_POST['editFilm'])) {
 //====== changeStatus ======//
 if (isset($_POST['changeStatus'])) {
     $id = validate($_POST['ma_phim']);
-    $status = validate($_POST['status']) == 1 ? 1 : 0;
+    $status = validate($_POST['status']);
 
-    $edit_query = "UPDATE Phim SET TrangThai = '$status' WHERE MaPhim = '$id'";
+    // Ensure the status is one of the allowed values
+    if (in_array($status, [0, 1, 2])) {
+        $edit_query = "UPDATE Phim SET TrangThai = '$status' WHERE MaPhim = '$id'";
 
-    if (mysqli_query($conn, $edit_query)) {
-        redirect('../film.php', 'success', 'Cập nhật trạng thái thành công');
+        if (mysqli_query($conn, $edit_query)) {
+            redirect(
+                '../film.php',
+                'success',
+                'Cập nhật trạng thái thành công'
+            );
+        } else {
+            redirect(
+                '../film.php',
+                'error',
+                'Cập nhật trạng thái thất bại'
+            );
+        }
     } else {
-
-        redirect('../film.php', 'error', 'Cập nhật trạng thái thất bại');
+        redirect('../film.php', 'error', 'Trạng thái không hợp lệ');
     }
 }
