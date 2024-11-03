@@ -76,83 +76,96 @@ if (isset($_POST['saveSlider'])) {
     }
 }
 
-if (isset($_POST['editFilm'])) {
+if (isset($_POST['editSlider'])) {
     $messages = [];
-    $name = validate($_POST['ten_phim']);
-    $id = validate($_POST['ma_phim']);
-    $phanloai = validate($_POST['phan_loai']);
-    $dao_dien = validate($_POST['dao_dien']);
-    $dien_vien = validate($_POST['dien_vien']);
+    $tenslider = validate($_POST['name']);
+    $tenTopic = validate($_POST['nametopic']);
+    $url = validate($_POST['url']);
+    $tukhoa = validate($_POST['tukhoa']);
+    $mota = validate($_POST['mota']);
+    $vitri = validate($_POST['vitri']); // Vị trí của slider
+    $sapxep = validate($_POST['sapxep']);
+    $trangthai = validate($_POST['status']) == 1 ? 1 : 0;
+    $anh_slider = '';
+    $id = uniqid('slider_', false);
 
-    $quoc_gia = $_POST['quoc_gia'] ?? [];
-    if (!empty($_POST['other_nation'])) {
-        $quoc_gia[] = validate($_POST['other_nation']);
+    if (empty($tenslider)) {
+        $messages['name'] = "Tên slider không được để trống.";
+    } elseif (isExistValue("Slider", "TenSlider", $tenslider, 'TenSlider', $tenslider)) {
+        $messages["name"] = "Tên slider đã tồn tại";
     }
-    $quoc_gia = implode(', ', $quoc_gia);
 
-    $mota = validate($_POST['mo_ta']);
-    $theloai = $_POST['the_loai'] ?? [];
-    $namphathanh = validate($_POST['nam_phat_hanh']);
-    $thoiluong = validate($_POST['thoi_luong']);
-    $status = validate($_POST['status']) == 1 ? 1 : 0;
+    if (empty($tenTopic)) {
+        $messages['nametopic'] = "Tên chủ đề không được để trống.";
+    }
 
-    $film = getByID('Phim', 'MaPhim', $id);
-    $anh_phim = $film['data']['Anh'];
+    if (empty($url)) {
+        $messages['url'] = "URL không được để trống.";
+    } elseif (isExistValue("Slider", "Url", $url, 'URL', $url)) {
+        $messages["url"] = "Đường dẫn đã tồn tại";
+    }
 
-    if (isset($_FILES['anh_phim']) && $_FILES['anh_phim']['error'] == 0) {
-        $filmPath = "../../uploads/film-imgs/" . $anh_phim;
 
-        if (!empty($anh_phim) && file_exists($filmPath)) {
-            $deleteResult = deleteImage($filmPath);
+    if (empty($tukhoa)) {
+        $messages['tukhoa'] = "Từ khóa không được để trống.";
+    } elseif (isExistValue("Slider", "TuKhoa", $tenslider, 'TuKhoa', $tukhoa)) {
+        $messages["tukhoa"] = "Từ khóa đã tồn tại";
+    }
+
+    if (empty($mota)) {
+        $messages["mota"] = "Mô tả không được để trống.";
+    }
+    if (empty($vitri)) {
+        $messages["vitri"] = "Vị trí không được để trống.";
+    }
+
+    $film = getByID('Slider', 'Id', $id);
+    $anh_slider = $film['data']['Anh'];
+
+    if (isset($_FILES['anh_slider']) && $_FILES['anh_slider']['error'] == 0) {
+        $sliderPath = "../../uploads/slider-imgs/" . $anh_slider;
+
+        if (!empty($anh_slider) && file_exists($sliderPath)) {
+            $deleteResult = deleteImage($sliderPath);
             if (!$deleteResult['success']) {
                 $messages[] = $deleteResult['message'];
             }
         }
 
-        $unique = uniqid('film_', false);
+        $unique = uniqid('slider_', false);
 
-        $filmResult = uploadImage($_FILES['anh_phim'], "../../uploads/film-imgs/", $unique);
-        if ($filmResult['success']) {
-            $anh_phim = $filmResult['filename'];
+        $sliderResult = uploadImage($_FILES['anh_slider'], "../../uploads/slider-imgs/", $unique);
+        if ($sliderResult['success']) {
+            $anh_phim = $sliderResult['filename'];
         } else {
-            $messages[] = $filmResult['message'];
+            $messages[] = $sliderResult['message'];
         }
     }
 
     if (empty($messages)) {
-        $deleteQuery = "DELETE FROM THELOAI_FILM WHERE MAPHIM = '$id'";
-        mysqli_query($conn, $deleteQuery);
+        $query = "UPDATE SLIDER
+          SET TenSlider = '$tenslider',
+              Anh = '$anh_slider',
+              ViTri = '$vitri',
+              SapXep = '$sapxep',
+              TrangThai = '$trangthai',
+              NguoiCapNhat = '1',
+              NgayCapNhat= CURRENT_TIMESTAMP,
+              TenChuDe = '$tenTopic',
+              Url = '$url',
+              TuKhoa = '$tukhoa',
+              MoTa = '$mota'
+          WHERE ID = '$id'";
 
-        $slug = str_slug($name);
-
-        $query = "UPDATE PHIM SET
-                TenPhim = '$name',
-                TenRutGon = '$slug',
-                ThoiLuong = '$thoiluong',
-                Anh = '$anh_phim',
-                DaoDien = '$dao_dien',
-                DienVien = '$dien_vien',
-                QuocGia = '$quoc_gia',
-                NamPhatHanh = '$namphathanh',
-                PhanLoai = '$phanloai',
-                MoTa = '$mota',
-                NguoiCapNhat = '1',
-                NgayCapNhat = CURRENT_TIMESTAMP,
-                TrangThai = '$status'
-                WHERE MaPhim = '$id'";
 
         if (mysqli_query($conn, $query)) {
-            foreach ($theloai as $maTheLoai) {
-                $insertQuery = "INSERT INTO TheLoai_Film (MaTheLoai, MaPhim) VALUES ('$maTheLoai', '$id')";
-                mysqli_query($conn, $insertQuery);
-            }
-            redirect('../film.php', 'success', 'Cập nhật phim thành công');
+            redirect('../slider.php', 'success', 'Cập nhật slider thành công');
         } else {
-            redirect('../views/film/film-edit.php?id=' . $id, 'error', 'Cập nhật phim thất bại');
+            redirect('../views/slider/slider-edit.php?id=' . $id, 'error', 'Cập nhật slider thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/film/film-add.php', 'messages', $messages);
+        redirect('../views/slider/slider-add.php', 'messages', $messages);
     }
 }
 

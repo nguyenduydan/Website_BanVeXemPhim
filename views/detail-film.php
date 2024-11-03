@@ -49,10 +49,10 @@
                         style="border: 2px solid #fff;transform: translateY(-60px);">
                 </div>
                 <!-- Thông tin chi tiết phim -->
-                <div class="col-lg-7 ms-3">
+                <div class="col-lg-7 ms-1">
                     <div class="d-flex align-items-center mb-2 mt-5">
                         <h5 class="movie-title-detail me-3">Thiên Đường Quả Báo</h5>
-                        <span class="movie-age-detail">T18</span>
+                        <span class="movie-age-detail bg-danger">T18</span>
                     </div>
                     <div class="movie-meta">
                         <span class="me-3 text-black fs-6"><i class="bi bi-clock text-warning"></i> 131 Phút</span>

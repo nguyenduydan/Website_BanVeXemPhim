@@ -4,26 +4,26 @@ require '../../../config/function.php';
 
 $result = check_valid_ID('id');
 if (is_numeric($result)) {
-    $userId = validate($result);
-    $user = getByID('Slider', 'id', $userId);
+    $Id = validate($result);
+    $slider = getByID('Slider', 'Id', $Id);
 
-    if ($user['status'] == 200) {
-        $username = validate($user['data']['username']);
-        $avatarPath = "../../../uploads/sliders/" . $user['data']['Anh'];
-        $userDelete = deleteQuery('NguoiDung', 'MaND', $userId);
+    if ($slider['status'] == 200) {
+        $name = validate($slider['data']['TenSlider']);
+        $avatarPath = "../../../uploads/slider-imgs/" . $slider['data']['Anh'];
+        $sliderDelete = deleteQuery('Slider', 'Id', $Id);
 
-       
-        if ($userDelete) {
-            if (!empty($user['data']['Anh']) && file_exists($avatarPath)) {
+
+        if ($sliderDelete) {
+            if (!empty($slider['data']['Anh']) && file_exists($avatarPath)) {
                 $deleteResult = deleteImage($avatarPath);
             }
-            redirect('../../user.php','success','Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($username) . '</span> thành công');
+            redirect('../../slider.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($name) . '</span> thành công');
         } else {
-            redirect('../../user.php','error','Xóa ' . htmlspecialchars($username) . ' thất bại');
+            redirect('../../slider.php', 'error', 'Xóa ' . htmlspecialchars($name) . ' thất bại');
         }
     } else {
-        redirect('../../user.php','error',$user['message']);
+        redirect('../../slider.php', 'error', $slider['message']);
     }
 } else {
-    redirect('../../user.php','error',$result);
+    redirect('../../slider.php', 'error', $result);
 }

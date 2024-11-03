@@ -17,50 +17,57 @@ unset($_SESSION['form_data']);
         <div class="text-end mb-4">
             <a class="btn btn-secondary" href="../../slider.php">Quay lại</a>
         </div>
-        <form id="addUserForm" action="../../controllers/slider-controller.php" method="post"
+        <form id="addSliderForm" action="../../controllers/slider-controller.php" method="post"
             enctype="multipart/form-data">
+            <?php
+            $id_result = check_valid_ID('id');
+            if (!is_numeric($id_result)) {
+                echo '<h5>' . $id_result . '</h5>';
+                return false;
+            }
+            $item = getByID('Slider', 'Id', check_valid_ID('id'));
+            if ($item['status'] == 200) {
+            ?>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="name">Tên slider (<span class="text-danger">*</span>)</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên slider"
-                            value="<?php echo isset($formData['name']) ? htmlspecialchars($formData['name']) : ''; ?>">
+                            value="<?= $item['data']['TenSlider'] ?? ''; ?>">
                         <?php if (isset($messages['name'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
                         <label for="nametopic">Tên chủ đề (<span class="text-danger">*</span>)</label>
                         <input type="text" class="form-control" id="nametopic" name="nametopic"
-                            placeholder="Nhập tên đăng nhập"
-                            value="<?php echo isset($formData['nametopic']) ? htmlspecialchars($formData['nametopic']) : ''; ?>">
+                            placeholder="Nhập tên đăng nhập" value="<?= $item['data']['TenChuDe'] ?? ''; ?>">
                         <?php if (isset($messages['nametopic'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['nametopic']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['nametopic']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
                         <label for="url">Url(<span class="text-danger">*</span>)</label>
                         <input type="text" class="form-control" id="url" name="url" placeholder="Nhập đường dẫn"
-                            value="<?php echo isset($formData['url']) ? htmlspecialchars($formData['url']) : ''; ?>">
+                            value="<?= $item['data']['URL'] ?? ''; ?>">
                         <?php if (isset($messages['url'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['url']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['url']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
                         <label for="tukhoa">Từ khóa (<span class="text-danger">*</span>)</label>
                         <input type="text" class="form-control" id="tukhoa" name="tukhoa" placeholder="Nhập từ khóa"
-                            value="<?php echo isset($formData['tukhoa']) ? htmlspecialchars($formData['tukhoa']) : ''; ?>">
+                            value="<?= $item['data']['TuKhoa'] ?? ''; ?>">
                         <?php if (isset($messages['tukhoa'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tukhoa']) ?></small>
+                        <small class=" text-danger m-2 text-xs"><?= htmlspecialchars($messages['tukhoa']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
                         <label for="mota">Mô tả (<span class="text-danger">*</span>)</label>
-                        <textarea class="form-control" id="mota" name="mota" placeholder="Nhập từ khóa" rows="5"
-                            value="<?php echo isset($formData['mota']) ? htmlspecialchars($formData['mota']) : ''; ?>">
+                        <textarea class="form-control" id="mota" name="mota" placeholder="Nhập từ khóa" rows="5"><?= $item['data']['MoTa'] ?? ''; ?>
                         </textarea>
                         <?php if (isset($messages['mota'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['mota']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['mota']) ?></small>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -74,7 +81,7 @@ unset($_SESSION['form_data']);
                             <option value="aside">aside</option>
                         </select>
                         <?php if (isset($messages['vitri'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['vitri']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['vitri']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group row mb-3">
@@ -108,7 +115,12 @@ unset($_SESSION['form_data']);
                     </div>
                 </div>
             </div>
-            <button type="submit" name="saveSlider" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
+            <?php
+            } else {
+                echo '<h5>' . $item['message'] . '</h5>';
+            }
+            ?>
+            <button type="submit" name="editSlider" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
         </form>
     </div>
 </div>

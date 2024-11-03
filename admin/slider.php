@@ -87,6 +87,7 @@ $records_per_page = $pagination['records_per_page'];
                                         <i class="bi bi-pencil"></i> Sửa
                                     </a>
                                     <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['Id'] ?>"
+                                        data-url="views/slider/slider-delete.php"
                                         style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                         data-bs-toggle="modal" data-bs-target="#confirmModal">
                                         <i class="bi bi-trash"></i> Xoá
