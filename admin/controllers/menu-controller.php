@@ -6,6 +6,7 @@ require '../../config/function.php';
 if (isset($_POST['addMenuTuyChon'])) {
     $name = validate($_POST['name']);
     $lienket = validate($_POST['lienket']);
+    $vitri = validate($_POST['vitri']);
 
     if (empty($name)) {
         $messages['name'] = 'Tên menu không được để trống';
@@ -19,8 +20,8 @@ if (isset($_POST['addMenuTuyChon'])) {
     }
 
     if (empty($messages)) {
-        $query = "INSERT INTO Menu (TenMenu, LienKet,TrangThai, NguoiTao, NgayTao)
-                  VALUES ('$name','$lienket',0, '1',CURRENT_TIMESTAMP)";
+        $query = "INSERT INTO Menu (TenMenu,ViTri, LienKet,TrangThai, NguoiTao, NgayTao)
+                  VALUES ('$name', '$vitri', '$lienket',0, '1',CURRENT_TIMESTAMP)";
         if (mysqli_query($conn, $query)) {
             redirect('../menu.php', 'success', 'Thêm menu thành công');
         } else {

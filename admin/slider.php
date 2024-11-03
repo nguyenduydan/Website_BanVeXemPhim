@@ -102,7 +102,7 @@ $records_per_page = $pagination['records_per_page'];
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body fs-5">
-                                                    Bạn có chắc chắn muốn xóa người dùng này?
+                                                    Bạn có chắc chắn muốn xóa này?
                                                 </div>
                                                 <div class="modal-footer d-flex justify-content-center">
                                                     <button type="button" class="btn btn-sm btn-success"

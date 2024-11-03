@@ -10,6 +10,9 @@ unset($_SESSION['form_data']);
 $pagination = setupPagination($conn, 'Menu'); // Sửa tên bảng thành 'Menu'
 $data = $pagination['data'];
 $records_per_page = $pagination['records_per_page'];
+
+$vitri;
+
 ?>
 <style>
 li {
@@ -31,49 +34,49 @@ li {
                 <div class="row px-4">
                     <div class="col-4">
                         <div class="card px-3">
-                            <div class="card-body form-control shadow">
-                                <label for="records_per_page" class="me-2 fs-6">Chọn vị trí</label>
-                                <select class="form-select">
-                                    <option>Header</option>
-                                    <option>Footer</option>
-                                </select>
-                            </div>
-                            <div class="card-body">
-                                <ul class="ps-0" data-widget="treeview" role="menu" data-accordion="false">
-                                    <li class="dropdown form-control w-100 mb-3 border shadow">
-                                        <div class="border-bottom">
-                                            <label class="mt-2 fs-6" for="">Trạng thái phim</label>
-                                            <a class="float-end mt-1 me-2 fs-3" data-bs-toggle="collapse"
-                                                data-bs-target="#listStatus" aria-expanded="false"><i
-                                                    class="bi bi-plus-square-fill text-success"></i>
-                                            </a>
-                                        </div>
-                                        <ul class="treeview collapse mt-3" id="listStatus">
-                                            <?php
-                                            $status = getAll('Phim');
-                                            foreach ($status as $row):
-                                            ?>
-                                            <li class="mb-3 fs-6 fw-bold">
-                                                <div class="form-check align-items-center">
-                                                    <input name="status" id="status-<?= $row['MaPhim'] ?>"
-                                                        type="checkbox" class="form-check-input">
-                                                    <label for="status-<?= $row['MaPhim'] ?>">
-                                                        <?= $row['TrangThai'] == 1 ? 'Đang chiếu' : 'Sắp chiếu' ?></label>
-                                                </div>
-                                            </li>
-                                            <?php endforeach; ?>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown form-control w-100 mb-3 border shadow">
-                                        <div class="border-bottom">
-                                            <label class="mt-2 fs-6" for="">Tùy chọn</label>
-                                            <a class="float-end mt-1 me-2 fs-3" data-bs-toggle="collapse"
-                                                data-bs-target="#random" aria-expanded="false"><i
-                                                    class="bi bi-plus-square-fill text-success"></i>
-                                            </a>
-                                        </div>
-                                        <ul class="treeview collapse mt-3 ps-0" id="random">
-                                            <form action="controllers/menu-controller.php" method="post">
+                            <form action="controllers/menu-controller.php" method="post">
+                                <div class="card-body form-control shadow">
+                                    <label for="records_per_page" class="me-2 fs-6">Chọn vị trí</label>
+                                    <select name="vitri" class="form-select">
+                                        <option value="header">Header</option>
+                                        <option value="footer">Footer</option>
+                                    </select>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="ps-0" data-widget="treeview" role="menu" data-accordion="false">
+                                        <li class="dropdown form-control w-100 mb-3 border shadow">
+                                            <div class="border-bottom">
+                                                <label class="mt-2 fs-6" for="">Trạng thái phim</label>
+                                                <a class="float-end mt-1 me-2 fs-3" data-bs-toggle="collapse"
+                                                    data-bs-target="#listStatus" aria-expanded="false"><i
+                                                        class="bi bi-plus-square-fill text-success"></i>
+                                                </a>
+                                            </div>
+                                            <ul class="treeview collapse mt-3" id="listStatus">
+                                                <?php
+                                                $status = getAll('Phim');
+                                                foreach ($status as $row):
+                                                ?>
+                                                <li class="mb-3 fs-6 fw-bold">
+                                                    <div class="form-check align-items-center">
+                                                        <input name="status" id="status-<?= $row['MaPhim'] ?>"
+                                                            type="checkbox" class="form-check-input">
+                                                        <label for="status-<?= $row['MaPhim'] ?>">
+                                                            <?= $row['TrangThai'] == 1 ? 'Đang chiếu' : 'Sắp chiếu' ?></label>
+                                                    </div>
+                                                </li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown form-control w-100 mb-3 border shadow">
+                                            <div class="border-bottom">
+                                                <label class="mt-2 fs-6" for="">Tùy chọn</label>
+                                                <a class="float-end mt-1 me-2 fs-3" data-bs-toggle="collapse"
+                                                    data-bs-target="#random" aria-expanded="false"><i
+                                                        class="bi bi-plus-square-fill text-success"></i>
+                                                </a>
+                                            </div>
+                                            <ul class="treeview collapse mt-3 ps-0" id="random">
                                                 <li class="mb-3 fs-6 fw-bold">
                                                     <div class="align-items-center ps-0 mb-3">
                                                         <label for="name">Nhập tên menu</label>
@@ -99,11 +102,11 @@ li {
                                                         name="addMenuTuyChon">Thêm<i
                                                             class="bi bi-plus ms-1 text-lg"></i></button>
                                                 </li>
-                                            </form>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="col-8 card card-body">
@@ -177,6 +180,28 @@ li {
                                                 data-bs-toggle="modal" data-bs-target="#confirmModal">
                                                 <i class="bi bi-trash"></i>
                                             </a>
+                                            <div class="modal fade" id="confirmModal" tabindex="-1"
+                                                aria-labelledby="confirmModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog mt-10">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="confirmModalLabel">Xác Nhận Xóa
+                                                            </h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body fs-5">
+                                                            Bạn có chắc chắn muốn xóa này?
+                                                        </div>
+                                                        <div class="modal-footer d-flex justify-content-center">
+                                                            <button type="button" class="btn btn-sm btn-success"
+                                                                id="confirmYes">Có</button>
+                                                            <button type="button" class="btn btn-sm btn-danger me-2"
+                                                                data-bs-dismiss="modal">Không</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                     <?php
