@@ -32,10 +32,10 @@ li {
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="row px-4">
-                    <div class="col-4">
+                    <div class="col-3">
                         <div class="card px-3">
                             <form action="controllers/menu-controller.php" method="post">
-                                <div class="card-body form-control shadow">
+                                <div class="card-body">
                                     <label for="records_per_page" class="me-2 fs-6">Chọn vị trí</label>
                                     <select name="vitri" class="form-select">
                                         <option value="header">Header</option>
@@ -44,8 +44,8 @@ li {
                                 </div>
                                 <div class="card-body">
                                     <ul class="ps-0" data-widget="treeview" role="menu" data-accordion="false">
-                                        <li class="dropdown form-control w-100 mb-3 border shadow">
-                                            <div class="border-bottom">
+                                        <li class="dropdown form-control border-0 w-100 mb-3 shadow">
+                                            <div class="border-bottom border-2">
                                                 <label class="mt-2 fs-6" for="">Trạng thái phim</label>
                                                 <a class="float-end mt-1 me-2 fs-3" data-bs-toggle="collapse"
                                                     data-bs-target="#listStatus" aria-expanded="false"><i
@@ -68,8 +68,8 @@ li {
                                                 <?php endforeach; ?>
                                             </ul>
                                         </li>
-                                        <li class="dropdown form-control w-100 mb-3 border shadow">
-                                            <div class="border-bottom">
+                                        <li class="dropdown form-control border-0 w-100 mb-3 shadow">
+                                            <div class="border-bottom border-2">
                                                 <label class="mt-2 fs-6" for="">Tùy chọn</label>
                                                 <a class="float-end mt-1 me-2 fs-3" data-bs-toggle="collapse"
                                                     data-bs-target="#random" aria-expanded="false"><i
@@ -129,8 +129,12 @@ li {
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">STT</th>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">Tên Menu</th>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">Liên Kết</th>
-                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Thứ Tự</th>
-                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Trạng Thái
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Kiểu
+                                            menu</th>
+                                        <th class="text-center text-uppercase col-1 text-xs font-weight-bolder">Thứ Tự
+                                        </th>
+                                        <th class="text-center text-uppercase col-1 text-xs font-weight-bolder">Trạng
+                                            Thái
                                         </th>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">Hành Động</th>
                                     </tr>
@@ -148,6 +152,8 @@ li {
                                         <th class="text-center text-xs font-weight-bolder"
                                             style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                             <?= $item['LienKet']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['KieuMenu']; ?>
+                                        </th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['Order']; ?></th>
                                         <th class="text-center text-s font-weight-bolder">
                                             <form action="controllers/menu-controller.php" method="POST"
