@@ -24,8 +24,8 @@ $articles = [
 ?>
 
 <div class="container mt-5 w-75">
-    <h4 class="mb-4 fw-bolder">
-        <span class="vertical-bar">|</span>Góc điện ảnh
+    <h4 class="mb-4 text-uppercase ps-3" style="border-left: 4px solid black;">
+        Góc điện ảnh
     </h4>
     <div class="row">
         <?php foreach ($articles as $article): ?>
