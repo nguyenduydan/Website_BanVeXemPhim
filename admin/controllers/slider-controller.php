@@ -78,6 +78,7 @@ if (isset($_POST['saveSlider'])) {
 
 if (isset($_POST['editSlider'])) {
     $messages = [];
+    $idSlider = validate($_POST['id']);
     $tenslider = validate($_POST['name']);
     $tenTopic = validate($_POST['nametopic']);
     $url = validate($_POST['url']);
@@ -91,7 +92,7 @@ if (isset($_POST['editSlider'])) {
 
     if (empty($tenslider)) {
         $messages['name'] = "Tên slider không được để trống.";
-    } elseif (isExistValue("Slider", "TenSlider", $tenslider, 'TenSlider', $tenslider)) {
+    } elseif (isExistValue("Slider", "TenSlider", $tenslider, 'Id', $idSlider)) {
         $messages["name"] = "Tên slider đã tồn tại";
     }
 
@@ -101,14 +102,14 @@ if (isset($_POST['editSlider'])) {
 
     if (empty($url)) {
         $messages['url'] = "URL không được để trống.";
-    } elseif (isExistValue("Slider", "Url", $url, 'URL', $url)) {
+    } elseif (isExistValue("Slider", "Url", $url, 'Id', $idSlider)) {
         $messages["url"] = "Đường dẫn đã tồn tại";
     }
 
 
     if (empty($tukhoa)) {
         $messages['tukhoa'] = "Từ khóa không được để trống.";
-    } elseif (isExistValue("Slider", "TuKhoa", $tenslider, 'TuKhoa', $tukhoa)) {
+    } elseif (isExistValue("Slider", "TuKhoa", $tenslider, 'Id', $idSlider)) {
         $messages["tukhoa"] = "Từ khóa đã tồn tại";
     }
 
@@ -136,28 +137,26 @@ if (isset($_POST['editSlider'])) {
 
         $sliderResult = uploadImage($_FILES['anh_slider'], "../../uploads/slider-imgs/", $unique);
         if ($sliderResult['success']) {
-            $anh_phim = $sliderResult['filename'];
+            $anh_slider = $sliderResult['filename'];
         } else {
             $messages[] = $sliderResult['message'];
         }
     }
 
     if (empty($messages)) {
-        $query = "UPDATE SLIDER
-          SET TenSlider = '$tenslider',
-              Anh = '$anh_slider',
-              ViTri = '$vitri',
-              SapXep = '$sapxep',
-              TrangThai = '$trangthai',
-              NguoiCapNhat = '1',
-              NgayCapNhat= CURRENT_TIMESTAMP,
-              TenChuDe = '$tenTopic',
-              Url = '$url',
-              TuKhoa = '$tukhoa',
-              MoTa = '$mota'
-          WHERE ID = '$id'";
-
-
+        $query = "UPDATE Slider
+                SET TenSlider = '$tenslider',
+                    Anh = '$anh_slider',
+                    ViTri = '$vitri',
+                    SapXep = '$sapxep',
+                    TrangThai = '$trangthai',
+                    NguoiCapNhat = '1',
+                    NgayCapNhat= CURRENT_TIMESTAMP,
+                    TenChuDe = '$tenTopic',
+                    Url = '$url',
+                    TuKhoa = '$tukhoa',
+                    MoTa = '$mota'
+                WHERE Id = '$id'";
         if (mysqli_query($conn, $query)) {
             redirect('../slider.php', 'success', 'Cập nhật slider thành công');
         } else {

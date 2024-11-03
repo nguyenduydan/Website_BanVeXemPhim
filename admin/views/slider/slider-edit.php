@@ -17,7 +17,7 @@ unset($_SESSION['form_data']);
         <div class="text-end mb-4">
             <a class="btn btn-secondary" href="../../slider.php">Quay lại</a>
         </div>
-        <form id="addSliderForm" action="../../controllers/slider-controller.php" method="post"
+        <form id="editSliderForm" action="../../controllers/slider-controller.php" method="post"
             enctype="multipart/form-data">
             <?php
             $id_result = check_valid_ID('id');
@@ -29,6 +29,7 @@ unset($_SESSION['form_data']);
             if ($item['status'] == 200) {
             ?>
             <div class="row">
+                <input type="hidden" name="id" value=<?= $item['data']['Id'] ?>>
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="name">Tên slider (<span class="text-danger">*</span>)</label>
