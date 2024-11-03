@@ -52,18 +52,18 @@
 
     ?>
     <style>
-    .nav-link .icon svg {
-        stroke: #3a416f !important;
-        stroke-width: 0.5 !important;
-        fill: #3a416f !important;
-        /* Màu đen mặc định */
-    }
+        .nav-link .icon svg {
+            stroke: #3a416f !important;
+            stroke-width: 0.5 !important;
+            fill: #3a416f !important;
+            /* Màu đen mặc định */
+        }
 
-    .nav-link.active .icon svg {
-        stroke: #FFFFFF !important;
-        fill: #FFFFFF !important;
-        /* Màu trắng khi active */
-    }
+        .nav-link.active .icon svg {
+            stroke: #FFFFFF !important;
+            fill: #FFFFFF !important;
+            /* Màu trắng khi active */
+        }
     </style>
     <div class="collapse navbar-collapse w-auto h-100" id="sidenav-collapse-main">
         <ul class="navbar-nav" data-widget="treeview" role="menu" data-accordion="false">
