@@ -12,8 +12,8 @@ if (!is_numeric($id_result)) {
     echo '<h5>' . $id_result . '</h5>';
     return false;
 }
-$content = getByID('NguoiDung', 'MaND', check_valid_ID('id'));
-if ($content['status'] == 200) {
+$item = getByID('BaiViet', 'Id', check_valid_ID('id'));
+if ($item['status'] == 200) {
 ?>
     <div class="row">
         <div class="col-xl-12 col-lg-12 mx-auto">
@@ -33,36 +33,46 @@ if ($content['status'] == 200) {
                         <!-- Cột 1 -->
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label class="fs-6">Mã ND:</label>
-                                <span><?= $content['data']['MaND']; ?></span>
+                                <label class="fs-6">Chủ đề bài viết:</label>
+                                <?php
+                                $query = "SELECT TENCHUDE FROM CHUDE WHERE Id = {$item['data']['ChuDeBV']}";
+                                $result = $conn->query($query);
+                                if ($result && $content = $result->fetch_assoc()) {
+                                    echo htmlspecialchars($content['TENCHUDE']);
+                                } else {
+                                    echo "Không tìm thấy tên chủ đề";
+                                }
+                                ?>
                             </div>
                             <div class="mb-3">
-                                <label class="fs-6">Họ và tên:</label>
-                                <span><?= $content['data']['TenND']; ?></span>
+                                <label class="fs-6">Tên bài viết:</label>
+                                <span><?= $item['data']['TenBV']; ?></span>
                             </div>
                             <div class="mb-3">
-                                <label class="fs-6">Tên đăng nhập:</label>
-                                <span><?= $content['data']['contentname']; ?></span>
+                                <label class="fs-6">Chi tiết bài viết:</label>
+                                <span><?= $item['data']['ChiTiet']; ?></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="fs-6">Mô tả:</label>
+                                <span><?= $item['data']['MoTa']; ?></span>
                             </div>
                             <div class="mb-3">
-                                <label class="fs-6">Ngày sinh:</label>
-                                <span><?= date('d/m/Y', strtotime($content['data']['NgaySinh'])); ?></span>
+                                <label class="fs-6">Kiểu bài viết:</label>
+                                <span><?= $item['data']['KieuBV']; ?></span>
                             </div>
-                            <div class="mb-3">
-                                <label class="fs-6">Giới tính:</label>
-                                <span><?= $content['data']['GioiTinh'] == 1 ? 'Nam' : 'Nữ'; ?></span>
-                            </div>
-                            <div class="mb-3">
-                                <label class="fs-6">Số điện thoại:</label>
-                                <span><?= $content['data']['SDT']; ?></span>
-                            </div>
-                            <div class="mb-3">
-                                <label class="fs-6">Email:</label>
-                                <span><?= $content['data']['Email']; ?></span>
-                            </div>
-                            <div class="mb-3">
-                                <label class="fs-6">Role:</label>
-                                <span><?= $content['data']['Role'] == 1 ? 'Admin' : 'content'; ?></span>
+                            <div class="form-group mb-3">
+                                <?php
+
+                                $anhArray = explode(',', $item['data']['Anh']);
+
+
+                                foreach ($anhArray as $anh) {
+
+                                    $anh = trim($anh);
+                                    echo '<img src="../../../uploads/content-imgs/' . htmlspecialchars($anh) . '" alt="Ảnh xem trước" class="img-fluid mb-2 mx-2" style="max-width: 100%; max-height: 150px;" />';
+                                }
+                                ?>
                             </div>
                         </div>
 
@@ -71,25 +81,23 @@ if ($content['status'] == 200) {
 
                             <div class="mb-3">
                                 <label class="fs-6">Người tạo:</label>
-                                <span><?= $content['data']['NguoiTao']; ?></span>
+                                <span>Nguyễn Văn E</span>
                             </div>
                             <div class="mb-3">
                                 <label class="fs-6">Ngày tạo:</label>
-                                <span><?= $content['data']['NgayTao']; ?></span>
+                                <span><?= isset($item['data']['NgayTao']) ? (new DateTime($item['data']['NgayTao']))->format('d/m/y H:i:s') : 'Chưa xác định'; ?></span>
+
                             </div>
                             <div class="mb-3">
                                 <label class="fs-6">Người cập nhật:</label>
-                                <span><?= $content['data']['NguoiCapNhat']; ?></span>
+                                <span>Trần Văn F</span>
                             </div>
                             <div class="mb-3">
                                 <label class="fs-6">Ngày cập nhật:</label>
-                                <span><?= $content['data']['NgayCapNhat']; ?></span>
-                            </div>
-                            <div class="form-group mb-3">
-                                <img id="preview" src="<?php echo isset($content['data']['Anh']) ? '../../../uploads/avatars/' . htmlspecialchars($content['data']['Anh']) : '#'; ?>" alt="Ảnh xem trước" class="img-fluid" style="display: <?php echo isset($content['data']['Anh']) ? 'block' : 'none'; ?>; max-width: 100%; max-height: 150px;" />
-                                <!-- Ảnh phim -->
+                                <span><?= isset($item['data']['NgayCapNhat']) ? (new DateTime($item['data']['NgayCapNhat']))->format('d/m/y H:i:s') : 'Chưa xác định'; ?></span>
                             </div>
                         </div>
+
 
                     </div>
                 </div>
@@ -97,7 +105,7 @@ if ($content['status'] == 200) {
         </div>
     <?php
 } else {
-    echo '<h5>' . $content['message'] . '</h5>';
+    echo '<h5>' . $item['message'] . '</h5>';
 }
     ?>
 

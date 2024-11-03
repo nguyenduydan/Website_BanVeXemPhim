@@ -43,6 +43,29 @@ function uploadImage($file, $targetDir, $id)
 
     return $result;
 }
+function uploadMultipleImages($files, $targetDir)
+{
+    $result = ['success' => true, 'messages' => [], 'filenames' => []];
+    foreach ($files['tmp_name'] as $key => $tmpName) {
+        $uniqueId = uniqid();
+        $currentFile = [
+            'name' => $files['name'][$key],
+            'tmp_name' => $tmpName,
+            'error' => $files['error'][$key],
+            'size' => $files['size'][$key]
+        ];
+        $imgResult = uploadImage($currentFile, $targetDir, $uniqueId);
+        if ($imgResult['success']) {
+            $result['filenames'][] = $imgResult['filename'];
+        } else {
+            $result['success'] = false;
+            $result['messages'][] = $imgResult['message'];
+        }
+    }
+
+    return $result;
+}
+
 
 function deleteImage($filePath)
 {
@@ -277,20 +300,14 @@ function str_slug($s)
         ['/[óòỏõọôốồổỗộơớờởỡợ]/u', 'o'],
         ['/[úùủũụưứừửữự]/u', 'u'],
         ['/[ýỳỷỹỵ]/u', 'y'],
-        ['/[\\s\'";,]/u', '-']
+        ['/[\\s\'";,]/', '-']
     ];
 
-
-    $s = strtolower($s);
-
-
-    foreach ($symbols as $pair) {
-        $s = preg_replace($pair[0], $pair[1], $s);
+    $s = mb_strtolower($s); // Chuyển sang chữ thường
+    foreach ($symbols as $ss) {
+        $s = preg_replace($ss[0], $ss[1], $s);
     }
 
-
-    $s = preg_replace('/-+/', '-', $s);
-    $s = trim($s, '-');
     return $s;
 }
 

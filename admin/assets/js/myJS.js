@@ -8,7 +8,24 @@ function previewImageAdd(event) {
     };
     reader.readAsDataURL(event.target.files[0]);
 }
+function previewImagesAdd2(event) {
+    const previewContainer = document.getElementById('preview');
+    previewContainer.innerHTML = '';
 
+    const files = event.target.files;
+    Array.from(files).forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.classList.add('img-fluid');
+            img.style.maxWidth = '100%';
+            img.style.maxHeight = '15rem';
+            previewContainer.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    });
+}
 function previewImage(event) {
     var preview = document.getElementById('preview');
     var file = event.target.files[0];

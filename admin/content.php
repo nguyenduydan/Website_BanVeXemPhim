@@ -58,7 +58,7 @@ $records_per_page = $pagination['records_per_page'];
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['TenBV']; ?></th>
                                         <th class="text-center text-s font-weight-bolder">
                                             <form action="controllers/content-controller.php" method="POST" style="display:inline;">
-                                                <input type="hidden" name="mand" value="<?= $item['Id'] ?>">
+                                                <input type="hidden" name="Id" value="<?= $item['Id'] ?>">
                                                 <input type="hidden" name="status" value="<?= $item['TrangThai'] == 1 ? 0 : 1 ?>">
                                                 <button type="submit" name="changeStatus" class="badge badge-sm <?= $item['TrangThai'] == 1 ? 'bg-gradient-success' : 'bg-gradient-secondary' ?> text-uppercase" style="border: none; cursor: pointer;">
                                                     <?= $item['TrangThai'] == 1 ? 'ON' : 'OFF' ?>
