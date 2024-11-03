@@ -28,47 +28,54 @@ unset($_SESSION['form_data']);
                             <?php
                             $topics = getAll('ChuDe');
                             foreach ($topics as $topic): ?>
-                                <option value="<?php echo htmlspecialchars($topic['Id']); ?>"
-                                    <?php echo (isset($formData['chudebv']) && $formData['chudebv'] == $topic['Id']) ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($topic['TenChuDe']); ?>
-                                </option>
+                            <option value="<?php echo htmlspecialchars($topic['Id']); ?>"
+                                <?php echo (isset($formData['chudebv']) && $formData['chudebv'] == $topic['Id']) ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($topic['TenChuDe']); ?>
+                            </option>
                             <?php endforeach; ?>
                         </select>
                         <?php if (isset($messages['chudebv'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['chudebv']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['chudebv']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
                         <label for="tenbv">Tên bài viết (<span class="text-danger">*</span>)</label>
-                        <input type="text" class="form-control" id="tenbv" name="tenbv"
-                            placeholder="Nhập tên bài viết"
+                        <input type="text" class="form-control" id="tenbv" name="tenbv" placeholder="Nhập tên bài viết"
                             value="<?php echo isset($formData['tenbv']) ? htmlspecialchars($formData['tenbv']) : ''; ?>">
                         <?php if (isset($messages['tenbv'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tenbv']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tenbv']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group row mb-3">
                         <div class="col-6">
                             <label for="tukhoa">Từ khóa bài viết (<span class="text-danger">*</span>)</label>
-                            <input type="text" class="form-control" id="tukhoa" name="tukhoa"
-                                placeholder="Nhập từ khóa"
+                            <input type="text" class="form-control" id="tukhoa" name="tukhoa" placeholder="Nhập từ khóa"
                                 value="<?php echo isset($formData['tukhoa']) ? htmlspecialchars($formData['tukhoa']) : ''; ?>">
                             <?php if (isset($messages['tukhoa'])): ?>
-                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tukhoa']) ?></small>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tukhoa']) ?></small>
                             <?php endif; ?>
                         </div>
-                        <div class="col-6">
+                        <div class="col-3">
                             <label for="status">Trạng thái</label>
                             <select class="form-select" id="status" name="status">
                                 <option value="1">Online</option>
                                 <option value="0">Offline</option>
                             </select>
                         </div>
+                        <div class="col-3">
+                            <label for="kieubv">Kiểu bài viết</label>
+                            <select class="form-select" id="kieubv" name="kieubv" required>
+                                <option value="tintuc">Tin tức</option>
+                                <option value="blog">Blog điện ảnh</option>
+                                <option value="danhgia">Đánh giá</option>
+                            </select>
+                        </div>
 
                     </div>
                     <div class="form-group mb-3">
                         <label for="chitietbv">Chi tiết bài viết</label>
-                        <textarea class="form-control" id="chitietbv" name="chitietbv" rows="10" placeholder="Chi tiết bài viết"
+                        <textarea class="form-control" id="chitietbv" name="chitietbv" rows="10"
+                            placeholder="Chi tiết bài viết"
                             value="<?php echo isset($formData['chitietbv']) ? htmlspecialchars($formData['chitietbv']) : ''; ?>"
                             required></textarea>
                     </div>
@@ -80,23 +87,14 @@ unset($_SESSION['form_data']);
                             value="<?php echo isset($formData['mota']) ? htmlspecialchars($formData['mota']) : ''; ?>"
                             required></textarea>
                     </div>
-                    <div class="form-group row mb-3">
-                        <div class="col-3">
-                            <label for="kieubv">Kiểu bài viết</label>
-                            <select class="form-select" id="kieubv" name="kieubv" required>
-                                <option value="tintuc">Tin tức</option>
-                                <option value="blog">Blog điện ảnh</option>
-                                <option value="danhgia">Đánh giá</option>
-                            </select>
-                        </div>
-                        <div class="col-9">
-                            <label for="content-imgs">Chọn ảnh</label>
-                            <input type="file" class="form-control" id="content-imgs" name="content-imgs[]" accept="image/*"
-                                multiple onchange="previewImagesAdd2(event)">
-                            <?php if (isset($messages['images'])): ?>
-                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['images']) ?></small>
-                            <?php endif; ?>
-                        </div>
+                    <div class="form-group mb-3">
+
+                        <label for="content-imgs">Chọn ảnh</label>
+                        <input type="file" class="form-control" id="content-imgs" name="content-imgs[]" accept="image/*"
+                            multiple onchange="previewImagesAdd2(event)">
+                        <?php if (isset($messages['images'])): ?>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['images']) ?></small>
+                        <?php endif; ?>
 
                     </div>
                     <div class="form-group mb-3">
