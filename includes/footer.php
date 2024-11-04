@@ -218,6 +218,6 @@ if (win && document.querySelector('#sidenav-scrollbar')) {
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
-    < /body>
+    </body>
 
-        < /html>
+    </html>
