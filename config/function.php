@@ -12,6 +12,7 @@ function validate($inpData)
     $validatedData = mysqli_real_escape_string($conn, $inpData);
     return trim($validatedData);
 }
+
 function uploadImage($file, $targetDir, $id)
 {
     $result = ['success' => false, 'message' => '', 'filename' => ''];

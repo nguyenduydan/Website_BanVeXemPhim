@@ -1,5 +1,5 @@
 <?php
-require_once 'config/function.php';
+require_once("config/function.php");
 ?>
 
 <div class="container mt-5 w-75">
@@ -23,22 +23,23 @@ require_once 'config/function.php';
         <div id="currently-showing" class="tab-pane fade show active">
             <div class="row">
                 <?php
+
                 $items = getFilm('1'); //Nhập trạng thái muốn hiển thị
                 $countCurrentlyShowing = count($items);
                 foreach ($items as $value => $item): ?>
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-4 movie-item <?= $value >= 8 ? 'hidden' : '' ?>">
-                        <div class="movie-card card">
-                            <img class="img-fluid" src="uploads/film-imgs/<?= $item['Anh'] ?>"
-                                alt="<?= $item['TenPhim'] ?>">
-                            <span class="movie-age">T<?= $item['PhanLoai'] ?></span>
-                            <a href="views/detail-film.php" class="buy-ticket">
-                                <i class="bi bi-ticket-perforated"></i> Mua Vé
-                            </a>
-                        </div>
-                        <div class="movie-info">
-                            <div class="movie-title"><?= $item['TenPhim'] ?></div>
-                        </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-4 movie-item <?= $value >= 8 ? 'hidden' : '' ?>">
+                    <div class="movie-card card">
+                        <img class="img-fluid" src="uploads/film-imgs/<?= $item['Anh'] ?>"
+                            alt="<?= $item['TenPhim'] ?>">
+                        <span class="movie-age">T<?= $item['PhanLoai'] ?></span>
+                        <a href="views/detail-film.php" class="buy-ticket">
+                            <i class="bi bi-ticket-perforated"></i> Mua Vé
+                        </a>
                     </div>
+                    <div class="movie-info">
+                        <div class="movie-title"><?= $item['TenPhim'] ?></div>
+                    </div>
+                </div>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -49,19 +50,19 @@ require_once 'config/function.php';
                 $items = getFilm('2');
                 $countComingSoon = count($items);
                 foreach ($items as $value => $item): ?>
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-4 movie-item <?= $value >= 8 ? 'hidden' : '' ?>">
-                        <div class="movie-card card">
-                            <img class="img-fluid" src="uploads/film-imgs/<?= $item['Anh'] ?>"
-                                alt="<?= $item['TenPhim'] ?>">
-                            <span class="movie-age">T<?= $item['PhanLoai'] ?></span>
-                        </div>
-                        <div class="movie-info">
-                            <div class="movie-title"><?= $item['TenPhim'] ?></div>
-                            <div class="movie-status">
-                                <span class="badge bg-warning">Sắp chiếu</span>
-                            </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-4 movie-item <?= $value >= 8 ? 'hidden' : '' ?>">
+                    <div class="movie-card card">
+                        <img class="img-fluid" src="uploads/film-imgs/<?= $item['Anh'] ?>"
+                            alt="<?= $item['TenPhim'] ?>">
+                        <span class="movie-age">T<?= $item['PhanLoai'] ?></span>
+                    </div>
+                    <div class="movie-info">
+                        <div class="movie-title"><?= $item['TenPhim'] ?></div>
+                        <div class="movie-status">
+                            <span class="badge bg-warning">Sắp chiếu</span>
                         </div>
                     </div>
+                </div>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -69,13 +70,13 @@ require_once 'config/function.php';
 
     <div class="text-center mt-3">
         <?php if ($countCurrentlyShowing > 8 || $countComingSoon > 8): ?>
-            <button id="showMoreBtn" class="btn btn-outline-primary" onclick="showMoreMovies()">Xem Thêm</button>
+        <button id="showMoreBtn" class="btn btn-outline-primary" onclick="showMoreMovies()">Xem Thêm</button>
         <?php endif; ?>
     </div>
 </div>
 
 <style>
-    .movie-item.hidden {
-        display: none;
-    }
+.movie-item.hidden {
+    display: none;
+}
 </style>

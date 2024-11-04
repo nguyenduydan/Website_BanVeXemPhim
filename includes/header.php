@@ -7,7 +7,10 @@
     <title>Trang người dùng</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <?php require('links.php'); ?>
+    <?php
+    require('links.php');
+
+    ?>
 </head>
 
 <body>
