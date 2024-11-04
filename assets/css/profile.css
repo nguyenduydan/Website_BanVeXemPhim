@@ -1,0 +1,115 @@
+.profile-card {
+    max-width: 300px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-card .user-info {
+    text-align: center;
+}
+
+.profile-card .user-info img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.profile-card .user-info h4 {
+    margin-bottom: 5px;
+}
+
+.profile-card .user-info p {
+    color: #ff8c00;
+    font-weight: bold;
+}
+
+.profile-card .spending-info {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.profile-form {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-control[readonly] {
+    background-color: #e9ecef;
+    opacity: 1;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.input-container {
+    position: relative;
+}
+
+.form-control {
+    padding-left: 40px;
+    /* Add padding to the left to make space for the icon */
+}
+
+.icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    color: #6c757d;
+}
+
+.update-button {
+    background-color: #ff8c00;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.input-group-text {
+    background-color: transparent;
+    border: none;
+}
+
+.progress {
+    height: 30px;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    font-size: 20px;
+    height: auto;
+    transition: width 0.6s ease;
+    background-color: #7b6ada;
+}
+
+.input-container {
+    position: relative;
+}
+
+.icon-container {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+}
+
+.icon {
+    color: #6c757d;
+    cursor: pointer;
+}
