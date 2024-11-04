@@ -128,7 +128,7 @@ if (isset($_POST['editFilm'])) {
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/film/film-add.php', 'messages', $messages);
+        redirect('../views/film/film-edit.php?id=' .$id, 'messages', $messages);
     }
 }
 
