@@ -1,29 +1,31 @@
 <?php
 session_start();
 require '../../config/function.php';
-// xử lý categories
+
 $messages = [];
+//====== room-add =======//
 if (isset($_POST['saveParameter'])) {
-    $name = validate($_POST['tenthamso']);
-    $donvitinh = validate($_POST['donvitinh']);
+    $messages = []; // Initialize messages array
+    $tenthamso = validate($_POST['tenthamso']);
+    $dvt = validate($_POST['dvt']);
     $giatri = validate($_POST['giatri']);
-    $status = validate($_POST['status']);
-    if (empty($name)) {
-        $messages['name'] = 'Tên tham số không được để trống';
+    $status = validate($_POST['status']) == 1 ? 1 : 0;
+
+    if (empty($tenthamso)) {
+        $messages['tenthamso'] = "Tên tham số không được để trống.";
+    } elseif (isExistValue('Thamso', 'TenThamSo', $tenthamso)) {
+        $messages['tenthamso'] = "Tên tham số đã tồn tại";
     }
-    if (isExistValue('ThamSo', 'TenThamSo', $name)) {
-        $messages['name'] = 'Tên tham số đã tồn tại';
-    }
-    if (empty($donvitinh)) {
-        $messages['donvitinh'] = 'Đơn vị tính không được để trống';
+    if (empty($dvt)) {
+        $messages['dvt'] = "Đơn vị tính không được để trống.";
     }
     if (empty($giatri)) {
-        $messages['giatri'] = 'Giá trị không được để trống';
+        $messages['giatri'] = "Giá trị không được để trống.";
     }
-
     if (empty($messages)) {
-        $query = "INSERT INTO ThamSo (TenThamSo,DonViTinh,GiaTri,TrangThai)
-            VALUES ('$name','$donvitinh','$giatri','$status')";
+        $query = "INSERT INTO Thamso (Tenthamso, DonViTinh, Giatri, TrangThai)
+                  VALUES ('$tenthamso','$dvt',$giatri,'$status')";
+
         if (mysqli_query($conn, $query)) {
             redirect('../parameter.php', 'success', 'Thêm tham số thành công');
         } else {
@@ -35,52 +37,49 @@ if (isset($_POST['saveParameter'])) {
     }
 }
 
-
-//====== categories-edit =======//
-
-if (isset($_POST['editCategory'])) {
-    $messages = [];
-    $name = validate($_POST['ten_the_loai']);
-    $id = validate($_POST['matl']);
-    $status = validate($_POST['status']);
-    if (empty($name)) {
-        $messages['name'] = 'Tên thể loại không được để trống';
-    }
-    if (isExistValue('TheLoai', 'TenTheLoai', $name, 'MaTheLoai', $id)) {
-        $messages['name'] = 'Tên thể loại đã tồn tại';
+//====== room-edit =======//
+if (isset($_POST['editParameter'])) {
+    $messages = []; // Initialize messages array
+    $tenthamso = validate($_POST['tenthamso']);
+    $dvt = validate($_POST['dvt']);
+    $giatri = validate($_POST['giatri']);
+    $status = validate($_POST['status']) == 1 ? 1 : 0;
+    $id = validate($_POST['mats']);
+    if (empty($tenthamso)) {
+        $messages['tenthamso'] = "Tên tham số không được để trống.";
     }
     if (empty($messages)) {
-        $query = "UPDATE TheLoai SET
-                TenTheLoai = '$name',
-                NguoiCapNhat = 1,
-                NgayCapNhat = CURRENT_TIMESTAMP,
+        $query = "UPDATE Thamso SET 
+                Tenthamso = '$tenthamso',
+                DonViTinh = '$dvt',
+                Giatri = '$giatri',
                 TrangThai = '$status'
-                WHERE MaTheLoai = '$id'
-                ";
+                WHERE Id = '$id'";
         if (mysqli_query($conn, $query)) {
-            redirect('../categories.php', 'success', 'Cập nhật thể loại thành công');
+            redirect('../parameter.php', 'success', 'Cập nhật tham số thành công');
         } else {
-            redirect('../views/category/categories-edit.php?id=' . $id, 'errors', 'Cập nhật thể loại thất bại');
+            redirect('../views/parameter/parameter-edit.php?id='.$id, 'error', 'Cập nhật tham số thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/category/categories-edit.php?id=' . $id, 'errors', $messages);
+        redirect('../views/parameter/parameter-edit.php?id='.$id, 'messages', $messages);
     }
 }
+
+
+//====== changeStatus ======//
 if (isset($_POST['changeStatus'])) {
-    $id = validate($_POST['matl']);
+    $id = validate($_POST['mats']);
     $status = validate($_POST['status']) == 1 ? 1 : 0;
 
-    $edit_query = "UPDATE TheLoai SET
-                TrangThai = '$status',
-                NguoiCapNhat = '1',
-                NgayCapNhat = CURRENT_TIMESTAMP
-                WHERE MaTheLoai = '$id'";
+    $edit_query = "UPDATE thamso SET
+                TrangThai = '$status'
+                WHERE Id = '$id'";
 
     if (mysqli_query($conn, $edit_query)) {
-        redirect('../categories.php', 'success', 'Cập nhật trạng thái thành công');
+        redirect('../parameter.php', 'success', 'Cập nhật trạng thái thành công');
     } else {
-        redirect('../categories.php', 'error', 'Cập nhật trạng thái thất bại');
+        redirect('../parameter.php', 'error', 'Cập nhật trạng thái thất bại');
     }
 }
 $conn->close();

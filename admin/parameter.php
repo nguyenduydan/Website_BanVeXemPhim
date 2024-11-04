@@ -63,7 +63,7 @@ $records_per_page = $pagination['records_per_page'];
                                 <th class="text-center text-s font-weight-bolder">
                                     <form action="controllers/parameter-controller.php" method="POST"
                                         style="display:inline;">
-                                        <input type="hidden" name="id" value="<?= $item['Id'] ?>">
+                                        <input type="hidden" name="mats" value="<?= $item['Id'] ?>">
                                         <input type="hidden" name="status"
                                             value="<?= $item['TrangThai'] == 1 ? 0 : 1 ?>">
                                         <button type="submit" name="changeStatus"

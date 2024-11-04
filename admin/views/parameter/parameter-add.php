@@ -35,12 +35,12 @@ unset($_SESSION['form_data']);
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="donvitinh">Đơn vị tính (<span class="text-danger">*</span>)</label>
-                        <input type="text" class="form-control" id="donvitinh" name="donvitinh"
+                        <label for="dvt">Đơn vị tính (<span class="text-danger">*</span>)</label>
+                        <input type="text" class="form-control" id="dvt" name="dvt"
                             placeholder="Nhập tên đơn vị tính"
-                            value="<?php echo isset($formData['donvitinh']) ? htmlspecialchars($formData['donvitinh']) : ''; ?>">
-                        <?php if (isset($messages['donvitinh'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['donvitinh']) ?></small>
+                            value="<?php echo isset($formData['dvt']) ? htmlspecialchars($formData['dvt']) : ''; ?>">
+                        <?php if (isset($messages['dvt'])): ?>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['dvt']) ?></small>
                         <?php endif; ?>
                     </div>
                 </div>
