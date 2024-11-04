@@ -150,7 +150,13 @@ function getFilm($trangthai)
     $trangthai = validate($trangthai);
     $query = "SELECT * FROM PHIM WHERE TrangThai = '$trangthai'";
     $result = mysqli_query($conn, $query);
-    return $result;
+
+    // Check if the query was successful and fetch results
+    if ($result) {
+        return mysqli_fetch_all($result, MYSQLI_ASSOC); // Fetch all results as an associative array
+    } else {
+        return []; // Return an empty array in case of an error
+    }
 }
 
 function check_valid_ID($id)

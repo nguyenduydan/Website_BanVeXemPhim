@@ -42,3 +42,31 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+
+
+
+function showTab(tab) {
+    const currentlyShowing = document.getElementById('currently-showing');
+    const comingSoon = document.getElementById('coming-soon');
+    const currentlyShowingTab = document.getElementById('currently-showing-tab');
+    const comingSoonTab = document.getElementById('coming-soon-tab');
+
+    if (tab === 'currently-showing') {
+        currentlyShowing.classList.add('show', 'active');
+        comingSoon.classList.remove('show', 'active');
+        currentlyShowingTab.classList.add('active');
+        comingSoonTab.classList.remove('active');
+    } else {
+        comingSoon.classList.add('show', 'active');
+        currentlyShowing.classList.remove('show', 'active');
+        comingSoonTab.classList.add('active');
+        currentlyShowingTab.classList.remove('active');
+    }
+}
+
+function showMoreMovies() {
+    const hiddenMovies = document.querySelectorAll('.movie-item.hidden');
+    hiddenMovies.forEach(movie => movie.classList.remove('hidden'));
+    document.getElementById('showMoreBtn').style.display = 'none'; // Hide "Show More" button
+}

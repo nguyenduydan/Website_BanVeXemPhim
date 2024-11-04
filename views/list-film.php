@@ -17,15 +17,14 @@ require_once 'config/function.php';
                     Chiếu</a>
             </li>
         </ul>
-
     </div>
-
 
     <div class="tab-content">
         <div id="currently-showing" class="tab-pane fade show active">
             <div class="row">
                 <?php
                 $items = getFilm('1'); //Nhập trạng thái muốn hiển thị
+                $countCurrentlyShowing = count($items);
                 foreach ($items as $value => $item): ?>
                 <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-4 movie-item <?= $value >= 8 ? 'hidden' : '' ?>">
                     <div class="movie-card card">
@@ -48,6 +47,7 @@ require_once 'config/function.php';
             <div class="row">
                 <?php
                 $items = getFilm('2');
+                $countComingSoon = count($items);
                 foreach ($items as $value => $item): ?>
                 <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-4 movie-item <?= $value >= 8 ? 'hidden' : '' ?>">
                     <div class="movie-card card">
@@ -68,36 +68,11 @@ require_once 'config/function.php';
     </div>
 
     <div class="text-center mt-3">
+        <?php if ($countCurrentlyShowing > 8 || $countComingSoon > 8): ?>
         <button id="showMoreBtn" class="btn btn-outline-primary" onclick="showMoreMovies()">Xem Thêm</button>
+        <?php endif; ?>
     </div>
 </div>
-
-<script>
-function showTab(tab) {
-    const currentlyShowing = document.getElementById('currently-showing');
-    const comingSoon = document.getElementById('coming-soon');
-    const currentlyShowingTab = document.getElementById('currently-showing-tab');
-    const comingSoonTab = document.getElementById('coming-soon-tab');
-
-    if (tab === 'currently-showing') {
-        currentlyShowing.classList.add('show', 'active');
-        comingSoon.classList.remove('show', 'active');
-        currentlyShowingTab.classList.add('active');
-        comingSoonTab.classList.remove('active');
-    } else {
-        comingSoon.classList.add('show', 'active');
-        currentlyShowing.classList.remove('show', 'active');
-        comingSoonTab.classList.add('active');
-        currentlyShowingTab.classList.remove('active');
-    }
-}
-
-function showMoreMovies() {
-    const hiddenMovies = document.querySelectorAll('.movie-item.hidden');
-    hiddenMovies.forEach(movie => movie.classList.remove('hidden'));
-    document.getElementById('showMoreBtn').style.display = 'none'; // Hide "Show More" button
-}
-</script>
 
 <style>
 .movie-item.hidden {
