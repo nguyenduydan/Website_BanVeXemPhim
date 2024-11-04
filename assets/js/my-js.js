@@ -33,6 +33,7 @@ function togglePasswordVisibility(passwordFieldId, iconId) {
 document.addEventListener('DOMContentLoaded', function () {
     const togglePassword = document.getElementById('togglePassword');
     const toggleRePassword = document.getElementById('toggleRePassword');
+    const togglePasswordLogin = document.getElementById('togglePasswordLogin');
 
     if (togglePassword) {
         togglePassword.addEventListener('click', function () {
@@ -43,6 +44,11 @@ document.addEventListener('DOMContentLoaded', function () {
     if (toggleRePassword) {
         toggleRePassword.addEventListener('click', function () {
             togglePasswordVisibility('re_password', 'toggleRePassword');
+        });
+    }
+    if (togglePasswordLogin) {
+        togglePasswordLogin.addEventListener('click', function () {
+            togglePasswordVisibility('password_login', 'togglePasswordLogin');
         });
     }
 });

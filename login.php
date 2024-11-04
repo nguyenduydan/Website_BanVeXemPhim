@@ -6,7 +6,7 @@
             <input type="text" name="name" placeholder="Họ và tên">
             <input type="email" name="email" placeholder="Email">
             <div class="input-group">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
+                <input type="password" class="form-control" name="password" placeholder="Nhập mật khẩu">
                 <span class="input-group-text iconEye" style="cursor: pointer;">
                     <i class="fas fa-eye-slash" id="togglePassword"></i>
                 </span>
@@ -35,9 +35,10 @@
             <span class="fw-bolder fs-3">Đăng Nhập</span>
             <input type="email" name="email" placeholder="Email">
             <div class="input-group">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
+                <input type="password" class="form-control" id="password_login" name="password"
+                    placeholder="Nhập mật khẩu">
                 <span class="input-group-text iconEye" style="cursor: pointer;">
-                    <i class="fas fa-eye-slash" id="togglePassword"></i>
+                    <i class="fas fa-eye-slash" id="togglePasswordLogin"></i>
                 </span>
             </div>
             <div class="d-flex input-group flex-nowrap align-items-center">
