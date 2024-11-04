@@ -30,7 +30,7 @@ require_once 'config/function.php';
                     <div class="movie-card card">
                         <img class="img-fluid" src="uploads/film-imgs/<?= $item['Anh'] ?>"
                             alt="<?= $item['TenPhim'] ?>">
-                        <span class="movie-age"><?= $item['PhanLoai'] ?></span>
+                        <span class="movie-age">T<?= $item['PhanLoai'] ?></span>
                         <a href="views/detail-film.php" class="buy-ticket">
                             <i class="bi bi-ticket-perforated"></i> Mua Vé
                         </a>
@@ -53,7 +53,7 @@ require_once 'config/function.php';
                     <div class="movie-card card">
                         <img class="img-fluid" src="uploads/film-imgs/<?= $item['Anh'] ?>"
                             alt="<?= $item['TenPhim'] ?>">
-                        <span class="movie-age"><?= $item['PhanLoai'] ?></span>
+                        <span class="movie-age">T<?= $item['PhanLoai'] ?></span>
                     </div>
                     <div class="movie-info">
                         <div class="movie-title"><?= $item['TenPhim'] ?></div>

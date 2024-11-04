@@ -28,7 +28,7 @@
 }
 
 #container button{
-    background-color: #512da8;
+    background: linear-gradient(90deg, var(--c1, #be41fc), var(--c2, #0009ab) 50%, var(--c1, #be41fc)) var(--x, 0)/ 200%;
     color: #fff;
     font-size: 12px;
     padding: 10px 45px;
@@ -39,9 +39,16 @@
     text-transform: uppercase;
     margin-top: 10px;
     cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+#container button:hover{
+    border-radius: 20px;
+    --x: 100%;
 }
 
 #container button.hidden{
+    background: transparent;
     background-color: transparent;
     border-color: #fff;
 }
@@ -188,4 +195,16 @@
 
 #container.active .toggle-right{
     transform: translateX(200%);
+}
+
+#container input[type = 'checkbox']{
+    width: 15px !important;
+    margin-right: 10px;
+    margin-left: 10px;
+    transition: all .2s;
+}
+
+#container input[type='checkbox']:checked::after {
+    color: #000;
+    /* Màu đen */
 }

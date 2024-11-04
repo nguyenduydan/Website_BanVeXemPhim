@@ -1,13 +1,24 @@
 <?php include('includes/header.php'); ?>
 <div class="container my-5" id="container">
     <div class="form-container sign-up">
-        <form>
-            <h1>Tạo Tài Khoản</h1>
-            <input type="text" placeholder="Họ và tên">
-            <input type="email" placeholder="Email">
-            <input type="password" placeholder="Mật khẩu">
-            <input type="password" placeholder="Nhập lại Mật khẩu">
-            <input type="tel" placeholder="Số điện thoại">
+        <form class="py-2" action="" method="post">
+            <span class="fw-bolder fs-3">Tạo Tài Khoản</span>
+            <input type="text" name="name" placeholder="Họ và tên">
+            <input type="email" name="email" placeholder="Email">
+            <div class="input-group">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
+                <span class="input-group-text iconEye" style="cursor: pointer;">
+                    <i class="fas fa-eye-slash" id="togglePassword"></i>
+                </span>
+            </div>
+            <div class="input-group">
+                <input type="password" class="form-control" id="re_password" name="re_password"
+                    placeholder="Nhập lại mật khẩu">
+                <span class="input-group-text iconEye" style="cursor: pointer;">
+                    <i class="fas fa-eye-slash" id="toggleRePassword"></i>
+                </span>
+            </div>
+            <input type="tel" name="phone" placeholder="Số điện thoại">
 
             <div class="d-flex align-item-center justify-content-center form-group">
                 <input class="form-radio me-1" type="radio" name="gender" id="nam" value="nam">
@@ -16,16 +27,25 @@
                 <label for="nu">Nữ</label>
             </div>
             <input type="date" placeholder="Ngày sinh">
-            <button>Đăng Ký</button>
+            <button type="submit" name="signup">Đăng Ký</button>
         </form>
     </div>
     <div class="form-container sign-in">
-        <form>
-            <h1>Đăng Nhập</h1>
-            <input type="email" placeholder="Email">
-            <input type="password" placeholder="Mật khẩu">
+        <form action="" method="post">
+            <span class="fw-bolder fs-3">Đăng Nhập</span>
+            <input type="email" name="email" placeholder="Email">
+            <div class="input-group">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
+                <span class="input-group-text iconEye" style="cursor: pointer;">
+                    <i class="fas fa-eye-slash" id="togglePassword"></i>
+                </span>
+            </div>
+            <div class="d-flex input-group flex-nowrap align-items-center">
+                <input type="checkbox" class="form-check" name="note_login" id="note_login" placeholder="Mật khẩu">
+                <label for="note_login">Ghi nhớ đăng nhập</label>
+            </div>
+            <button type="submit" name="login">Đăng Nhập</button>
             <a href="#">Quên mật khẩu?</a>
-            <button>Đăng Nhập</button>
         </form>
     </div>
     <div class="toggle-container">
