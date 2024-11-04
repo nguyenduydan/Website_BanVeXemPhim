@@ -19,16 +19,16 @@ unset($_SESSION['form_data']);
         <form id="addChairForm" action="../../controllers/chair-controller.php" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6">
-                    <label for="ten_ghe">Tên ghế</label>
-                    <input type="text" class="form-control" id="ten_ghe" name="ten_ghe" placeholder="Nhập tên ghế" required>
+                    <label for="tenghe">Tên ghế</label>
+                    <input type="text" class="form-control" id="tenghe" name="tenghe" placeholder="Nhập tên ghế">
                 </div>
                 <div class="col-md-6">
-                    <label for="loai_ghe">Loại ghế</label>
-                    <select class="form-select" id="loai_ghe" name="loai_ghe" required>
+                    <label for="loaighe">Loại ghế</label>
+                    <select class="form-select" id="loaighe" name="loaighe" required>
                         <option value="" disabled selected>Chọn loại ghế</option>
-                        <option value="ghe_doi">Ghế đôi</option>
-                        <option value="ghe_don">Ghế đơn</option>
-                        <option value="ghe_vip">Ghế vip</option>
+                        <option value="Đơn">Đơn</option>
+                        <option value="Đôi">Đôi</option>
+                        <option value="VIP">VIP</option>
                     </select>
                 </div>
                 <div class="col-md-6">

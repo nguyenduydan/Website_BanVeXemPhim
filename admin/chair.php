@@ -57,7 +57,13 @@ $records_per_page = $pagination['records_per_page'];
                                     <tr>
                                         <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['TenGhe']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $item['TenGhe']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder">
+                                            <?php 
+                                                $phong = getByID('Phong','MaPhong',$item['MaPhong']);
+                                                $tenphong = $phong['data']['TenPhong'];
+                                                echo $tenphong;
+                                            ?>
+                                        </th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['LoaiGhe']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder">
                                             <?= number_format($item['GiaGhe']); ?> VNĐ</th>

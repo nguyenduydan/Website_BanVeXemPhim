@@ -61,6 +61,8 @@ if (isset($_POST['editParameter'])) {
                 TrangThai = '$status'
                 WHERE Id = '$id'";
         if (mysqli_query($conn, $query)) {
+            $updateGheQuery = "UPDATE Ghe SET GiaGhe = '$giatri' WHERE LoaiGhe = '$tenthamso'";
+            mysqli_query($conn, $updateGheQuery); 
             redirect('../parameter.php', 'success', 'Cập nhật tham số thành công');
         } else {
             redirect('../views/parameter/parameter-edit.php?id='.$id, 'error', 'Cập nhật tham số thất bại');

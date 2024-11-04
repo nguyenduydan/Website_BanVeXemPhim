@@ -42,8 +42,8 @@ $records_per_page = $pagination['records_per_page'];
                             <tr>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">STT</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Tên tham số</th>
-                                <th class="text-center text-uppercase text-xs font-weight-bolder">Đơn vị tính</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Giá trị</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Đơn vị tính</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Trạng thái</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Hành động</th>
                             </tr>
@@ -58,8 +58,8 @@ $records_per_page = $pagination['records_per_page'];
                             <tr>
                                 <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
                                 <th class="text-center text-xs font-weight-bolder"><?= $item['TenThamSo']; ?></th>
-                                <th class="text-center text-xs font-weight-bolder"><?= $item['DonViTinh']; ?></th>
                                 <th class="text-center text-xs font-weight-bolder"><?= $item['GiaTri']; ?></th>
+                                <th class="text-center text-xs font-weight-bolder"><?= $item['DonViTinh']; ?></th>
                                 <th class="text-center text-s font-weight-bolder">
                                     <form action="controllers/parameter-controller.php" method="POST"
                                         style="display:inline;">
