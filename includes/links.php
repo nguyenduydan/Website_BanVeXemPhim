@@ -15,6 +15,7 @@ $baseURL = '/Website_BanVeXemPhim/';
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/style.css?3.4">
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/login_signin.css?1.2">
+<link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/profile.css?1.0">
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/toast.css">
 <script src="<?php echo $baseURL; ?>assets/js/toast.js?1.0"></script>
 <script src="<?php echo $baseURL; ?>assets/js/my-js.js?1.5"></script>
