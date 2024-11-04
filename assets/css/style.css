@@ -295,55 +295,40 @@ transition: background-image ease-in-out 1s;
 }
 
 
-
-/* Đối với các liên kết bình thường */
-a.nav-link.px-2.fw-bolder.text-uppercase.text-secondary {
+a.nav-link.px-2.fw-bolder.text-capitalize.text-secondary {
     position: relative;
-    /* Để đảm bảo dấu gạch chân có thể được định vị chính xác */
     color: #6c757d;
-    /* Màu mặc định */
     text-decoration: none;
-    /* Không có gạch chân mặc định */
 }
 
-/* Khi liên kết có lớp active */
-a.nav-link.px-2.fw-bolder.text-uppercase.text-secondary.active {
+a.nav-link.px-2.fw-bolder.text-capitalize.text-secondary:hover{
     color: #18009e !important;
-    /* Màu chữ khi active */
 }
 
-/* Dấu gạch chân khi hover */
-a.nav-link.px-2.fw-bolder.text-uppercase.text-secondary:hover::after {
+a.nav-link.px-2.fw-bolder.text-capitalize.text-secondary.active{
+    color: #18009e !important;
+}
+
+a.nav-link.px-2.fw-bolder.text-capitalize.text-secondary:hover::after {
     content: '';
     position: absolute;
     bottom: -3px;
-    /* Khoảng cách từ dưới cùng của chữ đến dấu gạch chân */
     left: 50%;
     transform: translateX(-50%);
     width: 60px;
-    /* Đặt chiều rộng cho dấu gạch chân */
     height: 2px;
-    /* Độ dày của dấu gạch chân */
     background-color: #18009e;
-    /* Màu sắc của dấu gạch chân */
-    transition: width 0.3s ease-in-out;
-    /* Hiệu ứng chuyển động */
+    transition: width 0.3s ease-out;
 }
 
-/* Dấu gạch chân cho liên kết không active */
-a.nav-link.px-2.fw-bolder.text-uppercase.text-secondary::after {
+a.nav-link.px-2.fw-bolder.text-capitalize.text-secondary::after {
     content: '';
     position: absolute;
     bottom: -3px;
-    /* Khoảng cách từ dưới cùng của chữ đến dấu gạch chân */
     left: 50%;
     transform: translateX(-50%);
     width: 0;
-    /* Không có chiều rộng khi không active */
     height: 2px;
-    /* Độ dày của dấu gạch chân */
     background-color: #18009e;
-    /* Màu sắc của dấu gạch chân */
-    transition: width 0.3s ease-in-out;
-    /* Hiệu ứng chuyển động */
+    transition: width 0.3s ease-out;
 }

@@ -11,7 +11,7 @@ require_once 'config/function.php';
 $items = getHeaderSliders($conn); // Lấy các slider có vị trí là header
 ?>
 
-<div class="d-flex justify-content-center bg-black">
+<div class="d-lg-flex d-none justify-content-center bg-black">
     <div id="carousel" class="carousel slide w-75" data-bs-ride="carousel" data-bs-touch="true">
         <div class="carousel-indicators">
             <?php foreach ($items as $index => $item): ?>

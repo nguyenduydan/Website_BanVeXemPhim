@@ -13,7 +13,7 @@ $baseURL = '/Website_BanVeXemPhim/';
 <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/style.css?3.5">
+<link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/style.css?3.6">
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/login_signin.css?1.2">
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/profile.css?1.0">
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/toast.css">
