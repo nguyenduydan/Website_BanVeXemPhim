@@ -42,6 +42,6 @@
         </div>
     </div>
     <div class="text-center mt-4">
-        <button type="button" class="btn btn-outline-primary">Xem thêm</button>
+        <a href="views/list-content-all.php" type="button" class="btn btn-outline-primary">Xem thêm</a>
     </div>
 </div>
