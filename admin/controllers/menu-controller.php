@@ -21,62 +21,70 @@ if (isset($_POST['addPhim'])) {
             }
             $query = "INSERT INTO Menu(TenMenu, TableId, KieuMenu, ViTri, LienKet, `Order`, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat,TrangThai)
                       VALUES ('$tenMenu','$tableid','$kieumenu','$vitri','$slug','1','1',CURRENT_TIMESTAMP, '1',CURRENT_TIMESTAMP, '$status')";
-            if (mysqli_query($conn, $query)) {
-                redirect('../menu.php', 'success', 'Thêm menu thành công');
-            } else {
-                redirect('../menu.php', 'error', 'Thêm menu thất bại');
-            }
+            mysqli_query($conn, $query);
         }
+        redirect('../menu.php', 'success', 'Thêm menu thành công');
     }else{
         $_SESSION['form_data'] = $_POST;
         redirect('../menu.php', 'messages', $messages);
     }
 }
 
-// Xử lý thêm menu
-if (isset($_POST['saveMenu'])) {
-    $messages = [];
-    $name = validate($_POST['tenmenu']);
-    $kieumenu = validate($_POST['kieumenu']);
+if (isset($_POST['addChuDe'])) {
     $vitri = validate($_POST['vitri']);
-    $lienket = validate($_POST['lienket']);
-    $order = validate($_POST['order']);
-    $status = validate($_POST['trangthai']);
-    $tableid = validate($_POST['tableid']); // Thêm trường tableid
-
-    if (empty($name)) {
-        $messages['name'] = 'Tên menu không được để trống';
-    }
-    if (isExistValue('Menu', 'TenMenu', $name)) {
-        $messages['name'] = 'Tên menu đã tồn tại';
-    }
-    if (empty($kieumenu)) {
-        $messages['kieumenu'] = 'Kiểu menu không được để trống';
-    }
-    if (empty($vitri)) {
-        $messages['vitri'] = 'Vị trí không được để trống';
-    }
-    if (empty($lienket)) {
-        $messages['lienket'] = 'Liên kết không được để trống';
-    }
-    if (empty($order)) {
-        $messages['order'] = 'Order không được để trống';
-    }
-
-    if (empty($messages)) {
-        $query = "INSERT INTO Menu (TenMenu, KieuMenu, ViTri, LienKet, Order, TrangThai, TableId, NguoiTao, NgayTao)
-                  VALUES ('$name', '$kieumenu', '$vitri', '$lienket', '$order', '$status', '$tableid', 1, CURRENT_TIMESTAMP)";
-        if (mysqli_query($conn, $query)) {
-            redirect('../menu.php', 'success', 'Thêm menu thành công');
-        } else {
-            redirect('../views/menu/menu-add.php', 'error', 'Thêm menu thất bại');
+    $list_chude = $_POST['chude'] ?? [];
+    $messages =[];
+    if(empty($messages)){
+        foreach($list_chude as $id){
+            $topic_query = "SELECT Id, TenChuDe FROM ChuDe WHERE Id = '$id'";
+            $result = mysqli_query($conn, $topic_query);
+            $topic = mysqli_fetch_assoc($result);
+            if($topic){
+                $tenMenu = $topic['TenChuDe'];
+                $tableid = $topic['Id'];
+                $kieumenu = "ChuDe";
+                $slug = str_slug($topic['TenChuDe']);
+                $status = 0;
+            }
+            $query = "INSERT INTO Menu(TenMenu, TableId, KieuMenu, ViTri, LienKet, `Order`, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat,TrangThai)
+                      VALUES ('$tenMenu','$tableid','$kieumenu','$vitri','$slug','1','1',CURRENT_TIMESTAMP, '1',CURRENT_TIMESTAMP, '$status')";
+            mysqli_query($conn, $query);
         }
-    } else {
+        redirect('../menu.php', 'success', 'Thêm menu thành công');
+    }else{
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/menu/menu-add.php', 'messages', $messages);
+        redirect('../menu.php', 'messages', $messages);
     }
 }
-
+if (isset($_POST['addCustom'])) {
+    $vitri = validate($_POST['vitri']);
+    $name = validate($_POST['name']);
+    $lienket = validate($_POST['lienket']);
+    $messages =[];
+    if(empty($name)){
+        $messages['name'] = 'Tên menu không được bỏ trống';
+    }
+    if(empty($lienket)){
+        $messages['lienket'] = 'Tên menu không được bỏ trống';
+    }
+    if(empty($messages)){
+        $tableid = $topic['Id'];
+        $kieumenu = "Custom";
+        $status = 0;
+    
+        $query = "INSERT INTO Menu(TenMenu, TableId, KieuMenu, ViTri, LienKet, `Order`, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat,TrangThai)
+                    VALUES ('$name',NULL,'$kieumenu','$vitri','$lienket','1','1',CURRENT_TIMESTAMP, '1',CURRENT_TIMESTAMP, '$status')";
+        if(mysqli_query($conn, $query)){
+            redirect('../menu.php', 'success', 'Thêm menu thành công');
+        }
+        else{
+            redirect('../menu.php', 'error', 'Thêm menu thất bại');
+        }
+    }else{
+        $_SESSION['form_data'] = $_POST;
+        redirect('../menu.php', 'messages', $messages);
+    }
+}
 //====== Xử lý chỉnh sửa menu =======//
 if (isset($_POST['editMenu'])) {
     $messages = [];
