@@ -115,7 +115,7 @@ transition: background-image ease-in-out 1s;
 
 .movie-card img {
     width: 100%;
-    height: auto;
+    height: 100%;
     border-radius: 8px;
     transition: 0.3s ease;
 }
@@ -290,3 +290,5 @@ transition: background-image ease-in-out 1s;
 #filmTabs .nav-link.active::after {
     width: 60px;
 }
+
+
