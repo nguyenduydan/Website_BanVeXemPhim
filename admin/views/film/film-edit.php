@@ -35,8 +35,8 @@ unset($_SESSION['form_data']);
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="ten_phim">Tên phim</label>
-                            <input type="text" class="form-control" id="ten_phim" name="ten_phim" value="<?= $film['data']['TenPhim'] ?>"
-                                value="<?php echo isset($formData['ten_phim']) ? htmlspecialchars($formData['ten_phim']) : ''; ?>" placeholder="Nhập tên phim">
+                            <input type="text" class="form-control" id="ten_phim" name="ten_phim"
+                                value="<?php echo isset($formData['ten_phim']) ? htmlspecialchars($formData['ten_phim']) : $film['data']['TenPhim']; ?>" placeholder="Nhập tên phim">
                             <?php if (isset($messages['ten_phim'])): ?>
                             <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ten_phim']) ?></small>
                         <?php endif; ?>

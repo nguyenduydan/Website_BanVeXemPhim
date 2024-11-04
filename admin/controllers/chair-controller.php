@@ -16,7 +16,7 @@ if (isset($_POST['saveChair'])) {
     }
     if (empty($messages)) {
         $thamso = getByID("ThamSo","TenThamSo",$loaighe);
-        $giaghe = $thamso['data']['GiaTri'];
+        $giaghe = $thamso['data']['GiaTri'] ?? 0;
         $query = "INSERT INTO Ghe (TenGhe, MaPhong, LoaiGhe, GiaGhe, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
                       VALUES ('$tenghe', '$maphong', '$loaighe', '$giaghe', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP, '$status')";
 
@@ -33,29 +33,33 @@ if (isset($_POST['saveChair'])) {
 
 //====== chair-edit =======//
 if (isset($_POST['editChair'])) {
-    $messages = [];
-    $id = validate($_POST['maphong']);
-    $ten_phong = validate($_POST['ten_phong']);
+    $messages = []; // Initialize messages array
+    $tenghe = validate($_POST['tenghe']);
+    $loaighe = validate($_POST['loaighe']);
+    $maphong = validate($_POST['maphong']);
     $status = validate($_POST['status']) == 1 ? 1 : 0;
+    $id = validate($_POST['maghe']);
 
-
-    if (empty($ten_phong)) {
-        $messages['ten_phong'] = "Tên phòng không được để trống.";
-    } elseif (isExistValue('Phong', 'TenPhong', $ten_phong, 'MaPhong', $id)) {
-        $messages['ten_phong'] = "Tên phòng đã tồn tại";
+    if (empty($tenghe)) {
+        $messages['tenghe'] = "Tên ghế không được để trống.";
     }
     if (empty($messages)) {
-        $query = "UPDATE phong SET
-                TenPhong = '$ten_phong',
+        $thamso = getByID("ThamSo","TenThamSo",$loaighe);
+        $giaghe = $thamso['data']['GiaTri'] ?? 0;
+        $query = "UPDATE GHE SET
+                TenGhe = '$tenghe',
+                MaPhong = '$maphong',
+                LoaiGhe = '$loaighe',
+                GiaGhe = '$giaghe',
                 NguoiCapNhat = '1',
                 NgayCapNhat = CURRENT_TIMESTAMP,
                 TrangThai = '$status'
-                WHERE MaPhong = '$id'";
+                WHERE MaGhe = '$id'";
 
         if (mysqli_query($conn, $query)) {
-            redirect('../chair.php', 'success', 'Cập nhật tài khoản thành công');
+            redirect('../chair.php', 'success', 'Cập nhật ghế thành công');
         } else {
-            redirect('../views/chair/chair-edit.php?id=' . $id, 'error', 'Cập nhật tài khoản thất bại');
+            redirect('../views/chair/chair-edit.php?id=' . $id, 'error', 'Cập nhật ghế thất bại');
         }
     } else {
         redirect('../views/chair/chair-edit.php?id=' . $id, 'errors', $messages);

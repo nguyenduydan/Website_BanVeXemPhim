@@ -52,9 +52,9 @@ if (isset($_POST['editRoom'])) {
                 WHERE MaPhong = '$id'";
 
         if (mysqli_query($conn, $query)) {
-            redirect('../room.php', 'success', 'Cập nhật tài khoản thành công');
+            redirect('../room.php', 'success', 'Cập nhật phòng thành công');
         } else {
-            redirect('../views/room/room-edit.php?id=' . $id, 'error', 'Cập nhật tài khoản thất bại');
+            redirect('../views/room/room-edit.php?id=' . $id, 'error', 'Cập nhật phòng thất bại');
         }
     } else {
         redirect('../views/room/room-edit.php?id=' . $id, 'errors', $messages);

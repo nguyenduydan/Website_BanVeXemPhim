@@ -81,11 +81,6 @@ $records_per_page = $pagination['records_per_page'];
                                             </form>
                                         </th>
                                         <td class="align-middle text-center text-sm">
-                                            <a class="btn btn-secondary m-0"
-                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="views/chair/chair-detail.php?id=<?= $item['MaGhe'] ?>">
-                                                <i class="bi bi-info-circle"></i> Chi tiết
-                                            </a>
                                             <a class="btn btn-info m-0"
                                                 style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
                                                 href="views/chair/chair-edit.php?id=<?= $item['MaGhe'] ?>">
