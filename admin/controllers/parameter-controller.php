@@ -47,6 +47,11 @@ if (isset($_POST['editParameter'])) {
     $id = validate($_POST['mats']);
     if (empty($tenthamso)) {
         $messages['tenthamso'] = "Tên tham số không được để trống.";
+    } else {
+        // Kiểm tra tính duy nhất của tenthamso
+        if (isExistValue('ThamSo', 'tenthamso', $tenthamso, 'Id', $id)) {
+            $messages['tenthamso'] = "Tên tham số đã tồn tại";
+        }
     }
     if (empty($messages)) {
         $query = "UPDATE Thamso SET 
