@@ -10,9 +10,6 @@ unset($_SESSION['form_data']);
 $pagination = setupPagination($conn, 'Menu'); // Sửa tên bảng thành 'Menu'
 $data = $pagination['data'];
 $records_per_page = $pagination['records_per_page'];
-
-$vitri;
-
 ?>
 <style>
 li {
@@ -46,26 +43,59 @@ li {
                                     <ul class="ps-0" data-widget="treeview" role="menu" data-accordion="false">
                                         <li class="dropdown form-control border-0 w-100 mb-3 shadow">
                                             <div class="border-bottom border-2">
-                                                <label class="mt-2 fs-6" for="">Trạng thái phim</label>
+                                                <label class="mt-2 fs-6" for="">Phim</label>
                                                 <a class="float-end mt-1 me-2 fs-3" data-bs-toggle="collapse"
-                                                    data-bs-target="#listStatus" aria-expanded="false"><i
+                                                    data-bs-target="#listphim" aria-expanded="false"><i
                                                         class="bi bi-plus-square-fill text-success"></i>
                                                 </a>
                                             </div>
-                                            <ul class="treeview collapse mt-3" id="listStatus">
+                                            <ul class="treeview collapse mt-3" id="listphim">
                                                 <?php
-                                                $status = getAll('Phim');
-                                                foreach ($status as $row):
+                                                $phim = getAll('Phim');
+                                                foreach ($phim as $row):
                                                 ?>
                                                 <li class="mb-3 fs-6 fw-bold">
                                                     <div class="form-check align-items-center">
-                                                        <input name="status" id="status-<?= $row['MaPhim'] ?>"
+                                                        <input name="phim[]" id="phim_<?=$row['MaPhim'] ?>" value="<?=$row['MaPhim']?>"
                                                             type="checkbox" class="form-check-input">
-                                                        <label for="status-<?= $row['MaPhim'] ?>">
-                                                            <?= $row['TrangThai'] == 1 ? 'Đang chiếu' : 'Sắp chiếu' ?></label>
+                                                        <label for="phim_<?= $row['MaPhim'] ?>"><?= $row['TenPhim'] ?></label>
                                                     </div>
                                                 </li>
                                                 <?php endforeach; ?>
+                                                <li class="fs-6 fw-bold d-flex justify-content-center">
+                                                    <button class="btn btn-sm py-2 px-3 bg-gradient-success d-flex align-items-center"
+                                                        name="addPhim">Thêm<i class="bi bi-plus ms-1 text-lg"></i>
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                            
+                                        </li>
+                                        <li class="dropdown form-control border-0 w-100 mb-3 shadow">
+                                            <div class="border-bottom border-2">
+                                                <label class="mt-2 fs-6" for="">Chủ đề</label>
+                                                <a class="float-end mt-1 me-2 fs-3" data-bs-toggle="collapse"
+                                                    data-bs-target="#listtopic" aria-expanded="false"><i
+                                                        class="bi bi-plus-square-fill text-success"></i>
+                                                </a>
+                                            </div>
+                                            <ul class="treeview collapse mt-3" id="listtopic">
+                                                <?php
+                                                $topic = getAll('ChuDe');
+                                                foreach ($topic as $row):
+                                                ?>
+                                                <li class="mb-3 fs-6 fw-bold">
+                                                    <div class="form-check align-items-center">
+                                                        <input name="chude[]" id="chude_<?=$row['Id'] ?>" value="<?=$row['Id']?>"
+                                                            type="checkbox" class="form-check-input">
+                                                        <label for="chude_<?= $row['Id'] ?>"><?= $row['TenChuDe'] ?></label>
+                                                    </div>
+                                                </li>
+                                                <?php endforeach; ?>
+                                                <li class="fs-6 fw-bold d-flex justify-content-center">
+                                                    <button class="btn btn-sm py-2 px-3 bg-gradient-success d-flex align-items-center"
+                                                        name="addChuDe">Thêm<i class="bi bi-plus ms-1 text-lg"></i>
+                                                    </button>
+                                                </li>
                                             </ul>
                                         </li>
                                         <li class="dropdown form-control border-0 w-100 mb-3 shadow">
@@ -97,10 +127,9 @@ li {
                                                     </div>
                                                 </li>
                                                 <li class="fs-6 fw-bold d-flex justify-content-center">
-                                                    <button
-                                                        class="btn btn-sm py-2 px-3 bg-gradient-success d-flex align-items-center"
-                                                        name="addMenuTuyChon">Thêm<i
-                                                            class="bi bi-plus ms-1 text-lg"></i></button>
+                                                    <button class="btn btn-sm py-2 px-3 bg-gradient-success d-flex align-items-center"
+                                                        name="addCustom">Thêm<i class="bi bi-plus ms-1 text-lg"></i>
+                                                    </button>
                                                 </li>
                                             </ul>
                                         </li>
@@ -129,13 +158,9 @@ li {
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">STT</th>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">Tên Menu</th>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">Liên Kết</th>
-                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Kiểu
-                                            menu</th>
-                                        <th class="text-center text-uppercase col-1 text-xs font-weight-bolder">Thứ Tự
-                                        </th>
-                                        <th class="text-center text-uppercase col-1 text-xs font-weight-bolder">Trạng
-                                            Thái
-                                        </th>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Kiểu menu</th>
+                                        <th class="text-center text-uppercase col-1 text-xs font-weight-bolder">Thứ Tự</th>
+                                        <th class="text-center text-uppercase col-1 text-xs font-weight-bolder">Trạng Thái</th>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">Hành Động</th>
                                     </tr>
                                 </thead>
