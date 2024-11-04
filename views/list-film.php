@@ -4,7 +4,7 @@ require_once 'config/function.php';
 
 <div class="container mt-5 w-75">
     <div class="d-flex align-items-center">
-        <h4 class="mb-4 text-uppercase ps-3" style="border-left: 4px solid black;">
+        <h4 class="mb-4 text-uppercase ps-3" style="border-left: 4px solid #15036c;">
             Phim
         </h4>
         <ul class="nav ms-5 mb-4 d-flex justify-content-center " id="filmTabs">

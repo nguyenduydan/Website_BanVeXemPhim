@@ -239,6 +239,9 @@ transition: background-image ease-in-out 1s;
 .hover-zoom:hover .card-img-top {
     transform: scale(1.02);
 }
+.hover-zoom:hover .card-title{
+    color: #4d5fd1;
+}
 
 /* Đặt màu sắc và style cho thẻ liên kết */
 .card-link {
