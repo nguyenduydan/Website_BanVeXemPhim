@@ -38,39 +38,78 @@
     </div>
 </div>
 
+<?php
+$id_result = check_valid_ID('id');
+if (!is_numeric($id_result)) {
+    echo '<h5>' . $id_result . '</h5>';
+    return false;
+}
+$item = getByID('Phim', 'MaPhim', check_valid_ID('id'));
+if ($item['status'] == 200) {
+?>
 <div class="container mb-5">
     <div class="row flex-nowrap m-0">
         <div class="col-8">
             <div class="row flex-nowrap">
                 <!-- Phần ảnh phim -->
                 <div class="col-lg-4">
-                    <img src="../uploads/film-imgs/anhphim.jpg" alt="Thiên Đường Quả Báo"
-                        class="img-fluid movie-poster rounded"
+                    <img src="<?php echo isset($item['data']['Anh']) ? '../uploads/film-imgs/' . htmlspecialchars($item['data']['Anh']) : '#'; ?>"
+                        alt="<?= $item['data']['TenPhim'] ?>" class="img-fluid movie-poster rounded"
                         style="border: 2px solid #fff;transform: translateY(-60px);">
                 </div>
                 <!-- Thông tin chi tiết phim -->
                 <div class="col-lg-7 ms-1">
                     <div class="d-flex align-items-center mb-2 mt-5">
-                        <h5 class="movie-title-detail me-3">Thiên Đường Quả Báo</h5>
-                        <span class="movie-age-detail bg-danger">T18</span>
+                        <h5 class="movie-title-detail me-3"><?= $item['data']['TenPhim'] ?></h5>
+                        <span class="movie-age-detail bg-danger">
+                            <?= "T" . $item['data']['PhanLoai'] ?? 'Chưa xác định'; ?></th></span>
                     </div>
                     <div class="movie-meta">
-                        <span class="me-3 text-black fs-6"><i class="bi bi-clock text-warning"></i> 131 Phút</span>
-                        <span class=" text-black"><i class="bi bi-calendar text-warning "></i> 30/10/2024</span>
+                        <span class="me-3 text-black fs-6"><i class="bi bi-clock text-warning"></i>
+                            <?= $item['data']['ThoiLuong'] ? $item['data']['ThoiLuong'] : 'Updating...'; ?> Phút</span>
+                        <span class=" text-black"><i class="bi bi-calendar text-warning "></i>
+                            <?php
+                                $query = "SELECT GioChieu FROM SuatChieu WHERE MaPhim = {$item['data']['MaPhim']}";
+                                $result = $conn->query($query);
+                                if ($result && $showtime = $result->fetch_assoc()) {
+                                    // Giả sử 'GioChieu' là một chuỗi ngày giờ
+                                    $dateTime = new DateTime($showtime['GioChieu']);
+                                    // Định dạng lại thành 'dd/mm/yyyy'
+                                    echo htmlspecialchars($dateTime->format('d/m/Y'));
+                                } else {
+                                    echo "Updating...";
+                                }
+                                ?>
+                        </span>
                     </div>
                     <div class="movie-info mt-3">
-                        <p><strong>Quốc gia:</strong> Thái Lan</p>
-                        <p><strong>Thể loại:</strong> Hành động - mamma </p>
-                        <p><strong>Đạo diễn:</strong> Boss Kuno</p>
-                        <p><strong>Diễn viên:</strong> Jeff Satur, Engfa Waraha, Srida Puapimol</p>
+                        <p><strong>Quốc gia:
+                            </strong><?= $item['data']['QuocGia'] ? $item['data']['QuocGia'] : 'Updating...'; ?></p>
+                        <p><strong>Thể loại: </strong>
+                            <?php
+                                global $conn;
+                                $query = "SELECT GROUP_CONCAT(Theloai.TenTheLoai SEPARATOR ', ') AS TheLoai
+                                                    FROM PHIM
+                                                    JOIN THELOAI_FILM ON PHIM.MAPHIM = THELOAI_FILM.MAPHIM
+                                                    JOIN THELOAI ON THELOAI_FILM.MATHELOAI = THELOAI.MATHELOAI
+                                                    WHERE PHIM.MAPHIM = {$item['data']['MaPhim']}
+                                                    GROUP BY PHIM.MAPHIM";
+                                $result = $conn->query($query);
+                                $genres = $result->fetch_assoc()['TheLoai'];
+                                echo $genres;
+                                ?>
+                        </p>
+                        <p><strong>Đạo diễn:
+                            </strong><?= $item['data']['DaoDien'] ? $item['data']['DaoDien'] : 'Updating...'; ?></p>
+                        <p><strong>Diễn viên: </strong>
+                            <?= $item['data']['DienVien'] ? $item['data']['DienVien'] : 'Updating...'; ?></p>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="movie-content mt-5">
+                <div class="movie-content">
                     <h4 class="fw-bold">Nội Dung Phim</h4>
-                    <p>Thongkam (Jeff Satur) và Sek (Pongsakorn) làm lụng vất vả, cày ngày cày đêm để xây dựng một mái
-                        ấm...
+                    <p> <?= $item['data']['MoTa'] ? $item['data']['MoTa'] : 'Updating...'; ?>
                     </p>
                 </div>
             </div>
@@ -110,5 +149,9 @@
         </div>
     </div>
 </div>
-
+<?php
+} else {
+    echo "Không tìm thấy Phim này";
+}
+?>
 <?php include('../includes/footer.php'); ?>
