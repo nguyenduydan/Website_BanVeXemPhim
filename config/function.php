@@ -327,9 +327,9 @@ function str_slug($s)
     return $s;
 }
 
-function getHeaderSliders($conn)
+function getSliders($conn, $value)
 {
-    $query = "SELECT * FROM SLIDER WHERE ViTri = 'header'and TrangThai = '1' ORDER BY SapXep ASC"; // Sắp xếp theo trường SapXep
+    $query = "SELECT * FROM SLIDER WHERE ViTri = '$value' and TrangThai = '1' ORDER BY SapXep ASC"; // Sắp xếp theo trường SapXep
     $result = mysqli_query($conn, $query);
     $sliders = [];
 

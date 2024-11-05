@@ -8,7 +8,7 @@ require_once 'config/function.php';
 }
 </style>
 <?php
-$items = getHeaderSliders($conn); // Lấy các slider có vị trí là header
+$items = getSliders($conn, 'header'); // Lấy các slider có vị trí là header
 ?>
 
 <div class="d-lg-flex d-md-flex d-none justify-content-center bg-black">
