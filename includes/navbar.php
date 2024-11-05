@@ -8,15 +8,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/config/function.
         <div class="container">
             <div class="d-flex row flex-lg-nowrap align-items-center justify-content-center justify-content-lg-center">
                 <!-- Logo -->
-                <div class="col-2 d-lg-none text-center">
-                    <a href="http://localhost/Website_BanVeXemPhim/index.php" class="me-5">
-                        <img src="/Website_BanVeXemPhim/assets/imgs/logo-100x100.png" style="width: 50px;"
-                            class="bg-dark rounded-circle">
-                    </a>
-                </div>
                 <div
-                    class="col-lg-1 d-none d-lg-block text-center justify-content-center col-lg-auto me-lg-auto mb-md-0">
-                    <a href="http://localhost/Website_BanVeXemPhim/index.php" class="me-5">
+                    class="col-2 text-center col-lg-1 d-lg-block text-center justify-content-center col-lg-auto me-lg-auto mb-md-0">
+                    <a href="#" class="me-5">
                         <img src="/Website_BanVeXemPhim/assets/imgs/logo-100x100.png" style="width: 60px;"
                             class="bg-dark rounded-circle">
                     </a>
@@ -35,12 +29,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/config/function.
                         <ul
                             class="nav flex-lg-row flex-column col-lg-12 col-sm-12 me-lg-auto mb-2 justify-content-start justify-content-lg-center mb-md-0">
                             <?php foreach ($items as $item): ?>
-                            <li class="nav-item mx-2">
-                                <a href="<?= $item['LienKet'] ?>"
-                                    class="nav-link px-2 fw-bolder text-capitalize text-secondary <?= ($current_url === $item['LienKet']) ? 'active' : '' ?>">
-                                    <?= htmlspecialchars($item['TenMenu']) ?>
-                                </a>
-                            </li>
+                                <li class="nav-item mx-2">
+                                    <a href="<?= $item['LienKet'] ?>"
+                                        class="nav-link px-2 fw-bolder text-capitalize text-secondary <?= ($current_url === $item['LienKet']) ? 'active' : '' ?>">
+                                        <?= htmlspecialchars($item['TenMenu']) ?>
+                                    </a>
+                                </li>
                             <?php endforeach; ?>
                         </ul>
                     </div>
