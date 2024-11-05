@@ -57,8 +57,8 @@ if (isset($_POST['editRoom'])) {
             redirect('../views/room/room-edit.php?id=' . $id, 'error', 'Cập nhật phòng thất bại');
         }
     } else {
-        redirect('../views/room/room-edit.php?id=' . $id, 'errors', $messages);
         $_SESSION['form_data'] = $_POST;
+        redirect('../views/room/room-edit.php?id=' . $id, 'messages', $messages);
     }
 }
 
