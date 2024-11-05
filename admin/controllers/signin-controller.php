@@ -28,14 +28,12 @@ if (isset($_POST['SignIn'])) {
 
                     // Lưu cookie cho 'username' trong 30 ngày
                     setcookie('username', $username, time() + (30 * 24 * 60 * 60), "/"); // 30 ngày
-                    setcookie('password', $password, time() + (30 * 24 * 60 * 60), "/"); // 30 ngày
                 } else {
                     $_SESSION['rememberMe'] = false;
 
                     // Xóa cookie nếu 'rememberMe' không được chọn
                     if (isset($_COOKIE['username'])) {
                         setcookie('username', '', time() - 3600, "/");
-                        setcookie('password', '', time() - 3600, "/");
                     }
                 }
 
