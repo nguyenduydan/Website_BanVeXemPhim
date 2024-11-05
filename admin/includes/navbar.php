@@ -1,3 +1,11 @@
+<?php
+require_once '../config/function.php';
+if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+    redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
+}
+$userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : [];
+$user = getByID('NguoiDung','MaND',$userId);
+?>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Iceberg&family=Keania+One&family=Rampart+One&display=swap');
 
@@ -116,7 +124,7 @@
             <!-- Welcome Message and Avatar -->
             <div class="ms-3 d-flex align-items-center">
                 <small for="username" class="d-none d-lg-inline">Welcome,
-                    <span class="fs-5 text-info text-gradient fw-bolder">username</span>
+                    <span class="fs-5 text-info text-gradient fw-bolder"><?=$user['data']['TenND'] ?></span>
                 </small>
                 <div id="avatar-container" class="rounded-circle">
                     <img id="avatar" src="/Website_BanVeXemPhim/uploads/avatars/christmas-9095.gif"

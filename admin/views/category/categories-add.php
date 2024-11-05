@@ -1,7 +1,9 @@
 <?php
 require '../../../config/function.php';
 include('../../includes/header.php');
-
+if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+    redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
+}
 $messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy lỗi từ session
 $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
 unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị

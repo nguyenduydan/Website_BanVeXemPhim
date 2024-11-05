@@ -1,5 +1,12 @@
-<?php include('includes/header.php'); ?>
+<?php 
+if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+    redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
+}
+require_once '../config/function.php';
+include('includes/header.php'); ?>
+<div id="toast"></div>
 
+<?php alertMessage() ?>
 <div class="row">
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
         <div class="card">

@@ -1,9 +1,12 @@
 <?php
 ob_start();
 session_start();
+
 require '../config/function.php';
 include('includes/header.php');
-
+if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+    redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
+}
 $pagination = setupPagination($conn, 'Phim');
 $data = $pagination['data'];
 $records_per_page = $pagination['records_per_page'];

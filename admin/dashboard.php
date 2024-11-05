@@ -1,3 +1,8 @@
+<?php
+if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+    redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
+}
+?>
 <div class="row">
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
         <div class="card">

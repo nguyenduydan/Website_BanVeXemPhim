@@ -314,8 +314,7 @@
                 </a>
             </li>
             <li class="sidenav-footer mx-3">
-                <a class="btn bg-gradient-primary mt-3 w-100" href="/Website_BanVeXemPhim/admin/sign-in.php">Đăng
-                    xuất</a>
+                <a class="btn bg-gradient-primary mt-3 w-100" href="/Website_BanVeXemPhim/admin/sign-in.php">Đăng xuất</a>
             </li>
         </ul>
     </div>

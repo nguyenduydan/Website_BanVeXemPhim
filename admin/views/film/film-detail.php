@@ -2,6 +2,9 @@
 
 require '../../../config/function.php';
 include('../../includes/header.php');
+if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+    redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
+}
 $phanloai = [
     0 => 'Phổ thông',
     13 => 'T13',

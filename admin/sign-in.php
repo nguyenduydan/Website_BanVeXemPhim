@@ -1,6 +1,16 @@
+<?php
+require '../config/function.php';
+if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+  redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
+}
+$messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy lỗi từ session
+$formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
+unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
+unset($_SESSION['form_data']);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -41,24 +51,30 @@
                   <h1 class="fx- font-weight-bolder text-info text-gradient">Đăng nhập</h1>
                 </div>
                 <div class="card-body">
-                  <form role="form">
-                    <label class="fs-5">Username</label>
+                <form role="form" action="controllers/signin-controller.php" method="post">
+                    <label class="fs-5">Tên đăng nhập</label>
                     <div class="mb-3">
-                      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="username-addon">
+                      <input type="text" class="form-control" name ="username" placeholder="Username" aria-label="Username" aria-describedby="username-addon">
+                      <?php if (isset($messages['username'])): ?>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['username']) ?></small>
+                        <?php endif; ?>
                     </div>
-                    <label class="fs-5">Password</label>
+                    <label class="fs-5">Mật khẩu</label>
                     <div class="input-group mb-3">
-                      <input type="password" id="passwordInput" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
+                      <input type="password" id="passwordInput" name="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
                       <span class="icon" id="password-addon">
                         <i class="fas fa-eye" id="togglePassword"></i>
                       </span>
                     </div>
+                     <?php if (isset($messages['password'])): ?>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['password']) ?></small>
+                        <?php endif; ?>
                     <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
                       <label class="form-check-label" for="rememberMe">Remember me</label>
                     </div>
                     <div class="text-center">
-                      <button type="button" class="btn bg-gradient-info w-100 mt-4 mb-0 fs-5">Sign in</button>
+                      <button type="submit" name="SignIn" class="btn bg-gradient-info w-100 mt-4 mb-0 fs-5">Sign in</button>
                     </div>
                   </form>
                 </div>

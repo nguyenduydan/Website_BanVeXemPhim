@@ -1,7 +1,6 @@
 <?php
 require 'dbcon.php';
 
-// Check if the session is already started
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
