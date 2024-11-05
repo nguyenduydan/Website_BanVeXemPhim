@@ -299,6 +299,8 @@ a.nav-link.px-2.fw-bolder.text-capitalize.text-secondary {
     position: relative;
     color: #6c757d;
     text-decoration: none;
+    align-items: center;
+    transition: all 0.3s ease;
 }
 
 a.nav-link.px-2.fw-bolder.text-capitalize.text-secondary:hover{
@@ -307,6 +309,8 @@ a.nav-link.px-2.fw-bolder.text-capitalize.text-secondary:hover{
 
 a.nav-link.px-2.fw-bolder.text-capitalize.text-secondary.active{
     color: #18009e !important;
+    border-top: 2px solid #18009e;
+    transition: all 0.3s ease;
 }
 
 a.nav-link.px-2.fw-bolder.text-capitalize.text-secondary:hover::after {
@@ -315,10 +319,10 @@ a.nav-link.px-2.fw-bolder.text-capitalize.text-secondary:hover::after {
     bottom: -3px;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
-    height: 2px;
+    width: 80px;
+    height: 1px;
     background-color: #18009e;
-    transition: width 0.3s ease-out;
+    transition: width 0.3s ease;
 }
 
 a.nav-link.px-2.fw-bolder.text-capitalize.text-secondary::after {
@@ -328,7 +332,7 @@ a.nav-link.px-2.fw-bolder.text-capitalize.text-secondary::after {
     left: 50%;
     transform: translateX(-50%);
     width: 0;
-    height: 2px;
+    height: 1px;
     background-color: #18009e;
-    transition: width 0.3s ease-out;
+    transition: width 0.3s ease;
 }
