@@ -1,4 +1,3 @@
-
 function previewImageAdd(event) {
     var reader = new FileReader();
     reader.onload = function () {

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <?php
+
     if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
         redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
     }
@@ -23,7 +25,6 @@
         'menu' => 'Danh sách menu',
         'parameter' => 'Danh sách tham số',
     ];
-
     // Hàm để lấy tiêu đề dựa trên tên trang
     function getPageTitle($page, $titles)
     {
