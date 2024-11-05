@@ -78,7 +78,7 @@ if (isset($_POST['saveSlider'])) {
 
 if (isset($_POST['editSlider'])) {
     $messages = [];
-    $idSlider = validate($_POST['id']);
+    $idSlider = validate($_POST['idSlider']);
     $tenslider = validate($_POST['name']);
     $tenTopic = validate($_POST['nametopic']);
     $url = validate($_POST['url']);
@@ -88,7 +88,6 @@ if (isset($_POST['editSlider'])) {
     $sapxep = validate($_POST['sapxep']);
     $trangthai = validate($_POST['status']) == 1 ? 1 : 0;
     $anh_slider = '';
-    $id = uniqid('slider_', false);
 
     if (empty($tenslider)) {
         $messages['name'] = "Tên slider không được để trống.";
@@ -120,8 +119,8 @@ if (isset($_POST['editSlider'])) {
         $messages["vitri"] = "Vị trí không được để trống.";
     }
 
-    $film = getByID('Slider', 'Id', $id);
-    $anh_slider = $film['data']['Anh'];
+    $item = getByID('Slider', 'Id', $idSlider);
+    $anh_slider = $item['data']['Anh'];
 
     if (isset($_FILES['anh_slider']) && $_FILES['anh_slider']['error'] == 0) {
         $sliderPath = "../../uploads/slider-imgs/" . $anh_slider;
@@ -156,15 +155,15 @@ if (isset($_POST['editSlider'])) {
                     Url = '$url',
                     TuKhoa = '$tukhoa',
                     MoTa = '$mota'
-                WHERE Id = '$id'";
+                WHERE Id = '$idSlider'";
         if (mysqli_query($conn, $query)) {
             redirect('../slider.php', 'success', 'Cập nhật slider thành công');
         } else {
-            redirect('../views/slider/slider-edit.php?id=' . $id, 'error', 'Cập nhật slider thất bại');
+            redirect('../views/slider/slider-edit.php?id=' . $idSlider, 'error', 'Cập nhật slider thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/slider/slider-add.php', 'messages', $messages);
+        redirect('../views/slider/slider-edit.php?id=' . $idSlider, 'messages', $messages);
     }
 }
 
