@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <?php
+    if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+        redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
+    }
     // Lấy tên trang hiện tại
     $page = pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME);
 
