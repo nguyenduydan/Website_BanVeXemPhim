@@ -6,18 +6,8 @@ $item = getByID('Phim', 'MaPhim', check_valid_ID('id'));
 </style>
 <div class="banner bg-black">
     <div class="banner-overlay">
-        <?php
-        // Kết nối đến cơ sở dữ liệu (giả sử biến $conn đã được thiết lập trước đó)
-        $query = "SELECT * FROM Slider WHERE ViTri = 'aside'";
-        $result = $conn->query($query);
-
-        // Kiểm tra xem có dữ liệu từ bảng Slider không
-        if ($result && $firstSlide = $result->fetch_assoc()): ?>
-        <img src="../uploads/slider-imgs/<?= htmlspecialchars($firstSlide['Anh']) ?>" alt="Venom: Kèo Cuối"
-            class="banner-image">
-        <?php else: ?>
-        <p>Không có hình ảnh để hiển thị.</p>
-        <?php endif; ?>
+        <img src="../uploads/film-imgs/<?= htmlspecialchars($item['data']['Banner']) ?>"
+            alt="<?= $item['data']['TenPhim']?>" class="banner-image">
     </div>
 </div>
 
