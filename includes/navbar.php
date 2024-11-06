@@ -71,9 +71,23 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/config/function.
                                     class="rounded-circle">
                             </a>
                             <ul class="dropdown-menu text-small">
-                                <li><a class="dropdown-item"><span>Xin chào, </span><span class="fw-bold" style="background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
-    background-clip: text;
-    color: transparent;">Đan</span></a>
+                                <li>
+                                    <a class="dropdown-item">
+                                        <span>Xin chào, </span>
+                                        <span class="fw-bold user-name" style="
+                                        background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
+                                        background-clip: text;
+                                        color: transparent;
+                                        display: block;
+                                        max-width: 100px; /* Giới hạn chiều rộng của tên */
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        ">
+                                            NguenThietDuyDanssssssssss
+                                        </span>
+                                    </a>
+                                </li>
+
                                 </li>
                                 <li><a class=" dropdown-item" href="profile-user.php">Cài đặt</a></li>
                                 <li>
