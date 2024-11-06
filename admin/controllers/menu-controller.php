@@ -103,13 +103,8 @@ if (isset($_POST['editMenu'])) {
             redirect('../views/menu/menu-edit.php?id=' . $id, 'error', 'Cập nhật menu thất bại');
         }
     } else {
-<<<<<<< Updated upstream
         $_SESSION['form_data'] = $_POST;
         redirect('../views/menu/menu-edit.php?id=' . $id, 'messages', $messages);
-=======
-        redirect('../views/menu/menu-edit.php?id=' . $id, 'errors', $messages);
-        $_SESSION['form_data'] = $_POST;
->>>>>>> Stashed changes
     }
 }
 //====== Cập nhật trạng thái menu ======//
