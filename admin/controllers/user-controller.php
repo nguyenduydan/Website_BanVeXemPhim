@@ -1,7 +1,8 @@
 <?php
 session_start();
 require '../../config/function.php';
-
+getAdmin();
+$created = $admin['data']['MaND'];
 $messages = [];
 //====== user-add =======//
 if (isset($_POST['saveUser'])) {
@@ -63,7 +64,7 @@ if (isset($_POST['saveUser'])) {
     }
     if (empty($messages)) {
         $query = "INSERT INTO nguoidung (TenND, username, NgaySinh, GioiTinh, SDT, Anh, Email, MatKhau, Role, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
-                  VALUES ('$name', '$username', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email', '$hashedPassword', '$role', '1', CURRENT_TIMESTAMP, NULL, NULL, '$status')";
+                  VALUES ('$name', '$username', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email', '$hashedPassword', '$role', '$created', CURRENT_TIMESTAMP, '$created', CURRENT_TIMESTAMP, '$status')";
 
         if (mysqli_query($conn, $query)) {
             redirect('../user.php', 'success', 'Thêm tài khoản thành công');
@@ -139,7 +140,7 @@ if (isset($_POST['editUser'])) {
                 Anh = '$avatar',
                 Email = '$email',
                 Role = '$role',
-                NguoiCapNhat = '1',
+                NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP,
                 TrangThai = '$status'
                 WHERE MaND = '$id'";
@@ -163,7 +164,7 @@ if (isset($_POST['changeStatus'])) {
 
     $edit_query = "UPDATE NguoiDung SET
                 TrangThai = '$status',
-                NguoiCapNhat = '1',
+                NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP
                 WHERE MaND = '$id'";
 

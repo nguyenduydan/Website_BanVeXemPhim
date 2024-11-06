@@ -1,7 +1,8 @@
 <?php
 session_start();
 require '../../config/function.php';
-
+getAdmin();
+$created = $admin['data']['MaND'];
 $messages = [];
 //====== room-add =======//
 if (isset($_POST['saveRoom'])) {
@@ -17,7 +18,7 @@ if (isset($_POST['saveRoom'])) {
 
     if (empty($messages)) {
         $query = "INSERT INTO phong (TenPhong, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
-                  VALUES ('$ten_phong', '1', CURRENT_TIMESTAMP, NULL, NULL, '$status')";
+                  VALUES ('$ten_phong', '$created', CURRENT_TIMESTAMP, '$created', CURRENT_TIMESTAMP, '$status')";
 
         if (mysqli_query($conn, $query)) {
             redirect('../room.php', 'success', 'Thêm phòng thành công');
@@ -46,7 +47,7 @@ if (isset($_POST['editRoom'])) {
     if (empty($messages)) {
         $query = "UPDATE phong SET
                 TenPhong = '$ten_phong',
-                NguoiCapNhat = '1',
+                NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP,
                 TrangThai = '$status'
                 WHERE MaPhong = '$id'";
@@ -70,7 +71,7 @@ if (isset($_POST['changeStatus'])) {
 
     $edit_query = "UPDATE Phong SET
                 TrangThai = '$status',
-                NguoiCapNhat = '1',
+                NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP
                 WHERE MaPhong = '$id'";
 

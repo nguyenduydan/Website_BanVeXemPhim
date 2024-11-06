@@ -1,7 +1,8 @@
 <?php
 session_start();
 require '../../config/function.php';
-
+getAdmin();
+$created = $admin['data']['MaND'];
 $messages = [];
 //====== slider-add =======//
 if (isset($_POST['saveSlider'])) {
@@ -57,7 +58,7 @@ if (isset($_POST['saveSlider'])) {
 
     if (empty($messages)) {
         $query = "INSERT INTO SLIDER (TenSlider, Anh, ViTri, SapXep, TrangThai, NguoiTao, NgayTao, TenChuDe, Url, TuKhoa, MoTa)
-              VALUES ('$tenslider', '$anh_slider', '$vitri', '$sapxep', '$trangthai', '1', CURRENT_TIMESTAMP, '$tenTopic', '$url', '$tukhoa', '$mota')";
+              VALUES ('$tenslider', '$anh_slider', '$vitri', '$sapxep', '$trangthai', '$created', CURRENT_TIMESTAMP, '$tenTopic', '$url', '$tukhoa', '$mota')";
 
         if (mysqli_query($conn, $query)) {
             redirect('../slider.php', 'success', 'Thêm slider thành công');
@@ -136,7 +137,7 @@ if (isset($_POST['editSlider'])) {
                     ViTri = '$vitri',
                     SapXep = '$sapxep',
                     TrangThai = '$trangthai',
-                    NguoiCapNhat = '1',
+                    NguoiCapNhat = '$created',
                     NgayCapNhat= CURRENT_TIMESTAMP,
                     TenChuDe = '$tenTopic',
                     Url = '$url',

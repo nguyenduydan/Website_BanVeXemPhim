@@ -1,7 +1,8 @@
 <?php
 session_start();
 require '../../config/function.php';
-
+getAdmin();
+$created = $admin['data']['MaND'];
 $messages = [];
 //====== film-add =======//
 if (isset($_POST['saveFilm'])) {
@@ -35,7 +36,7 @@ if (isset($_POST['saveFilm'])) {
 
         $slug = str_slug($name);
         $query = "INSERT INTO PHIM (TenPhim,TenRutGon,ThoiLuong,Anh,DaoDien,DienVien,QuocGia,NamPhatHanh,PhanLoai,MoTa, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
-                  VALUES ('$name','$slug','$thoiluong','$anh_phim','$dao_dien','$dien_vien','$quoc_gia','$namphathanh','$phanloai','$mota', '1',CURRENT_TIMESTAMP, '1',CURRENT_TIMESTAMP, '$status')";
+                  VALUES ('$name','$slug','$thoiluong','$anh_phim','$dao_dien','$dien_vien','$quoc_gia','$namphathanh','$phanloai','$mota', '$created',CURRENT_TIMESTAMP, '$created',CURRENT_TIMESTAMP, '$status')";
         if (mysqli_query($conn, $query)) {
             $maPhim = mysqli_insert_id($conn);
             foreach ($theloai as $maTheLoai) {
@@ -112,7 +113,7 @@ if (isset($_POST['editFilm'])) {
                 NamPhatHanh = '$namphathanh',
                 PhanLoai = '$phanloai',
                 MoTa = '$mota',
-                NguoiCapNhat = '1',
+                NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP,
                 TrangThai = '$status'
                 WHERE MaPhim = '$id'";

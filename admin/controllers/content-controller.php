@@ -27,7 +27,7 @@ if (isset($_POST['saveContent'])) {
     if (empty($messages)) {
         $link = str_slug($name);
         $query = "INSERT INTO baiviet (ChuDeBV, TenBV, LienKet, ChiTiet, Anh, KieuBV, MoTa, TuKhoa, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
-            VALUES ('$chudebv', '$name', '$link', '$chitiet', '$anhbv', '$kieubv', '$mota', '$tukhoa', '1', CURRENT_TIMESTAMP, NULL, NULL, '$status')";
+            VALUES ('$chudebv', '$name', '$link', '$chitiet', '$anhbv', '$kieubv', '$mota', '$tukhoa', '$created', CURRENT_TIMESTAMP,'$created',CURRENT_TIMESTAMP, '$status')";
 
         if (mysqli_query($conn, $query)) {
             redirect('../content.php', 'success', 'Thêm bài viết thành công');
@@ -57,7 +57,7 @@ if (isset($_POST['editCategory'])) {
     if (empty($messages)) {
         $query = "UPDATE TheLoai SET
                 TenTheLoai = '$name',
-                NguoiCapNhat = 1,
+                NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP,
                 TrangThai = '$status'
                 WHERE MaTheLoai = '$id'
@@ -78,7 +78,7 @@ if (isset($_POST['changeStatus'])) {
 
     $edit_query = "UPDATE TheLoai SET
                 TrangThai = '$status',
-                NguoiCapNhat = '1',
+                NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP
                 WHERE MaTheLoai = '$id'";
 

@@ -1,7 +1,8 @@
 <?php
 session_start();
 require '../../config/function.php';
-
+getAdmin();
+$created = $admin['data']['MaND'];
 $messages = [];
 //====== chair-add =======//
 if (isset($_POST['saveChair'])) {
@@ -18,7 +19,7 @@ if (isset($_POST['saveChair'])) {
         $thamso = getByID("ThamSo","TenThamSo",$loaighe);
         $giaghe = $thamso['data']['GiaTri'] ?? 0;
         $query = "INSERT INTO Ghe (TenGhe, MaPhong, LoaiGhe, GiaGhe, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
-                      VALUES ('$tenghe', '$maphong', '$loaighe', '$giaghe', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP, '$status')";
+                      VALUES ('$tenghe', '$maphong', '$loaighe', '$giaghe', '$created', CURRENT_TIMESTAMP, '$created', CURRENT_TIMESTAMP, '$status')";
 
         if (mysqli_query($conn, $query)) {
             redirect('../chair.php', 'success', 'Thêm ghế thành công');
@@ -51,7 +52,7 @@ if (isset($_POST['editChair'])) {
                 MaPhong = '$maphong',
                 LoaiGhe = '$loaighe',
                 GiaGhe = '$giaghe',
-                NguoiCapNhat = '1',
+                NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP,
                 TrangThai = '$status'
                 WHERE MaGhe = '$id'";
@@ -75,7 +76,7 @@ if (isset($_POST['changeStatus'])) {
 
     $edit_query = "UPDATE Ghe SET
                 TrangThai = '$status',
-                NguoiCapNhat = '1',
+                NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP
                 WHERE MaGhe = '$id'";
 

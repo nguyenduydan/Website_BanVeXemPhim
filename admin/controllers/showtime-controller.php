@@ -1,7 +1,8 @@
 <?php
 session_start();
 require '../../config/function.php';
-
+getAdmin();
+$created = $admin['data']['MaND'];
 $messages = [];
 //====== suatchieu-add =======//
 if (isset($_POST['savesc'])) {
@@ -19,7 +20,7 @@ if (isset($_POST['savesc'])) {
     }
     if (empty($messages)) {
         $query = "INSERT INTO SuatChieu (MaPhim,GioChieu, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
-                  VALUES ('$mafilm','$giochieu', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP, '$status')";
+                  VALUES ('$mafilm','$giochieu', '$created', CURRENT_TIMESTAMP, '$created', CURRENT_TIMESTAMP, '$status')";
 
         if (mysqli_query($conn, $query)) {
             redirect('../showtime.php', 'success', 'Thêm suất chiếu thành công');
@@ -48,7 +49,7 @@ if (isset($_POST['editRoom'])) {
     if (empty($messages)) {
         $query = "UPDATE phong SET
                 TenPhong = '$ten_phong',
-                NguoiCapNhat = '1',
+                NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP,
                 TrangThai = '$status'
                 WHERE MaPhong = '$id'";
@@ -72,7 +73,7 @@ if (isset($_POST['changeStatus'])) {
 
     $edit_query = "UPDATE SUATCHIEU SET
                 TrangThai = '$status',
-                NguoiCapNhat = '1',
+                NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP
                 WHERE MaSuatChieu = '$id'";
 

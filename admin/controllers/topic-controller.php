@@ -2,6 +2,8 @@
 session_start();
 require '../../config/function.php';
 // xử lý topic
+getAdmin();
+$created = $admin['data']['MaND'];
 $messages = [];
 if (isset($_POST['saveTopic'])) {
     $name_topic = validate($_POST['name_topic']);
@@ -19,7 +21,7 @@ if (isset($_POST['saveTopic'])) {
 
     if (empty($messages)) {
         $query = "INSERT INTO chude (MaPhim,TenRutGon,MoTa,TuKhoa,TenChuDe,NguoiTao,NgayTao,NguoiCapNhat,NgayCapNhat,TrangThai)
-            VALUES ('$phim','$slug','$mota','$tukhoa','$name_topic',1,CURRENT_TIMESTAMP,NULL,NULL,'$status')";
+            VALUES ('$phim','$slug','$mota','$tukhoa','$name_topic','$created',CURRENT_TIMESTAMP,'$created',CURRENT_TIMESTAMP,'$status')";
         if (mysqli_query($conn, $query)) {
             redirect('../topic.php', 'success', 'Thêm chủ đề thành công');
         } else {
@@ -57,7 +59,7 @@ if (isset($_POST['editTopic'])) {
                 MoTa = '$mota',
                 TuKhoa = '$tukhoa',
                 TenChuDe = '$name_topic',
-                NguoiCapNhat = 1,
+                NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP,
                 TrangThai = '$status'
                 WHERE Id = '$id'
@@ -80,7 +82,7 @@ if (isset($_POST['changeStatus'])) {
 
     $edit_query = "UPDATE CHUDE SET
                 TrangThai = '$status',
-                NguoiCapNhat = '1',
+                NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP
                 WHERE Id = '$id'";
 
