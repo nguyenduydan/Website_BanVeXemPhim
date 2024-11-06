@@ -70,7 +70,7 @@ if (isset($_POST['editFilm'])) {
     $theloai = $_POST['the_loai'] ?? [];
     $namphathanh = validate($_POST['nam_phat_hanh']);
     $thoiluong = validate($_POST['thoi_luong']);
-    $status = validate($_POST['status']) == 1 ? 1 : 0;
+    $status = validate($_POST['status']);
 
     $film = getByID('Phim', 'MaPhim', $id);
     $anh_phim = $film['data']['Anh'];
