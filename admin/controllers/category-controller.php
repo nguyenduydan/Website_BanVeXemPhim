@@ -36,10 +36,10 @@ if (isset($_POST['editCategory'])) {
     $id = validate($_POST['matl']);
     $status = validate($_POST['status']);
     if (empty($name)) {
-        $messages['name'] = 'Tên thể loại không được để trống';
+        $messages['ten_the_loai'] = 'Tên thể loại không được để trống';
     }
     if (isExistValue('TheLoai', 'TenTheLoai', $name, 'MaTheLoai', $id)) {
-        $messages['name'] = 'Tên thể loại đã tồn tại';
+        $messages['ten_the_loai'] = 'Tên thể loại đã tồn tại';
     }
     if (empty($messages)) {
         $query = "UPDATE TheLoai SET
@@ -56,7 +56,7 @@ if (isset($_POST['editCategory'])) {
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/category/categories-edit.php?id=' . $id, 'errors', $messages);
+        redirect('../views/category/categories-edit.php?id=' . $id, 'messages', $messages);
     }
 }
 if (isset($_POST['changeStatus'])) {
