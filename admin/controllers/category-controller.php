@@ -1,6 +1,8 @@
 <?php
 session_start();
 require '../../config/function.php';
+getAdmin();
+$created = $admin['data']['MaND'];
 // xử lý categories
 $messages = [];
 if (isset($_POST['saveCategory'])) {
@@ -15,7 +17,7 @@ if (isset($_POST['saveCategory'])) {
     }
     if (empty($messages)) {
         $query = "INSERT INTO theloai (TenTheLoai,NguoiTao,NgayTao,NguoiCapNhat,NgayCapNhat,TrangThai)
-            VALUES ('$name',1,CURRENT_TIMESTAMP,NULL,NULL,'$status')";
+            VALUES ('$name','$created',CURRENT_TIMESTAMP,'$created',CURRENT_TIMESTAMP,'$status')";
         if (mysqli_query($conn, $query)) {
             redirect('../categories.php', 'success', 'Thêm thể loại thành công');
         } else {
@@ -44,7 +46,7 @@ if (isset($_POST['editCategory'])) {
     if (empty($messages)) {
         $query = "UPDATE TheLoai SET
                 TenTheLoai = '$name',
-                NguoiCapNhat = 1,
+                NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP,
                 TrangThai = '$status'
                 WHERE MaTheLoai = '$id'
@@ -65,7 +67,7 @@ if (isset($_POST['changeStatus'])) {
 
     $edit_query = "UPDATE TheLoai SET
                 TrangThai = '$status',
-                NguoiCapNhat = '1',
+                NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP
                 WHERE MaTheLoai = '$id'";
 

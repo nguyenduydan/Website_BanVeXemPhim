@@ -339,3 +339,9 @@ function getSliders($conn, $value)
 
     return $sliders;
 }
+function getAdmin() {
+    global $admin; 
+    global $userId;
+    $userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : [];
+    $admin = getByID('NguoiDung', 'MaND', $userId);
+}
