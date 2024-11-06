@@ -16,10 +16,14 @@ if (is_numeric($result)) {
         mysqli_query($conn, $query);
         $name = validate($film['data']['TenPhim']);
         $filmPath = "../../../uploads/film-imgs/" . $film['data']['Anh'];
+        $bannerPath = "../../../uploads/film-imgs/" . $film['data']['Banner'];
         $filmDelete = deleteQuery('Phim', 'MaPhim', $id);
         if ($filmDelete) {
             if (!empty($film['data']['Anh']) && file_exists($filmPath)) {
                 $deleteResult = deleteImage($filmPath);
+            }
+            if (!empty($film['data']['Banner']) && file_exists($bannerPath)) {
+                $deleteResult = deleteImage($bannerPath);
             }
             redirect('../../film.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($name) . '</span> thành công');
         } else {

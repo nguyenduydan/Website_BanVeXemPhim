@@ -7,7 +7,7 @@ $item = getByID('Phim', 'MaPhim', check_valid_ID('id'));
 <div class="banner bg-black">
     <div class="banner-overlay">
         <img src="../uploads/film-imgs/<?= htmlspecialchars($item['data']['Banner']) ?>"
-            alt="<?= $item['data']['TenPhim']?>" class="banner-image">
+            alt="<?= $item['data']['TenPhim'] ?>" class="banner-image">
     </div>
 </div>
 
@@ -90,7 +90,9 @@ if ($item['status'] == 200) {
                             <div class="collapse navbar-collapse" id="navbarNav">
                                 <ul class="navbar-nav mr-auto text-black text-center fw-bolder" id="daysNav">
                                     <!-- Days of the week will be dynamically added here -->
+
                                 </ul>
+                                <input type="text" name="selected_date" id="activeDay" readonly>
                             </div>
                         </div>
                     </nav>

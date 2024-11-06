@@ -101,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function generateDays() {
         const daysNav = document.getElementById('daysNav');
+        const activeDayInput = document.getElementById('activeDay');
         const today = new Date();
         const weekdays = ['Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy', 'Chủ Nhật'];
 
@@ -120,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
             a.classList.add('nav-link', 'day-link');
 
             const dateToDisplay = new Date(today.getTime() + ((currentStartIndex + i) * 86400000)); // Calculate future date
+            const dateString = `${dateToDisplay.toLocaleDateString('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' })}`;
             a.innerHTML = `${weekdays[index]}<br>${dateToDisplay.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' })}`;
 
             // Set href attribute to prevent default link behavior
@@ -128,13 +130,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add click event to show different showtimes based on the day
             a.onclick = () => {
                 highlightActiveDay(a, index); // Highlight active day
-                // Optionally, you can also show the showtimes for the selected day if needed
+                activeDayInput.value = dateString;
             };
 
             // Check if this day is today to mark it as active
             if (i === 0 && currentStartIndex === 0) {
                 a.classList.add('active'); // Mark today as active
                 a.innerHTML = `Hôm Nay<br>${today.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' })}`;
+                activeDayInput.value = `${today.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' })}`;
             }
 
             li.appendChild(a);
