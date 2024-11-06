@@ -23,14 +23,13 @@
     /* Increase width on hover */
 }
 /* CSS */
+
 .word {
-    position: absolute;
-    top: 20%;
+    position:absolute;
     text-transform: uppercase;
-    left: 12%;
     font-size: 2rem;
     font-weight: bolder;
-    width: 220px;
+    width: max-content;
     opacity: 0;
 }
 
