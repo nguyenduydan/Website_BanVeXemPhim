@@ -27,14 +27,15 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/config/function.
                     <div class="offcanvas-body">
                         <?php
                         $items = getMenu('Menu');
+                        $baseUrl = "http://" . $_SERVER['HTTP_HOST'] . "/Website_BanVeXemPhim/";
                         ?>
                         <ul
                             class="nav flex-lg-row flex-column col-lg-12 col-sm-12 me-lg-auto mb-2 justify-content-start justify-content-lg-center mb-md-0">
                             <?php foreach ($items as $item):
                             ?>
                             <li class="nav-item mx-2">
-                                <a href="<?= $item['LienKet'] ?>"
-                                    class="nav-link px-2 fw-bolder text-capitalize text-secondary <?= ($current_url === $item['LienKet']) ? 'active' : '' ?>">
+                                <a href="<?= $baseUrl . $item['LienKet'] ?>"
+                                    class="nav-link px-2 fw-bolder text-capitalize text-secondary <?= ($current_url === $baseUrl . $item['LienKet']) ? 'active' : '' ?>">
                                     <?= htmlspecialchars($item['TenMenu']) ?>
                                 </a>
                             </li>

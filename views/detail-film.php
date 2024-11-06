@@ -117,6 +117,10 @@ if ($item['status'] == 200) {
                     </div>
                 </div>
             </div>
+
+            <div class="chair">
+                <?php require_once("list-chair.php") ?>
+            </div>
         </div>
         <div class="col-3 mt-5 ms-3">
             <h4 class="mb-4 text-uppercase ps-3" style="border-left: 4px solid black;">
