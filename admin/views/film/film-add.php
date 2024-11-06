@@ -33,7 +33,7 @@ unset($_SESSION['form_data']);
                             value="<?php echo isset($formData['ten_phim']) ? htmlspecialchars($formData['ten_phim']) : ''; ?>"
                             placeholder="Nhập tên phim" required>
                         <?php if (isset($messages['ten_phim'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ten_phim']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ten_phim']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
@@ -64,12 +64,12 @@ unset($_SESSION['form_data']);
                             <?php
                             $nation = ['Âu Mỹ', 'Hàn Quốc', 'Trung Quốc', 'Anh', 'Việt Nam'];
                             foreach ($nation as $nation): ?>
-                                <div class="form-check me-3">
-                                    <input class="form-check-input" type="checkbox" name="quoc_gia[]" value="<?= $nation ?>"
-                                        id="quoc_gia<?= strtolower($nation) ?>">
-                                    <label class="form-check-label"
-                                        for="quoc_gia<?= strtolower($nation) ?>"><?= $nation ?></label>
-                                </div>
+                            <div class="form-check me-3">
+                                <input class="form-check-input" type="checkbox" name="quoc_gia[]" value="<?= $nation ?>"
+                                    id="quoc_gia<?= strtolower($nation) ?>">
+                                <label class="form-check-label"
+                                    for="quoc_gia<?= strtolower($nation) ?>"><?= $nation ?></label>
+                            </div>
                             <?php endforeach; ?>
                             <div class="d-flex align-items-center">
                                 <label for="quoc_gia" class="me-2">Khác: </label>
@@ -93,13 +93,13 @@ unset($_SESSION['form_data']);
                             <?php
                             $genres = getAll('TheLoai');
                             foreach ($genres as $genre): ?>
-                                <div class="form-check me-3">
-                                    <input class="form-check-input" type="checkbox" name="the_loai[]"
-                                        value="<?= $genre['MaTheLoai'] ?>"
-                                        id="the_loai_<?= strtolower($genre['TenTheLoai']) ?>">
-                                    <label class="form-check-label"
-                                        for="the_loai_<?= strtolower($genre['TenTheLoai']) ?>"><?= $genre['TenTheLoai'] ?></label>
-                                </div>
+                            <div class="form-check me-3">
+                                <input class="form-check-input" type="checkbox" name="the_loai[]"
+                                    value="<?= $genre['MaTheLoai'] ?>"
+                                    id="the_loai_<?= strtolower($genre['TenTheLoai']) ?>">
+                                <label class="form-check-label"
+                                    for="the_loai_<?= strtolower($genre['TenTheLoai']) ?>"><?= $genre['TenTheLoai'] ?></label>
+                            </div>
                             <?php endforeach; ?>
                         </div>
                         <div class="mt-3">
@@ -119,7 +119,7 @@ unset($_SESSION['form_data']);
                         <input type="number" class="form-control" id="thoi_luong" name="thoi_luong"
                             placeholder="Nhập thời lượng phim" required>
                     </div>
-                    <div class="col-6">
+                    <div class="form-group mb-3">
                         <label for="status">Trạng thái</label>
                         <select class="form-select" id="status" name="status">
                             <option value="1">Online</option>
@@ -127,17 +127,27 @@ unset($_SESSION['form_data']);
                             <option value="2">Coming soon</option>
                         </select>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="anh_phim">Chọn ảnh phim</label>
-                        <input type="file" class="form-control" id="anh_phim" name="anh_phim" accept="image/*" required
-                            onchange="previewImage(event)">
+                    <div class="form-group row mb-3">
+                        <div class="col-6">
+                            <label for="anh_phim">Chọn ảnh phim</label>
+                            <input type="file" class="form-control" id="anh_phim" name="anh_phim" accept="image/*"
+                                onchange="previewImage(event, 'preview')">
+                            <div class="form-group d-flex justify-content-center mt-3">
+                                <img id="preview" src="#" alt="Ảnh xem trước" class="img-fluid"
+                                    style="display:none; max-width: 100%; max-height: 10rem;" />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label for="banner">Chọn ảnh banner</label>
+                            <input type="file" class="form-control" id="banner" name="banner" accept="image/*"
+                                onchange="previewImage(event, 'previewbanner')">
+                            <div class="form-group d-flex justify-content-center mt-3">
+                                <img id="previewbanner" src="#" alt="Ảnh xem trước" class="img-fluid"
+                                    style="display:none; max-width: 100%; max-height: 10rem;" />
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Hiển thị ảnh đã chọn -->
-                    <div class="form-group d-flex justify-content-center mb-3">
-                        <img id="preview" src="#" alt="Ảnh xem trước" class="img-fluid"
-                            style="display:none; max-width: 100%; max-height: 17rem;" />
-                    </div>
                 </div>
             </div>
 

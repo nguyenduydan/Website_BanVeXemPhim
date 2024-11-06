@@ -22,6 +22,7 @@ if (isset($_POST['saveFilm'])) {
     $status = validate($_POST['status']);
     $id = uniqid('film_', false);
     $anh_phim = '';
+    $banner = '';
     if (isset($_FILES['anh_phim'])) {
         // Use filmname as filename for the img
         $imgResult = uploadImage($_FILES['anh_phim'], "../../uploads/film-imgs/", $id);
@@ -31,11 +32,20 @@ if (isset($_POST['saveFilm'])) {
             $messages[] = $imgResult['message'];
         }
     }
+    if (isset($_FILES['banner'])) {
+        // Use filmname as filename for the img
+        $imgResult = uploadImage($_FILES['banner'], "../../uploads/film-imgs/", "$id_$namphathanh");
+        if ($imgResult['success']) {
+            $banner = $imgResult['filename'];
+        } else {
+            $messages[] = $imgResult['message'];
+        }
+    }
     if (empty($messages)) {
 
         $slug = str_slug($name);
-        $query = "INSERT INTO PHIM (TenPhim,TenRutGon,ThoiLuong,Anh,DaoDien,DienVien,QuocGia,NamPhatHanh,PhanLoai,MoTa, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
-                  VALUES ('$name','$slug','$thoiluong','$anh_phim','$dao_dien','$dien_vien','$quoc_gia','$namphathanh','$phanloai','$mota', '$created',CURRENT_TIMESTAMP, '$created',CURRENT_TIMESTAMP, '$status')";
+        $query = "INSERT INTO PHIM (TenPhim,TenRutGon,ThoiLuong,Anh,Banner,DaoDien,DienVien,QuocGia,NamPhatHanh,PhanLoai,MoTa, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
+                  VALUES ('$name','$slug','$thoiluong','$anh_phim','$banner','$dao_dien','$dien_vien','$quoc_gia','$namphathanh','$phanloai','$mota', '$created',CURRENT_TIMESTAMP, '$created',CURRENT_TIMESTAMP, '$status')";
         if (mysqli_query($conn, $query)) {
             $maPhim = mysqli_insert_id($conn);
             foreach ($theloai as $maTheLoai) {
@@ -128,7 +138,7 @@ if (isset($_POST['editFilm'])) {
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/film/film-edit.php?id=' .$id, 'messages', $messages);
+        redirect('../views/film/film-edit.php?id=' . $id, 'messages', $messages);
     }
 }
 

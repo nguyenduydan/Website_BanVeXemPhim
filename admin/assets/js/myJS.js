@@ -7,6 +7,7 @@ function previewImageAdd(event) {
     };
     reader.readAsDataURL(event.target.files[0]);
 }
+
 function previewImagesAdd2(event) {
     const previewContainer = document.getElementById('preview');
     previewContainer.innerHTML = '';
@@ -25,8 +26,9 @@ function previewImagesAdd2(event) {
         reader.readAsDataURL(file);
     });
 }
-function previewImage(event) {
-    var preview = document.getElementById('preview');
+
+function previewImage(event, previewId) {
+    var preview = document.getElementById(previewId);
     var file = event.target.files[0];
     var reader = new FileReader();
 
