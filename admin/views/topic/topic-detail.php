@@ -83,7 +83,7 @@ if ($item['status'] == 200) {
                         </div>
                         <div class="mb-3">
                             <label class="fs-6">Người tạo:</label>
-                            <span><?= $item['data']['NguoiTao']; ?></span>
+                            <span><?=$admin['data']['TenND']?></span>
                         </div>
                         <div class="mb-3">
                             <label class="fs-6">Ngày tạo:</label>
@@ -91,7 +91,7 @@ if ($item['status'] == 200) {
                         </div>
                         <div class="mb-3">
                             <label class="fs-6">Người cập nhật:</label>
-                            <span><?= $item['data']['NguoiCapNhat']; ?></span>
+                            <span><?=$admin['data']['TenND']?></span>
                         </div>
                         <div class="mb-3">
                             <label class="fs-6">Ngày cập nhật:</label>

@@ -74,7 +74,7 @@ if ($user['status'] == 200) {
 
                             <div class="mb-3">
                                 <label class="fs-6">Người tạo:</label>
-                                <span><?= $user['data']['NguoiTao']; ?></span>
+                                <span><?=$admin['data']['TenND']?></span>
                             </div>
                             <div class="mb-3">
                                 <label class="fs-6">Ngày tạo:</label>
@@ -82,7 +82,7 @@ if ($user['status'] == 200) {
                             </div>
                             <div class="mb-3">
                                 <label class="fs-6">Người cập nhật:</label>
-                                <span><?= $user['data']['NguoiCapNhat']; ?></span>
+                                <span><?=$admin['data']['TenND']?></span>
                             </div>
                             <div class="mb-3">
                                 <label class="fs-6">Ngày cập nhật:</label>
