@@ -90,7 +90,7 @@ if (isset($_POST['editMenu'])) {
         $messages['ordermenu'] = "Thứ tự không được để trống.";
     }
     if (empty($messages)) {
-        $menu = getByID('Menu','Id',$id);
+        $menu = getByID('Menu', 'Id', $id);
         $query = "UPDATE Menu SET
                 ViTri = '$vitri',
                 `Order` = '$order'
