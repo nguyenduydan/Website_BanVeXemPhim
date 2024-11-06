@@ -13,7 +13,11 @@ if (isset($_POST['signup'])) {
     $status = 1;
     if (empty($name)) {
         $messages['name'] = "Họ và tên không được để trống.";
-    }elseif (isExistValue('NguoiDung', 'Email', $email)) {
+    }
+    if (empty($email)) {
+        $messages['email'] = "Email không được để trống.";
+    }
+    if (isExistValue('NguoiDung', 'Email', $email)) {
         $messages['email'] = "Email đã tồn tại";
     }
     if (empty($password)) {
@@ -34,13 +38,13 @@ if (isset($_POST['signup'])) {
                   VALUES ('$name', NULL, '$email', '$hashedPassword', '$role', '0', CURRENT_TIMESTAMP, '0', CURRENT_TIMESTAMP, '$status')";
 
         if (mysqli_query($conn, $query)) {
-            redirect('../../login-signup.php', 'success', 'Tạo tài khoản thành công');
+            redirect('../../login.php', 'success', 'Tạo tài khoản thành công');
         } else {
-            redirect('../../login-signup.php', 'error', 'Tạo tài khoản thất bại');
+            redirect('../../register.php', 'error', 'Tạo tài khoản thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../../login-signup.php', 'messages', $messages);
+        redirect('../../register.php', 'messages', $messages);
     }
 }
 if (isset($_POST['login'])) {

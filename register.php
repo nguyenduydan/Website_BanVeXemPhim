@@ -1,4 +1,9 @@
-<?php include('includes/header.php'); ?>
+<?php include('includes/header.php');
+$messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy lỗi từ session
+$formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
+unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
+unset($_SESSION['form_data']);
+?>
 
 <div class="container my-5" id="container">
     <div class="form-container sign-up">
@@ -9,51 +14,20 @@
             <div class="input-group mb-3">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                 <input type="text" class="form-control" name="name" placeholder="Họ và tên">
-                <?php if (isset($messages['name'])): ?>
+                
+            </div>
+            <?php if (isset($messages['name'])): ?>
                     <small class="text-danger m-2"><?= htmlspecialchars($messages['name']) ?></small>
                 <?php endif; ?>
-            </div>
-
             <!-- Email -->
             <div class="input-group mb-3">
                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                 <input type="email" class="form-control" name="email" placeholder="Email">
-                <?php if (isset($messages['email'])): ?>
+                
+            </div>
+            <?php if (isset($messages['email'])): ?>
                     <small class="text-danger m-2"><?= htmlspecialchars($messages['email']) ?></small>
                 <?php endif; ?>
-            </div>
-
-            <!-- Số điện thoại -->
-            <div class="input-group mb-3">
-                <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                <input type="tel" class="form-control" name="phone" placeholder="Số điện thoại">
-                <?php if (isset($messages['phone'])): ?>
-                    <small class="text-danger m-2"><?= htmlspecialchars($messages['phone']) ?></small>
-                <?php endif; ?>
-            </div>
-
-            <!-- Giới tính -->
-            <div class="mb-3">
-                <label class="form-label">Giới tính</label>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="male" value="Nam">
-                    <label class="form-check-label" for="male">Nam</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="female" value="Nữ">
-                    <label class="form-check-label" for="female">Nữ</label>
-                </div>
-            </div>
-
-            <!-- Ngày sinh -->
-            <div class="input-group mb-3">
-                <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
-                <input type="date" class="form-control" name="birthdate" placeholder="Ngày sinh">
-                <?php if (isset($messages['birthdate'])): ?>
-                    <small class="text-danger m-2"><?= htmlspecialchars($messages['birthdate']) ?></small>
-                <?php endif; ?>
-            </div>
-
             <!-- Mật khẩu -->
             <div class="input-group mb-3">
                 <span class="input-group-text"><i class="fas fa-lock"></i></span>
