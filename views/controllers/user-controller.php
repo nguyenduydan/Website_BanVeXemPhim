@@ -29,8 +29,9 @@ if (isset($_POST['signup'])) {
         $messages['re_password'] = "Xác nhận mật khẩu không được để trống.";
     }
     $passwordDetails = validateAndHashPassword($password, $re_password);
-    if (!$passwordDetails['status']) {
-        $messages['re_password'] = $passwordDetails['message'];
+    
+    if ($passwordDetails['status'] == false) {
+        $messages['password'] = $passwordDetails['message'];
     }
     $hashedPassword = $passwordDetails['hashed'];
     if (empty($messages)) {
@@ -61,7 +62,6 @@ if (isset($_POST['login'])) {
 
     if (empty($messages)) {
         $user = getByID('NguoiDung', 'Email', $email);
-
         if ($user['status'] == 200 && $user['data']['Role'] == 0) {
             if (password_verify($password, $user['data']['MatKhau'])) {
                 $_SESSION['NDloggedIn'] = true;
@@ -85,15 +85,17 @@ if (isset($_POST['login'])) {
                 // Điều hướng đến trang index với thông báo đăng nhập thành công
                 redirect('../../index.php', 'success', 'Đăng nhập thành công');
             } else {
-                redirect('../sign-in.php', 'error', 'Sai mật khẩu');
+                $messages['password'] = 'Sai mật khẩu';
+                $_SESSION['form_data'] = $_POST;
+                redirect('../../login.php', 'messages', $messages);
             }
         } else {
-            redirect('../sign-in.php', 'error', 'Đăng nhập thất bại');
+            redirect('../../login.php', 'error', 'Đăng nhập thất bại');
         }
     } else {
         // Lưu thông tin lỗi và dữ liệu form vào session nếu có lỗi
         $_SESSION['form_data'] = $_POST;
-        redirect('../sign-in.php', 'messages', $messages);
+        redirect('../../login.php', 'messages', $messages);
     }
 }
 $conn->close();

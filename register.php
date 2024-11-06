@@ -13,7 +13,8 @@ unset($_SESSION['form_data']);
             <!-- Họ và tên -->
             <div class="input-group mb-3">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
-                <input type="text" class="form-control" name="name" placeholder="Họ và tên">
+                <input type="text" class="form-control" name="name" placeholder="Họ và tên" 
+                value="<?php echo isset($formData['name']) ? htmlspecialchars($formData['name']) : ''; ?>">
                 
             </div>
             <?php if (isset($messages['name'])): ?>
@@ -22,7 +23,8 @@ unset($_SESSION['form_data']);
             <!-- Email -->
             <div class="input-group mb-3">
                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                <input type="email" class="form-control" name="email" placeholder="Email">
+                <input type="email" class="form-control" name="email" placeholder="Email"
+                value="<?php echo isset($formData['email']) ? htmlspecialchars($formData['email']) : ''; ?>">
                 
             </div>
             <?php if (isset($messages['email'])): ?>

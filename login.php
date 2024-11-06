@@ -1,4 +1,9 @@
-<?php include('includes/header.php'); ?>
+<?php include('includes/header.php');
+$messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy lỗi từ session
+$formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
+unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
+unset($_SESSION['form_data']);
+?>
 
 <div class="container my-5" id="container">
     <div class="form-container sign-in">
@@ -8,12 +13,13 @@
             <!-- Email -->
             <div class="input-group mb-3">
                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                <input type="email" class="form-control" name="email" placeholder="Email">
-                <?php if (isset($messages['email'])): ?>
+                <input type="email" class="form-control" name="email" placeholder="Email"
+                value="<?php echo isset($formData['email']) ? htmlspecialchars($formData['email']) : ''; ?>">
+                
+            </div>
+            <?php if (isset($messages['email'])): ?>
                     <small class="text-danger m-2"><?= htmlspecialchars($messages['email']) ?></small>
                 <?php endif; ?>
-            </div>
-
             <!-- Mật khẩu -->
             <div class="input-group mb-3">
                 <span class="input-group-text"><i class="fas fa-lock"></i></span>
