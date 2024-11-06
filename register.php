@@ -5,6 +5,10 @@ unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
 unset($_SESSION['form_data']);
 ?>
 
+<div id="toast"></div>
+
+<?php alertMessage() ?>
+
 <div class="container my-5" id="container">
     <div class="form-container sign-up">
         <form class="py-2" action="views/controllers/user-controller.php" method="post">
@@ -12,7 +16,7 @@ unset($_SESSION['form_data']);
                 <span class="fw-bolder fs-3">Đăng Ký Tài Khoản</span>
             </div>
             <?php if (isset($messages['name'])): ?>
-                <small class="text-danger m-2"><?= htmlspecialchars($messages['name']) ?></small>
+            <small class="text-danger m-2"><?= htmlspecialchars($messages['name']) ?></small>
             <?php endif; ?>
             <!-- Họ và tên -->
             <div class="input-group mb-3">
@@ -21,7 +25,7 @@ unset($_SESSION['form_data']);
 
             </div>
             <?php if (isset($messages['email'])): ?>
-                <small class="text-danger m-2"><?= htmlspecialchars($messages['email']) ?></small>
+            <small class="text-danger m-2"><?= htmlspecialchars($messages['email']) ?></small>
             <?php endif; ?>
             <!-- Email -->
             <div class="input-group mb-3">
@@ -30,7 +34,7 @@ unset($_SESSION['form_data']);
 
             </div>
             <?php if (isset($messages['password'])): ?>
-                <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
+            <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
             <?php endif; ?>
             <!-- Mật khẩu -->
             <div class="input-group mb-3">
@@ -42,7 +46,7 @@ unset($_SESSION['form_data']);
                 </span>
             </div>
             <?php if (isset($messages['re_password'])): ?>
-                <small class="text-danger m-2"><?= htmlspecialchars($messages['re_password']) ?></small>
+            <small class="text-danger m-2"><?= htmlspecialchars($messages['re_password']) ?></small>
             <?php endif; ?>
             <!-- Nhập lại mật khẩu -->
             <div class="input-group mb-3">

@@ -346,6 +346,7 @@ function getAdmin()
     $userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : [];
     $admin = getByID('NguoiDung', 'MaND', $userId);
 }
+
 function getMenu($table)
 {
     // Giả sử bạn có kết nối tới cơ sở dữ liệu trong biến $conn
