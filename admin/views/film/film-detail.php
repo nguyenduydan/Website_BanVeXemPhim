@@ -43,6 +43,10 @@ if ($item['status'] == 200) {
                             <span><?= $item['data']['TenPhim']; ?></span>
                         </div>
                         <div class="mb-3">
+                            <label class="fs-6">Năm phát hành:</label>
+                            <span><?= $item['data']['NamPhatHanh']; ?></span>
+                        </div>
+                        <div class="mb-3">
                             <label class="fs-6">Thời lượng:</label>
                             <span><?= $item['data']['ThoiLuong']; ?></span>
                         </div>
