@@ -380,15 +380,23 @@ li.nav-item.day-item {
     cursor: pointer;
     margin: 0 2rem;
     border-radius: 5px;
+
     transition: .5s ease-out;
 }
 
-.day-link:hover {
+.day-item a {
+    text-decoration: none;
+    color: gray;
+}
+
+.day-item .day-link:hover {
+    text-decoration: none;
     background: #000;
     color: #fff !important;
 }
 
 .day-link.active{
+    color: #000;
     border: 2px solid #000;
 }
 
@@ -418,5 +426,79 @@ li.nav-item.day-item {
     border: 2px solid #18009e;
     color: #fff;
     border-radius: 10px;
+}
+
+/* seat */
+
+.tv {
+    border-top: 10px solid #000;
+    border-radius: 10px;
+}
+
+.seat {
+    list-style-type: none;
+    margin-right: 2rem;
+    font-weight: bold;
+    position: relative;
+    /* Ensure relative positioning for absolute child elements */
+}
+
+.seat::before {
+    content: '';
+    display: inline-block;
+    /* Allows for width and height */
+    width: 20px;
+    margin-bottom: 2px;
+    /* Width of the square */
+    height: 20px;
+    /* Height of the square */
+    /* Change color as needed (red in this case) */
+    margin-right: 0.5rem;
+    /* Space between the square and text */
+    vertical-align: middle;
+    border: 2px solid;
+    border-radius: 5px;
+    /* Aligns the square with the text */
+}
+
+.seat.couple::before {
+    width: 40px;
+}
+
+.seat.vip {
+    color: goldenrod;
+}
+
+.seat.single {
+    color: blueviolet;
+}
+
+.seat.couple {
+    color: plum;
+}
+
+.seat.choosed {
+    color: blue;
+}
+
+.seat.selected {
+    color: gray;
+}
+
+.list {
+    cursor: default;
+}
+
+.list button {
+    background: #fff;
+    padding: 1px 8px;
+    transition: all .2s ease;
+}
+
+.list button:hover {
+    transform: scale(1.1);
+    background: #7f33ff;
+    border: 1px solid #7f33ff;
+    color: #fff;
 }
 
