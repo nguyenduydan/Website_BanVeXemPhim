@@ -28,10 +28,6 @@ if (isset($_POST['saveSlider'])) {
         $messages['nametopic'] = "Tên chủ đề không được để trống.";
     }
 
-    if (isExistValue("Slider", "Url", $url)) {
-        $messages["url"] = "Đường dẫn đã tồn tại";
-    }
-
 
     if (empty($tukhoa)) {
         $messages['tukhoa'] = "Từ khóa không được để trống.";
@@ -96,11 +92,6 @@ if (isset($_POST['editSlider'])) {
     if (empty($tenTopic)) {
         $messages['nametopic'] = "Tên chủ đề không được để trống.";
     }
-
-    if (isExistValue("Slider", "Url", $url, 'Id', $idSlider)) {
-        $messages["url"] = "Đường dẫn đã tồn tại";
-    }
-
 
     if (empty($tukhoa)) {
         $messages['tukhoa'] = "Từ khóa không được để trống.";

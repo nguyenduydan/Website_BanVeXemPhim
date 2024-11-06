@@ -41,7 +41,7 @@ unset($_SESSION['form_data']);
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="url">Url(<span class="text-danger">*</span>)</label>
+                        <label for="url">Url</label>
                         <input type="text" class="form-control" id="url" name="url" placeholder="Nhập đường dẫn"
                             value="<?php echo isset($formData['url']) ? htmlspecialchars($formData['url']) : ''; ?>">
                         <?php if (isset($messages['url'])): ?>
