@@ -1,26 +1,116 @@
-.form-container {
-    max-width: 500px;
-    margin: 2rem auto;
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
+/* Đặt nền và kiểu cho container */
+#container {
+    background-color: #f8f9fa;
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 500px;
+    margin: 0 auto;
 }
-.form-container .icon {
-    font-size: 3rem;
-    color: #ff9800;
-    display: flex;
-    justify-content: center;
+
+/* Kiểu cho tiêu đề */
+.form-container .fw-bolder {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
 }
-.form-container .form-check-label {
-    font-size: 0.9rem;
+
+/* Kiểu cho các input-group */
+.input-group {
+    margin-bottom: 20px;
 }
-.btn-submit {
-    background-color: #d48771;
-    border: none;
+
+/* Kiểu cho các input */
+.form-control {
+    border-radius: 8px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+/* Thay đổi màu sắc khi focus vào input */
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Kiểu cho icon bên trong input */
+.input-group-text {
+    background-color: #007bff;
     color: white;
-    width: 100%;
+    border-radius: 8px 0 0 8px;
 }
-.btn-submit:hover {
-    background-color: #b06b5d;
+
+/* Kiểu cho các icon mắt */
+.iconEye {
+    border-radius: 0 8px 8px 0;
+    background-color: #007bff;
+    color: white;
+}
+
+/* Style cho thông báo lỗi */
+.small.text-danger {
+    font-size: 0.875rem;
+    display: block;
+    color: #dc3545;
+}
+
+/* Style cho nút submit */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+/* Thêm hiệu ứng hover cho nút submit */
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Kiểu cho liên kết "Quên mật khẩu?" */
+.text-center a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.text-center a:hover {
+    text-decoration: underline;
+}
+
+/* Kiểu cho liên kết "Đăng ký" */
+.text-center span a {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.text-center span a:hover {
+    text-decoration: underline;
+}
+
+/* Khoảng cách giữa form và footer */
+footer {
+    margin-top: 20px;
+}
+
+/* Thêm một chút padding cho các phần tử trong form */
+.form-container {
+    padding: 20px;
+}
+/* Đặt màu đen cho toàn bộ icon trong form đăng nhập */
+.form-container i {
+    color: #000; /* Màu đen cho tất cả các icon */
+}
+
+/* Thêm hiệu ứng hover nếu muốn thay đổi màu khi hover */
+.form-container i:hover {
+    color: #555; /* Màu đen sáng hơn khi hover */
 }

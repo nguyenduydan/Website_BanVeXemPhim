@@ -8,19 +8,24 @@ unset($_SESSION['form_data']);
 <div class="container my-5" id="container">
     <div class="form-container sign-in">
         <form class="py-2" action="views/controllers/user-controller.php" method="post">
-            <span class="fw-bolder fs-3">Đăng Nhập</span>
+            <div class="mb-3">
+                <span class="fw-bolder fs-3">Đăng Nhập Tài Khoản</span>
+            </div>
 
             <!-- Email -->
+            <?php if (isset($messages['email'])): ?>
+            <small class="text-danger m-2"><?= htmlspecialchars($messages['email']) ?></small>
+            <?php endif; ?>
             <div class="input-group mb-3">
                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                 <input type="email" class="form-control" name="email" placeholder="Email"
-                value="<?php echo isset($formData['email']) ? htmlspecialchars($formData['email']) : ''; ?>">
-                
+                    value="<?php echo isset($formData['email']) ? htmlspecialchars($formData['email']) : ''; ?>">
             </div>
-            <?php if (isset($messages['email'])): ?>
-                    <small class="text-danger m-2"><?= htmlspecialchars($messages['email']) ?></small>
-                <?php endif; ?>
+
             <!-- Mật khẩu -->
+            <?php if (isset($messages['password'])): ?>
+            <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
+            <?php endif; ?>
             <div class="input-group mb-3">
                 <span class="input-group-text"><i class="fas fa-lock"></i></span>
                 <input type="password" class="form-control" id="password_login" name="password"
@@ -30,9 +35,6 @@ unset($_SESSION['form_data']);
                     <i class="fas fa-eye-slash" id="togglePasswordLogin"></i>
                 </span>
             </div>
-            <?php if (isset($messages['password'])): ?>
-                <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
-            <?php endif; ?>
 
             <!-- Ghi nhớ đăng nhập -->
             <div class="form-check mb-3">
