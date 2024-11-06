@@ -19,7 +19,7 @@ if (isset($_POST['saveFilm'])) {
     $theloai = $_POST['the_loai'] ?? [];
     $namphathanh = validate($_POST['nam_phat_hanh']);
     $thoiluong = validate($_POST['thoi_luong']);
-    $status = validate($_POST['status']) == 1 ? 1 : 0;
+    $status = validate($_POST['status']);
     $id = uniqid('film_', false);
     $anh_phim = '';
     if (isset($_FILES['anh_phim'])) {

@@ -124,6 +124,7 @@ unset($_SESSION['form_data']);
                         <select class="form-select" id="status" name="status">
                             <option value="1">Online</option>
                             <option value="0">Offline</option>
+                            <option value="2">Coming soon</option>
                         </select>
                     </div>
                     <div class="form-group mb-3">

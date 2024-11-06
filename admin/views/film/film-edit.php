@@ -162,6 +162,7 @@ unset($_SESSION['form_data']);
                             <select class="form-select" id="status" name="status">
                                 <option value="1" <?= $film['data']['TrangThai'] == 1 ? 'selected' : ''; ?>>Online</option>
                                 <option value="0" <?= $film['data']['TrangThai'] == 0 ? 'selected' : ''; ?>>Offline</option>
+                                <option value="2" <?= $film['data']['TrangThai'] == 2 ? 'selected' : ''; ?>>Coming soon</option>
                             </select>
                         </div>
                         <div class="form-group mb-3">
