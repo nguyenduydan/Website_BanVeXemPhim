@@ -125,7 +125,7 @@ if ($item['status'] == 200) {
                             if ($resultShowtimes->num_rows > 0) {
                                 echo '<ul class="d-flex flex-row justify-content-center">';
                                 while ($showtime = $resultShowtimes->fetch_assoc()) {
-                                    // Sử dụng cột 'giochieu' để hiển thị giờ chiếu
+                                    // Sử dụng cột 'giochieu' để hiển thị giờ chieu
                                     $timeFormatted = date('H:i', strtotime($showtime['giochieu']));
                                     echo "<li class='time-link'>{$timeFormatted}</li>";
                                 }
