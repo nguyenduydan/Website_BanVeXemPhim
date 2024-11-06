@@ -107,3 +107,14 @@ footer {
 .form-container i:hover {
     color: #555; /* Màu đen sáng hơn khi hover */
 }
+
+#login-sigin{
+    color: #fff;
+    font-weight: bolder;
+    background: linear-gradient(90deg, var(--c1, #0F51B7), var(--c2, #7f33ff) 51%, var(--c1, #0F51B7)) var(--x, 0)/ 200%;
+    transition: all .5s ease;
+}
+#login-sigin:hover{
+    --x:100%;
+    border-radius: 20px;
+}

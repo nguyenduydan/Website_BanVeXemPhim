@@ -51,7 +51,7 @@ unset($_SESSION['form_data']);
             </div>
 
             <!-- Nút Đăng Nhập -->
-            <button type="submit" class="btn btn-primary w-100" name="login">Đăng Nhập</button>
+            <button type="submit" class="btn w-100" id="login-sigin" name="login">Đăng Nhập</button>
 
             <!-- Liên kết Quên mật khẩu -->
             <div class="text-center mt-3">
