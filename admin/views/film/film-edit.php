@@ -164,8 +164,8 @@ unset($_SESSION['form_data']);
                         <div class="col-6">
                             <label for="status">Trạng thái</label>
                             <select class="form-select" id="status" name="status">
-                                <option value="1">Online</option>
-                                <option value="0">Offline</option>
+                                <option value="1" <?= $film['data']['TrangThai'] == 1 ? 'selected' : ''; ?>>Online</option>
+                                <option value="0" <?= $film['data']['TrangThai'] == 0 ? 'selected' : ''; ?>>Offline</option>
                             </select>
                         </div>
                         <div class="form-group mb-3">

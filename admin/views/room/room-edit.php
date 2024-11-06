@@ -49,8 +49,8 @@ unset($_SESSION['form_data']);
                         <div class="form-group mb-3">
                             <label for="status">Trạng thái</label>
                             <select class="form-select" id="status" name="status">
-                                <option value="1" <?= $item['data']['TrangThai'] == 1 ? 'selected' : ''; ?>>Online</option>
-                                <option value="0" <?= $item['data']['TrangThai'] == 0 ? 'selected' : ''; ?>>Offline</option>
+                                <option value="1" <?= $room['data']['TrangThai'] == 1 ? 'selected' : ''; ?>>Online</option>
+                                <option value="0" <?= $room['data']['TrangThai'] == 0 ? 'selected' : ''; ?>>Offline</option>
                             </select>
                         </div>
                         <button type="submit" name="editRoom" class="btn bg-gradient-info px-5 mt-3">Lưu</button>

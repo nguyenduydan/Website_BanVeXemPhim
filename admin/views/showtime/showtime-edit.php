@@ -65,14 +65,8 @@ unset($_SESSION['form_data']);
                     <div class="form-group mb-3">
                         <label for="status">Trạng thái</label>
                         <select class="form-select" id="status" name="status">
-                            <option value="1" 
-                                <?php echo (isset($formData['status']) && $formData['status'] == '1') || (!isset($formData['status']) && $sc['data']['TrangThai'] == '1') ? 'selected' : ''; ?>>
-                                Online
-                            </option>
-                            <option value="0" 
-                                <?php echo (isset($formData['status']) && $formData['status'] == '0') || (!isset($formData['status']) && $sc['data']['TrangThai'] == '0') ? 'selected' : ''; ?>>
-                                Offline
-                            </option>
+                        <option value="1" <?= $sc['data']['TrangThai'] == 1 ? 'selected' : ''; ?>>Online</option>
+                        <option value="0" <?= $sc['data']['TrangThai'] == 0 ? 'selected' : ''; ?>>Offline</option>
                         </select>
                     </div>
 

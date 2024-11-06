@@ -47,11 +47,11 @@ unset($_SESSION['form_data']);
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="status">Trạng thái</label>
-                        <select class="form-select" id="status" name="status">
-                            <option value="1">Online</option>
-                            <option value="0">Offline</option>
-                        </select>
+                        <label for="status">Chọn vị trí(<span class="text-danger">*</span>)</label>
+                            <select name="vitri" class="form-select" readonly>
+                                <option value="header" <?= $category['data']['ViTri'] == 'header' ? 'selected' : ''; ?>>Header</option>
+                                <option value="footer" <?= $category['data']['ViTri'] == 'footer' ? 'selected' : ''; ?>>Footer</option>
+                            </select>
                     </div>
                     <button type="submit" name="editCategory" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
                 </div>
