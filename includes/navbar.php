@@ -10,14 +10,17 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/config/function.
         <div class="container">
             <div class="d-flex row flex-lg-nowrap align-items-center justify-content-center justify-content-lg-center">
                 <!-- Logo -->
-                <div
-                    class="col-4 text-center col-lg-1 d-lg-block text-center justify-content-center col-lg-auto me-lg-auto mb-md-0">
-                    <a href="#" class="me-5">
-                        <img src="/Website_BanVeXemPhim/assets/imgs/logo-100x100.png" style="width: 60px;"
-                            class="bg-dark rounded-circle">
-                    </a>
-                    <div class="text d-sm-none d-lg-block">
-                        <p>
+                <div class="col-3 d-lg-flex row text-center col-lg-2 justify-content-center me-lg-auto mb-md-0">
+                    <div class="col-6">
+                        <a href="#" class="me-3">
+                            <img src="/Website_BanVeXemPhim/assets/imgs/logo-100x100.png" style="width: 60px;"
+                                class="bg-dark rounded-circle">
+                        </a>
+                    </div>
+                    <div class="text d-none d-lg-block col-6 position-relative mt-1">
+                        <!-- Đặt chiều cao để chứa văn bản -->
+                        <p class="mb-0 position-absolute" style="left: 0;">
+                            <!-- Đảm bảo các từ không bị cắt -->
                             <span class="word wisteria">ticket</span>
                             <span class="word belize">cheap</span>
                             <span class="word pomegranate">dino</span>
@@ -26,7 +29,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/config/function.
                         </p>
                     </div>
                 </div>
-
 
                 <!-- Offcanvas sidebar cho menu trên màn hình nhỏ -->
                 <div class="offcanvas offcanvas-end w-100" tabindex="-1" id="offcanvasMenu"
