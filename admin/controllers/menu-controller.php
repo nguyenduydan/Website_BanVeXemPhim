@@ -82,49 +82,36 @@ if (isset($_POST['addCustom'])) {
         redirect('../menu.php', 'messages', $messages);
     }
 }
-//====== Xử lý chỉnh sửa menu =======//
 if (isset($_POST['editMenu'])) {
-    $messages = [];
-    $name = validate($_POST['tenmenu']);
-    $id = validate($_POST['idmenu']);
-    $kieumenu = validate($_POST['kieumenu']);
+    $messages = []; // Initialize messages array
+    $order = validate($_POST['ordermenu']);
     $vitri = validate($_POST['vitri']);
-    $lienket = validate($_POST['lienket']);
-    $order = validate($_POST['order']);
-    $status = validate($_POST['trangthai']);
-    $tableid = validate($_POST['tableid']); // Thêm trường tableid
-
-    if (empty($name)) {
-        $messages['name'] = 'Tên menu không được để trống';
+    $id = validate($_POST['mamenu']);
+    if (empty($order)) {
+        $messages['ordermenu'] = "Thứ tự không được để trống.";
     }
-    if (isExistValue('Menu', 'TenMenu', $name, 'IdMenu', $id)) {
-        $messages['name'] = 'Tên menu đã tồn tại';
-    }
-
     if (empty($messages)) {
+        $menu = getByID('Menu','Id',$id);
         $query = "UPDATE Menu SET
-                  TenMenu = '$name',
-                  KieuMenu = '$kieumenu',
-                  ViTri = '$vitri',
-                  LienKet = '$lienket',
-                  OrderMenu = '$order',
-                  TrangThai = '$status',
-                  TableId = '$tableid', // Cập nhật tableid
-                  NguoiCapNhat = 1,
-                  NgayCapNhat = CURRENT_TIMESTAMP
-                  WHERE IdMenu = '$id'";
+                ViTri = '$vitri',
+                `Order` = '$order'
+                WHERE Id = '$id'";
 
         if (mysqli_query($conn, $query)) {
             redirect('../menu.php', 'success', 'Cập nhật menu thành công');
         } else {
-            redirect('../views/menu/menu-edit.php?id=' . $id, 'errors', 'Cập nhật menu thất bại');
+            redirect('../views/menu/menu-edit.php?id=' . $id, 'error', 'Cập nhật menu thất bại');
         }
     } else {
+<<<<<<< Updated upstream
         $_SESSION['form_data'] = $_POST;
         redirect('../views/menu/menu-edit.php?id=' . $id, 'messages', $messages);
+=======
+        redirect('../views/menu/menu-edit.php?id=' . $id, 'errors', $messages);
+        $_SESSION['form_data'] = $_POST;
+>>>>>>> Stashed changes
     }
 }
-
 //====== Cập nhật trạng thái menu ======//
 if (isset($_POST['changeStatus'])) {
     $id = validate($_POST['id']);

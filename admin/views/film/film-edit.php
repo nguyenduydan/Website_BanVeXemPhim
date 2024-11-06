@@ -21,7 +21,7 @@ unset($_SESSION['form_data']);
                 Quay lại
             </a>
         </div>
-        <form id="addFilmForm" action="../../controllers/film-controller.php" method="post"
+        <form id="editFilmForm" action="../../controllers/film-controller.php" method="post"
             enctype="multipart/form-data">
             <?php
             $id_result = check_valid_ID('id');
@@ -47,11 +47,18 @@ unset($_SESSION['form_data']);
                         <div class="form-group mb-3">
                             <label for="phan_loai">Phân loại</label>
                             <select class="form-select" id="phan_loai" name="phan_loai">
+<<<<<<< Updated upstream
                                 <option value="P" <?= $film['data']['PhanLoai'] == 0 ? 'selected' : ''; ?>>Phổ thông
                                 </option>
                                 <option value="T13" <?= $film['data']['PhanLoai'] == 13 ? 'selected' : ''; ?>>T13</option>
                                 <option value="T16" <?= $film['data']['PhanLoai'] == 16 ? 'selected' : ''; ?>>T16</option>
                                 <option value="T18" <?= $film['data']['PhanLoai'] == 18 ? 'selected' : ''; ?>>T18</option>
+=======
+                                <option value="Phổ thông" <?= $film['data']['PhanLoai'] == 'Phổ thông' ? 'selected' : ''; ?>>Phổ thông</option>
+                                <option value="T13" <?= $film['data']['PhanLoai'] == 'T13' ? 'selected' : ''; ?>>T13</option>
+                                <option value="T16" <?= $film['data']['PhanLoai'] == 'T16' ? 'selected' : ''; ?>>T16</option>
+                                <option value="T18" <?= $film['data']['PhanLoai'] == 'T18' ? 'selected' : ''; ?>>T18</option>
+>>>>>>> Stashed changes
                             </select>
                         </div>
 

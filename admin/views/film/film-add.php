@@ -39,7 +39,11 @@ unset($_SESSION['form_data']);
                     <div class="form-group mb-3">
                         <label for="phan_loai">Phân loại</label>
                         <select class="form-select" id="phan_loai" name="phan_loai" required>
+<<<<<<< Updated upstream
                             <option value="P">Phổ thông</option>
+=======
+                            <option value="Phổ thông">Phổ thông</option>
+>>>>>>> Stashed changes
                             <option value="T13">T13</option>
                             <option value="T16">T16</option>
                             <option value="T18">T18</option>

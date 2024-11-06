@@ -22,7 +22,7 @@ unset($_SESSION['form_data']);
                 Quay lại
             </a>
         </div>
-        <form id="addMenuForm" action="../../controllers/menu-controller.php" method="post"
+        <form id="editMenuForm" action="../../controllers/menu-controller.php" method="post"
             enctype="multipart/form-data">
             <?php
             $id_result = check_valid_ID('id');
@@ -31,15 +31,17 @@ unset($_SESSION['form_data']);
                 return false;
             }
             $item = getByID('Menu', 'Id', check_valid_ID('id'));
-            if ($item['status'] == 200):
+            if ($item['status'] == 200) {
             ?>
-            <div class="row">
+                <input type="hidden" name="mamenu" value=<?= $item['data']['Id'] ?>>
+                <div class="row">
                 <!-- Cột -->
+                 
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="tenmenu">Tên Menu (<span class="text-danger">*</span>)</label>
                         <input type="text" class="form-control" id="tenmenu" name="tenmenu" placeholder="Nhập tên menu"
-                            value="<?php echo isset($formData['tenmenu']) ? htmlspecialchars($formData['tenmenu']) : ''; ?>">
+                            value="<?php echo isset($formData['tenmenu']) ? htmlspecialchars($formData['tenmenu']) : $item['data']['TenMenu']; ?>" readonly>
                         <?php if (isset($messages['tenmenu'])): ?>
                         <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tenmenu']) ?></small>
                         <?php endif; ?>
@@ -48,25 +50,30 @@ unset($_SESSION['form_data']);
                         <label for="kieumenu">Kiểu Menu (<span class="text-danger">*</span>)</label>
                         <input type="text" class="form-control" id="kieumenu" name="kieumenu"
                             placeholder="Nhập kiểu menu"
-                            value="<?php echo isset($formData['kieumenu']) ? htmlspecialchars($formData['kieumenu']) : ''; ?>">
+                            value="<?php echo isset($formData['kieumenu']) ? htmlspecialchars($formData['kieumenu']) : $item['data']['KieuMenu']; ?>" readonly>
                         <?php if (isset($messages['kieumenu'])): ?>
                         <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['kieumenu']) ?></small>
                         <?php endif; ?>
                     </div>
+                    <div class="form-group mb-3">
+                        <label for="status">Trạng thái</label>
+                        <div id="status" class="form-control">
+                            <?= $item['data']['TrangThai'] == 1 ? 'Online' : 'Offline'; ?>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group mb-3">
-                        <label for="vitri">Vị Trí (<span class="text-danger">*</span>)</label>
-                        <input type="text" class="form-control" id="vitri" name="vitri" placeholder="Nhập vị trí"
-                            value="<?php echo isset($formData['vitri']) ? htmlspecialchars($formData['vitri']) : ''; ?>">
-                        <?php if (isset($messages['vitri'])): ?>
-                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['vitri']) ?></small>
-                        <?php endif; ?>
-                    </div>
+                        <div class="form-group mb-3">
+                            <label for="status">Chọn vị trí(<span class="text-danger">*</span>)</label>
+                                <select name="vitri" class="form-select" readonly>
+                                    <option value="header" <?= $item['data']['ViTri'] == 'header' ? 'selected' : ''; ?>>Header</option>
+                                    <option value="footer" <?= $item['data']['ViTri'] == 'footer' ? 'selected' : ''; ?>>Footer</option>
+                                </select>
+                        </div>
                     <div class="form-group mb-3">
                         <label for="lienket">Liên Kết (<span class="text-danger">*</span>)</label>
                         <input type="text" class="form-control" id="lienket" name="lienket" placeholder="Nhập liên kết"
-                            value="<?php echo isset($formData['lienket']) ? htmlspecialchars($formData['lienket']) : ''; ?>">
+                            value="<?php echo isset($formData['lienket']) ? htmlspecialchars($formData['lienket']) : $item['data']['LienKet']; ?>" readonly>
                         <?php if (isset($messages['lienket'])): ?>
                         <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['lienket']) ?></small>
                         <?php endif; ?>
@@ -75,20 +82,20 @@ unset($_SESSION['form_data']);
                         <label for="ordermenu">Thứ Tự</label>
                         <input type="number" class="form-control" id="ordermenu" name="ordermenu"
                             placeholder="Nhập thứ tự"
-                            value="<?php echo isset($formData['ordermenu']) ? htmlspecialchars($formData['ordermenu']) : ''; ?>">
+                            value="<?php echo isset($formData['ordermenu']) ? htmlspecialchars($formData['ordermenu']) : $item['data']['Order']; ?>">
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="status">Trạng thái</label>
-                        <select class="form-select" id="status" name="status">
-                            <option value="1">Online</option>
-                            <option value="0">Offline</option>
-                        </select>
-                    </div>
+                    
                 </div>
             </div>
-            <?php endif; ?>
-            <button type="submit" name="saveMenu" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
+            <?php
+            } else {
+                echo '<h5>' . $item['message'] . '</h5>';
+            }
+            ?>
+            <!-- Nút submit -->
+            <button type="submit" name="editMenu" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
         </form>
+
     </div>
 </div>
 

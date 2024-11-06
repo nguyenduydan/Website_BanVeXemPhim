@@ -57,6 +57,7 @@ li {
                                                 $phim = getAll('Phim');
                                                 foreach ($phim as $row):
                                                 ?>
+                                            
                                                 <li class="mb-3 fs-6 fw-bold">
                                                     <div class="form-check align-items-center">
                                                         <input name="phim[]" id="phim_<?=$row['MaPhim'] ?>" value="<?=$row['MaPhim']?>"
@@ -175,6 +176,7 @@ li {
                                             $stt++;
                                     ?>
                                     <tr>
+                                        
                                         <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['TenMenu']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"
