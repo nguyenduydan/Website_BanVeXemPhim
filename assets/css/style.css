@@ -24,6 +24,10 @@
 }
 /* CSS */
 
+small{
+    font-style: italic;
+}
+
 .word {
     position:absolute;
     text-transform: uppercase;

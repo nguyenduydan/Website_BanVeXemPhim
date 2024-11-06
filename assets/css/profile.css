@@ -60,11 +60,6 @@
     position: relative;
 }
 
-.form-control {
-    padding-left: 40px;
-    /* Add padding to the left to make space for the icon */
-}
-
 .icon {
     position: absolute;
     top: 50%;

@@ -12,32 +12,36 @@ unset($_SESSION['form_data']);
 <div class="container my-5" id="container">
     <div class="form-container sign-in">
         <form class="py-2" action="views/controllers/user-controller.php" method="post">
-            <div class="mb-3">
-                <span class="fw-bolder fs-3">Đăng Nhập Tài Khoản</span>
+            <div class="mb-3 text-center">
+                <span class="fw-bolder fs-3 ">Đăng Nhập Tài Khoản</span>
             </div>
-
             <!-- Email -->
-            <?php if (isset($messages['email'])): ?>
-            <small class="text-danger m-2"><?= htmlspecialchars($messages['email']) ?></small>
-            <?php endif; ?>
-            <div class="input-group mb-3">
-                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                <input type="email" class="form-control" name="email" placeholder="Email"
-                    value="<?php echo isset($formData['email']) ? htmlspecialchars($formData['email']) : ''; ?>">
+            <div class="mb-3">
+                <div class="input-group mb-1">
+                    <span class="input-group-text bg-primary"><i class="fas fa-envelope text-white"></i></span>
+                    <input type="email" class="form-control" name="email" placeholder="Email"
+                        value="<?php echo isset($formData['email']) ? htmlspecialchars($formData['email']) : ''; ?>">
+                </div>
+                <?php if (isset($messages['email'])): ?>
+                    <small class="text-danger m-2"><?= htmlspecialchars($messages['email']) ?></small>
+                <?php endif; ?>
             </div>
 
             <!-- Mật khẩu -->
-            <?php if (isset($messages['password'])): ?>
-            <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
-            <?php endif; ?>
-            <div class="input-group mb-3">
-                <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                <input type="password" class="form-control" id="password_login" name="password"
-                    placeholder="Nhập mật khẩu">
-                <span class="input-group-text iconEye" style="cursor: pointer;"
-                    onclick="togglePassword('password_login', 'togglePasswordLogin')">
-                    <i class="fas fa-eye-slash" id="togglePasswordLogin"></i>
-                </span>
+
+            <div class="mb-3">
+                <div class="input-group mb-1">
+                    <span class="input-group-text bg-primary"><i class="fas fa-lock text-white"></i></span>
+                    <input type="password" class="form-control" id="password_login" name="password"
+                        placeholder="Nhập mật khẩu">
+                    <span class="input-group-text iconEye" style="cursor: pointer;"
+                        onclick="togglePassword('password_login', 'togglePasswordLogin')">
+                        <i class="fas fa-eye-slash" id="togglePasswordLogin"></i>
+                    </span>
+                </div>
+                <?php if (isset($messages['password'])): ?>
+                    <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
+                <?php endif; ?>
             </div>
 
             <!-- Ghi nhớ đăng nhập -->

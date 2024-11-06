@@ -36,13 +36,6 @@
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Kiểu cho icon bên trong input */
-.input-group-text {
-    background-color: #007bff;
-    color: white;
-    border-radius: 8px 0 0 8px;
-}
-
 /* Kiểu cho các icon mắt */
 .iconEye {
     border-radius: 0 8px 8px 0;
