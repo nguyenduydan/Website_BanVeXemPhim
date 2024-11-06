@@ -83,7 +83,7 @@ if ($item['status'] == 200) {
                                     <ul class="navbar-nav mr-auto text-black text-center fw-bolder" id="daysNav">
                                         <?php
                                         $today = new DateTime();
-                                        $selectedDate = isset($_GET['selected_date']) ? $_GET['selected_date'] : '';
+                                        $selectedDate = isset($_POST['selected_date']) ? $_POST['selected_date'] : '';
                                         for ($i = 0; $i < 5; $i++) {
                                             $dateToDisplay = clone $today;
                                             $dateToDisplay->modify("+{$i} days");
@@ -91,18 +91,19 @@ if ($item['status'] == 200) {
                                             $weekday = $dateToDisplay->format('N'); // 1 (Thứ Hai) đến 7 (Chủ Nhật)
                                             $activeClass = ($selectedDate === $dateStr) ? 'active' : '';
                                             echo '<li class="nav-item day-item">
-                                    <a class="nav-link day-link ' . $activeClass . '"
-                                       href="?id=' . $item['data']['MaPhim'] . '&selected_date=' . $dateStr . '">
-                                       ' . $weekdays[$weekday - 1] . '<br>' . $dateToDisplay->format('m/d') . '
-                                    </a>
-                                  </li>';
+                                                    <form method="POST" action="">
+                                                        <button type="submit" class="nav-link day-link ' . $activeClass . '" name="selected_date" value="' . $dateStr . '">
+                                                            ' . $weekdays[$weekday - 1] . '<br>' . $dateToDisplay->format('m/d') . '
+                                                        </button>
+                                                    </form>
+                                                  </li>';
                                         }
                                         ?>
                                     </ul>
                                 </div>
                             </div>
                         </nav>
-                    </div>
+                    </div>  
 
                     <div class="showtime" id="showtimeContainer">
                         <?php
