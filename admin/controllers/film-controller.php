@@ -23,6 +23,7 @@ if (isset($_POST['saveFilm'])) {
     $id = uniqid('film_', false);
     $anh_phim = '';
     $banner = '';
+    $slug = str_slug($name);
     if (isset($_FILES['anh_phim'])) {
         // Use filmname as filename for the img
         $imgResult = uploadImage($_FILES['anh_phim'], "../../uploads/film-imgs/", $id);
@@ -34,7 +35,7 @@ if (isset($_POST['saveFilm'])) {
     }
     if (isset($_FILES['banner'])) {
         // Use filmname as filename for the img
-        $imgResult = uploadImage($_FILES['banner'], "../../uploads/film-imgs/", "$id_$namphathanh");
+        $imgResult = uploadImage($_FILES['banner'], "../../uploads/film-imgs/", "$id-$namphathanh");
         if ($imgResult['success']) {
             $banner = $imgResult['filename'];
         } else {
@@ -43,7 +44,6 @@ if (isset($_POST['saveFilm'])) {
     }
     if (empty($messages)) {
 
-        $slug = str_slug($name);
         $query = "INSERT INTO PHIM (TenPhim,TenRutGon,ThoiLuong,Anh,Banner,DaoDien,DienVien,QuocGia,NamPhatHanh,PhanLoai,MoTa, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
                   VALUES ('$name','$slug','$thoiluong','$anh_phim','$banner','$dao_dien','$dien_vien','$quoc_gia','$namphathanh','$phanloai','$mota', '$created',CURRENT_TIMESTAMP, '$created',CURRENT_TIMESTAMP, '$status')";
         if (mysqli_query($conn, $query)) {
@@ -84,7 +84,8 @@ if (isset($_POST['editFilm'])) {
 
     $film = getByID('Phim', 'MaPhim', $id);
     $anh_phim = $film['data']['Anh'];
-
+    $banner = $film['data']['Banner'];
+    $unique = uniqid('film_', false);
     if (isset($_FILES['anh_phim']) && $_FILES['anh_phim']['error'] == 0) {
         $filmPath = "../../uploads/film-imgs/" . $anh_phim;
 
@@ -95,11 +96,26 @@ if (isset($_POST['editFilm'])) {
             }
         }
 
-        $unique = uniqid('film_', false);
-
         $filmResult = uploadImage($_FILES['anh_phim'], "../../uploads/film-imgs/", $unique);
         if ($filmResult['success']) {
             $anh_phim = $filmResult['filename'];
+        } else {
+            $messages[] = $filmResult['message'];
+        }
+    }
+    if (isset($_FILES['banner']) && $_FILES['banner']['error'] == 0) {
+        $bannerPath = "../../uploads/film-imgs/" . $banner;
+        $slug = str_slug($name);
+        if (!empty($banner) && file_exists($bannerPath)) {
+            $deleteResult = deleteImage($bannerPath);
+            if (!$deleteResult['success']) {
+                $messages[] = $deleteResult['message'];
+            }
+        }
+
+        $filmResult = uploadImage($_FILES['banner'], "../../uploads/film-imgs/", "$unique-$namphathanh");
+        if ($filmResult['success']) {
+            $banner = $filmResult['filename'];
         } else {
             $messages[] = $filmResult['message'];
         }
@@ -116,6 +132,7 @@ if (isset($_POST['editFilm'])) {
                 TenRutGon = '$slug',
                 ThoiLuong = '$thoiluong',
                 Anh = '$anh_phim',
+                Banner = '$banner',
                 DaoDien = '$dao_dien',
                 DienVien = '$dien_vien',
                 QuocGia = '$quoc_gia',
