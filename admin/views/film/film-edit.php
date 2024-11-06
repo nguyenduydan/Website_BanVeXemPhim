@@ -38,30 +38,36 @@ unset($_SESSION['form_data']);
                         <div class="form-group mb-3">
                             <label for="ten_phim">Tên phim</label>
                             <input type="text" class="form-control" id="ten_phim" name="ten_phim"
-                                value="<?php echo isset($formData['ten_phim']) ? htmlspecialchars($formData['ten_phim']) : $film['data']['TenPhim']; ?>" placeholder="Nhập tên phim">
+                                value="<?php echo isset($formData['ten_phim']) ? htmlspecialchars($formData['ten_phim']) : $film['data']['TenPhim']; ?>"
+                                placeholder="Nhập tên phim">
                             <?php if (isset($messages['ten_phim'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ten_phim']) ?></small>
-                        <?php endif; ?>
+                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ten_phim']) ?></small>
+                            <?php endif; ?>
                         </div>
                         <div class="form-group mb-3">
                             <label for="phan_loai">Phân loại</label>
                             <select class="form-select" id="phan_loai" name="phan_loai">
-                                <option value="0" <?= $film['data']['PhanLoai'] == 0 ? 'selected' : ''; ?>>Phổ thông</option>
-                                <option value="13" <?= $film['data']['PhanLoai'] == 13 ? 'selected' : ''; ?>>T13</option>
-                                <option value="16" <?= $film['data']['PhanLoai'] == 16 ? 'selected' : ''; ?>>T16</option>
-                                <option value="18" <?= $film['data']['PhanLoai'] == 18 ? 'selected' : ''; ?>>T18</option>
+                                <option value="P" <?= $film['data']['PhanLoai'] == 0 ? 'selected' : ''; ?>>Phổ thông
+                                </option>
+                                <option value="T13" <?= $film['data']['PhanLoai'] == 13 ? 'selected' : ''; ?>>T13</option>
+                                <option value="T16" <?= $film['data']['PhanLoai'] == 16 ? 'selected' : ''; ?>>T16</option>
+                                <option value="T18" <?= $film['data']['PhanLoai'] == 18 ? 'selected' : ''; ?>>T18</option>
                             </select>
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="dao_dien">Đạo diễn</label>
-                            <input type="text" class="form-control" id="dao_dien" name="dao_dien" value="<?= $film['data']['DaoDien'] ?>"
-                                value="<?php echo isset($formData['dao_dien']) ? htmlspecialchars($formData['dao_dien']) : ''; ?>" placeholder="Nhập tên đạo diễn">
+                            <input type="text" class="form-control" id="dao_dien" name="dao_dien"
+                                value="<?= $film['data']['DaoDien'] ?>"
+                                value="<?php echo isset($formData['dao_dien']) ? htmlspecialchars($formData['dao_dien']) : ''; ?>"
+                                placeholder="Nhập tên đạo diễn">
                         </div>
                         <div class="form-group mb-3">
                             <label for="dien_vien">Diễn viên</label>
-                            <input type="text" class="form-control" id="dien_vien" name="dien_vien" value="<?= $film['data']['DienVien'] ?>"
-                                value="<?php echo isset($formData['dien_vien']) ? htmlspecialchars($formData['dien_vien']) : ''; ?>" placeholder="Nhập tên diễn viên">
+                            <input type="text" class="form-control" id="dien_vien" name="dien_vien"
+                                value="<?= $film['data']['DienVien'] ?>"
+                                value="<?php echo isset($formData['dien_vien']) ? htmlspecialchars($formData['dien_vien']) : ''; ?>"
+                                placeholder="Nhập tên diễn viên">
                         </div>
                         <?php
                         // Danh sách quốc gia đã định nghĩa
@@ -82,7 +88,8 @@ unset($_SESSION['form_data']);
                                         <input class="form-check-input" type="checkbox" name="quoc_gia[]" value="<?= $nation ?>"
                                             id="quoc_gia<?= strtolower($nation) ?>"
                                             <?= in_array($nation, $selected) ? 'checked' : ''; ?>>
-                                        <label class="form-check-label" for="quoc_gia<?= strtolower($nation) ?>"><?= $nation ?></label>
+                                        <label class="form-check-label"
+                                            for="quoc_gia<?= strtolower($nation) ?>"><?= $nation ?></label>
                                     </div>
                                 <?php endforeach; ?>
                                 <div class="d-flex align-items-center">
@@ -95,7 +102,8 @@ unset($_SESSION['form_data']);
                         </div>
                         <div class="form-group mb-3">
                             <label for="mo_ta">Mô tả phim</label>
-                            <textarea class="form-control" id="mo_ta" name="mo_ta" rows="10" placeholder="Nhập mô tả phim" required>
+                            <textarea class="form-control" id="mo_ta" name="mo_ta" rows="10" placeholder="Nhập mô tả phim"
+                                required>
                             <?= isset($formData['mo_ta']) ? htmlspecialchars($formData['mo_ta']) : htmlspecialchars($film['data']['MoTa']); ?>
                         </textarea>
                         </div>
@@ -120,7 +128,8 @@ unset($_SESSION['form_data']);
                                 $genres = getAll('TheLoai');
                                 foreach ($genres as $genre): ?>
                                     <div class="form-check me-3">
-                                        <input class="form-check-input" type="checkbox" name="the_loai[]" value="<?= $genre['MaTheLoai'] ?>"
+                                        <input class="form-check-input" type="checkbox" name="the_loai[]"
+                                            value="<?= $genre['MaTheLoai'] ?>"
                                             id="the_loai_<?= strtolower($genre['TenTheLoai']) ?>"
                                             <?= in_array($genre['TenTheLoai'], $selectedGenres) ? 'checked' : ''; ?>>
                                         <label class="form-check-label"
@@ -136,14 +145,14 @@ unset($_SESSION['form_data']);
                         </div>
                         <div class="form-group mb-3">
                             <label for="nam_phat_hanh">Năm phát hành</label>
-                            <input type="number" class="form-control" id="nam_phat_hanh" name="nam_phat_hanh" value="<?= $film['data']['NamPhatHanh'] ?>"
-                                placeholder="Nhập năm phát hành" required>
+                            <input type="number" class="form-control" id="nam_phat_hanh" name="nam_phat_hanh"
+                                value="<?= $film['data']['NamPhatHanh'] ?>" placeholder="Nhập năm phát hành" required>
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="thoi_luong">Thời lượng (phút)</label>
-                            <input type="number" class="form-control" id="thoi_luong" name="thoi_luong" value="<?= $film['data']['ThoiLuong'] ?>"
-                                placeholder="Nhập thời lượng phim" required>
+                            <input type="number" class="form-control" id="thoi_luong" name="thoi_luong"
+                                value="<?= $film['data']['ThoiLuong'] ?>" placeholder="Nhập thời lượng phim" required>
                         </div>
                         <div class="col-6">
                             <label for="status">Trạng thái</label>
