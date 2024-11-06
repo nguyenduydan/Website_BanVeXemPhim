@@ -2,37 +2,7 @@
 $item = getByID('Phim', 'MaPhim', check_valid_ID('id'));
 ?>
 <style>
-.banner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    height: 550px;
-    overflow: hidden;
-    padding: 0 10rem;
-}
 
-.banner-image {
-    width: 100%;
-    height: 100%;
-    opacity: 0.7;
-}
-
-.banner-overlay {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    background: rgba(0, 0, 0, 0.5);
-}
-
-.card .card-movie.hover .buy-ticket {
-    display: block;
-}
 </style>
 <div class="banner bg-black">
     <div class="banner-overlay">
@@ -114,69 +84,36 @@ if ($item['status'] == 200) {
                     </p>
                 </div>
             </div>
-            <div>
-                <h5 class="title-with-line mt-5">Lịch chiếu</h5>
-                <div class="showtime-container" id="gioChieuContainer">
+            <div class="d-lg-flex flex-column mb-2">
+                <h5 class="mb-4 mt-2 ps-3" style="border-left: 4px solid blue;">
+                    Lịch chiếu
+                </h5>
 
-                    <div class="row col-12">
-                        <div class="d-flex flex-wrap">
-                            <div class="d-flex align-items-center" style="margin-right: 30px;">
-                                <span class="fw-bolder"></span>
-                                <span class="mx-2 fw-bolder"></span>
-                            </div>
-                            <div class="row-cols-4 d-flex justify-content-center align-items-center"
-                                style="margin-right:30px">
-                                <div class="flex flex-row d-flex py-5"
-                                    style="column-gap:.75rem; flex-wrap:wrap; flex-direction:row;">
-                                    <button type="button" name="MaSuatChieu"
-                                        class="btn py-2 px-6 md:px-6 px-6 border rounded text-sm hover:bg-blue-10 active:bg-blue-10 transition-all duration-500 easy-in-out hover:text-white showtime_btn"
-                                        style="font-size: .875rem; font-weight: 400; padding-left: 1rem; padding-right: 1rem; margin-right: 0.5rem; margin-bottom: 0.25rem;"
-                                        data-masuatchieu="<?= htmlspecialchars($showtime['MaSuatChieu']) ?>">
-                                        <?= date('H:i', strtotime($showtime['GioChieu'])) ?>
-                                    </button>
-                                </div>
+                <div class="day h-25 border-bottom">
+                    <nav class="navbar navbar-expand-lg">
+                        <div class="container-fluid">
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav mr-auto text-black text-center fw-bolder" id="daysNav">
+                                    <!-- Days of the week will be dynamically added here -->
+                                </ul>
                             </div>
                         </div>
-                    </div>
-
+                    </nav>
                 </div>
-            </div>
-            <div class="center">
-                <div class="tickets mx-5 my-4">
-                    <div class="ticket-selector">
-                        <div class="head">
-                            <div class="title" style="text-transform:uppercase;">
-                                <?= htmlspecialchars($item['TenPhim']) ?></div>
-                        </div>
-                        <div class="seats">
-                            <div class="status">
-                                <div class="item vip">Ghế VIP</div>
-                                <div class="item double">Ghế đôi</div>
-                                <div class="item single">Ghế đơn</div>
-                                <div class="item booked">Ghế đã có người đặt</div>
-                                <div class="item selected">Ghế được chọn</div>
-                            </div>
-                            <div class="all-seats">
-                                <input type="checkbox" name="tickets" id="s1" />
-                                <label for="s1" class="seat booked"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="price">
-                        <div class="total">
-                            <span><span class="count">0</span> Vé </span>
-                            <div class="totalPrice">0</div>
-                        </div>
-                        <div class="popcorn">
-                            <input type="checkbox" style="display:flex!important" id="popcorn" name="popcorn"
-                                value="true" />
-                            <img src="~/Public/img/popcorn.png" style="width:30px;height:30px" class="mx-2" />
-                            <p>Bắp và nước</p>
-                        </div>
-                        <div class="d-flex justify-content-around mt-4">
-                            <button type="submit" name="submit"
-                                class="btn custom-btn d-flex justify-content-around mt-4" value="Submit">Mua vé</button>
-                        </div>
+
+                <div class="showtime">
+                    <div class="d-flex justify-content-center">
+                        <ul class="d-flex flex-row" id="showtimeContainer">
+                            <li class="time-link">12:30</li>
+                            <li class="time-link">12:30</li>
+                            <li class="time-link">12:30</li>
+                            <li class="time-link">12:30</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -221,4 +158,8 @@ if ($item['status'] == 200) {
     echo "Không tìm thấy Phim này";
 }
 ?>
+<script>
+
+</script>
+
 <?php include('../includes/footer.php'); ?>

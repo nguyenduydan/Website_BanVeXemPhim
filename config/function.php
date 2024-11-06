@@ -339,9 +339,26 @@ function getSliders($conn, $value)
 
     return $sliders;
 }
-function getAdmin() {
-    global $admin; 
+function getAdmin()
+{
+    global $admin;
     global $userId;
     $userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : [];
     $admin = getByID('NguoiDung', 'MaND', $userId);
+}
+function getMenu($table)
+{
+    // Giả sử bạn có kết nối tới cơ sở dữ liệu trong biến $conn
+    global $conn;
+
+    $query = "SELECT * FROM $table where TrangThai = 1 and KieuMenu = 'custom' ORDER BY `Order` ASC";
+    $result = mysqli_query($conn, $query);
+
+    $items = [];
+    if ($result) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $items[] = $row;
+        }
+    }
+    return $items;
 }
