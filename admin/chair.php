@@ -44,6 +44,7 @@ $records_per_page = $pagination['records_per_page'];
                                 <th class="text-center text-uppercase text-xs font-weight-bolder ">Tên phòng</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder ">Loại ghế</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder ">Giá ghế</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder ">Số lượng</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder ">Trạng thái</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder ">Hành động</th>
                             </tr>
@@ -55,74 +56,75 @@ $records_per_page = $pagination['records_per_page'];
                                 foreach ($data as $item) {
                                     $stt++;
                             ?>
-                                    <tr>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $item['TenGhe']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder">
-                                            <?php 
-                                                $phong = getByID('Phong','MaPhong',$item['MaPhong']);
-                                                $tenphong = $phong['data']['TenPhong'];
-                                                echo $tenphong;
+                            <tr>
+                                <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
+                                <th class="text-center text-xs font-weight-bolder"><?= $item['TenGhe']; ?></th>
+                                <th class="text-center text-xs font-weight-bolder">
+                                    <?php
+                                            $phong = getByID('Phong', 'MaPhong', $item['MaPhong']);
+                                            $tenphong = $phong['data']['TenPhong'];
+                                            echo $tenphong;
                                             ?>
-                                        </th>
-                                        <th class="text-center text-xs font-weight-bolder"><?= $item['LoaiGhe']; ?></th>
-                                        <th class="text-center text-xs font-weight-bolder">
-                                            <?= number_format($item['GiaGhe']); ?> VNĐ</th>
-                                        <th class="text-center text-s font-weight-bolder">
-                                            <form action="controllers/chair-controller.php" method="POST"
-                                                style="display:inline;">
-                                                <input type="hidden" name="maghe" value="<?= $item['MaGhe'] ?>">
-                                                <input type="hidden" name="status"
-                                                    value="<?= $item['TrangThai'] == 1 ? 0 : 1 ?>">
-                                                <button type="submit" name="changeStatus"
-                                                    class="badge badge-sm <?= $item['TrangThai'] == 1 ? 'bg-gradient-success' : 'bg-gradient-secondary' ?> text-uppercase"
-                                                    style="border: none; cursor: pointer;">
-                                                    <?= $item['TrangThai'] == 1 ? 'ON' : 'OFF' ?>
-                                                </button>
-                                            </form>
-                                        </th>
-                                        <td class="align-middle text-center text-sm">
-                                            <a class="btn btn-info m-0"
-                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                href="views/chair/chair-edit.php?id=<?= $item['MaGhe'] ?>">
-                                                <i class="bi bi-pencil"></i> Sửa
-                                            </a>
-                                            <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['MaGhe'] ?>"
-                                                data-url="views/chair/chair-delete.php"
-                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                                data-bs-toggle="modal" data-bs-target="#confirmModal">
-                                                <i class="bi bi-trash"></i> Xoá
-                                            </a>
-                                            <div class="modal fade" id="confirmModal" tabindex="-1"
-                                                aria-labelledby="confirmModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog mt-10">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="confirmModalLabel">Xác Nhận Xóa</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p class="p-2 fs-5">Bạn có muốn xóa không?</p>
-                                                        </div>
-                                                        <div class="modal-footer d-flex justify-content-center">
-                                                            <button type="button" class="btn btn-sm btn-success"
-                                                                id="confirmYes">Có</button>
-                                                            <button type="button" class="btn btn-sm btn-danger me-2"
-                                                                data-bs-dismiss="modal">Không</button>
-                                                        </div>
-                                                    </div>
+                                </th>
+                                <th class="text-center text-xs font-weight-bolder"><?= $item['LoaiGhe']; ?></th>
+                                <th class="text-center text-xs font-weight-bolder">
+                                    <?= number_format($item['GiaGhe']); ?> VNĐ</th>
+                                <th class="text-center text-xs font-weight-bolder"><?= $item['SoLuong']; ?></th>
+                                <th class="text-center text-s font-weight-bolder">
+                                    <form action="controllers/chair-controller.php" method="POST"
+                                        style="display:inline;">
+                                        <input type="hidden" name="maghe" value="<?= $item['MaGhe'] ?>">
+                                        <input type="hidden" name="status"
+                                            value="<?= $item['TrangThai'] == 1 ? 0 : 1 ?>">
+                                        <button type="submit" name="changeStatus"
+                                            class="badge badge-sm <?= $item['TrangThai'] == 1 ? 'bg-gradient-success' : 'bg-gradient-secondary' ?> text-uppercase"
+                                            style="border: none; cursor: pointer;">
+                                            <?= $item['TrangThai'] == 1 ? 'ON' : 'OFF' ?>
+                                        </button>
+                                    </form>
+                                </th>
+                                <td class="align-middle text-center text-sm">
+                                    <a class="btn btn-info m-0"
+                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                        href="views/chair/chair-edit.php?id=<?= $item['MaGhe'] ?>">
+                                        <i class="bi bi-pencil"></i> Sửa
+                                    </a>
+                                    <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['MaGhe'] ?>"
+                                        data-url="views/chair/chair-delete.php"
+                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                        data-bs-toggle="modal" data-bs-target="#confirmModal">
+                                        <i class="bi bi-trash"></i> Xoá
+                                    </a>
+                                    <div class="modal fade" id="confirmModal" tabindex="-1"
+                                        aria-labelledby="confirmModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog mt-10">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="confirmModalLabel">Xác Nhận Xóa</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p class="p-2 fs-5">Bạn có muốn xóa không?</p>
+                                                </div>
+                                                <div class="modal-footer d-flex justify-content-center">
+                                                    <button type="button" class="btn btn-sm btn-success"
+                                                        id="confirmYes">Có</button>
+                                                    <button type="button" class="btn btn-sm btn-danger me-2"
+                                                        data-bs-dismiss="modal">Không</button>
                                                 </div>
                                             </div>
-                                        </td>
-                                    </tr>
-                                <?php
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php
                                 }
                             } else {
                                 ?>
-                                <tr>
-                                    <td colspan="10" class="text-center">Không có bản ghi nào</td>
-                                </tr>
+                            <tr>
+                                <td colspan="10" class="text-center">Không có bản ghi nào</td>
+                            </tr>
                             <?php
                             }
                             ?>

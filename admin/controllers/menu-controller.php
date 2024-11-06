@@ -6,13 +6,13 @@ require '../../config/function.php';
 if (isset($_POST['addPhim'])) {
     $vitri = validate($_POST['vitri']);
     $list_phim = $_POST['phim'] ?? [];
-    $messages =[];
-    if(empty($messages)){
-        foreach($list_phim as $ma_phim){
+    $messages = [];
+    if (empty($messages)) {
+        foreach ($list_phim as $ma_phim) {
             $film_query = "SELECT MaPhim, TenPhim FROM Phim WHERE MaPhim = '$ma_phim'";
             $result = mysqli_query($conn, $film_query);
             $film = mysqli_fetch_assoc($result);
-            if($film){
+            if ($film) {
                 $tenMenu = $film['TenPhim'];
                 $tableid = $film['MaPhim'];
                 $kieumenu = "Phim";
@@ -24,7 +24,7 @@ if (isset($_POST['addPhim'])) {
             mysqli_query($conn, $query);
         }
         redirect('../menu.php', 'success', 'Thêm menu thành công');
-    }else{
+    } else {
         $_SESSION['form_data'] = $_POST;
         redirect('../menu.php', 'messages', $messages);
     }
@@ -33,13 +33,13 @@ if (isset($_POST['addPhim'])) {
 if (isset($_POST['addChuDe'])) {
     $vitri = validate($_POST['vitri']);
     $list_chude = $_POST['chude'] ?? [];
-    $messages =[];
-    if(empty($messages)){
-        foreach($list_chude as $id){
+    $messages = [];
+    if (empty($messages)) {
+        foreach ($list_chude as $id) {
             $topic_query = "SELECT Id, TenChuDe FROM ChuDe WHERE Id = '$id'";
             $result = mysqli_query($conn, $topic_query);
             $topic = mysqli_fetch_assoc($result);
-            if($topic){
+            if ($topic) {
                 $tenMenu = $topic['TenChuDe'];
                 $tableid = $topic['Id'];
                 $kieumenu = "ChuDe";
@@ -51,7 +51,7 @@ if (isset($_POST['addChuDe'])) {
             mysqli_query($conn, $query);
         }
         redirect('../menu.php', 'success', 'Thêm menu thành công');
-    }else{
+    } else {
         $_SESSION['form_data'] = $_POST;
         redirect('../menu.php', 'messages', $messages);
     }
@@ -60,27 +60,24 @@ if (isset($_POST['addCustom'])) {
     $vitri = validate($_POST['vitri']);
     $name = validate($_POST['name']);
     $lienket = validate($_POST['lienket']);
-    $messages =[];
-    if(empty($name)){
+    $messages = [];
+    if (empty($name)) {
         $messages['name'] = 'Tên menu không được bỏ trống';
     }
-    if(empty($lienket)){
-        $messages['lienket'] = 'Tên menu không được bỏ trống';
-    }
-    if(empty($messages)){
+
+    if (empty($messages)) {
         $tableid = $topic['Id'];
         $kieumenu = "Custom";
         $status = 0;
-    
+
         $query = "INSERT INTO Menu(TenMenu, TableId, KieuMenu, ViTri, LienKet, `Order`, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat,TrangThai)
                     VALUES ('$name',NULL,'$kieumenu','$vitri','$lienket','1','1',CURRENT_TIMESTAMP, '1',CURRENT_TIMESTAMP, '$status')";
-        if(mysqli_query($conn, $query)){
+        if (mysqli_query($conn, $query)) {
             redirect('../menu.php', 'success', 'Thêm menu thành công');
-        }
-        else{
+        } else {
             redirect('../menu.php', 'error', 'Thêm menu thất bại');
         }
-    }else{
+    } else {
         $_SESSION['form_data'] = $_POST;
         redirect('../menu.php', 'messages', $messages);
     }
@@ -124,7 +121,7 @@ if (isset($_POST['editMenu'])) {
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/menu/menu-edit.php?id=' . $id, 'errors', $messages);
+        redirect('../views/menu/menu-edit.php?id=' . $id, 'messages', $messages);
     }
 }
 
