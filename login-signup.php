@@ -1,9 +1,13 @@
 <?php include('includes/header.php'); ?>
+
 <div class="container my-5" id="container">
     <div class="form-container sign-up">
-        <form class="py-2" action="" method="post">
+        <form class="py-2" action="views/controllers/user-controller.php" method="post">
             <span class="fw-bolder fs-3">Tạo Tài Khoản</span>
             <input type="text" name="name" placeholder="Họ và tên">
+            <?php if (isset($messages['name'])): ?>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
+                        <?php endif; ?>
             <input type="email" name="email" placeholder="Email">
             <div class="input-group">
                 <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
@@ -11,6 +15,9 @@
                     <i class="fas fa-eye-slash" id="togglePassword"></i>
                 </span>
             </div>
+            <?php if (isset($messages['password'])): ?>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
+                        <?php endif; ?>
             <div class="input-group">
                 <input type="password" class="form-control" id="re_password" name="re_password"
                     placeholder="Nhập lại mật khẩu">
@@ -18,15 +25,9 @@
                     <i class="fas fa-eye-slash" id="toggleRePassword"></i>
                 </span>
             </div>
-            <input type="tel" name="phone" placeholder="Số điện thoại">
-
-            <div class="d-flex align-item-center justify-content-center form-group">
-                <input class="form-radio me-1" type="radio" name="gender" id="nam" value="nam">
-                <label class="me-3" for="nam">Nam</label>
-                <input class="form-radio me-1" type="radio" name="gender" id="nu" value="nu">
-                <label for="nu">Nữ</label>
-            </div>
-            <input type="date" placeholder="Ngày sinh">
+            <?php if (isset($messages['re_password'])): ?>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['re_password']) ?></small>
+                        <?php endif; ?>
             <button type="submit" name="signup">Đăng Ký</button>
         </form>
     </div>
