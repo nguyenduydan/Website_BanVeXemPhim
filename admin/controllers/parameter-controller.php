@@ -1,8 +1,7 @@
 <?php
 session_start();
 require '../../config/function.php';
-getAdmin();
-$created = $admin['data']['MaND'];
+
 $messages = [];
 //====== room-add =======//
 if (isset($_POST['saveParameter'])) {

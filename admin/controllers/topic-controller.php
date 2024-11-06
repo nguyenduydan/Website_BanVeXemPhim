@@ -2,8 +2,7 @@
 session_start();
 require '../../config/function.php';
 // xử lý topic
-getAdmin();
-$created = $admin['data']['MaND'];
+
 $messages = [];
 if (isset($_POST['saveTopic'])) {
     $name_topic = validate($_POST['name_topic']);

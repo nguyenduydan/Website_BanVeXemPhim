@@ -96,7 +96,7 @@ if ($item['status'] == 200) {
                             </div>
                             <div class="mb-3">
                                 <label class="fs-6">Người tạo:</label>
-                                <span>Nguyễn Văn E</span>
+                                <span><?=$admin['data']['TenND']?></span>
                             </div>
                             <div class="mb-3">
                                 <label class="fs-6">Ngày tạo:</label>

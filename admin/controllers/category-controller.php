@@ -1,8 +1,7 @@
 <?php
 session_start();
 require '../../config/function.php';
-getAdmin();
-$created = $admin['data']['MaND'];
+
 // xử lý categories
 $messages = [];
 if (isset($_POST['saveCategory'])) {
