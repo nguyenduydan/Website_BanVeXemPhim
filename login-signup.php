@@ -32,7 +32,7 @@
         </form>
     </div>
     <div class="form-container sign-in">
-        <form action="" method="post">
+        <form action="views/controllers/user-controller.php" method="post">
             <span class="fw-bolder fs-3">Đăng Nhập</span>
             <input type="email" name="email" placeholder="Email">
             <div class="input-group">
