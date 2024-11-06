@@ -33,17 +33,13 @@ unset($_SESSION['form_data']);
                             value="<?php echo isset($formData['ten_phim']) ? htmlspecialchars($formData['ten_phim']) : ''; ?>"
                             placeholder="Nhập tên phim" required>
                         <?php if (isset($messages['ten_phim'])): ?>
-                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ten_phim']) ?></small>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ten_phim']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
                         <label for="phan_loai">Phân loại</label>
                         <select class="form-select" id="phan_loai" name="phan_loai" required>
-<<<<<<< Updated upstream
                             <option value="P">Phổ thông</option>
-=======
-                            <option value="Phổ thông">Phổ thông</option>
->>>>>>> Stashed changes
                             <option value="T13">T13</option>
                             <option value="T16">T16</option>
                             <option value="T18">T18</option>
@@ -68,12 +64,12 @@ unset($_SESSION['form_data']);
                             <?php
                             $nation = ['Âu Mỹ', 'Hàn Quốc', 'Trung Quốc', 'Anh', 'Việt Nam'];
                             foreach ($nation as $nation): ?>
-                            <div class="form-check me-3">
-                                <input class="form-check-input" type="checkbox" name="quoc_gia[]" value="<?= $nation ?>"
-                                    id="quoc_gia<?= strtolower($nation) ?>">
-                                <label class="form-check-label"
-                                    for="quoc_gia<?= strtolower($nation) ?>"><?= $nation ?></label>
-                            </div>
+                                <div class="form-check me-3">
+                                    <input class="form-check-input" type="checkbox" name="quoc_gia[]" value="<?= $nation ?>"
+                                        id="quoc_gia<?= strtolower($nation) ?>">
+                                    <label class="form-check-label"
+                                        for="quoc_gia<?= strtolower($nation) ?>"><?= $nation ?></label>
+                                </div>
                             <?php endforeach; ?>
                             <div class="d-flex align-items-center">
                                 <label for="quoc_gia" class="me-2">Khác: </label>
@@ -97,13 +93,13 @@ unset($_SESSION['form_data']);
                             <?php
                             $genres = getAll('TheLoai');
                             foreach ($genres as $genre): ?>
-                            <div class="form-check me-3">
-                                <input class="form-check-input" type="checkbox" name="the_loai[]"
-                                    value="<?= $genre['MaTheLoai'] ?>"
-                                    id="the_loai_<?= strtolower($genre['TenTheLoai']) ?>">
-                                <label class="form-check-label"
-                                    for="the_loai_<?= strtolower($genre['TenTheLoai']) ?>"><?= $genre['TenTheLoai'] ?></label>
-                            </div>
+                                <div class="form-check me-3">
+                                    <input class="form-check-input" type="checkbox" name="the_loai[]"
+                                        value="<?= $genre['MaTheLoai'] ?>"
+                                        id="the_loai_<?= strtolower($genre['TenTheLoai']) ?>">
+                                    <label class="form-check-label"
+                                        for="the_loai_<?= strtolower($genre['TenTheLoai']) ?>"><?= $genre['TenTheLoai'] ?></label>
+                                </div>
                             <?php endforeach; ?>
                         </div>
                         <div class="mt-3">
