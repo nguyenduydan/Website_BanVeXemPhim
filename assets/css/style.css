@@ -505,7 +505,7 @@ li.nav-item.day-item {
     font-weight: bold;
     border-radius: 0px;
     transition: .2s ease-out;
-    margin-right: 5rem;
+    margin-right: 3.5rem;
 }
 
 .showtime li:hover{
