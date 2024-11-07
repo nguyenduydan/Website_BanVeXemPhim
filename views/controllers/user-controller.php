@@ -9,6 +9,9 @@ if (isset($_POST['signup'])) {
     $password = validate($_POST['password']);
     $email = validate($_POST['email']);
     $re_password = validate($_POST['re_password']);
+    $ngay_sinh = validate($_POST['ngay_sinh']);
+    $gioi_tinh = validate($_POST['gioi_tinh']) == 1 ? 1 : 0;
+    $sdt = validate($_POST['sdt']);
     $role = 0;
     $status = 1;
     if (empty($name)) {
@@ -28,15 +31,32 @@ if (isset($_POST['signup'])) {
     if (empty($re_password)) {
         $messages['re_password'] = "Xác nhận mật khẩu không được để trống.";
     }
+    if (empty($ngay_sinh)) {
+        $messages['ngay_sinh'] = "Ngày sinh không được để trống.";
+    }
+
     $passwordDetails = validateAndHashPassword($password, $re_password);
-    
+
     if ($passwordDetails['status'] == false) {
         $messages['password'] = $passwordDetails['message'];
     }
     $hashedPassword = $passwordDetails['hashed'];
+
+    $avatar = '';
+    $unique = uniqid('user_', false);
+    if (isset($_FILES['avatar'])) {
+        // Use username as filename for the avatar
+        $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/", $unique);
+        if ($avatarResult['success']) {
+            $avatar = $avatarResult['filename'];
+        } else {
+            $messages[] = $avatarResult['message'];
+        }
+    }
+
     if (empty($messages)) {
-        $query = "INSERT INTO nguoidung (TenND, Anh, Email, MatKhau, Role, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
-                  VALUES ('$name', NULL, '$email', '$hashedPassword', '$role', '0', CURRENT_TIMESTAMP, '0', CURRENT_TIMESTAMP, '$status')";
+        $query = "INSERT INTO nguoidung (TenND, NgaySinh, GioiTinh, SDT, Anh, Email, MatKhau, Role, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
+                  VALUES ('$name', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email','$password','$role' ,'0',CURRENT_TIMESTAMP, '0', CURRENT_TIMESTAMP, '$status')";
 
         if (mysqli_query($conn, $query)) {
             redirect('../../login.php', 'success', 'Tạo tài khoản thành công');
