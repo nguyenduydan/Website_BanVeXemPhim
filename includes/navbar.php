@@ -72,13 +72,15 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/config/function.
                             <ul class="dropdown-menu text-small shadow border-0">
                                 <li class="dropdown-css">
                                     <a class="dropdown-item">
+                                        <img src="assets/imgs/wave.gif" class="bg-transparent" width="25px"
+                                            height="25px" alt="">
                                         <span>Xin chào, </span>
                                         <span class="fw-bold user-name" style="
                                         background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
                                         background-clip: text;
                                         color: transparent;
                                         display: block;
-                                        max-width: 100px; /* Giới hạn chiều rộng của tên */
+                                        max-width: 200px; /* Giới hạn chiều rộng của tên */
                                         overflow: hidden;
                                         text-overflow: ellipsis;
                                         ">
@@ -87,12 +89,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/config/function.
                                     </a>
                                 </li>
                                 <li class="dropdown-css"><a class=" dropdown-item"
-                                        href="<?= $baseUrl ?>profile-user.php">Trang người
+                                        href="<?= $baseUrl ?>profile-user.php"><i class="bi bi-person-video2"></i> Trang
+                                        người
                                         dùng</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li class="dropdown-css"><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                                <li class="dropdown-css"><a class="dropdown-item" href="#"><i
+                                            class="bi bi-box-arrow-right"></i> Đăng xuất</a></li>
                             </ul>
                         </div>
                     </div>
