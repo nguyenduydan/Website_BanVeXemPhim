@@ -1,5 +1,3 @@
-
-
 function togglePasswordVisibility(passwordFieldId, iconId) {
     const passwordInput = document.getElementById(passwordFieldId);
     const icon = document.getElementById(iconId);
@@ -72,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     window.selectDate = function (date) {
+        // Fetch new showtimes
         fetch(window.location.href, {
             method: 'POST',
             headers: {
@@ -96,6 +95,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 const showtimeContainer = document.querySelector('#showtimeContainer');
                 if (newShowtimeContainer && showtimeContainer) {
                     showtimeContainer.innerHTML = newShowtimeContainer.innerHTML;
+                }
+
+                // Update active class
+                const activeButtons = daysNav.querySelectorAll('.nav-link');
+                activeButtons.forEach(button => button.classList.remove('active'));
+                const currentActiveButton = daysNav.querySelector(`.nav-link[onclick*="${date}"]`);
+                if (currentActiveButton) {
+                    currentActiveButton.classList.add('active');
                 }
             })
             .catch(error => console.error('Error:', error));
