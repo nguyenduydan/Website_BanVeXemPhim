@@ -174,11 +174,16 @@ transition: background-image ease-in-out 1s;
 }
 
 /* navbar */
-.dropdown-css{
+.dropdown-css a{
+    color: #000000a1;
     transition: all .1s ease-in-out;
 }
-.dropdown-css:hover{
+.dropdown-css a{
+    text-decoration: none;
+}
+.dropdown-css a:hover{
     border-left: 4px solid #9156b8;
+    text-decoration: none;
 }
 
 .dropdown-css .dropdown-item:hover{
