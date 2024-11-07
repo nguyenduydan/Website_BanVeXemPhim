@@ -1,6 +1,7 @@
 <?php
 $current_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/config/function.php";
+getUser();
 ?>
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light navbar-blur p-3">
     <div class="container-fluid mx-5">
@@ -64,10 +65,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/config/function.
                             <input type="search" class="form-control ps-4" placeholder="Search..." aria-label="Search">
                         </form>
                         <div class="dropdown col-1 col-lg-2 text-end">
+                            <?php if (isset($_SESSION['NDId']) && $_SESSION['NDloggedIn'] == true): ?>
+                            <!-- Người dùng đã đăng nhập, hiển thị dropdown -->
                             <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://github.com/mdo.png" alt="mdo" width="40" height="40"
-                                    class="rounded-circle">
+                                <img src="<?= $baseUrl . 'uploads/avatars/' . $user['data']['Anh'] ?>" alt="mdo"
+                                    width="40" height="40" class="rounded-circle">
                             </a>
                             <ul class="dropdown-menu text-small shadow border-0">
                                 <li class="dropdown-css">
@@ -76,28 +79,35 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/config/function.
                                             width="25px" height="25px" alt="">
                                         <span>Xin chào, </span>
                                         <span class="fw-bold user-name" style="
-                                        background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
-                                        background-clip: text;
-                                        color: transparent;
-                                        display: block;
-                                        max-width: 200px; /* Giới hạn chiều rộng của tên */
-                                        overflow: hidden;
-                                        text-overflow: ellipsis;
-                                        ">
-                                            NguenThietDuyDanssssssssss
+                                                background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
+                                                background-clip: text;
+                                                color: transparent;
+                                                display: block;
+                                                max-width: 200px; /* Giới hạn chiều rộng của tên */
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;">
+                                            <?= $user['data']['TenND'] ?>
                                         </span>
                                     </a>
                                 </li>
-                                <li class="dropdown-css"><a class=" dropdown-item"
-                                        href="<?= $baseUrl ?>profile-user.php"><i class="bi bi-person-video2"></i> Trang
-                                        người
-                                        dùng</a></li>
+                                <li class="dropdown-css">
+                                    <a class="dropdown-item" href="<?= $baseUrl ?>profile-user.php">
+                                        <i class="bi bi-person-video2"></i> Trang người dùng
+                                    </a>
+                                </li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li class="dropdown-css"><a class="dropdown-item" href="#"><i
-                                            class="bi bi-box-arrow-right"></i> Đăng xuất</a></li>
+                                <li class="dropdown-css">
+                                    <a class="dropdown-item" href="<?= $baseUrl ?>logout.php">
+                                        <i class="bi bi-box-arrow-right"></i> Đăng xuất
+                                    </a>
+                                </li>
                             </ul>
+                            <?php else: ?>
+                            <!-- Người dùng chưa đăng nhập, hiển thị nút Đăng nhập -->
+                            <a href="<?= $baseUrl ?>login.php" class="btn btn-primary">Đăng nhập</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
