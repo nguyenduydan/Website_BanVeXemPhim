@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
-<?php session_start(); ?>
+<?php session_start();
+unset($_SESSION['error']); // Xóa lỗi khỏi session sau khi hiển thị
+?>
 
 <head>
     <!-- Required meta tags -->

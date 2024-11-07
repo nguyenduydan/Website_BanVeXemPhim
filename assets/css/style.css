@@ -595,7 +595,7 @@ li.nav-item.day-item {
 }
 
 .list button.single {
-    border: 1px solid #1190ff;
+    border: 1px solid blueviolet;
 }
 
 .list button.vip{
@@ -611,8 +611,8 @@ li.nav-item.day-item {
 }
 
 .seat-button.choosed {
-    border-color: orange !important;
-    background-color: rgba(255, 165, 0, 0.2);
+    border-color: blue !important;
+    background-color: rgba(36, 36, 255, 0.422);
 }
 
 #paymentButton {
