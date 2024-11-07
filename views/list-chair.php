@@ -1,5 +1,6 @@
 <?php include('../includes/header.php');
 require_once("../config/function.php");
+unset($_SESSION['error']); // Xóa lỗi khỏi session sau khi hiển thị
 ob_start();
 $isLoggedIn = isset($_SESSION['NDloggedIn']);
 
@@ -97,12 +98,13 @@ function handlePayment() {
     }).filter(seat => seat);
 
     if (selectedSeatNumbers.length === 0) {
-        alert("Bạn chưa chọn chỗ ngồi kìa >.<");
+        <?php $_SESSION['error'] = 'Bạn chưa chọn chỗ ngồi kìa >.<';?>
         return;
     }
     const isLoggedIn = <?= json_encode($isLoggedIn) ?>;
     if (!isLoggedIn) {
-        <?php redirect('../login.php','error','Đăng nhập trước khi mua ve')?>
+        <?php $_SESSION['error'] = 'Đăng nhập trước khi mua vé';?>
+        window.location.href = '../login.php';
         return; 
     }
     const dataArray = {
