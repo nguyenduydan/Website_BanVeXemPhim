@@ -351,9 +351,15 @@ function getUser()
 {
     global $user;
     global $NDId;
-    $NDId = isset($_SESSION['NDId']) ? $_SESSION['NDId'] : [];
-    $user = getByID('NguoiDung', 'MaND', $NDId);
+    $NDId = isset($_SESSION['NDId']) ? $_SESSION['NDId'] : '';
+    
+    if (!empty($NDId)) {
+        $user = getByID('NguoiDung', 'MaND', $NDId);
+    } else {
+        $user = [];
+    }
 }
+
 
 function getMenu($table)
 {
