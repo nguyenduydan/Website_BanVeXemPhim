@@ -499,16 +499,21 @@ li.nav-item.day-item {
 
 .showtime li{
     list-style: none;
+    margin-right: 3.5rem;
+
+}
+
+.showtime li a{
     border: 2px solid #000;
+    border-radius: 0px;
     padding: 7px 20px;
     font-size: 17px;
     font-weight: bold;
-    border-radius: 0px;
     transition: .2s ease-out;
-    margin-right: 3.5rem;
+
 }
 
-.showtime li:hover{
+.showtime li a:hover{
     transform: scale(1.1);
     background-color: #18009e;
     border: 2px solid #18009e;
