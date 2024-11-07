@@ -24,61 +24,61 @@ unset($_SESSION['form_data']);
         <!-- Form thêm suất chiếu -->
         <form id="editShowtimeForm" action="../../controllers/showtime-controller.php" method="post">
             <?php
-                $id_result = check_valid_ID('id');
-                if (!is_numeric($id_result)) {
-                    echo '<h5>' . $id_result . '</h5>';
-                    return false;
-                }
-                $sc = getByID('SuatChieu', 'MaSuatChieu', check_valid_ID('id'));
-                if ($sc['status'] == 200) {
-                ?>
+            $id_result = check_valid_ID('id');
+            if (!is_numeric($id_result)) {
+                echo '<h5>' . $id_result . '</h5>';
+                return false;
+            }
+            $sc = getByID('SuatChieu', 'MaSuatChieu', check_valid_ID('id'));
+            if ($sc['status'] == 200) {
+            ?>
                 <input type="hidden" name="masc" value=<?= $sc['data']['MaSuatChieu'] ?>>
                 <div class="row">
-                <!-- Giờ chiếu -->
-                <div class="col-md-4 m-auto">
-                    <div class="form-group mb-3">
-                        <label for="giochieu">Giờ chiếu</label>
-                        <input type="datetime-local" class="form-control" id="giochieu" name="giochieu"
-                        value="<?php echo isset($formData['giochieu']) ? htmlspecialchars($formData['giochieu']) : $sc['data']['GioChieu']; ?>" >
-                        <?php if (isset($messages['giochieu'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['giochieu']) ?></small>
-                        <?php endif; ?>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="maphim">Tên phim</label>
-                        <select class="form-control" id="maphim" name="maphim">
-                            <option value="">Chọn tên phim</option>
-                            <?php
-                            $films = getAll('Phim');
-                            foreach ($films as $film): ?>
-                                <option value="<?php echo htmlspecialchars($film['MaPhim']); ?>"
-                                <?php echo (isset($formData['maphim']) && $formData['maphim'] == $film['MaPhim']) ||
-                                (!isset($formData['maphim']) && $sc['data']['MaPhim'] == $film['MaPhim']) ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($film['TenPhim']); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                        <?php if (isset($messages['maphim'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['maphim']) ?></small>
-                        <?php endif; ?>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="status">Trạng thái</label>
-                        <select class="form-select" id="status" name="status">
-                        <option value="1" <?= $sc['data']['TrangThai'] == 1 ? 'selected' : ''; ?>>Online</option>
-                        <option value="0" <?= $sc['data']['TrangThai'] == 0 ? 'selected' : ''; ?>>Offline</option>
-                        </select>
-                    </div>
+                    <!-- Giờ chiếu -->
+                    <div class="col-md-4 m-auto">
+                        <div class="form-group mb-3">
+                            <label for="giochieu">Giờ chiếu</label>
+                            <input type="datetime-local" class="form-control" id="giochieu" name="giochieu"
+                                value="<?php echo isset($formData['giochieu']) ? htmlspecialchars($formData['giochieu']) : $sc['data']['GioChieu']; ?>">
+                            <?php if (isset($messages['giochieu'])): ?>
+                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['giochieu']) ?></small>
+                            <?php endif; ?>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="maphim">Tên phim</label>
+                            <select class="form-control" id="maphim" name="maphim">
+                                <option value="">Chọn tên phim</option>
+                                <?php
+                                $films = getAll('Phim');
+                                foreach ($films as $film): ?>
+                                    <option value="<?php echo htmlspecialchars($film['MaPhim']); ?>"
+                                        <?php echo (isset($formData['maphim']) && $formData['maphim'] == $film['MaPhim']) ||
+                                            (!isset($formData['maphim']) && $sc['data']['MaPhim'] == $film['MaPhim']) ? 'selected' : ''; ?>>
+                                        <?php echo htmlspecialchars($film['TenPhim']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                            <?php if (isset($messages['maphim'])): ?>
+                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['maphim']) ?></small>
+                            <?php endif; ?>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="status">Trạng thái</label>
+                            <select class="form-select" id="status" name="status">
+                                <option value="1" <?= $sc['data']['TrangThai'] == 1 ? 'selected' : ''; ?>>Online</option>
+                                <option value="0" <?= $sc['data']['TrangThai'] == 0 ? 'selected' : ''; ?>>Offline</option>
+                            </select>
+                        </div>
 
-                    <button type="submit" name="savesc" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
+                        <button type="submit" name="editsc" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
+                    </div>
                 </div>
-            </div>
             <?php
             } else {
                 echo '<h5>' . $sc['message'] . '</h5>';
             }
             ?>
-            </form>
+        </form>
     </div>
 </div>
 

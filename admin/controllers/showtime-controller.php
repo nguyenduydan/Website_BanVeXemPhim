@@ -11,10 +11,10 @@ if (isset($_POST['savesc'])) {
     $status = validate($_POST['status']) == 1 ? 1 : 0;
     if (empty($giochieu)) {
         $messages['giochieu'] = "Giờ chiếu không được để trống.";
-    } elseif (isExistValue('Phong', 'TenPhong', $ten_phong)) {
+    } elseif (isExistValue('SuatChieu', 'GioChieu', $giochieu)) {
         $messages['giochieu'] = "Giờ chiếu đã tồn tại";
     }
-    if(empty($mafilm)){
+    if (empty($mafilm)) {
         $messages['maphim'] = 'Tên phim không được để trống';
     }
     if (empty($messages)) {
@@ -33,33 +33,37 @@ if (isset($_POST['savesc'])) {
 }
 
 //====== suatchieu-edit =======//
-if (isset($_POST['editRoom'])) {
+if (isset($_POST['editsc'])) {
     $messages = [];
-    $id = validate($_POST['maphong']);
-    $ten_phong = validate($_POST['ten_phong']);
+    $id = validate($_POST['masc']);
+    $giochieu = validate($_POST['giochieu']);
+    $mafilm = validate($_POST['maphim']);
     $status = validate($_POST['status']) == 1 ? 1 : 0;
 
-
-    if (empty($ten_phong)) {
-        $messages['ten_phong'] = "Tên phòng không được để trống.";
-    } elseif (isExistValue('Phong', 'TenPhong', $ten_phong, 'MaPhong', $id)) {
-        $messages['ten_phong'] = "Tên phòng đã tồn tại";
+    if (empty($giochieu)) {
+        $messages['giochieu'] = "Giờ chiếu không được để trống.";
+    } elseif (isExistValue('SuatChieu', 'GioChieu', $giochieu, 'MaSuatChieu', $id)) {
+        $messages['giochieu'] = "Giờ chiếu đã tồn tại";
+    }
+    if (empty($mafilm)) {
+        $messages['maphim'] = 'Tên phim không được để trống';
     }
     if (empty($messages)) {
-        $query = "UPDATE phong SET
-                TenPhong = '$ten_phong',
+        $query = "UPDATE SuatChieu SET
+                MaPhim = '$mafilm',
+                GioChieu = '$giochieu',
                 NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP,
                 TrangThai = '$status'
-                WHERE MaPhong = '$id'";
+                WHERE MaSuatChieu = '$id'";
 
         if (mysqli_query($conn, $query)) {
-            redirect('../room.php', 'success', 'Cập nhật tài khoản thành công');
+            redirect('../showtime.php', 'success', 'Cập nhật suất chiếu thành công');
         } else {
-            redirect('../views/room/room-edit.php?id=' . $id, 'error', 'Cập nhật tài khoản thất bại');
+            redirect('../views/showtime/showtime-edit.php?id=' . $id, 'error', 'Cập nhật suất chiếu thất bại');
         }
     } else {
-        redirect('../views/room/room-edit.php?id=' . $id, 'errors', $messages);
+        redirect('../views/showtime/showtime-edit.php?id=' . $id, 'messages', $messages);
         $_SESSION['form_data'] = $_POST;
     }
 }

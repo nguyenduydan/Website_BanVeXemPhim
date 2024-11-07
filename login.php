@@ -8,7 +8,6 @@ unset($_SESSION['form_data']);
 <div id="toast"></div>
 
 <?php alertMessage() ?>
-
 <div class="container my-5" id="container">
     <div class="form-container sign-in">
         <form class="py-2" action="views/controllers/user-controller.php" method="post">

@@ -46,12 +46,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/config/function.
                             class="nav flex-lg-row flex-column col-lg-12 col-sm-12 me-lg-auto mb-2 justify-content-start justify-content-lg-center mb-md-0">
                             <?php foreach ($items as $item):
                             ?>
-                                <li class="nav-item mx-2">
-                                    <a href="<?= $baseUrl . $item['LienKet'] ?>"
-                                        class="nav-link px-2 fw-bolder text-capitalize text-secondary <?= ($current_url === $baseUrl . $item['LienKet']) ? 'active' : '' ?>">
-                                        <?= htmlspecialchars($item['TenMenu']) ?>
-                                    </a>
-                                </li>
+                            <li class="nav-item mx-2">
+                                <a href="<?= $baseUrl . $item['LienKet'] ?>"
+                                    class="nav-link px-2 fw-bolder text-capitalize text-secondary <?= ($current_url === $baseUrl . $item['LienKet']) ? 'active' : '' ?>">
+                                    <?= htmlspecialchars($item['TenMenu']) ?>
+                                </a>
+                            </li>
                             <?php endforeach; ?>
                         </ul>
                     </div>
@@ -91,7 +91,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/config/function.
                                 </li>
 
                                 </li>
-                                <li><a class=" dropdown-item" href="profile-user.php">Cài đặt</a></li>
+                                <li><a class=" dropdown-item" href="profile-user.php">Trang người dùng</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -113,58 +113,58 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/config/function.
     </div>
 </nav>
 <script>
-    var words = document.getElementsByClassName('word');
-    var wordArray = [];
-    var currentWord = 0;
+var words = document.getElementsByClassName('word');
+var wordArray = [];
+var currentWord = 0;
 
-    words[currentWord].style.opacity = 1;
-    for (var i = 0; i < words.length; i++) {
-        splitLetters(words[i]);
+words[currentWord].style.opacity = 1;
+for (var i = 0; i < words.length; i++) {
+    splitLetters(words[i]);
+}
+
+function changeWord() {
+    var cw = wordArray[currentWord];
+    var nw = currentWord == words.length - 1 ? wordArray[0] : wordArray[currentWord + 1];
+    for (var i = 0; i < cw.length; i++) {
+        animateLetterOut(cw, i);
     }
 
-    function changeWord() {
-        var cw = wordArray[currentWord];
-        var nw = currentWord == words.length - 1 ? wordArray[0] : wordArray[currentWord + 1];
-        for (var i = 0; i < cw.length; i++) {
-            animateLetterOut(cw, i);
-        }
-
-        for (var i = 0; i < nw.length; i++) {
-            nw[i].className = 'letter behind';
-            nw[0].parentElement.style.opacity = 1;
-            animateLetterIn(nw, i);
-        }
-
-        currentWord = (currentWord == wordArray.length - 1) ? 0 : currentWord + 1;
+    for (var i = 0; i < nw.length; i++) {
+        nw[i].className = 'letter behind';
+        nw[0].parentElement.style.opacity = 1;
+        animateLetterIn(nw, i);
     }
 
-    function animateLetterOut(cw, i) {
-        setTimeout(function() {
-            cw[i].className = 'letter out';
-        }, i * 80);
+    currentWord = (currentWord == wordArray.length - 1) ? 0 : currentWord + 1;
+}
+
+function animateLetterOut(cw, i) {
+    setTimeout(function() {
+        cw[i].className = 'letter out';
+    }, i * 80);
+}
+
+function animateLetterIn(nw, i) {
+    setTimeout(function() {
+        nw[i].className = 'letter in';
+    }, 340 + (i * 80));
+}
+
+function splitLetters(word) {
+    var content = word.innerHTML;
+    word.innerHTML = '';
+    var letters = [];
+    for (var i = 0; i < content.length; i++) {
+        var letter = document.createElement('span');
+        letter.className = 'letter';
+        letter.innerHTML = content.charAt(i);
+        word.appendChild(letter);
+        letters.push(letter);
     }
 
-    function animateLetterIn(nw, i) {
-        setTimeout(function() {
-            nw[i].className = 'letter in';
-        }, 340 + (i * 80));
-    }
+    wordArray.push(letters);
+}
 
-    function splitLetters(word) {
-        var content = word.innerHTML;
-        word.innerHTML = '';
-        var letters = [];
-        for (var i = 0; i < content.length; i++) {
-            var letter = document.createElement('span');
-            letter.className = 'letter';
-            letter.innerHTML = content.charAt(i);
-            word.appendChild(letter);
-            letters.push(letter);
-        }
-
-        wordArray.push(letters);
-    }
-
-    changeWord();
-    setInterval(changeWord, 4000);
+changeWord();
+setInterval(changeWord, 4000);
 </script>

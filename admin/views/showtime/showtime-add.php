@@ -28,10 +28,11 @@ unset($_SESSION['form_data']);
                 <div class="col-md-4 m-auto">
                     <div class="form-group mb-3">
                         <label for="giochieu">Giờ chiếu</label>
-                        <input type="datetime-local" class="form-control" id="giochieu" name="giochieu" 
-                        value="<?php echo isset($formData['giochieu']) ? htmlspecialchars($formData['giochieu']) : ''; ?>" >
+                        <input type="text" class="form-select" id="giochieu" name="giochieu"
+                            value="<?php echo isset($formData['giochieu']) ? htmlspecialchars($formData['giochieu']) : ''; ?>"
+                            placeholder="Chọn ngày và giờ" readonly>
                         <?php if (isset($messages['giochieu'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['giochieu']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['giochieu']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
@@ -41,21 +42,25 @@ unset($_SESSION['form_data']);
                             <?php
                             $films = getAll('Phim');
                             foreach ($films as $film): ?>
-                                <option value="<?php echo htmlspecialchars($film['MaPhim']); ?>"
-                                    <?php echo (isset($formData['maphim']) && $formData['maphim'] == $film['MaPhim']) ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($film['TenPhim']); ?>
-                                </option>
+                            <option value="<?php echo htmlspecialchars($film['MaPhim']); ?>"
+                                <?php echo (isset($formData['maphim']) && $formData['maphim'] == $film['MaPhim']) ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($film['TenPhim']); ?>
+                            </option>
                             <?php endforeach; ?>
                         </select>
                         <?php if (isset($messages['maphim'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['maphim']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['maphim']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
                         <label for="status">Trạng thái</label>
                         <select class="form-select" id="status" name="status">
-                            <option value="1" <?php echo (isset($formData['status']) && $formData['status'] == '1') ? 'selected' : ''; ?>>Online</option>
-                            <option value="0" <?php echo (isset($formData['status']) && $formData['status'] == '0') ? 'selected' : ''; ?>>Offline</option>
+                            <option value="1"
+                                <?php echo (isset($formData['status']) && $formData['status'] == '1') ? 'selected' : ''; ?>>
+                                Online</option>
+                            <option value="0"
+                                <?php echo (isset($formData['status']) && $formData['status'] == '0') ? 'selected' : ''; ?>>
+                                Offline</option>
                         </select>
                     </div>
                     <button type="submit" name="savesc" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
@@ -64,5 +69,15 @@ unset($_SESSION['form_data']);
         </form>
     </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    flatpickr("#giochieu", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        minDate: "today",
+        allowInput: true,
 
+    });
+});
+</script>
 <?php include('../../includes/footer.php'); ?>
