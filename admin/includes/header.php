@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+unset($_SESSION['error']);
+unset($_SESSION['messages']);
+?>
 
 <head>
     <?php
