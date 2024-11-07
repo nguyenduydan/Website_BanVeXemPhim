@@ -38,23 +38,44 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function showTab(tab) {
-    const currentlyShowing = document.getElementById('currently-showing');
-    const comingSoon = document.getElementById('coming-soon');
-    const currentlyShowingTab = document.getElementById('currently-showing-tab');
-    const comingSoonTab = document.getElementById('coming-soon-tab');
+    const tabs = {
+        // For movies.php
+        'currently-showing': {
+            content: document.getElementById('currently-showing'),
+            tab: document.getElementById('currently-showing-tab')
+        },
+        'coming-soon': {
+            content: document.getElementById('coming-soon'),
+            tab: document.getElementById('coming-soon-tab')
+        },
+        // For account.php
+        'transition-history': {
+            content: document.getElementById('transition-history'),
+            tab: document.getElementById('transition-history-tab')
+        },
+        'personal-infomation': {
+            content: document.getElementById('personal-infomation'),
+            tab: document.getElementById('personal-information-tab')
+        }
+    };
 
-    if (tab === 'currently-showing') {
-        currentlyShowing.classList.add('show', 'active');
-        comingSoon.classList.remove('show', 'active');
-        currentlyShowingTab.classList.add('active');
-        comingSoonTab.classList.remove('active');
+    // Hide all tabs and remove active class
+    Object.keys(tabs).forEach(key => {
+        if (tabs[key].content) { // Check if content exists
+            tabs[key].content.classList.remove('show', 'active');
+            tabs[key].tab.classList.remove('active');
+        }
+    });
+
+    // Show the selected tab and add active class, if it exists
+    if (tabs[tab]) {
+        tabs[tab].content.classList.add('show', 'active');
+        tabs[tab].tab.classList.add('active');
     } else {
-        comingSoon.classList.add('show', 'active');
-        currentlyShowing.classList.remove('show', 'active');
-        comingSoonTab.classList.add('active');
-        currentlyShowingTab.classList.remove('active');
+        console.error(`Tab "${tab}" does not exist.`);
     }
 }
+
 
 function showMoreMovies() {
     const hiddenMovies = document.querySelectorAll('.movie-item.hidden');

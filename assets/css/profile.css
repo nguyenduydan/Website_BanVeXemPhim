@@ -33,13 +33,8 @@
     font-weight: bold;
 }
 
-.profile-form {
-    max-width: 600px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.profile-form .border-bottom{
+    border-bottom: 1px solid gray !important;
 }
 
 .form-control[readonly] {
@@ -107,4 +102,15 @@
 .icon {
     color: #6c757d;
     cursor: pointer;
+}
+
+#update{
+    font-weight: bolder;
+    background: linear-gradient(90deg, var(--c1, #1d8443), var(--c2, #44f859) 51%, var(--c1, #1d8443)) var(--x, 0)/ 200%;
+        transition: all .5s ease;
+        color: #e9ecef;
+}
+#update:hover{
+    --x:100%;
+    transform: scale(1.04);
 }

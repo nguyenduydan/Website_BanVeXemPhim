@@ -172,6 +172,18 @@ transition: background-image ease-in-out 1s;
     background-position: center right;
     /* change the direction of the change here */
 }
+
+/* navbar */
+.dropdown-css{
+    transition: all .1s ease-in-out;
+}
+.dropdown-css:hover{
+    border-left: 4px solid #9156b8;
+}
+
+.dropdown-css .dropdown-item:hover{
+    background: #4dafff13;
+}
 /* Show film styles */
 .vertical-bar {
     color: #333;

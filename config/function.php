@@ -347,6 +347,14 @@ function getAdmin()
     $admin = getByID('NguoiDung', 'MaND', $userId);
 }
 
+function getUser()
+{
+    global $user;
+    global $NDId;
+    $NDId = isset($_SESSION['NDId']) ? $_SESSION['NDId'] : [];
+    $user = getByID('NguoiDung', 'MaND', $NDId);
+}
+
 function getMenu($table)
 {
     // Giả sử bạn có kết nối tới cơ sở dữ liệu trong biến $conn
