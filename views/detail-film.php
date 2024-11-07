@@ -135,7 +135,7 @@ if ($item['status'] == 200) {
                             function displayShowtimes($showtimes, $label)
                             {
                                 if (count($showtimes) > 0) {
-                                    echo "<h6>$label</h6>";
+                                    echo "<h6 class='text-danger'>$label</h6>";
                                     echo '<ul class="d-flex flex-row flex-wrap justify-content-start">';
                                     $count = 0; // Initialize a counter
 
