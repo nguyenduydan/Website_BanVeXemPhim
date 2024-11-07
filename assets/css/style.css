@@ -580,18 +580,54 @@ li.nav-item.day-item {
 
 .list {
     cursor: default;
+
 }
 
 .list button {
+    text-align: center;
     background: #fff;
     padding: 1px 8px;
     transition: all .2s ease;
 }
+
+.list button.couple {
+    border: 1px solid #f839dc;
+}
+
+.list button.single {
+    border: 1px solid #1190ff;
+}
+
+.list button.vip{
+    border: 1px solid #ecf32c;
+}
+
 
 .list button:hover {
     transform: scale(1.1);
     background: #7f33ff;
     border: 1px solid #7f33ff;
     color: #fff;
+}
+
+.seat-button.choosed {
+    border-color: orange !important;
+    background-color: rgba(255, 165, 0, 0.2);
+}
+
+#paymentButton {
+    color: aliceblue;
+    border: none;
+    padding: 7px 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    background: linear-gradient(90deg, var(--c1, #61036c), var(--c2, #7f33ff) 51%, var(--c1, #61036c)) var(--x, 0)/ 200%;
+    transition: all .4s ease;
+}
+
+#paymentButton:hover {
+    --x: 100%;
+    transform: scale(1.1);
+    border-radius: 20px;
 }
 

@@ -29,8 +29,9 @@ if ($item['status'] == 200) {
         <?php
             $film = getByID('Phim', 'MaPhim', $item['data']['MaPhim']);
             $maPhim = $film['data']['MaPhim'];
-        ?>
-        <h4 class="text-center mb-4 text-uppercase fw-bold">Chọn ghế cho phim: <?= htmlspecialchars($film['data']['TenPhim']) ?></h4>
+            ?>
+        <h4 class="text-center mb-4 text-uppercase fw-bold">Chọn ghế cho phim:
+            <?= htmlspecialchars($film['data']['TenPhim']) ?></h4>
         <div class="type-chair">
             <ul class="d-flex flex-row justify-content-center">
                 <li class="seat vip">Ghế VIP</li>
@@ -49,31 +50,41 @@ if ($item['status'] == 200) {
             <div class="list-chair mt-5">
                 <ul class="container-fluid d-flex flex-column">
                     <?php
-                    $currentRow = '';
-                    foreach ($seats as $seat) {
-                        $rowLetter = substr($seat['TenGhe'], 0, 1);
-                        $seatNumber = substr($seat['TenGhe'], 1);
+                        $currentRow = '';
+                        foreach ($seats as $seat) {
+                            $rowLetter = substr($seat['TenGhe'], 0, 1);
+                            $seatNumber = substr($seat['TenGhe'], 1);
 
-                        if ($rowLetter != $currentRow) {
-                            if ($currentRow != '') {
-                                echo '</div><div class="col-1 fw-bold text-secondary">' . $currentRow . '</div></li>';
+                            if ($rowLetter != $currentRow) {
+                                if ($currentRow != '') {
+                                    echo '</div><div class="col-1 fw-bold text-secondary">' . $currentRow . '</div></li>';
+                                }
+                                $currentRow = $rowLetter;
+                                echo '<li class="d-flex mb-2 text-center"><div class="col-1 fw-bold text-secondary">' . $currentRow . '</div><div class="list col-10 text-center justify-content-center m-auto">';
                             }
-                            $currentRow = $rowLetter;
-                            echo '<li class="d-flex mb-2 text-center"><div class="col-1 fw-bold text-secondary">' . $currentRow . '</div><div class="list col-10 text-center justify-content-center m-auto">';
-                        }
 
-                        $seatClass = strtolower($seat['LoaiGhe']) == 'đơn' ? 'single' : (strtolower($seat['LoaiGhe']) == 'VIP' ? 'vip' : 'couple');
-echo '<button class="mx-1 ' . $seatClass . ' border-1 rounded seat-button" data-row="' . $rowLetter . '" onclick="toggleSeatSelection(this)"><span class="me-2">' . htmlspecialchars($seatNumber) . '</span></button>';
-                    }
-                    if ($currentRow != '') {
-                        echo '</div><div class="col-1 fw-bold text-secondary">' . $currentRow . '</div></li>';
-                    }
-                    ?>
+                            $seatClass = strtolower($seat['LoaiGhe']) == 'đơn' ? 'single' : (strtolower($seat['LoaiGhe']) == 'vip' ? 'vip' : 'couple');
+
+                            if ($seatClass == 'couple') {
+                                // Ghép đôi các số ghế thành cặp (1-2, 3-4, ...)
+                                if ($seatNumber % 2 != 0) {
+                                    $seatNumberPair = htmlspecialchars($seatNumber) . '-' . htmlspecialchars($seatNumber + 1);
+                                    echo '<button class="mx-1 ' . $seatClass . ' rounded seat-button" data-row="' . $rowLetter . '" onclick="toggleSeatSelection(this)"><span>' . $seatNumberPair . '</span></button>';
+                                }
+                            } else {
+                                // Hiển thị một số trong một ô cho các loại ghế khác
+                                echo '<button class="mx-1 ' . $seatClass . ' rounded seat-button" data-row="' . $rowLetter . '" onclick="toggleSeatSelection(this)"><span>' . htmlspecialchars($seatNumber) . '</span></button>';
+                            }
+                        }
+                        if ($currentRow != '') {
+                            echo '</div><div class="col-1 fw-bold text-secondary">' . $currentRow . '</div></li>';
+                        }
+                        ?>
                 </ul>
             </div>
         </div>
         <div>
-            <form id="paymentForm" action="ticket.php" method="POST">
+            <form id="paymentForm" class="text-center" action="ticket.php" method="POST">
                 <input type="hidden" name="seatsInput" id="seatsInput">
                 <button type="button" id="paymentButton" onclick="handlePayment()">Thanh toán</button>
             </form>
@@ -89,23 +100,23 @@ function toggleSeatSelection(button) {
 function handlePayment() {
     const selectedSeats = document.querySelectorAll('.choosed');
     const selectedSeatNumbers = Array.from(selectedSeats).map(seat => {
-        const rowLetter = seat.getAttribute('data-row'); 
+        const rowLetter = seat.getAttribute('data-row');
         const seatNumber = seat.textContent.trim();
         if (rowLetter && seatNumber) {
-            return rowLetter + seatNumber; 
+            return rowLetter + seatNumber;
         }
         return null;
     }).filter(seat => seat);
 
     if (selectedSeatNumbers.length === 0) {
-        <?php $_SESSION['error'] = 'Bạn chưa chọn chỗ ngồi kìa >.<';?>
+        <?php $_SESSION['error'] = 'Bạn chưa chọn chỗ ngồi kìa >.<'; ?>
         return;
     }
     const isLoggedIn = <?= json_encode($isLoggedIn) ?>;
     if (!isLoggedIn) {
-        <?php $_SESSION['error'] = 'Đăng nhập trước khi mua vé';?>
+        <?php $_SESSION['error'] = 'Đăng nhập trước khi mua vé'; ?>
         window.location.href = '../login.php';
-        return; 
+        return;
     }
     const dataArray = {
         MaGhe: selectedSeatNumbers.join(','),
@@ -117,18 +128,6 @@ function handlePayment() {
     document.getElementById('paymentForm').submit();
 }
 </script>
-
-<style>
-.seat-button {
-    border: 1px solid #ccc;
-    transition: border-color 0.3s ease; 
-}
-
-.seat-button.choosed {
-    border-color: orange; 
-    background-color: rgba(255, 165, 0, 0.2);
-}
-</style>
 
 <?php
 } else {
