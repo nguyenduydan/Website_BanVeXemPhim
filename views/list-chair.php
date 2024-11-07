@@ -2,7 +2,7 @@
 require_once("../config/function.php");
 
 ob_start();
-$isLoggedIn = isset($_SESSION['NDloggedIn']);
+$isLoggedIn = isset($_SESSION['NDloggedIn']) && $_SESSION['NDloggedIn'] == TRUE;
 
 ?>
 
@@ -91,43 +91,84 @@ if ($item['status'] == 200) {
             </div>
         </div>
     </div>
+    <div class="modal fade" id="noSeatSelectedModal" tabindex="-1" aria-labelledby="noSeatSelectedModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="noSeatSelectedModalLabel">Thông báo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-danger fw-bold">
+                    Bạn chưa chọn ghế >.<
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <script>
-        function toggleSeatSelection(button) {
-            button.classList.toggle('choosed');
+    <!-- MODAL ĐĂNG NHẬP -->
+    <div class="modal fade" id="modalLogged" tabindex="-1" aria-labelledby="modalLoggedLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLoggedLabel">Thông báo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-danger fw-bold">
+                    Bạn chưa đăng nhập trước khi thanh toán
+                </div>
+                <div class="modal-footer">
+                    <a href="../login.php" class="btn btn-primary">Đăng nhập</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    function toggleSeatSelection(button) {
+        button.classList.toggle('choosed');
+    }
+
+    function handlePayment() {
+        const selectedSeats = document.querySelectorAll('.choosed');
+        const selectedSeatNumbers = Array.from(selectedSeats).map(seat => {
+            const rowLetter = seat.getAttribute('data-row');
+            const seatNumber = seat.textContent.trim();
+            if (rowLetter && seatNumber) {
+                return rowLetter + seatNumber;
+            }
+            return null;
+        }).filter(seat => seat);
+
+        if (selectedSeatNumbers.length === 0) {
+            // Show "No Seat Selected" modal if no seats are selected
+            var noSeatSelectedModal = new bootstrap.Modal(document.getElementById('noSeatSelectedModal'), {});
+            noSeatSelectedModal.show();
+            return;
         }
 
-        function handlePayment() {
-            const selectedSeats = document.querySelectorAll('.choosed');
-            const selectedSeatNumbers = Array.from(selectedSeats).map(seat => {
-                const rowLetter = seat.getAttribute('data-row');
-                const seatNumber = seat.textContent.trim();
-                if (rowLetter && seatNumber) {
-                    return rowLetter + seatNumber;
-                }
-                return null;
-            }).filter(seat => seat);
-
-            if (selectedSeatNumbers.length === 0) {
-                <?php $_SESSION['error'] = 'Bạn chưa chọn chỗ ngồi kìa >.<'; ?>
-                return;
-            }
-            const isLoggedIn = <?= json_encode($isLoggedIn) ?>;
-            if (!isLoggedIn) {
-                <?php $_SESSION['error'] = 'Đăng nhập trước khi mua vé'; ?>
-                window.location.href = '../login.php';
-                return;
-            }
-            const dataArray = {
-                MaGhe: selectedSeatNumbers.join(','),
-                MaPhim: <?= json_encode($maPhim) ?>,
-                MaPhong: <?= json_encode($maPhong) ?>,
-                MaSuatChieu: <?= json_encode($id_result) ?>
-            };
-            document.getElementById('seatsInput').value = JSON.stringify(dataArray);
-            document.getElementById('paymentForm').submit();
+        const isLoggedIn = <?= json_encode($isLoggedIn) ?>;
+        if (!isLoggedIn) {
+            // Show "Not Logged In" modal if user is not logged in
+            var modalLogged = new bootstrap.Modal(document.getElementById('modalLogged'), {});
+            modalLogged.show();
+            return;
         }
-    </script>
+
+        const dataArray = {
+            MaGhe: selectedSeatNumbers.join(','),
+            MaPhim: <?= json_encode($maPhim) ?>,
+            MaPhong: <?= json_encode($maPhong) ?>,
+            MaSuatChieu: <?= json_encode($id_result) ?>
+        };
+        document.getElementById('seatsInput').value = JSON.stringify(dataArray);
+        document.getElementById('paymentForm').submit();
+    }
+</script>
+
 
 <?php
 } else {
