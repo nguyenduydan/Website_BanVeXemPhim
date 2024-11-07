@@ -27,15 +27,18 @@ if (isset($_POST['seatsInput'])) {
     getUser();
     $tongTien = 0;
     $seatTypes = [];
+    $seatId =[];
     foreach ($seatNumbers as $ghe) {
-        $queryPrice = "SELECT GiaGhe, LoaiGhe FROM GHE WHERE TenGhe = '$ghe' AND MaPhong = '$maPhong'";
+        $queryPrice = "SELECT MaGhe,GiaGhe, LoaiGhe FROM GHE WHERE TenGhe = '$ghe' AND MaPhong = '$maPhong'";
         $result = mysqli_query($conn, $queryPrice);
         $seatData = mysqli_fetch_assoc($result);
 
         if (!in_array($seatData['LoaiGhe'], $seatTypes)) {
             $seatTypes[] = $seatData['LoaiGhe'];
         }
-
+        if (!in_array($seatData['MaGhe'], $seatId)) {
+            $seatId[] = $seatData['MaGhe']; 
+        }
         $tongTien += $seatData['GiaGhe'];
     }
 
@@ -44,7 +47,7 @@ if (isset($_POST['seatsInput'])) {
     mysqli_query($conn, $query);
 
     $maHD = mysqli_insert_id($conn);
-    foreach ($seatNumbers as $ghe) {
+    foreach ($seatId as $ghe) {
         $queryDetail = "INSERT INTO ChiTietHoaDon(MaHD, MaSuatChieu, MaGhe, BapNuoc, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
                         VALUES ('$maHD', '$maSuatChieu', '$ghe', '0', '$NDId', CURRENT_TIMESTAMP, '$NDId', CURRENT_TIMESTAMP, '1')";
         mysqli_query($conn, $queryDetail);

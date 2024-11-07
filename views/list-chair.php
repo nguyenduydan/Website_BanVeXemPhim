@@ -19,12 +19,20 @@ if ($item['status'] == 200) {
     global $conn;
     $query = "SELECT * FROM GHE WHERE MaPhong = '$maPhong'";
     $seats = mysqli_query($conn, $query);
+
+    // Get list of booked seats for the current show time
+    $bookedSeats = [];
+    $queryBookedSeats = "SELECT MaGhe FROM ChiTietHoaDon WHERE MaSuatChieu = '$id_result' AND TrangThai = 1";
+    $bookedResult = mysqli_query($conn, $queryBookedSeats);
+    while ($bookedSeat = mysqli_fetch_assoc($bookedResult)) {
+        $bookedSeats[] = $bookedSeat['MaGhe']; 
+    }
 ?>
     <div id="toast"></div>
 
     <?php alertMessage() ?>
 
-    <div class="chair my-5 ">
+    <div class="chair my-5">
         <div class="container movie-content w-50 shadow">
             <?php
             $film = getByID('Phim', 'MaPhim', $item['data']['MaPhim']);
@@ -54,6 +62,9 @@ if ($item['status'] == 200) {
                         foreach ($seats as $seat) {
                             $rowLetter = substr($seat['TenGhe'], 0, 1);
                             $seatNumber = substr($seat['TenGhe'], 1);
+                            $seatId = htmlspecialchars($seat['TenGhe']);
+
+                            $isBooked = in_array($seatId, $bookedSeats);
 
                             if ($rowLetter != $currentRow) {
                                 if ($currentRow != '') {
@@ -63,17 +74,19 @@ if ($item['status'] == 200) {
                                 echo '<li class="d-flex mb-2 text-center"><div class="col-1 fw-bold text-secondary">' . $currentRow . '</div><div class="list col-10 text-center justify-content-center m-auto">';
                             }
 
-                            $seatClass = strtolower($seat['LoaiGhe']) == 'Đơn' ? 'single' : (strtolower($seat['LoaiGhe']) == 'Vip' ? 'vip' : 'couple');
+                            $seatClass = strtolower($seat['LoaiGhe']) == 'Đơn' ? 'single' : (strtolower($seat['LoaiGhe']) == 'vip' ? 'vip' : 'couple');
 
                             if ($seatClass == 'couple') {
                                 // Ghép đôi các số ghế thành cặp (1-2, 3-4, ...)
                                 if ($seatNumber % 2 != 0) {
                                     $seatNumberPair = htmlspecialchars($seatNumber) . '-' . htmlspecialchars($seatNumber + 1);
-                                    echo '<button class="mx-1 ' . $seatClass . ' rounded seat-button" data-row="' . $rowLetter . '" onclick="toggleSeatSelection(this)"><span>' . $seatNumberPair . '</span></button>';
+                                    $disabledClass = $isBooked ? 'disabled' : ''; // Disable if booked
+                                    echo '<button class="mx-1 ' . $seatClass . ' rounded seat-button ' . $disabledClass . '" data-row="' . $rowLetter . '" onclick="toggleSeatSelection(this)"><span>' . $seatNumberPair . '</span></button>';
                                 }
                             } else {
                                 // Hiển thị một số trong một ô cho các loại ghế khác
-                                echo '<button class="mx-1 ' . $seatClass . ' rounded seat-button" data-row="' . $rowLetter . '" onclick="toggleSeatSelection(this)"><span>' . htmlspecialchars($seatNumber) . '</span></button>';
+                                $disabledClass = $isBooked ? 'disabled' : ''; // Disable if booked
+                                echo '<button class="mx-1 ' . $seatClass . ' rounded seat-button ' . $disabledClass . '" data-row="' . $rowLetter . '" onclick="toggleSeatSelection(this)"><span>' . htmlspecialchars($seatNumber) . '</span></button>';
                             }
                         }
                         if ($currentRow != '') {
@@ -91,6 +104,8 @@ if ($item['status'] == 200) {
             </div>
         </div>
     </div>
+
+    <!-- MODAL NO SEAT SELECTED -->
     <div class="modal fade" id="noSeatSelectedModal" tabindex="-1" aria-labelledby="noSeatSelectedModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -125,51 +140,50 @@ if ($item['status'] == 200) {
             </div>
         </div>
     </div>
-</div>
-</div>
-<script>
-    function toggleSeatSelection(button) {
-        button.classList.toggle('choosed');
-    }
 
-    function handlePayment() {
-        const selectedSeats = document.querySelectorAll('.choosed');
-        const selectedSeatNumbers = Array.from(selectedSeats).map(seat => {
-            const rowLetter = seat.getAttribute('data-row');
-            const seatNumber = seat.textContent.trim();
-            if (rowLetter && seatNumber) {
-                return rowLetter + seatNumber;
+    <script>
+        function toggleSeatSelection(button) {
+            if (!button.classList.contains('disabled')) {
+                button.classList.toggle('choosed');
             }
-            return null;
-        }).filter(seat => seat);
-
-        if (selectedSeatNumbers.length === 0) {
-            // Show "No Seat Selected" modal if no seats are selected
-            var noSeatSelectedModal = new bootstrap.Modal(document.getElementById('noSeatSelectedModal'), {});
-            noSeatSelectedModal.show();
-            return;
         }
 
-        const isLoggedIn = <?= json_encode($isLoggedIn) ?>;
-        if (!isLoggedIn) {
-            // Show "Not Logged In" modal if user is not logged in
-            var modalLogged = new bootstrap.Modal(document.getElementById('modalLogged'), {});
-            modalLogged.show();
-            return;
+        function handlePayment() {
+            const selectedSeats = document.querySelectorAll('.choosed');
+            const selectedSeatNumbers = Array.from(selectedSeats).map(seat => {
+                const rowLetter = seat.getAttribute('data-row');
+                const seatNumber = seat.textContent.trim();
+                if (rowLetter && seatNumber) {
+                    return rowLetter + seatNumber;
+                }
+                return null;
+            }).filter(seat => seat);
+
+            if (selectedSeatNumbers.length === 0) {
+                // Show "No Seat Selected" modal if no seats are selected
+                var noSeatSelectedModal = new bootstrap.Modal(document.getElementById('noSeatSelectedModal'), {});
+                noSeatSelectedModal.show();
+                return;
+            }
+
+            const isLoggedIn = <?= json_encode($isLoggedIn) ?>;
+            if (!isLoggedIn) {
+                // Show "Not Logged In" modal if user is not logged in
+                var modalLogged = new bootstrap.Modal(document.getElementById('modalLogged'), {});
+                modalLogged.show();
+                return;
+            }
+
+            const dataArray = {
+                MaGhe: selectedSeatNumbers.join(','),
+                MaPhim: <?= json_encode($maPhim) ?>,
+                MaPhong: <?= json_encode($maPhong) ?>,
+                MaSuatChieu: <?= json_encode($id_result) ?>
+            };
+            document.getElementById('seatsInput').value = JSON.stringify(dataArray);
+            document.getElementById('paymentForm').submit();
         }
-
-        const dataArray = {
-            MaGhe: selectedSeatNumbers.join(','),
-            MaPhim: <?= json_encode($maPhim) ?>,
-            MaPhong: <?= json_encode($maPhong) ?>,
-            MaSuatChieu: <?= json_encode($id_result) ?>
-        };
-        document.getElementById('seatsInput').value = JSON.stringify(dataArray);
-        document.getElementById('paymentForm').submit();
-    }
-</script>
-
-
+    </script>
 <?php
 } else {
     echo '<h5>' . htmlspecialchars($item['message']) . '</h5>';
@@ -177,3 +191,11 @@ if ($item['status'] == 200) {
 ?>
 
 <?php include('../includes/footer.php'); ?>
+<style>
+    .seat-button.disabled {
+    pointer-events: none;
+    background-color: #d3d3d3;
+    opacity: 0.5;
+}
+
+</style>
