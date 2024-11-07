@@ -1,14 +1,16 @@
-<?php include('includes/header.php');
+<?php
+include('includes/header.php');
 $messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy lỗi từ session
 $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
 unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
 unset($_SESSION['form_data']);
+
 ?>
 
 <div id="toast"></div>
 
 <?php alertMessage() ?>
-<div class="container my-5" id="container">
+<div class="container my-5 w-25 shadow rounded">
     <div class="form-container sign-in">
         <form class="py-2" action="views/controllers/user-controller.php" method="post">
             <div class="mb-3 text-center">
