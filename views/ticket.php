@@ -7,15 +7,16 @@ if (isset($_POST['seatsInput'])) {
     $maGhe = explode(',', $data['MaGhe'] ?? '');
     $seatNumbers = [];
 
-    //Tách đôi thành đơn
     foreach ($maGhe as $seat) {
         if (strpos($seat, '-') !== false) {
-            
             list($start, $end) = explode('-', $seat);
-            $startLetter = substr($start, 0, 1); // 'A'
-            $startNumber = (int)substr($start, 1); // '1'
-            $endNumber = (int)$end; // '2'
-            $seatNumbers[] = $startLetter . $startNumber;
+            $startLetter = substr($start, 0, 1);
+            $startNumber = (int)substr($start, 1); 
+            $endNumber = (int)$end; 
+
+            for ($i = $startNumber; $i <= $endNumber; $i++) {
+                $seatNumbers[] = $startLetter . $i;
+            }
         } else {
             $seatNumbers[] = $seat;
         }
@@ -25,18 +26,19 @@ if (isset($_POST['seatsInput'])) {
     $maSuatChieu = $data['MaSuatChieu'] ?? '';
     getUser();
     $tongTien = 0;
-    $seatTypes = []; 
+    $seatTypes = [];
     foreach ($seatNumbers as $ghe) {
         $queryPrice = "SELECT GiaGhe, LoaiGhe FROM GHE WHERE TenGhe = '$ghe' AND MaPhong = '$maPhong'";
         $result = mysqli_query($conn, $queryPrice);
         $seatData = mysqli_fetch_assoc($result);
 
         if (!in_array($seatData['LoaiGhe'], $seatTypes)) {
-            $seatTypes[] = $seatData['LoaiGhe']; 
+            $seatTypes[] = $seatData['LoaiGhe'];
         }
 
-        $tongTien += $seatData['GiaGhe']; 
+        $tongTien += $seatData['GiaGhe'];
     }
+
     $query = "INSERT INTO HoaDon(MaND, NgayLapHD, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai, TongTien)
             VALUES ('$NDId', CURRENT_TIMESTAMP, '$NDId', CURRENT_TIMESTAMP, '$NDId', CURRENT_TIMESTAMP, '1', '$tongTien')";
     mysqli_query($conn, $query);
@@ -47,14 +49,15 @@ if (isset($_POST['seatsInput'])) {
                         VALUES ('$maHD', '$maSuatChieu', '$ghe', '0', '$NDId', CURRENT_TIMESTAMP, '$NDId', CURRENT_TIMESTAMP, '1')";
         mysqli_query($conn, $queryDetail);
     }
-
     $queryMovie = "SELECT TenPhim, Anh FROM Phim WHERE MaPhim = '$maPhim'";
     $resultMovie = mysqli_query($conn, $queryMovie);
     $movie = mysqli_fetch_assoc($resultMovie);
 
+
     $queryShowtime = "SELECT GioChieu FROM SuatChieu WHERE MaSuatChieu = '$maSuatChieu'";
     $resultShowtime = mysqli_query($conn, $queryShowtime);
     $showtime = mysqli_fetch_assoc($resultShowtime);
+
 
     $queryRoom = "SELECT TenPhong FROM Phong WHERE MaPhong = '$maPhong'";
     $resultRoom = mysqli_query($conn, $queryRoom);
