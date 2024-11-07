@@ -1,8 +1,10 @@
-<?php include('includes/header.php');
+<?php
+include('includes/header.php');
 $messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy lỗi từ session
 $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
 unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
 unset($_SESSION['form_data']);
+
 ?>
 
 <div id="toast"></div>
