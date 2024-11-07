@@ -66,23 +66,6 @@ if (isset($_POST['login'])) {
             if (password_verify($password, $user['data']['MatKhau'])) {
                 $_SESSION['NDloggedIn'] = true;
                 $_SESSION['NDId'] = $user['data']['MaND'];
-
-                // // Kiểm tra nếu checkbox 'rememberMe' được chọn
-                // if (isset($_POST['rememberMe']) && $_POST['rememberMe'] == '1') {
-                //     $_SESSION['rememberMe'] = true; // Lưu vào session
-
-                //     // Lưu cookie cho 'username' trong 30 ngày
-                //     setcookie('username', $username, time() + (30 * 24 * 60 * 60), "/"); // 30 ngày
-                // } else {
-                //     $_SESSION['rememberMe'] = false;
-
-                //     // Xóa cookie nếu 'rememberMe' không được chọn
-                //     if (isset($_COOKIE['username'])) {
-                //         setcookie('username', '', time() - 3600, "/");
-                //     }
-                // }
-
-                // Điều hướng đến trang index với thông báo đăng nhập thành công
                 redirect('../../index.php', 'success', 'Đăng nhập thành công');
             } else {
                 $messages['password'] = 'Sai mật khẩu';

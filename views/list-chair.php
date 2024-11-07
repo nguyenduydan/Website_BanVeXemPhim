@@ -1,14 +1,38 @@
 <?php include('../includes/header.php');
+require_once("../config/function.php");
+ob_start();
+$isLoggedIn = isset($_SESSION['NDloggedIn']);
 
 ?>
 
+<?php
+$id_result = check_valid_ID('id');
+if (!is_numeric($id_result)) {
+    echo '<h5>' . htmlspecialchars($id_result) . '</h5>';
+    return false;
+}
+
+$item = getByID('SuatChieu', 'MaSuatChieu', $id_result);
+if ($item['status'] == 200) {
+    $maPhong = $item['data']['MaPhong'];
+    global $conn;
+    $query = "SELECT * FROM GHE WHERE MaPhong = '$maPhong'";
+    $seats = mysqli_query($conn, $query);
+?>
+<div id="toast"></div>
+
+<?php alertMessage() ?>
+
 <div class="chair">
     <div class="container movie-content">
-        <h4 class="text-center mb-4 text-uppercase fw-bold">Chọn ghế</h4>
-
+        <?php
+            $film = getByID('Phim', 'MaPhim', $item['data']['MaPhim']);
+            $maPhim = $film['data']['MaPhim'];
+        ?>
+        <h4 class="text-center mb-4 text-uppercase fw-bold">Chọn ghế cho phim: <?= htmlspecialchars($film['data']['TenPhim']) ?></h4>
         <div class="type-chair">
-            <ul class=" d-flex flex-row justify-content-center">
-                <li class="seat vip">Ghế vip</li>
+            <ul class="d-flex flex-row justify-content-center">
+                <li class="seat vip">Ghế VIP</li>
                 <li class="seat single">Ghế đơn</li>
                 <li class="seat couple">Ghế đôi</li>
                 <li class="seat choosed">Ghế đã chọn</li>
@@ -20,101 +44,94 @@
                 <div class="tv mx-5"></div>
                 <span class="text-center text-secondary">Màn hình</span>
             </div>
-            <?php
-            require_once("../config/function.php");
-            // SQL query to fetch seat data
-            $query = "SELECT MaGhe, TenGhe, SoLuong, MaPhong, LoaiGhe, GiaGhe FROM Ghe";
-            $result = $conn->query($query);
 
-            // Start output
-            if ($result->num_rows > 0) {
-                echo '<div class="list-chair mt-5">';
-                echo '<ul class="container-fluid d-flex flex-column">';
-
-                // Initialize an array to group seats by row
-                $seatsByRow = [];
-
-                // Fetch data and group by row (assuming TenGhe indicates the row)
-                while ($row = $result->fetch_assoc()) {
-                    $seatsByRow[$row['TenGhe']][] = $row; // Group seats by row name
-                }
-
-                // Loop through each row
-                foreach ($seatsByRow as $rowName => $seats) {
-                    echo '<li class="d-flex mb-2 text-center">';
-                    echo '<div class="col-1 fw-bold text-secondary">' . htmlspecialchars($rowName) . '</div>';
-                    echo '<div class="list col-10 text-center justify-content-center m-auto">';
-
-                    // Loop through seats in this row
+            <div class="list-chair mt-5">
+                <ul class="container-fluid d-flex flex-column">
+                    <?php
+                    $currentRow = '';
                     foreach ($seats as $seat) {
-                        // Create multiple buttons based on SoLuong
-                        for ($i = 1; $i <= $seat['SoLuong']; $i++) { // Start from 1
-                            // Assuming LoaiGhe differentiates seat types (e.g., normal, couple)
-                            if ($seat['LoaiGhe'] === 'Đôi') {
-                                // Create a single button for couple seats
-                                echo '<button class="mx-1 couple border-1 rounded"><span class="me-2">' . htmlspecialchars($i) . '</span><span>' . htmlspecialchars($i + 1) . '</span></button>';
-                            } else {
-                                // Create multiple buttons based on SoLuong for regular seats
-                                for ($i = 1; $i <= $seat['SoLuong']; $i++) {
-                                    echo '<button class="mx-1 rounded border-1">' . htmlspecialchars($i) . '</button>'; // Use $i as the label
-                                }
+                        $rowLetter = substr($seat['TenGhe'], 0, 1);
+                        $seatNumber = substr($seat['TenGhe'], 1);
+
+                        if ($rowLetter != $currentRow) {
+                            if ($currentRow != '') {
+                                echo '</div><div class="col-1 fw-bold text-secondary">' . $currentRow . '</div></li>';
                             }
+                            $currentRow = $rowLetter;
+                            echo '<li class="d-flex mb-2 text-center"><div class="col-1 fw-bold text-secondary">' . $currentRow . '</div><div class="list col-10 text-center justify-content-center m-auto">';
                         }
+
+                        $seatClass = strtolower($seat['LoaiGhe']) == 'đơn' ? 'single' : (strtolower($seat['LoaiGhe']) == 'VIP' ? 'vip' : 'couple');
+echo '<button class="mx-1 ' . $seatClass . ' border-1 rounded seat-button" data-row="' . $rowLetter . '" onclick="toggleSeatSelection(this)"><span class="me-2">' . htmlspecialchars($seatNumber) . '</span></button>';
                     }
-
-                    echo '</div>';
-                    echo '<div class="col-1 fw-bold text-secondary">' . htmlspecialchars($rowName) . '</div>';
-                    echo '</li>';
-                }
-
-                echo '</ul>';
-                echo '</div>';
-            } else {
-                echo '<p>Không có ghế nào trong phòng này.</p>';
-            }
-            ?>
-            <!-- <div class="list-chair mt-5">
-            <ul class="container-fluid d-flex flex-column">
-                <li class="d-flex mb-2 text-center">
-                    <div class="col-1 fw-bold text-secondary">A</div>
-                    <div class="list col-10 text-center justify-content-center m-auto">
-                        <button class="mx-1 couple border-1 rounded"><span class="me-2">1</span><span>1</span></button>
-                        <button class="mx-1 couple border-1 rounded"><span class="me-2">1</span><span>1</span></button>
-                        <button class="mx-1 rounded border-1">1</button>
-                        <button class="mx-1 rounded border-1">1</button>
-                        <button class="mx-1 rounded border-1">1</button>
-                    </div>
-                    <div class="col-1 fw-bold text-secondary">A</div>
-                </li>
-                <li class="d-flex mb-2 text-center">
-                    <div class="col-1 fw-bold text-secondary">A</div>
-                    <div class="list col-10 text-center justify-content-center m-auto">
-                        <button class="mx-1 couple border-1 rounded"><span class="me-2">1</span><span>1</span></button>
-                        <button class="mx-1 couple border-1 rounded"><span class="me-2">1</span><span>1</span></button>
-                        <button class="mx-1 rounded border-1">1</button>
-                        <button class="mx-1 rounded border-1">1</button>
-                        <button class="mx-1 rounded border-1">1</button>
-                    </div>
-                    <div class="col-1 fw-bold text-secondary">A</div>
-                </li>
-                <li class="d-flex mb-2 text-center">
-                    <div class="col-1 fw-bold text-secondary">A</div>
-                    <div class="list col-10 text-center justify-content-center m-auto">
-                        <button class="mx-1 couple border-1 rounded"><span class="me-2">1</span><span>1</span></button>
-                        <button class="mx-1 couple border-1 rounded"><span class="me-2">1</span><span>1</span></button>
-                        <button class="mx-1 rounded border-1">1</button>
-                        <button class="mx-1 rounded border-1">1</button>
-                        <button class="mx-1 rounded border-1">1</button>
-                    </div>
-                    <div class="col-1 fw-bold text-secondary">A</div>
-                </li>
-            </ul>
-        </div> -->
+                    if ($currentRow != '') {
+                        echo '</div><div class="col-1 fw-bold text-secondary">' . $currentRow . '</div></li>';
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>
+        <div>
+            <form id="paymentForm" action="ticket.php" method="POST">
+                <input type="hidden" name="seatsInput" id="seatsInput">
+                <button type="button" id="paymentButton" onclick="handlePayment()">Thanh toán</button>
+            </form>
         </div>
     </div>
 </div>
 
+<script>
+function toggleSeatSelection(button) {
+    button.classList.toggle('choosed');
+}
 
-<?php include('../includes/footer.php');
+function handlePayment() {
+    const selectedSeats = document.querySelectorAll('.choosed');
+    const selectedSeatNumbers = Array.from(selectedSeats).map(seat => {
+        const rowLetter = seat.getAttribute('data-row'); 
+        const seatNumber = seat.textContent.trim();
+        if (rowLetter && seatNumber) {
+            return rowLetter + seatNumber; 
+        }
+        return null;
+    }).filter(seat => seat);
 
+    if (selectedSeatNumbers.length === 0) {
+        alert("Bạn chưa chọn chỗ ngồi kìa >.<");
+        return;
+    }
+    const isLoggedIn = <?= json_encode($isLoggedIn) ?>;
+    if (!isLoggedIn) {
+        <?php redirect('../login.php','error','Đăng nhập trước khi mua ve')?>
+        return; 
+    }
+    const dataArray = {
+        MaGhe: selectedSeatNumbers.join(','),
+        MaPhim: <?= json_encode($maPhim) ?>,
+        MaPhong: <?= json_encode($maPhong) ?>,
+        MaSuatChieu: <?= json_encode($id_result) ?>
+    };
+    document.getElementById('seatsInput').value = JSON.stringify(dataArray);
+    document.getElementById('paymentForm').submit();
+}
+</script>
+
+<style>
+.seat-button {
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease; 
+}
+
+.seat-button.choosed {
+    border-color: orange; 
+    background-color: rgba(255, 165, 0, 0.2);
+}
+</style>
+
+<?php
+} else {
+    echo '<h5>' . htmlspecialchars($item['message']) . '</h5>';
+}
 ?>
+
+<?php include('../includes/footer.php'); ?>

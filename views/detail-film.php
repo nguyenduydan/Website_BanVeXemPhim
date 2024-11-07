@@ -106,7 +106,7 @@ if ($item['status'] == 200) {
                         <?php
                         // Fetching showtimes for the selected date or today's date if no selection
                         $formattedDate = date('Y-m-d', strtotime($selectedDate));
-                        $queryShowtimes = "SELECT giochieu FROM SuatChieu WHERE MaPhim = ? AND giochieu LIKE ? ORDER BY giochieu ASC"; // Add ORDER BY clause
+                        $queryShowtimes = "SELECT MaSuatChieu, giochieu FROM SuatChieu WHERE MaPhim = ? AND giochieu LIKE ? ORDER BY giochieu ASC"; // Add the MaSuatChieu field
                         $stmt = $conn->prepare($queryShowtimes);
                         $likeDate = "$formattedDate%";
                         $stmt->bind_param("is", $item['data']['MaPhim'], $likeDate);
@@ -125,7 +125,10 @@ if ($item['status'] == 200) {
                                     echo '</ul><ul class="d-flex flex-row flex-wrap justify-content-start">'; // Close and open a new row
                                 }
 
-                                echo "<li class='time-link mb-3'>" . date('H:i', strtotime($showtime['giochieu'])) . "</li>";
+                                // Now you can access MaSuatChieu safely
+                                echo "<li class='time-link mb-3'>
+                                        <a href='list-chair.php?id=" . urlencode($showtime['MaSuatChieu']) . "' class='btn border-0'>" . date('H:i', strtotime($showtime['giochieu'])) . "</a>
+                                    </li>";
                                 $count++; // Increment the counter
                             }
 
