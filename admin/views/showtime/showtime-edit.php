@@ -62,6 +62,23 @@ unset($_SESSION['form_data']);
                                 <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['maphim']) ?></small>
                             <?php endif; ?>
                         </div>
+                        <div class="col-md-6">
+                <label for="maphong">Tên phòng (<span class="text-danger">*</span>)</label>
+                        <select class="form-control" id="maphong" name="maphong">
+                            <option value="">Chọn phòng</option>
+                            <?php
+                            $rooms = getAll('Phong');
+                            foreach ($rooms as $room): ?>
+                            <option value="<?php echo htmlspecialchars($room['MaPhong']); ?>"
+                                <?php echo (isset($formData['maphong']) && $formData['maphong'] == $room['maphong']) ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($room['TenPhong']); ?>
+                            </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <?php if (isset($messages['maphong'])): ?>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['maphong']) ?></small>
+                        <?php endif; ?>
+                </div>
                         <div class="form-group mb-3">
                             <label for="status">Trạng thái</label>
                             <select class="form-select" id="status" name="status">
