@@ -44,7 +44,6 @@ $records_per_page = $pagination['records_per_page'];
                                 <th class="text-center text-uppercase text-xs font-weight-bolder ">Tên phòng</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder ">Loại ghế</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder ">Giá ghế</th>
-                                <th class="text-center text-uppercase text-xs font-weight-bolder ">Số lượng</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder ">Trạng thái</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder ">Hành động</th>
                             </tr>
@@ -69,7 +68,6 @@ $records_per_page = $pagination['records_per_page'];
                                 <th class="text-center text-xs font-weight-bolder"><?= $item['LoaiGhe']; ?></th>
                                 <th class="text-center text-xs font-weight-bolder">
                                     <?= number_format($item['GiaGhe']); ?> VNĐ</th>
-                                <th class="text-center text-xs font-weight-bolder"><?= $item['SoLuong']; ?></th>
                                 <th class="text-center text-s font-weight-bolder">
                                     <form action="controllers/chair-controller.php" method="POST"
                                         style="display:inline;">

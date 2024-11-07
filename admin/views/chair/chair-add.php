@@ -24,14 +24,25 @@ unset($_SESSION['form_data']);
                     <label for="tenghe">Tên ghế</label>
                     <input type="text" class="form-control" id="tenghe" name="tenghe" placeholder="Nhập tên ghế">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 row">
+                    <div class="col-6">
                     <label for="loaighe">Loại ghế</label>
-                    <select class="form-select" id="loaighe" name="loaighe" required>
+                    <select class="form-select" id="loaighe" name="loaighe">
                         <option value="" disabled selected>Chọn loại ghế</option>
                         <option value="Đơn">Đơn</option>
                         <option value="Đôi">Đôi</option>
                         <option value="VIP">VIP</option>
                     </select>
+                    </div>
+                    <div class="col-6">
+                        <label for="soluong">Số lượng</label>
+                        <input type="number" class="form-control" id="soluong" name="soluong" placeholder="Nhập số lượng" min="0" max="10">
+                        <?php if (isset($messages['soluong'])): ?>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['soluong']) ?></small>
+                        <?php endif; ?>
+                    </div>
+                    
+
                 </div>
                 <div class="col-md-6">
                     <label for="status">Trạng thái</label>
