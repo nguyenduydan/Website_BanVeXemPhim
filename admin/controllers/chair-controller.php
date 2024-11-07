@@ -18,6 +18,12 @@ if (isset($_POST['saveChair'])) {
     if (empty($soluong)) {
         $messages['soluong'] = "Số lượng không được để trống.";
     }
+    if (empty($loaighe)) {
+        $messages['loaighe'] = "Loại ghế không được để trống.";
+    }
+    if (empty($maphong)) {
+        $messages['maphong'] = "Tên phòng không được để trống.";
+    }
     if (empty($messages)) {
         $thamso = getByID("ThamSo","TenThamSo",$loaighe);
         $giaghe = $thamso['data']['GiaTri'] ?? 0;

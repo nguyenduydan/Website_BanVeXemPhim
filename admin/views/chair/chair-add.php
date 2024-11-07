@@ -23,8 +23,12 @@ unset($_SESSION['form_data']);
                 <div class="col-md-6">
                     <label for="tenghe">Tên ghế</label>
                     <input type="text" class="form-control" id="tenghe" name="tenghe" placeholder="Nhập tên ghế">
+                    <?php if (isset($messages['tenghe'])): ?>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tenghe']) ?></small>
+                        <?php endif; ?>
                 </div>
-                <div class="col-md-6 row">
+                <div class="col-md-6">
+                    <div class="row">
                     <div class="col-6">
                     <label for="loaighe">Loại ghế</label>
                     <select class="form-select" id="loaighe" name="loaighe">
@@ -32,7 +36,11 @@ unset($_SESSION['form_data']);
                         <option value="Đơn">Đơn</option>
                         <option value="Đôi">Đôi</option>
                         <option value="VIP">VIP</option>
+                        
                     </select>
+                    <?php if (isset($messages['loaighe'])): ?>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['loaighe']) ?></small>
+                        <?php endif; ?>
                     </div>
                     <div class="col-6">
                         <label for="soluong">Số lượng</label>
@@ -41,6 +49,9 @@ unset($_SESSION['form_data']);
                             <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['soluong']) ?></small>
                         <?php endif; ?>
                     </div>
+                    </div>
+
+                    
                     
 
                 </div>
