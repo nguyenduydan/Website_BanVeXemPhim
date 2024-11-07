@@ -1,4 +1,6 @@
 <?php
+include('../includes/header.php');
+
 require_once("../config/function.php");
 
 if (isset($_POST['seatsInput'])) {
@@ -11,8 +13,8 @@ if (isset($_POST['seatsInput'])) {
         if (strpos($seat, '-') !== false) {
             list($start, $end) = explode('-', $seat);
             $startLetter = substr($start, 0, 1);
-            $startNumber = (int)substr($start, 1); 
-            $endNumber = (int)$end; 
+            $startNumber = (int)substr($start, 1);
+            $endNumber = (int)$end;
 
             for ($i = $startNumber; $i <= $endNumber; $i++) {
                 $seatNumbers[] = $startLetter . $i;
@@ -27,7 +29,7 @@ if (isset($_POST['seatsInput'])) {
     getUser();
     $tongTien = 0;
     $seatTypes = [];
-    $seatId =[];
+    $seatId = [];
     foreach ($seatNumbers as $ghe) {
         $queryPrice = "SELECT MaGhe,GiaGhe, LoaiGhe FROM GHE WHERE TenGhe = '$ghe' AND MaPhong = '$maPhong'";
         $result = mysqli_query($conn, $queryPrice);
@@ -37,7 +39,7 @@ if (isset($_POST['seatsInput'])) {
             $seatTypes[] = $seatData['LoaiGhe'];
         }
         if (!in_array($seatData['MaGhe'], $seatId)) {
-            $seatId[] = $seatData['MaGhe']; 
+            $seatId[] = $seatData['MaGhe'];
         }
         $tongTien += $seatData['GiaGhe'];
     }
@@ -66,86 +68,52 @@ if (isset($_POST['seatsInput'])) {
     $resultRoom = mysqli_query($conn, $queryRoom);
     $room = mysqli_fetch_assoc($resultRoom);
 
-    ?>
-    <style>
-        .ticket-container {
-            border: 2px dashed #7a6ad8;
-            border-radius: 15px;
-            padding: 20px;
-            max-width: 600px;
-            margin: auto;
-            position: relative;
-            background-color: #fff;
-        }
-        .ticket-header, .ticket-footer {
-            background-color: #7a6ad8;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 10px 10px 0 0;
-        }
-        .ticket-footer {
-            border-radius: 0 0 10px 10px;
-            text-align: center;
-        }
-        .ticket-body {
-            padding: 20px;
-        }
-        .ticket-details {
-            display: flex;
-            justify-content: space-between;
-        }
-        .ticket-info {
-            margin-bottom: 10px;
-        }
-        .btn-custom {
-            background-color: #7a6ad8;
-            border: 2px solid #fff;
-            border-radius: 5px;
-            color: white;
-        }
-        .btn-custom:hover {
-            background-color: #5a50b2;
-            border-color: #5a50b2;
-        }
-    </style>
 
-    <div class="ticket-container mt-4">
-        <div class="ticket-header">
-            <h4 style="text-transform:uppercase" class="d-flex justify-content-center align-items-center mt-2">
-                <?php echo $movie['TenPhim']; ?> 
+?>
+
+
+<div class="container d-flex justify-content-center">
+    <div class="ticket-container mt-4 border rounded shadow p-4" style="max-width: 400px; width: 100%;">
+        <div class="ticket-header text-center">
+            <h4 class="text-uppercase mt-2 mb-4">
+                <?php echo $movie['TenPhim']; ?>
             </h4>
         </div>
-        <div class="ticket-body">
-            <div class="ticket-details">
-                <div class="ticket-poster">
-                    <img src="../uploads/film-imgs/<?=$movie['Anh']; ?>" class="img-fluid" style="max-width: 150px; border-radius: 10px;">
-                </div>
-                <div class="ticket-info">
-                    <p><strong>Galaxy Nha Trang Center - <?php echo $room['TenPhong']; ?></strong></p>
-                    <p>Suất: <strong>
+        <div class="ticket-body d-flex align-items-center mb-3">
+            <div class="ticket-poster me-3">
+                <img src="../uploads/film-imgs/<?= $movie['Anh']; ?>" class="img-fluid rounded"
+                    style="max-width: 100px;">
+            </div>
+            <div class="ticket-info">
+                <p class="mb-2"><strong>D2P - <?php echo $room['TenPhong']; ?></strong></p>
+                <p class="mb-2">Suất: <strong>
                         <?php
-                        $showtimeDate = new DateTime($showtime['GioChieu']);
-                        echo $showtimeDate->format('d-m-Y H:i');
-                        ?>
+                            $showtimeDate = new DateTime($showtime['GioChieu']);
+                            echo $showtimeDate->format('d-m-Y H:i');
+                            ?>
                     </strong>
-                    </p>
-                    <p>Loại ghế: <?php echo implode(", ", $seatTypes); ?> </p>
-                    <p>Ghế: <?php echo $data['MaGhe']; ?></p>
-                    <p><strong>Tổng cộng:</strong> <?php echo number_format($tongTien, 0, ',', '.') . ' VNĐ'; ?></p>
-                </div>
+                </p>
+                <p class="mb-2">Loại ghế: <?php echo implode(", ", $seatTypes); ?></p>
+                <p class="mb-2">Ghế: <?php echo $data['MaGhe']; ?></p>
+                <p class="mb-2"><strong>Tổng cộng:</strong>
+                    <?php echo number_format($tongTien, 0, ',', '.') . ' VNĐ'; ?></p>
             </div>
         </div>
-        <div class="ticket-footer d-flex justify-content-between align-content-center">
-            <a href="/"><button class="btn btn-secondary">Quay Lại</button></a>
-            <button class="btn btn-custom" id="payButton">Thanh Toán</button>
+        <div class="ticket-footer d-flex justify-content-between align-items-center mt-3">
+            <a href="/" class="btn btn-secondary">Quay Lại</a>
+            <button class="btn btn-primary" id="payButton">Thanh Toán</button>
         </div>
-        <div class="alert alert-success mt-3" id="successMessage" style="display: none;">
+        <div class="alert alert-success mt-3 text-center" id="successMessage" style="display: none;">
             Thanh toán thành công!
         </div>
     </div>
+</div>
+
 
 <?php
 } else {
-    redirect('../index.php','error','Đã có lỗi xảy ra');
+    redirect('../index.php', 'error', 'Đã có lỗi xảy ra');
 }
 ?>
+
+<?php include('../includes/footer.php'); ?>
