@@ -58,13 +58,13 @@ getUser();
                 <!-- Phần tìm kiếm và dropdown người dùng -->
                 <div
                     class="col-8 col-md-8 col-lg-4 d-none d-md-flex d-lg-flex mt-lg-0 mt-2 justify-content-start justify-content-sm-start flex-column">
-                    <div class="d-flex">
+                    <div class="d-flex align-items-center">
                         <form class="mb-3 mb-lg-0 me-3 input-group w-100 flex-nowrap" role="search">
                             <span class="input-group-text bg-dark text-white border" style="cursor: pointer;"
                                 id="addon-wrapping"><i class="bi bi-search"></i></span>
                             <input type="search" class="form-control ps-4" placeholder="Search..." aria-label="Search">
                         </form>
-                        <div class="dropdown col-1 col-lg-2 text-end">
+                        <div class="dropdown col-lg-3 text-center ">
                             <?php if (isset($_SESSION['NDId']) && $_SESSION['NDloggedIn'] == true): ?>
                             <!-- Người dùng đã đăng nhập, hiển thị dropdown -->
                             <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
@@ -106,7 +106,8 @@ getUser();
                             </ul>
                             <?php else: ?>
                             <!-- Người dùng chưa đăng nhập, hiển thị nút Đăng nhập -->
-                            <a href="<?= $baseUrl ?>login.php" class="btn btn-primary">Đăng nhập</a>
+                            <a href="<?= $baseUrl ?>login.php" class="nav-link px-2 fw-bolder text-capitalize "
+                                id="login">Đăng nhập</a>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -118,7 +119,6 @@ getUser();
                         <i class="bi bi-list"></i>
                     </button>
                 </div>
-
             </div>
         </div>
     </div>
