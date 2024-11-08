@@ -1,4 +1,6 @@
-<?php include('includes/header.php');
+<?php
+$title = 'Trang người dùng';
+include('includes/header.php');
 require_once 'config/function.php';
 getUser();
 
@@ -17,7 +19,7 @@ getUser();
                 <div class="card-body text-center p-4">
                     <img src="uploads/avatars/admin.gif" class="rounded-circle mb-3 border" alt="Profile Picture"
                         width="100px" height="100px">
-                    <h4 class="fw-bold mb-3"><?=$user['data']['TenND']?></h4>
+                    <h4 class="fw-bold mb-3"><?= $user['data']['TenND'] ?></h4>
 
                     <h5 class="text-muted mt-3">Tổng chi tiêu 2024</h5>
                     <p class="text-warning fw-bold"><?= number_format($tongTien, 0, ',', '.') ?> ₫</p>
@@ -61,7 +63,8 @@ getUser();
                                         <div class="input-group">
                                             <span class="input-group-text bg-light border-0"><i
                                                     class="fas fa-user"></i></span>
-                                            <input type="text" class="form-control form-control-lg" id="fullName" value="<?=$user['data']['TenND']?>" readonly>
+                                            <input type="text" class="form-control form-control-lg" id="fullName"
+                                                value="<?= $user['data']['TenND'] ?>" readonly>
                                         </div>
                                     </div>
 
@@ -71,7 +74,8 @@ getUser();
                                         <div class="input-group">
                                             <span class="input-group-text bg-light border-0"><i
                                                     class="fas fa-envelope"></i></span>
-                                            <input type="email" class="form-control form-control-lg" id="email" value="<?=$user['data']['Email']?>" readonly>
+                                            <input type="email" class="form-control form-control-lg" id="email"
+                                                value="<?= $user['data']['Email'] ?>" readonly>
                                         </div>
                                     </div>
                                     <div class="mb-4 text-center">
@@ -79,12 +83,14 @@ getUser();
                                         <div class="d-flex justify-content-center">
                                             <div class="form-check me-5">
                                                 <input class="form-check-input" type="radio" name="gender" id="male"
-                                                    value="male" <?php echo ($user['data']['GioiTinh'] == '1') ? 'checked' : ''; ?>>
+                                                    value="male"
+                                                    <?php echo ($user['data']['GioiTinh'] == '1') ? 'checked' : ''; ?>>
                                                 <label class="form-check-label" for="male">Nam</label>
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="gender" id="female"
-                                                    value="female" <?php echo ($user['data']['GioiTinh'] == '0') ? 'checked' : ''; ?>
+                                                    value="female"
+                                                    <?php echo ($user['data']['GioiTinh'] == '0') ? 'checked' : ''; ?>
                                                     <?php echo ($user['data']['GioiTinh'] == '1') ? 'disabled' : ''; ?>>
                                                 <label class="form-check-label" for="female">Nữ</label>
                                             </div>
@@ -110,9 +116,11 @@ getUser();
                                     <div class="mb-4">
                                         <label for="dob" class="form-label fw-semibold">Ngày sinh</label>
                                         <div class="input-group">
-                                            <span class="input-group-text bg-light border-0"><i class="fas fa-calendar-alt"></i></span>
-                                            <input type="text" class="form-control form-control-lg" id="dob" 
-                                                value="<?= date('d/m/Y', strtotime($user['data']['NgaySinh'])) ?>" readonly>
+                                            <span class="input-group-text bg-light border-0"><i
+                                                    class="fas fa-calendar-alt"></i></span>
+                                            <input type="text" class="form-control form-control-lg" id="dob"
+                                                value="<?= date('d/m/Y', strtotime($user['data']['NgaySinh'])) ?>"
+                                                readonly>
                                         </div>
                                     </div>
                                     <!-- Số điện thoại -->
@@ -121,23 +129,24 @@ getUser();
                                         <div class="input-group">
                                             <span class="input-group-text bg-light border-0"><i
                                                     class="fas fa-phone"></i></span>
-                                                    <?php
-                                                    // Giả sử số điện thoại được lấy từ mảng $user
-                                                    $phoneNumber = $user['data']['SDT'];
+                                            <?php
+                                            // Giả sử số điện thoại được lấy từ mảng $user
+                                            $phoneNumber = $user['data']['SDT'];
 
-                                                    // Kiểm tra độ dài của số điện thoại và xử lý
-                                                    if (strlen($phoneNumber) >= 6) {
-                                                        // Lấy 3 số đầu và 3 số cuối
-                                                        $firstThree = substr($phoneNumber, 0, 3);
-                                                        $lastThree = substr($phoneNumber, -3);
-                                                        $displayPhone = $firstThree . '****' . $lastThree;
-                                                    } else {
-                                                        // Nếu số điện thoại có độ dài nhỏ hơn 6, hiển thị nguyên bản
-                                                        $displayPhone = $phoneNumber;
-                                                    }
-                                                    ?>
+                                            // Kiểm tra độ dài của số điện thoại và xử lý
+                                            if (strlen($phoneNumber) >= 6) {
+                                                // Lấy 3 số đầu và 3 số cuối
+                                                $firstThree = substr($phoneNumber, 0, 3);
+                                                $lastThree = substr($phoneNumber, -3);
+                                                $displayPhone = $firstThree . '****' . $lastThree;
+                                            } else {
+                                                // Nếu số điện thoại có độ dài nhỏ hơn 6, hiển thị nguyên bản
+                                                $displayPhone = $phoneNumber;
+                                            }
+                                            ?>
 
-                                                    <input type="text" class="form-control form-control-lg" id="phone" value="<?= htmlspecialchars($displayPhone) ?>" readonly>
+                                            <input type="text" class="form-control form-control-lg" id="phone"
+                                                value="<?= htmlspecialchars($displayPhone) ?>" readonly>
 
                                         </div>
                                     </div>

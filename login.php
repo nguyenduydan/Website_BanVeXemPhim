@@ -1,4 +1,5 @@
 <?php
+$title = "Đăng nhập";
 include('includes/header.php');
 $messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy lỗi từ session
 $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
@@ -24,7 +25,7 @@ unset($_SESSION['form_data']);
                         value="<?php echo isset($formData['email']) ? htmlspecialchars($formData['email']) : ''; ?>">
                 </div>
                 <?php if (isset($messages['email'])): ?>
-                    <small class="text-danger m-2"><?= htmlspecialchars($messages['email']) ?></small>
+                <small class="text-danger m-2"><?= htmlspecialchars($messages['email']) ?></small>
                 <?php endif; ?>
             </div>
 
@@ -41,7 +42,7 @@ unset($_SESSION['form_data']);
                     </span>
                 </div>
                 <?php if (isset($messages['password'])): ?>
-                    <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
+                <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
                 <?php endif; ?>
             </div>
 

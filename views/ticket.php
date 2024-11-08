@@ -1,4 +1,5 @@
 <?php
+$title = 'Thông tin vé';
 include('../includes/header.php');
 
 require_once("../config/function.php");
