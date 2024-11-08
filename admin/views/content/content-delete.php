@@ -7,25 +7,25 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
 $result = check_valid_ID('id');
 if (is_numeric($result)) {
     $contentId = validate($result);
-    $content = getByID('NguoiDung', 'MaND', $contentId);
+    $content = getByID('BaiViet', 'Id', $contentId);
 
     if ($content['status'] == 200) {
         $contentname = validate($content['data']['contentname']);
         $avatarPath = "../../../uploads/avatars/" . $content['data']['Anh'];
-        $contentDelete = deleteQuery('NguoiDung', 'MaND', $contentId);
+        $contentDelete = deleteQuery('BaiViet', 'Id', $contentId);
 
-       
+
         if ($contentDelete) {
             if (!empty($content['data']['Anh']) && file_exists($avatarPath)) {
                 $deleteResult = deleteImage($avatarPath);
             }
-            redirect('../../content.php','success','Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($contentname) . '</span> thành công');
+            redirect('../../content.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($contentname) . '</span> thành công');
         } else {
-            redirect('../../content.php','error','Xóa ' . htmlspecialchars($contentname) . ' thất bại');
+            redirect('../../content.php', 'error', 'Xóa ' . htmlspecialchars($contentname) . ' thất bại');
         }
     } else {
-        redirect('../../content.php','error',$content['message']);
+        redirect('../../content.php', 'error', $content['message']);
     }
 } else {
-    redirect('../../content.php','error',$result);
+    redirect('../../content.php', 'error', $result);
 }

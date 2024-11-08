@@ -19,26 +19,27 @@ unset($_SESSION['form_data']);
         <div class="text-end mb-4">
             <a class="btn btn-secondary" href="../../content.php">Quay lại</a>
         </div>
-        <form id="addcontentForm" action="../../controllers/content-controller.php" method="post" enctype="multipart/form-data">
+        <form id="addcontentForm" action="../../controllers/content-controller.php" method="post"
+            enctype="multipart/form-data">
             <?php
             $id_result = check_valid_ID('id');
             if (!is_numeric($id_result)) {
                 echo '<h5>' . $id_result . '</h5>';
                 return false;
             }
-            $content = getByID('NguoiDung', 'MaND', check_valid_ID('id'));
-            if ($content['status'] == 200) {
+            $item = getByID('BaiViet', 'Id', check_valid_ID('id'));
+            if ($item['status'] == 200) {
             ?>
-                <input type="hidden" name="mand" value=<?= $content['data']['MaND'] ?>>
-                <div class="row">
+            <input type="hidden" name="mabv" value=<?= $item['data']['Id'] ?>>
+            <div class="row">
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="chudebv">Chủ đề bài viết (<span class="text-danger">*</span>)</label>
                         <select class="form-control" id="chudebv" name="chudebv">
                             <option value="">Chọn chủ đề</option>
                             <?php
-                            $topics = getAll('ChuDe');
-                            foreach ($topics as $topic): ?>
+                                $topics = getAll('ChuDe');
+                                foreach ($topics as $topic): ?>
                             <option value="<?php echo htmlspecialchars($topic['Id']); ?>"
                                 <?php echo (isset($formData['chudebv']) && $formData['chudebv'] == $topic['Id']) ? 'selected' : ''; ?>>
                                 <?php echo htmlspecialchars($topic['TenChuDe']); ?>

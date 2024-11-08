@@ -72,6 +72,8 @@ if (isset($_POST['editCategory'])) {
         redirect('../views/category/content-edit.php?id=' . $id, 'errors', $messages);
     }
 }
+
+
 if (isset($_POST['changeStatus'])) {
     $id = validate($_POST['matl']);
     $status = validate($_POST['status']) == 1 ? 1 : 0;
