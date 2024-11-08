@@ -73,7 +73,7 @@ if (isset($_POST['seatsInput'])) {
 ?>
 
 
-<div class="container d-flex justify-content-center">
+<div class="container d-flex justify-content-center my-5">
     <div class="ticket-container mt-4 border rounded shadow p-4" style="max-width: 400px; width: 100%;">
         <div class="ticket-header text-center">
             <h4 class="text-uppercase mt-2 mb-4">
@@ -101,7 +101,7 @@ if (isset($_POST['seatsInput'])) {
             </div>
         </div>
         <div class="ticket-footer d-flex justify-content-between align-items-center mt-3">
-            <a href="/" class="btn btn-secondary">Quay Lại</a>
+            <a href="http://localhost/Website_BanVeXemPhim/index.php" class="btn btn-secondary">Quay Lại</a>
             <button class="btn btn-primary" id="payButton">Thanh Toán</button>
         </div>
         <div class="alert alert-success mt-3 text-center" id="successMessage" style="display: none;">
