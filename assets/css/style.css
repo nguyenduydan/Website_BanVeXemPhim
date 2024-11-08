@@ -271,6 +271,10 @@ transition: background-image ease-in-out 1s;
     --x: 100%;
 }
 
+.buy-ticket:active{
+    scale: 0.8;
+}
+
 /* Luôn hiển thị nút "Mua Vé" ở md và sm */
 @media (max-width: 991px) {
     .buy-ticket {
@@ -284,10 +288,6 @@ transition: background-image ease-in-out 1s;
     }
 }
 
-.buy-ticket:hover {
-    background-color: #4d5fd1;
-    color: white;
-}
 
 /* Detail film styles */
 .movie-poster {
@@ -615,6 +615,10 @@ li.nav-item.day-item {
     color: #fff;
 }
 
+.list button:active{
+    transform: scale(0.8);
+}
+
 .seat-button.choosed {
     border-color: blue !important;
     background-color: rgba(36, 36, 255, 0.422);
@@ -634,5 +638,9 @@ li.nav-item.day-item {
     --x: 100%;
     transform: scale(1.1);
     border-radius: 20px;
+}
+
+#paymentButton:active{
+    transform: scale(0.8);
 }
 

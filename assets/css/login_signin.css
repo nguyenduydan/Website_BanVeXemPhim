@@ -162,5 +162,9 @@ footer {
 }
 #login-sigin:hover{
     --x:100%;
+
     border-radius: 20px;
+}
+#login-sigin:active{
+    scale: 0.8;
 }
