@@ -5,7 +5,13 @@ include('includes/header.php');
 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
 }
-$pagination = searchString($searchString, $records_per_page, $current_page, 'TheLoai', 'TenTheLoai');
+
+$searchString = isset($_GET['searchString']) ? trim($_GET['searchString']) : '';
+$records_per_page = isset($_POST['records_per_page']) ? (int)$_POST['records_per_page'] : 5;
+$current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+// Set up pagination with search
+$pagination = setupPagination($conn, 'TheLoai', $records_per_page, $searchString, 'TenTheLoai');
 $data = $pagination['data'];
 $records_per_page = $pagination['records_per_page'];
 ?>
@@ -29,6 +35,18 @@ $records_per_page = $pagination['records_per_page'];
                         <option value="20" <?= $records_per_page == 20 ? 'selected' : '' ?>>20</option>
                     </select>
                 </form>
+                <div class="col-3">
+                    <form class="mb-3 mb-lg-0 me-3 input-group w-100 flex-nowrap" role="search" method="GET" action="#">
+                        <button type="submit" class="bg-transparent p-0 border-0">
+                            <span class="input-group-text bg-dark text-white border" style="cursor: pointer;">
+                                <i class="bi bi-search"></i>
+                            </span>
+                        </button>
+                        <input type="search" name="searchString" class="form-control ps-2" placeholder="Search..."
+                            aria-label="Search" value="<?= htmlspecialchars($searchString) ?>">
+                        <input type="hidden" name="page" value="<?= $current_page ?>">
+                    </form>
+                </div>
                 <a href="views/category/categories-add.php" class="btn btn-lg me-5 btn-add"
                     style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">
                     <i class="bi bi-plus me-1 fs-3" style="margin-bottom: 5px;"></i>

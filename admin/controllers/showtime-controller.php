@@ -1,7 +1,7 @@
 <?php
 session_start();
 require '../../config/function.php';
-
+getAdmin();
 $messages = [];
 //====== suatchieu-add =======//
 if (isset($_POST['savesc'])) {

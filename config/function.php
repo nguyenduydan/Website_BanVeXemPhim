@@ -213,8 +213,7 @@ function deleteQuery($tableName, $colName, $id)
     $result = mysqli_query($conn, $query);
     return $result;
 }
-
-function setupPagination($conn, $table, $record = 5)
+function setupPagination($conn, $table, $record = 5, $searchString = null, $colName = null)
 {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['records_per_page'])) {
         $_SESSION['records_per_page'] = (int)$_POST['records_per_page'];
@@ -224,16 +223,27 @@ function setupPagination($conn, $table, $record = 5)
     $records_per_page = isset($_SESSION['records_per_page']) ? $_SESSION['records_per_page'] : $record;
 
     $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-    $data = paginate($conn, $table, $records_per_page, $current_page);
+    $data = paginate($conn, $table, $records_per_page, $current_page, $searchString, $colName);
     $data['records_per_page'] = $records_per_page;
+
     return $data;
 }
 
-// Hàm phân trang
-function paginate($conn, $table, $recordsPerPage, $currentPage)
+// Pagination function with search handling
+function paginate($conn, $table, $recordsPerPage, $currentPage, $searchString = null, $colName = null)
 {
-    $totalQuery = "SELECT COUNT(*) AS total FROM $table";
-    $totalResult = $conn->query($totalQuery);
+    // Prepare the base SQL query for counting total records
+    $totalQuery = "SELECT COUNT(*) AS total FROM $table" . ($searchString ? " WHERE `$colName` LIKE ?" : "");
+    $stmt = $conn->prepare($totalQuery);
+
+    // Bind parameter if search string is provided
+    if ($searchString) {
+        $searchParam = '%' . $searchString . '%';
+        $stmt->bind_param("s", $searchParam);
+    }
+
+    $stmt->execute();
+    $totalResult = $stmt->get_result();
     $totalRow = $totalResult->fetch_assoc();
     $totalRecords = $totalRow['total'];
 
@@ -242,15 +252,25 @@ function paginate($conn, $table, $recordsPerPage, $currentPage)
 
     $offset = ($currentPage - 1) * $recordsPerPage;
 
+    // Prepare the query to fetch the paginated data
+    $query = "SELECT * FROM $table" . ($searchString ? " WHERE `$colName` LIKE ?" : "") . " LIMIT ?, ?";
+    $stmt = $conn->prepare($query);
 
-    $query = "SELECT * FROM $table LIMIT $offset, $recordsPerPage";
-    $result = $conn->query($query);
+    // Bind parameters
+    if ($searchString) {
+        $stmt->bind_param("sii", $searchParam, $offset, $recordsPerPage);
+    } else {
+        $stmt->bind_param("ii", $offset, $recordsPerPage);
+    }
 
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     $data = [];
     while ($row = $result->fetch_assoc()) {
         $data[] = $row;
     }
+
     return [
         'data' => $data,
         'total_pages' => $totalPages,
@@ -258,6 +278,7 @@ function paginate($conn, $table, $recordsPerPage, $currentPage)
         'total_records' => $totalRecords
     ];
 }
+
 function paginate_html($totalPages, $currentPage, $url = "?page=")
 {
     if ($totalPages <= 1) {
@@ -376,31 +397,4 @@ function getMenu($table)
         }
     }
     return $items;
-}
-function searchString($searchString, $records_per_page, $current_page, $tableName, $colName)
-{
-    global $conn;
-
-    $offset = ($current_page - 1) * $records_per_page;
-
-    $sql = "SELECT * FROM `$tableName`";
-    if (!empty($searchString)) {
-        $sql .= " WHERE `$colName`   LIKE '%$searchString%'";
-    }
-
-    $result = mysqli_query($conn, $sql);
-    $total_records = mysqli_num_rows($result);
-    $sql .= " LIMIT $offset, $records_per_page";
-    $data = mysqli_query($conn, $sql);
-    $items = mysqli_fetch_all($data, MYSQLI_ASSOC);
-
-    // Total pages
-    $total_pages = ceil($total_records / $records_per_page);
-
-    return [
-        'data' => $items,
-        'total_records' => $total_records,
-        'total_pages' => $total_pages,
-        'current_page' => $current_page
-    ];
 }
