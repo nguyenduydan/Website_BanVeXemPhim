@@ -1,9 +1,7 @@
 <?php
 require '../../../config/function.php';
 include('../../includes/header.php');
-if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
-    redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
-}
+
 $messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy lỗi từ session
 $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
 unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
@@ -39,18 +37,22 @@ unset($_SESSION['form_data']);
                     <!-- Nhập tên thể loại -->
                     <div class="form-group mb-3">
                         <label for="ten_the_loai">Tên thể loại (<span class="text-danger">*</span>)</label>
-                        <input type="text" value="<?php echo isset($formData['ten_the_loai']) ? htmlspecialchars($formData['ten_the_loai']) : $category['data']['TenTheLoai']; ?>"
+                        <input type="text"
+                            value="<?php echo isset($formData['ten_the_loai']) ? htmlspecialchars($formData['ten_the_loai']) : $category['data']['TenTheLoai']; ?>"
                             class="form-control" id="ten_the_loai" name="ten_the_loai" placeholder="Nhập tên thể loại">
                         <?php if (isset($messages['ten_the_loai'])): ?>
-                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ten_the_loai']) ?></small>
+                        <small
+                            class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ten_the_loai']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
                         <label for="status">Chọn vị trí(<span class="text-danger">*</span>)</label>
-                            <select name="vitri" class="form-select" readonly>
-                            <option value="1" <?= $category['data']['TrangThai'] == 1 ? 'selected' : ''; ?>>Online</option>
-                            <option value="0" <?= $category['data']['TrangThai'] == 0 ? 'selected' : ''; ?>>Offline</option>
-                            </select>
+                        <select name="vitri" class="form-select" readonly>
+                            <option value="1" <?= $category['data']['TrangThai'] == 1 ? 'selected' : ''; ?>>Online
+                            </option>
+                            <option value="0" <?= $category['data']['TrangThai'] == 0 ? 'selected' : ''; ?>>Offline
+                            </option>
+                        </select>
                     </div>
                     <button type="submit" name="editCategory" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
                 </div>

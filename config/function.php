@@ -1,5 +1,6 @@
 <?php
 require 'dbcon.php';
+define('BASE_URL_ADMIN', 'http://localhost/Website_BanVeXemPhim/admin/');
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -7,9 +8,23 @@ if (session_status() === PHP_SESSION_NONE) {
 function validate($inpData)
 {
     global $conn;
-    $validatedData = mysqli_real_escape_string($conn, $inpData);
-    return trim($validatedData);
+
+    if (is_array($inpData)) {
+        // Nếu là mảng, thực hiện đệ quy để xử lý từng phần tử trong mảng
+        foreach ($inpData as $key => $value) {
+            $inpData[$key] = validate($value); // Gọi lại chính hàm validate cho từng phần tử
+        }
+        return $inpData;
+    } elseif (is_string($inpData)) {
+        // Nếu là chuỗi, xử lý như bình thường
+        $validatedData = mysqli_real_escape_string($conn, $inpData);
+        return trim($validatedData);
+    } else {
+        // Nếu không phải chuỗi hoặc mảng, chuyển đổi thành chuỗi để xử lý
+        return trim(mysqli_real_escape_string($conn, (string)$inpData));
+    }
 }
+
 
 function uploadImage($file, $targetDir, $id)
 {
@@ -85,7 +100,7 @@ function deleteImage($filePath)
 function redirect($url, $status, $message)
 {
     $_SESSION[$status] = $message;
-    header('Location: ' . $url);
+    header('Location: ' . BASE_URL_ADMIN . $url);
     exit(0);
 }
 

@@ -1,9 +1,7 @@
 <?php
 require '../../../config/function.php';
 include('../../includes/header.php');
-if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
-    redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
-}
+
 $messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy lỗi từ session
 $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
 unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
@@ -29,7 +27,7 @@ unset($_SESSION['form_data']);
                             value="<?php echo isset($formData['ten_the_loai']) ? htmlspecialchars($formData['ten_the_loai']) : ''; ?>"
                             class="form-control" id="ten_the_loai" name="ten_the_loai" placeholder="Nhập tên thể loại">
                         <?php if (isset($messages['name'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">

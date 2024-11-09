@@ -17,13 +17,13 @@ if (isset($_POST['saveCategory'])) {
         $query = "INSERT INTO theloai (TenTheLoai,NguoiTao,NgayTao,NguoiCapNhat,NgayCapNhat,TrangThai)
             VALUES ('$name','$created',CURRENT_TIMESTAMP,'$created',CURRENT_TIMESTAMP,'$status')";
         if (mysqli_query($conn, $query)) {
-            redirect('../categories.php', 'success', 'Thêm thể loại thành công');
+            redirect('categories.php', 'success', 'Thêm thể loại thành công');
         } else {
-            redirect('../views/category/categories-add.php', 'error', 'Thêm thể loại thất bại');
+            redirect('views/category/categories-add.php', 'error', 'Thêm thể loại thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/category/categories-add.php', 'messages', $messages);
+        redirect('views/category/categories-add.php', 'messages', $messages);
     }
 }
 
@@ -50,13 +50,13 @@ if (isset($_POST['editCategory'])) {
                 WHERE MaTheLoai = '$id'
                 ";
         if (mysqli_query($conn, $query)) {
-            redirect('../categories.php', 'success', 'Cập nhật thể loại thành công');
+            redirect('categories.php', 'success', 'Cập nhật thể loại thành công');
         } else {
-            redirect('../views/category/categories-edit.php?id=' . $id, 'errors', 'Cập nhật thể loại thất bại');
+            redirect('views/category/categories-edit.php?id=' . $id, 'errors', 'Cập nhật thể loại thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/category/categories-edit.php?id=' . $id, 'messages', $messages);
+        redirect('views/category/categories-edit.php?id=' . $id, 'messages', $messages);
     }
 }
 if (isset($_POST['changeStatus'])) {
@@ -70,9 +70,9 @@ if (isset($_POST['changeStatus'])) {
                 WHERE MaTheLoai = '$id'";
 
     if (mysqli_query($conn, $edit_query)) {
-        redirect('../categories.php', 'success', 'Cập nhật trạng thái thành công');
+        redirect('categories.php', 'success', 'Cập nhật trạng thái thành công');
     } else {
-        redirect('../categories.php', 'error', 'Cập nhật trạng thái thất bại');
+        redirect('categories.php', 'error', 'Cập nhật trạng thái thất bại');
     }
 }
 $conn->close();

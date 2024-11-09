@@ -60,13 +60,13 @@ if (isset($_POST['saveSlider'])) {
               VALUES ('$tenslider', '$anh_slider', '$vitri', '$sapxep', '$trangthai', '$created', CURRENT_TIMESTAMP, '$tenTopic', '$url', '$tukhoa', '$mota')";
 
         if (mysqli_query($conn, $query)) {
-            redirect('../slider.php', 'success', 'Thêm slider thành công');
+            redirect('slider.php', 'success', 'Thêm slider thành công');
         } else {
-            redirect('../views/slider/slider-add.php', 'error', 'Thêm slider thất bại');
+            redirect('views/slider/slider-add.php', 'error', 'Thêm slider thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/slider/slider-add.php', 'messages', $messages);
+        redirect('views/slider/slider-add.php', 'messages', $messages);
     }
 }
 
@@ -144,13 +144,13 @@ if (isset($_POST['editSlider'])) {
                     MoTa = '$mota'
                 WHERE Id = '$idSlider'";
         if (mysqli_query($conn, $query)) {
-            redirect('../slider.php', 'success', 'Cập nhật slider thành công');
+            redirect('slider.php', 'success', 'Cập nhật slider thành công');
         } else {
-            redirect('../views/slider/slider-edit.php?id=' . $idSlider, 'error', 'Cập nhật slider thất bại');
+            redirect('views/slider/slider-edit.php?id=' . $idSlider, 'error', 'Cập nhật slider thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/slider/slider-edit.php?id=' . $idSlider, 'messages', $messages);
+        redirect('views/slider/slider-edit.php?id=' . $idSlider, 'messages', $messages);
     }
 }
 
@@ -166,9 +166,9 @@ if (isset($_POST['changeStatus'])) {
             WHERE Id = '$id'";
 
     if (mysqli_query($conn, $edit_query)) {
-        redirect('../slider.php', 'success', 'Cập nhật trạng thái thành công');
+        redirect('slider.php', 'success', 'Cập nhật trạng thái thành công');
     } else {
 
-        redirect('../slider.php', 'error', 'Cập nhật trạng thái thất bại');
+        redirect('slider.php', 'error', 'Cập nhật trạng thái thất bại');
     }
 }

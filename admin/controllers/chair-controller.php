@@ -33,10 +33,10 @@ if (isset($_POST['saveChair'])) {
                           VALUES ('$name', '$maphong', '$loaighe', '$giaghe', '$created', CURRENT_TIMESTAMP, '$created', CURRENT_TIMESTAMP, '$status')";
             mysqli_query($conn, $query);
         }
-        redirect('../chair.php', 'success', 'Thêm mới ghế thành công');
+        redirect('chair.php', 'success', 'Thêm mới ghế thành công');
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/chair/chair-add.php', 'messages', $messages);
+        redirect('views/chair/chair-add.php', 'messages', $messages);
     }
 }
 
@@ -66,12 +66,12 @@ if (isset($_POST['editChair'])) {
                 WHERE MaGhe = '$id'";
 
         if (mysqli_query($conn, $query)) {
-            redirect('../chair.php', 'success', 'Cập nhật ghế thành công');
+            redirect('chair.php', 'success', 'Cập nhật ghế thành công');
         } else {
-            redirect('../views/chair/chair-edit.php?id=' . $id, 'error', 'Cập nhật ghế thất bại');
+            redirect('views/chair/chair-edit.php?id=' . $id, 'error', 'Cập nhật ghế thất bại');
         }
     } else {
-        redirect('../views/chair/chair-edit.php?id=' . $id, 'errors', $messages);
+        redirect('views/chair/chair-edit.php?id=' . $id, 'errors', $messages);
         $_SESSION['form_data'] = $_POST;
     }
 }
@@ -89,9 +89,9 @@ if (isset($_POST['changeStatus'])) {
                 WHERE MaGhe = '$id'";
 
     if (mysqli_query($conn, $edit_query)) {
-        redirect('../chair.php', 'success', 'Cập nhật trạng thái thành công');
+        redirect('chair.php', 'success', 'Cập nhật trạng thái thành công');
     } else {
-        redirect('../chair.php', 'error', 'Cập nhật trạng thái thất bại');
+        redirect('chair.php', 'error', 'Cập nhật trạng thái thất bại');
     }
 }
 $conn->close();

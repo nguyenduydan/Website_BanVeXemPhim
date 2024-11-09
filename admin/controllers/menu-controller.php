@@ -22,10 +22,10 @@ if (isset($_POST['addPhim'])) {
                       VALUES ('$tenMenu','$tableid','$kieumenu','$vitri','$slug','1','1',CURRENT_TIMESTAMP, '1',CURRENT_TIMESTAMP, '$status')";
             mysqli_query($conn, $query);
         }
-        redirect('../menu.php', 'success', 'Thêm menu thành công');
+        redirect('menu.php', 'success', 'Thêm menu thành công');
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../menu.php', 'messages', $messages);
+        redirect('menu.php', 'messages', $messages);
     }
 }
 
@@ -49,10 +49,10 @@ if (isset($_POST['addChuDe'])) {
                       VALUES ('$tenMenu','$tableid','$kieumenu','$vitri','$slug','1','1',CURRENT_TIMESTAMP, '1',CURRENT_TIMESTAMP, '$status')";
             mysqli_query($conn, $query);
         }
-        redirect('../menu.php', 'success', 'Thêm menu thành công');
+        redirect('menu.php', 'success', 'Thêm menu thành công');
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../menu.php', 'messages', $messages);
+        redirect('menu.php', 'messages', $messages);
     }
 }
 if (isset($_POST['addCustom'])) {
@@ -72,13 +72,13 @@ if (isset($_POST['addCustom'])) {
         $query = "INSERT INTO Menu(TenMenu, TableId, KieuMenu, ViTri, LienKet, `Order`, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat,TrangThai)
                     VALUES ('$name',NULL,'$kieumenu','$vitri','$lienket','1','1',CURRENT_TIMESTAMP, '1',CURRENT_TIMESTAMP, '$status')";
         if (mysqli_query($conn, $query)) {
-            redirect('../menu.php', 'success', 'Thêm menu thành công');
+            redirect('menu.php', 'success', 'Thêm menu thành công');
         } else {
-            redirect('../menu.php', 'error', 'Thêm menu thất bại');
+            redirect('menu.php', 'error', 'Thêm menu thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../menu.php', 'messages', $messages);
+        redirect('menu.php', 'messages', $messages);
     }
 }
 if (isset($_POST['editMenu'])) {
@@ -97,13 +97,13 @@ if (isset($_POST['editMenu'])) {
                 WHERE Id = '$id'";
 
         if (mysqli_query($conn, $query)) {
-            redirect('../menu.php', 'success', 'Cập nhật menu thành công');
+            redirect('menu.php', 'success', 'Cập nhật menu thành công');
         } else {
-            redirect('../views/menu/menu-edit.php?id=' . $id, 'error', 'Cập nhật menu thất bại');
+            redirect('views/menu/menu-edit.php?id=' . $id, 'error', 'Cập nhật menu thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/menu/menu-edit.php?id=' . $id, 'messages', $messages);
+        redirect('views/menu/menu-edit.php?id=' . $id, 'messages', $messages);
     }
 }
 //====== Cập nhật trạng thái menu ======//
@@ -118,9 +118,9 @@ if (isset($_POST['changeStatus'])) {
                    WHERE Id = '$id'";
 
     if (mysqli_query($conn, $edit_query)) {
-        redirect('../menu.php', 'success', 'Cập nhật trạng thái thành công');
+        redirect('menu.php', 'success', 'Cập nhật trạng thái thành công');
     } else {
-        redirect('../menu.php', 'error', 'Cập nhật trạng thái thất bại');
+        redirect('menu.php', 'error', 'Cập nhật trạng thái thất bại');
     }
 }
 

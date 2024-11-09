@@ -30,13 +30,13 @@ if (isset($_POST['saveContent'])) {
             VALUES ('$chudebv', '$name', '$link', '$chitiet', '$anhbv', '$kieubv', '$mota', '$tukhoa', '$created', CURRENT_TIMESTAMP,'$created',CURRENT_TIMESTAMP, '$status')";
 
         if (mysqli_query($conn, $query)) {
-            redirect('../content.php', 'success', 'Thêm bài viết thành công');
+            redirect('content.php', 'success', 'Thêm bài viết thành công');
         } else {
-            redirect('../views/content/content-add.php', 'error', 'Thêm bài viết thất bại');
+            redirect('views/content/content-add.php', 'error', 'Thêm bài viết thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/content/content-add.php', 'messages', $messages);
+        redirect('views/content/content-add.php', 'messages', $messages);
     }
 }
 
@@ -63,31 +63,31 @@ if (isset($_POST['editCategory'])) {
                 WHERE MaTheLoai = '$id'
                 ";
         if (mysqli_query($conn, $query)) {
-            redirect('../content.php', 'success', 'Cập nhật thể loại thành công');
+            redirect('content.php', 'success', 'Cập nhật thể loại thành công');
         } else {
-            redirect('../views/category/content-edit.php?id=' . $id, 'errors', 'Cập nhật thể loại thất bại');
+            redirect('views/category/content-edit.php?id=' . $id, 'errors', 'Cập nhật thể loại thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/category/content-edit.php?id=' . $id, 'errors', $messages);
+        redirect('views/category/content-edit.php?id=' . $id, 'errors', $messages);
     }
 }
 
 
 if (isset($_POST['changeStatus'])) {
-    $id = validate($_POST['matl']);
+    $id = validate($_POST['Id']);
     $status = validate($_POST['status']) == 1 ? 1 : 0;
 
-    $edit_query = "UPDATE TheLoai SET
+    $edit_query = "UPDATE BaiViet SET
                 TrangThai = '$status',
                 NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP
-                WHERE MaTheLoai = '$id'";
+                WHERE Id = '$id'";
 
     if (mysqli_query($conn, $edit_query)) {
-        redirect('../content.php', 'success', 'Cập nhật trạng thái thành công');
+        redirect('content.php', 'success', 'Cập nhật trạng thái thành công');
     } else {
-        redirect('../content.php', 'error', 'Cập nhật trạng thái thất bại');
+        redirect('content.php', 'error', 'Cập nhật trạng thái thất bại');
     }
 }
 $conn->close();

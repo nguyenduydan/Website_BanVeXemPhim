@@ -52,13 +52,13 @@ if (isset($_POST['saveFilm'])) {
                 $insertQuery = "INSERT INTO TheLoai_Film (MaTheLoai, MaPhim) VALUES ('$maTheLoai', '$maPhim')";
                 mysqli_query($conn, $insertQuery);
             }
-            redirect('../film.php', 'success', 'Thêm phim thành công');
+            redirect('film.php', 'success', 'Thêm phim thành công');
         } else {
-            redirect('../views/film/film-add.php', 'error', 'Thêm phim thất bại');
+            redirect('views/film/film-add.php', 'error', 'Thêm phim thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/film/film-add.php', 'messages', $messages);
+        redirect('views/film/film-add.php', 'messages', $messages);
     }
 }
 
@@ -149,13 +149,13 @@ if (isset($_POST['editFilm'])) {
                 $insertQuery = "INSERT INTO TheLoai_Film (MaTheLoai, MaPhim) VALUES ('$maTheLoai', '$id')";
                 mysqli_query($conn, $insertQuery);
             }
-            redirect('../film.php', 'success', 'Cập nhật phim thành công');
+            redirect('film.php', 'success', 'Cập nhật phim thành công');
         } else {
-            redirect('../views/film/film-edit.php?id=' . $id, 'error', 'Cập nhật phim thất bại');
+            redirect('views/film/film-edit.php?id=' . $id, 'error', 'Cập nhật phim thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/film/film-edit.php?id=' . $id, 'messages', $messages);
+        redirect('views/film/film-edit.php?id=' . $id, 'messages', $messages);
     }
 }
 
@@ -170,18 +170,18 @@ if (isset($_POST['changeStatus'])) {
 
         if (mysqli_query($conn, $edit_query)) {
             redirect(
-                '../film.php',
+                'film.php',
                 'success',
                 'Cập nhật trạng thái thành công'
             );
         } else {
             redirect(
-                '../film.php',
+                'film.php',
                 'error',
                 'Cập nhật trạng thái thất bại'
             );
         }
     } else {
-        redirect('../film.php', 'error', 'Trạng thái không hợp lệ');
+        redirect('film.php', 'error', 'Trạng thái không hợp lệ');
     }
 }

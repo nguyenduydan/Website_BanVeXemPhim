@@ -21,6 +21,7 @@ if (isset($_POST['SignIn'])) {
             if (password_verify($password, $user['data']['MatKhau'])) {
                 $_SESSION['loggedIn'] = true;
                 $_SESSION['userId'] = $user['data']['MaND'];
+                $_SESSION['lastActivity'] = time();
 
                 // Kiểm tra nếu checkbox 'rememberMe' được chọn
                 if (isset($_POST['rememberMe']) && $_POST['rememberMe'] == '1') {
@@ -38,16 +39,16 @@ if (isset($_POST['SignIn'])) {
                 }
 
                 // Điều hướng đến trang index với thông báo đăng nhập thành công
-                redirect('../index.php', 'success', 'Đăng nhập thành công');
+                redirect('index.php', 'success', 'Đăng nhập thành công');
             } else {
-                redirect('../sign-in.php', 'error', 'Sai mật khẩu');
+                redirect('sign-in.php', 'error', 'Sai mật khẩu');
             }
         } else {
-            redirect('../sign-in.php', 'error', 'Đăng nhập thất bại');
+            redirect('sign-in.php', 'error', 'Đăng nhập thất bại');
         }
     } else {
         // Lưu thông tin lỗi và dữ liệu form vào session nếu có lỗi
         $_SESSION['form_data'] = $_POST;
-        redirect('../sign-in.php', 'messages', $messages);
+        redirect('sign-in.php', 'messages', $messages);
     }
 }
