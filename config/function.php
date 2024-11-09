@@ -363,11 +363,11 @@ function getSliders($conn, $value)
 function getAdmin()
 {
     global $admin;
-    global $userId;
-    $userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : [];
-    $admin = getByID('NguoiDung', 'MaND', $userId);
+    global $created;
+    $created = isset($_SESSION['userId']) ? $_SESSION['userId'] : [];
+    $admin = getByID('NguoiDung', 'MaND', $created);
 }
-
+getAdmin();
 function getUser()
 {
     global $user;

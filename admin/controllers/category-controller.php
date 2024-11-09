@@ -1,7 +1,6 @@
 <?php
 session_start();
 require '../../config/function.php';
-
 // xử lý categories
 $messages = [];
 if (isset($_POST['saveCategory'])) {
