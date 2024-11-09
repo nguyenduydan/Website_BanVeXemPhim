@@ -352,7 +352,7 @@ function getUser()
     global $user;
     global $NDId;
     $NDId = isset($_SESSION['NDId']) ? $_SESSION['NDId'] : '';
-    
+
     if (!empty($NDId)) {
         $user = getByID('NguoiDung', 'MaND', $NDId);
     } else {
@@ -376,4 +376,32 @@ function getMenu($table)
         }
     }
     return $items;
+}
+function searchString($searchString, $records_per_page, $current_page, $tableName, $colName)
+{
+    global $conn;
+
+    $offset = ($current_page - 1) * $records_per_page;
+
+    $sql = "SELECT * FROM `$tableName`";
+    if (!empty($searchString)) {
+        $searchString = validate($conn, $searchString);
+        $sql .= " WHERE '$colName' LIKE '%$searchString%'";
+    }
+
+    $result = mysqli_query($conn, $sql);
+    $total_records = mysqli_num_rows($result);
+    $sql .= " LIMIT $offset, $records_per_page";
+    $data = mysqli_query($conn, $sql);
+    $items = mysqli_fetch_all($data, MYSQLI_ASSOC);
+
+    // Total pages
+    $total_pages = ceil($total_records / $records_per_page);
+
+    return [
+        'data' => $items,
+        'total_records' => $total_records,
+        'total_pages' => $total_pages,
+        'current_page' => $current_page
+    ];
 }
