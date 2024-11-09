@@ -5,7 +5,7 @@ require '../../config/function.php';
 // xử lý categories
 $messages = [];
 if (isset($_POST['signup'])) {
-    $name = validate($_POST['name']);
+    $tennd = validate($_POST['tennd']);
     $password = validate($_POST['password']);
     $email = validate($_POST['email']);
     $re_password = validate($_POST['re_password']);
@@ -14,8 +14,8 @@ if (isset($_POST['signup'])) {
     $sdt = validate($_POST['sdt']);
     $role = 0;
     $status = 1;
-    if (empty($name)) {
-        $messages['name'] = "Họ và tên không được để trống.";
+    if (empty($tennd)) {
+        $messages['tennd'] = "Họ và tên không được để trống.";
     }
     if (empty($email)) {
         $messages['email'] = "Email không được để trống.";
@@ -45,7 +45,7 @@ if (isset($_POST['signup'])) {
     $avatar = '';
     $unique = uniqid('user_', false);
     if (isset($_FILES['avatar'])) {
-        // Use username as filename for the avatar
+        // Use usertennd as filetennd for the avatar
         $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/", $unique);
         if ($avatarResult['success']) {
             $avatar = $avatarResult['filename'];
@@ -56,7 +56,7 @@ if (isset($_POST['signup'])) {
 
     if (empty($messages)) {
         $query = "INSERT INTO nguoidung (TenND, NgaySinh, GioiTinh, SDT, Anh, Email, MatKhau, Role, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
-                  VALUES ('$name', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email','$password','$role' ,'0',CURRENT_TIMESTAMP, '0', CURRENT_TIMESTAMP, '$status')";
+                  VALUES ('$tennd', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email','$hashedPassword','$role' ,'0',CURRENT_TIMESTAMP, '0', CURRENT_TIMESTAMP, '$status')";
 
         if (mysqli_query($conn, $query)) {
             redirect('../../login.php', 'success', 'Tạo tài khoản thành công');

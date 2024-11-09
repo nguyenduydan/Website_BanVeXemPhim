@@ -25,12 +25,12 @@ unset($_SESSION['form_data']);
                         <div class="mb-3">
                             <div class="input-group mb-1">
                                 <span class="input-group-text bg-primary"><i class="fas fa-user text-white"></i></span>
-                                <input type="text" class="form-control" name="name"
-                                    value="<?= isset($formData['name']) ? htmlspecialchars($formData['name']) : ''; ?>"
+                                <input type="text" class="form-control" name="tennd"
+                                    value="<?= isset($formData['tennd']) ? htmlspecialchars($formData['tennd']) : ''; ?>"
                                     placeholder="Họ và tên">
                             </div>
-                            <?php if (isset($messages['name'])): ?>
-                            <small class="text-danger m-2"><?= htmlspecialchars($messages['name']) ?></small>
+                            <?php if (isset($messages['tennd'])): ?>
+                                <small class="text-danger m-2"><?= htmlspecialchars($messages['tennd']) ?></small>
                             <?php endif; ?>
                         </div>
                         <!-- Email -->
@@ -42,7 +42,7 @@ unset($_SESSION['form_data']);
 
                             </div>
                             <?php if (isset($messages['email'])): ?>
-                            <small class="text-danger m-2"><?= htmlspecialchars($messages['email']) ?></small>
+                                <small class="text-danger m-2"><?= htmlspecialchars($messages['email']) ?></small>
                             <?php endif; ?>
                         </div>
 
@@ -58,7 +58,7 @@ unset($_SESSION['form_data']);
                                 </span>
                             </div>
                             <?php if (isset($messages['password'])): ?>
-                            <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
+                                <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
                             <?php endif; ?>
                         </div>
 
@@ -74,7 +74,7 @@ unset($_SESSION['form_data']);
                                 </span>
                             </div>
                             <?php if (isset($messages['re_password'])): ?>
-                            <small class="text-danger m-2"><?= htmlspecialchars($messages['re_password']) ?></small>
+                                <small class="text-danger m-2"><?= htmlspecialchars($messages['re_password']) ?></small>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -87,14 +87,14 @@ unset($_SESSION['form_data']);
 
                             </div>
                             <?php if (isset($messages['ngay_sinh'])): ?>
-                            <small class="text-danger m-2"><?= htmlspecialchars($messages['ngay_sinh']) ?></small>
+                                <small class="text-danger m-2"><?= htmlspecialchars($messages['ngay_sinh']) ?></small>
                             <?php endif; ?>
                         </div>
                         <div class="mb-3">
                             <div class="input-group mb-1">
                                 <span class="input-group-text bg-primary"><i
                                         class="bi bi-phone-fill text-white"></i></span>
-                                <input type="number" class="form-control" name="name" placeholder="Số điện thoại">
+                                <input type="number" class="form-control" name="sdt" placeholder="Số điện thoại">
 
                             </div>
 
