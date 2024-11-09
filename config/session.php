@@ -1,19 +1,20 @@
 <?php
+
 // Kiểm tra phiên và hết hạn
-$inactiveLimit = 300; // Giới hạn thời gian không hoạt động, ví dụ 10 giây
+$inactiveLimit = 6; // Giới hạn thời gian không hoạt động, ví dụ 10 giây
 $_SESSION['session_expired'] = false;
 
 // Kiểm tra thời gian không hoạt động
 if (isset($_SESSION['lastActivity']) && (time() - $_SESSION['lastActivity'] > $inactiveLimit)) {
     // Nếu đã quá thời gian không hoạt động, hủy session và đăng xuất người dùng
     session_unset();
-    $_SESSION['session_expired'] = true;
+    $_SESSION['session_expired'] = true; // Đánh dấu phiên đã hết hạn
+    redirect('sign-in.php', 'error', 'Quá phiên đăng nhập! Vui lòng đăng nhập lại'); // Thông báo phiên hết hạn
 }
 
 // Cập nhật thời gian hoạt động cuối cùng của người dùng
 $_SESSION['lastActivity'] = time();
 ?>
-
 
 <script>
 // Biến cờ để kiểm tra xem modal đã hiển thị chưa
@@ -29,8 +30,13 @@ window.onload = function() {
     <?php if (isset($_SESSION['session_expired']) && $_SESSION['session_expired'] === true): ?>
     // Chỉ hiển thị modal nếu nó chưa được hiển thị
     if (!modalShown) {
-        createSessionExpiredModal();
+        createSessionExpiredModal(); // Tạo và hiển thị modal
         modalShown = true; // Đánh dấu là modal đã được hiển thị
+
+        // Tự động chuyển hướng đến trang sign-in.php sau 5 giây
+        setTimeout(function() {
+            window.location.href = "sign-in.php"; // Chuyển hướng đến trang đăng nhập
+        }, 5000); // Thời gian chờ 5 giây (5000ms)
     }
     <?php unset($_SESSION['session_expired']); ?>
     <?php endif; ?>
