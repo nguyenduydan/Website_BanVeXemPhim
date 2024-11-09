@@ -1,7 +1,7 @@
 <?php
 session_start();
 require '../../config/function.php';
-
+getAdmin();
 if (isset($_POST['SignIn'])) {
     $username = validate($_POST['username']);
     $password = validate($_POST['password']);

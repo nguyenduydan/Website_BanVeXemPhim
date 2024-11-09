@@ -1,7 +1,7 @@
 <?php
 session_start();
 require '../../config/function.php';
-
+getAdmin();
 $messages = [];
 //====== slider-add =======//
 if (isset($_POST['saveSlider'])) {

@@ -367,7 +367,7 @@ function getAdmin()
     $created = isset($_SESSION['userId']) ? $_SESSION['userId'] : [];
     $admin = getByID('NguoiDung', 'MaND', $created);
 }
-getAdmin();
+
 function getUser()
 {
     global $user;

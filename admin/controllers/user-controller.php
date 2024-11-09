@@ -1,7 +1,7 @@
 <?php
 session_start();
 require '../../config/function.php';
-
+getAdmin();
 $messages = [];
 //====== user-add =======//
 if (isset($_POST['saveUser'])) {
@@ -129,7 +129,7 @@ if (isset($_POST['editUser'])) {
         }
     }
     if (empty($messages)) {
-        
+
         $query = "UPDATE NguoiDung SET
                 TenND = '$name',
                 username = '$username',

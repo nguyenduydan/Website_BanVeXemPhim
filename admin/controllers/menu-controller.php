@@ -1,7 +1,7 @@
 <?php
 session_start();
 require '../../config/function.php';
-
+getAdmin();
 if (isset($_POST['addPhim'])) {
     $vitri = validate($_POST['vitri']);
     $list_phim = $_POST['phim'] ?? [];

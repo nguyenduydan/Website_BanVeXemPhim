@@ -1,7 +1,7 @@
 <?php
 session_start();
 require '../../config/function.php';
-
+getAdmin();
 $messages = [];
 //====== chair-add =======//
 if (isset($_POST['saveChair'])) {
@@ -25,17 +25,16 @@ if (isset($_POST['saveChair'])) {
         $messages['maphong'] = "Tên phòng không được để trống.";
     }
     if (empty($messages)) {
-        $thamso = getByID("ThamSo","TenThamSo",$loaighe);
+        $thamso = getByID("ThamSo", "TenThamSo", $loaighe);
         $giaghe = $thamso['data']['GiaTri'] ?? 0;
-        for($i = 1;$i <= $soluong;$i++){ 
-            $name = $tenghe . $i; 
+        for ($i = 1; $i <= $soluong; $i++) {
+            $name = $tenghe . $i;
             $query = "INSERT INTO Ghe (TenGhe, MaPhong, LoaiGhe, GiaGhe, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
                           VALUES ('$name', '$maphong', '$loaighe', '$giaghe', '$created', CURRENT_TIMESTAMP, '$created', CURRENT_TIMESTAMP, '$status')";
             mysqli_query($conn, $query);
         }
         redirect('../chair.php', 'success', 'Thêm mới ghế thành công');
-    }
-    else {
+    } else {
         $_SESSION['form_data'] = $_POST;
         redirect('../views/chair/chair-add.php', 'messages', $messages);
     }
@@ -54,7 +53,7 @@ if (isset($_POST['editChair'])) {
         $messages['tenghe'] = "Tên ghế không được để trống.";
     }
     if (empty($messages)) {
-        $thamso = getByID("ThamSo","TenThamSo",$loaighe);
+        $thamso = getByID("ThamSo", "TenThamSo", $loaighe);
         $giaghe = $thamso['data']['GiaTri'] ?? 0;
         $query = "UPDATE GHE SET
                 TenGhe = '$tenghe',

@@ -1,7 +1,7 @@
 <?php
 session_start();
 require '../../config/function.php';
-
+getAdmin();
 $messages = [];
 //====== film-add =======//
 if (isset($_POST['saveFilm'])) {

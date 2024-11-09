@@ -2,7 +2,7 @@
 session_start();
 require '../../config/function.php';
 // xử lý topic
-
+getAdmin();
 $messages = [];
 if (isset($_POST['saveTopic'])) {
     $name_topic = validate($_POST['name_topic']);

@@ -1,7 +1,7 @@
 <?php
 session_start();
 require '../../config/function.php';
-
+getAdmin();
 $messages = [];
 //====== room-add =======//
 if (isset($_POST['saveParameter'])) {
@@ -54,7 +54,7 @@ if (isset($_POST['editParameter'])) {
         }
     }
     if (empty($messages)) {
-        $query = "UPDATE Thamso SET 
+        $query = "UPDATE Thamso SET
                 Tenthamso = '$tenthamso',
                 DonViTinh = '$dvt',
                 Giatri = '$giatri',
@@ -62,14 +62,14 @@ if (isset($_POST['editParameter'])) {
                 WHERE Id = '$id'";
         if (mysqli_query($conn, $query)) {
             $updateGheQuery = "UPDATE Ghe SET GiaGhe = '$giatri' WHERE LoaiGhe = '$tenthamso'";
-            mysqli_query($conn, $updateGheQuery); 
+            mysqli_query($conn, $updateGheQuery);
             redirect('../parameter.php', 'success', 'Cập nhật tham số thành công');
         } else {
-            redirect('../views/parameter/parameter-edit.php?id='.$id, 'error', 'Cập nhật tham số thất bại');
+            redirect('../views/parameter/parameter-edit.php?id=' . $id, 'error', 'Cập nhật tham số thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../views/parameter/parameter-edit.php?id='.$id, 'messages', $messages);
+        redirect('../views/parameter/parameter-edit.php?id=' . $id, 'messages', $messages);
     }
 }
 

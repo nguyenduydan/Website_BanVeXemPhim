@@ -1,7 +1,7 @@
 <?php
 session_start();
 require '../../config/function.php';
-// xử lý content
+getAdmin();
 $messages = [];
 if (isset($_POST['saveContent'])) {
     $name = validate($_POST['tenbv']);

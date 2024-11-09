@@ -1,7 +1,7 @@
 <?php
 session_start();
 require '../../config/function.php';
-// xử lý categories
+getAdmin();
 $messages = [];
 if (isset($_POST['saveCategory'])) {
     $ngay_tao = new DateTime();
