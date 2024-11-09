@@ -135,10 +135,6 @@
     text-decoration: underline;
 }
 
-/* Khoảng cách giữa form và footer */
-footer {
-    margin-top: 20px;
-}
 
 /* Thêm một chút padding cho các phần tử trong form */
 .form-container {

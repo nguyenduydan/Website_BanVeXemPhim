@@ -47,7 +47,7 @@ unset($_SESSION['form_data']);
             </div>
 
             <!-- Ghi nhớ đăng nhập -->
-            <div class="form-check mb-3">
+            <div class="form-check form-switch mb-3">
                 <input class="form-check-input" type="checkbox" name="remember_me" id="remember_me">
                 <label class="form-check-label" for="remember_me">Ghi nhớ đăng nhập</label>
             </div>

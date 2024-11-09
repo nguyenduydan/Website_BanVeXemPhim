@@ -90,7 +90,7 @@ $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ?
 
                                         <div class="text-center">
                                             <button type="submit" name="SignIn"
-                                                class="btn bg-gradient-info w-100 mt-4 mb-0 fs-5">Sign in</button>
+                                                class="btn bg-gradient-info w-100 mt-4 mb-0 fs-5">Đăng nhập</button>
                                         </div>
                                     </form>
                                 </div>
