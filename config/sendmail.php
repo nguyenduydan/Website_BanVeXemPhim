@@ -12,6 +12,7 @@ $mail = new PHPMailer(true);
 
 try {
     // Enable verbose debug output
+    $mail->CharSet = 'UTF-8';
     $mail->isSMTP();                                            // Gửi bằng SMTP
     $mail->Host       = 'smtp.gmail.com';                     // Đặt máy chủ SMTP
     $mail->SMTPAuth   = true;                                   // Kích hoạt xác thực SMTP
