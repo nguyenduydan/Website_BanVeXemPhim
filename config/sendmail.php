@@ -39,5 +39,6 @@ try {
     $mail->send();
     redirect('contact.php', 'success', 'Gửi Email thành công');
 } catch (Exception $e) {
-    echo "Tin nhắn không thể gửi đi. Lỗi: {$mail->ErrorInfo}";
+    $error = $mail->ErrorInfo;
+    redirect('contact.php', 'success', 'Tin nhắn không thể gửi đi. Lỗi: ' . $error);
 }
