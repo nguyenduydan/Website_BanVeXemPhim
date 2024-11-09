@@ -72,7 +72,15 @@ document.addEventListener('DOMContentLoaded', function () {
 function togglePasswordVisibility(passwordFieldId, iconId) {
     const passwordInput = document.getElementById(passwordFieldId);
     const icon = document.getElementById(iconId);
-
+    // Kiểm tra nếu phần tử tồn tại
+    if (!passwordInput) {
+        console.error('Không tìm thấy phần tử input với ID:', passwordFieldId);
+        return;
+    }
+    if (!icon) {
+        console.error('Không tìm thấy phần tử icon với ID:', iconId);
+        return;
+    }
     // Chuyển đổi giữa mật khẩu và văn bản
     if (passwordInput.type === 'password') {
         passwordInput.type = 'text';

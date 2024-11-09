@@ -35,7 +35,10 @@ try {
     // Nội dung email
     $mail->isHTML(true);                                        // Đặt định dạng email là HTML
     $mail->Subject = $_POST['subject'];                        // Tiêu đề email
-    $mail->Body    = '<h2>' . htmlspecialchars($_POST['message']) . '</h2><br><h2>' . htmlspecialchars($_POST['phone']) . '</h2>'; // Nội dung email
+    $mail->Body    = '
+    <h2>Nội dung tin nhắn:</h2>
+    <span>' . htmlspecialchars($_POST['message']) . '</span><br style="width:50px; border-bottom: 1px solid black">
+    <h2>SĐT: ' . htmlspecialchars($_POST['phone']) . '</h2>'; // Nội dung email
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients'; // Nội dung plain-text
 
     $mail->send();

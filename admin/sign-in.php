@@ -18,25 +18,25 @@ $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ?
     <title>Đăng nhập</title>
     <?php require('../admin/includes/links.php'); ?>
     <style>
-    .input-group .form-control {
-        padding-right: 40px;
-        /* Để dành khoảng trống cho icon */
-    }
+        .input-group .form-control {
+            padding-right: 40px;
+            /* Để dành khoảng trống cho icon */
+        }
 
-    .input-group {
-        position: relative;
-    }
+        .input-group {
+            position: relative;
+        }
 
-    .input-group .icon {
-        position: absolute;
-        right: 20px;
-        /* Đặt icon ở phía bên phải của ô input */
-        top: 40%;
-        transform: translateY(-50%);
-        cursor: pointer;
-        z-index: 999;
-        /* Đảm bảo icon không bị che khuất */
-    }
+        .input-group .icon {
+            position: absolute;
+            right: 20px;
+            /* Đặt icon ở phía bên phải của ô input */
+            top: 40%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            z-index: 999;
+            /* Đảm bảo icon không bị che khuất */
+        }
     </style>
 </head>
 <div id="toast"></div>
@@ -63,23 +63,23 @@ $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ?
                                                 aria-describedby="username-addon"
                                                 value="<?php echo htmlspecialchars($username); ?>">
                                             <?php if (isset($messages['username'])): ?>
-                                            <small
-                                                class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['username']) ?></small>
+                                                <small
+                                                    class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['username']) ?></small>
                                             <?php endif; ?>
                                         </div>
 
                                         <label class="fs-5">Mật khẩu</label>
                                         <div class="input-group mb-3">
-                                            <input type="password" id="passwordInput" name="password"
-                                                class="form-control" placeholder="Password" aria-label="Password"
+                                            <input type="password" id="password" name="password" class="form-control"
+                                                placeholder="Password" aria-label="Password"
                                                 aria-describedby="password-addon">
                                             <span class="icon" id="password-addon">
-                                                <i class="fas fa-eye" id="togglePassword"></i>
+                                                <i class="fas fa-eye-slash" id="togglePassword"></i>
                                             </span>
                                         </div>
                                         <?php if (isset($messages['password'])): ?>
-                                        <small
-                                            class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['password']) ?></small>
+                                            <small
+                                                class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['password']) ?></small>
                                         <?php endif; ?>
 
                                         <div class="form-check form-switch">
@@ -107,23 +107,7 @@ $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ?
             </div>
         </section>
     </main>
-    <script>
-    document.getElementById('togglePassword').addEventListener('click', function() {
-        const passwordInput = document.getElementById('passwordInput');
-        const icon = this;
 
-        // Chuyển đổi giữa mật khẩu và văn bản
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            icon.classList.remove('fa-eye');
-            icon.classList.add('fa-eye-slash'); // Thay đổi biểu tượng
-        } else {
-            passwordInput.type = 'password';
-            icon.classList.remove('fa-eye-slash');
-            icon.classList.add('fa-eye'); // Khôi phục biểu tượng
-        }
-    });
-    </script>
     <div class="mt-5">
         <?php include('includes/footer.php'); ?>
     </div>
