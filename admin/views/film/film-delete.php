@@ -25,13 +25,13 @@ if (is_numeric($result)) {
             if (!empty($film['data']['Banner']) && file_exists($bannerPath)) {
                 $deleteResult = deleteImage($bannerPath);
             }
-            redirect('../../film.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($name) . '</span> thành công');
+            redirect('film.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($name) . '</span> thành công', 'admin');
         } else {
-            redirect('../../film.php', 'error', 'Xóa ' . htmlspecialchars($name) . ' thất bại');
+            redirect('film.php', 'error', 'Xóa ' . htmlspecialchars($name) . ' thất bại', 'admin');
         }
     } else {
-        redirect('../../film.php', 'error', $film['message']);
+        redirect('film.php', 'error', $film['message'], 'admin');
     }
 } else {
-    redirect('../../film.php', 'error', $result);
+    redirect('film.php', 'error', $result, 'admin');
 }

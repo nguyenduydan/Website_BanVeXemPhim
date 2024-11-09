@@ -14,13 +14,13 @@ if (is_numeric($result)) {
         $menuDelete = deleteQuery('Menu', 'Id', $id);
         if ($menuDelete) {
 
-            redirect('../../menu.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($name) . '</span> thành công');
+            redirect('menu.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($name) . '</span> thành công', 'admin');
         } else {
-            redirect('../../menu.php', 'error', 'Xóa ' . htmlspecialchars($name) . ' thất bại');
+            redirect('menu.php', 'error', 'Xóa ' . htmlspecialchars($name) . ' thất bại', 'admin');
         }
     } else {
-        redirect('../../menu.php', 'error', $menu['message']);
+        redirect('menu.php', 'error', $menu['message'], 'admin');
     }
 } else {
-    redirect('../../menu.php', 'error', $result);
+    redirect('menu.php', 'error', $result, 'admin');
 }

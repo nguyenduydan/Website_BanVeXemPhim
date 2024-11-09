@@ -13,13 +13,13 @@ if (is_numeric($result)) {
 
 
         if ($chairDelete) {
-            redirect('../../chair.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($name) . '</span> thành công');
+            redirect('chair.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($name) . '</span> thành công', 'admin');
         } else {
-            redirect('../../chair.php', 'error', 'Xóa ' . htmlspecialchars($name) . ' thất bại');
+            redirect('chair.php', 'error', 'Xóa ' . htmlspecialchars($name) . ' thất bại', 'admin');
         }
     } else {
-        redirect('../../chair.php', 'error', $chair['message']);
+        redirect('chair.php', 'error', $chair['message'], 'admin');
     }
 } else {
-    redirect('../../chair.php', 'error', $result);
+    redirect('chair.php', 'error', $result, 'admin');
 }

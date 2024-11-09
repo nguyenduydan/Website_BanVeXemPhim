@@ -14,13 +14,13 @@ if (is_numeric($result)) {
         $topicDelete = deleteQuery('ChuDe', 'Id', $topicId);
 
         if ($topicDelete) {
-            redirect('../../topic.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($name) . '</span> thành công');
+            redirect('topic.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($name) . '</span> thành công', 'admin');
         } else {
-            redirect('../../topic.php', 'error', 'Xóa ' . htmlspecialchars($name) . ' thất bại');
+            redirect('topic.php', 'error', 'Xóa ' . htmlspecialchars($name) . ' thất bại', 'admin');
         }
     } else {
-        redirect('../../topic.php', 'error', $topic['message']);
+        redirect('topic.php', 'error', $topic['message'], 'admin');
     }
 } else {
-    redirect('../../topic.php', 'error', $result);
+    redirect('topic.php', 'error', $result, 'admin');
 }

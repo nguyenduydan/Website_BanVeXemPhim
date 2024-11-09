@@ -14,18 +14,18 @@ if (is_numeric($result)) {
         $avatarPath = "../../../uploads/avatars/" . $user['data']['Anh'];
         $userDelete = deleteQuery('NguoiDung', 'MaND', $userId);
 
-       
+
         if ($userDelete) {
             if (!empty($user['data']['Anh']) && file_exists($avatarPath)) {
                 $deleteResult = deleteImage($avatarPath);
             }
-            redirect('../../user.php','success','Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($username) . '</span> thành công');
+            redirect('user.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($username) . '</span> thành công', 'admin');
         } else {
-            redirect('../../user.php','error','Xóa ' . htmlspecialchars($username) . ' thất bại');
+            redirect('user.php', 'error', 'Xóa ' . htmlspecialchars($username) . ' thất bại', 'admin');
         }
     } else {
-        redirect('../../user.php','error',$user['message']);
+        redirect('user.php', 'error', $user['message'], 'admin');
     }
 } else {
-    redirect('../../user.php','error',$result);
+    redirect('user.php', 'error', $result, 'admin');
 }

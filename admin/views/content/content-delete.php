@@ -19,13 +19,13 @@ if (is_numeric($result)) {
             if (!empty($content['data']['Anh']) && file_exists($avatarPath)) {
                 $deleteResult = deleteImage($avatarPath);
             }
-            redirect('../../content.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($contentname) . '</span> thành công');
+            redirect('content.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($contentname) . '</span> thành công', 'admin');
         } else {
-            redirect('../../content.php', 'error', 'Xóa ' . htmlspecialchars($contentname) . ' thất bại');
+            redirect('content.php', 'error', 'Xóa ' . htmlspecialchars($contentname) . ' thất bại', 'admin');
         }
     } else {
-        redirect('../../content.php', 'error', $content['message']);
+        redirect('content.php', 'error', $content['message'], 'admin');
     }
 } else {
-    redirect('../../content.php', 'error', $result);
+    redirect('content.php', 'error', $result, 'admin');
 }

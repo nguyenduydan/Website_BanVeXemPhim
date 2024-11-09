@@ -18,25 +18,25 @@ $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ?
     <title>Đăng nhập</title>
     <?php require('../admin/includes/links.php'); ?>
     <style>
-        .input-group .form-control {
-            padding-right: 40px;
-            /* Để dành khoảng trống cho icon */
-        }
+    .input-group .form-control {
+        padding-right: 40px;
+        /* Để dành khoảng trống cho icon */
+    }
 
-        .input-group {
-            position: relative;
-        }
+    .input-group {
+        position: relative;
+    }
 
-        .input-group .icon {
-            position: absolute;
-            right: 20px;
-            /* Đặt icon ở phía bên phải của ô input */
-            top: 40%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            z-index: 999;
-            /* Đảm bảo icon không bị che khuất */
-        }
+    .input-group .icon {
+        position: absolute;
+        right: 20px;
+        /* Đặt icon ở phía bên phải của ô input */
+        top: 40%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        z-index: 999;
+        /* Đảm bảo icon không bị che khuất */
+    }
     </style>
 </head>
 <div id="toast"></div>
@@ -63,13 +63,13 @@ $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ?
                                                 aria-describedby="username-addon"
                                                 value="<?php echo htmlspecialchars($username); ?>">
                                             <?php if (isset($messages['username'])): ?>
-                                                <small
-                                                    class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['username']) ?></small>
+                                            <small
+                                                class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['username']) ?></small>
                                             <?php endif; ?>
                                         </div>
 
                                         <label class="fs-5">Mật khẩu</label>
-                                        <div class="input-group mb-3">
+                                        <div class="input-group">
                                             <input type="password" id="password" name="password" class="form-control"
                                                 placeholder="Password" aria-label="Password"
                                                 aria-describedby="password-addon">
@@ -78,11 +78,10 @@ $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ?
                                             </span>
                                         </div>
                                         <?php if (isset($messages['password'])): ?>
-                                            <small
-                                                class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['password']) ?></small>
+                                        <small
+                                            class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['password']) ?></small>
                                         <?php endif; ?>
-
-                                        <div class="form-check form-switch">
+                                        <div class="form-check mt-3 form-switch">
                                             <input class="form-check-input" type="checkbox" id="rememberMe"
                                                 name="rememberMe" value="1" <?php echo $rememberMeChecked; ?>>
                                             <label class="form-check-label" for="rememberMe">Ghi nhớ đăng nhập</label>

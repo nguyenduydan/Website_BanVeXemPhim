@@ -13,13 +13,13 @@ if (is_numeric($result)) {
         $name = validate($parameter['data']['TenThamSo']);
         $parameterDelete = deleteQuery('ThamSo', 'Id', $parameterd);
         if ($parameterDelete) {
-            redirect('../../parameter.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($name) . '</span> thành công');
+            redirect('parameter.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($name) . '</span> thành công', 'admin');
         } else {
-            redirect('../../parameter.php', 'error', 'Xóa ' . htmlspecialchars($name) . ' thất bại');
+            redirect('parameter.php', 'error', 'Xóa ' . htmlspecialchars($name) . ' thất bại', 'admin');
         }
     } else {
-        redirect('../../parameter.php', 'error', $parameter['message']);
+        redirect('parameter.php', 'error', $parameter['message'], 'admin');
     }
 } else {
-    redirect('../../parameter.php', 'error', $result);
+    redirect('parameter.php', 'error', $result, 'admin');
 }
