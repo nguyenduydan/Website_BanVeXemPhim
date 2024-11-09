@@ -23,13 +23,13 @@ if (isset($_POST['savesc'])) {
                   VALUES ('$mafilm','$maphong','$giochieu', '$created', CURRENT_TIMESTAMP, '$created', CURRENT_TIMESTAMP, '$status')";
 
         if (mysqli_query($conn, $query)) {
-            redirect('showtime.php', 'success', 'Thêm suất chiếu thành công');
+            redirect('showtime.php', 'success', 'Thêm suất chiếu thành công', 'admin');
         } else {
-            redirect('views/showtime/showtime-add.php', 'error', 'Thêm suất chiếu thất bại');
+            redirect('views/showtime/showtime-add.php', 'error', 'Thêm suất chiếu thất bại', 'admin');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('views/showtime/showtime-add.php', 'messages', $messages);
+        redirect('views/showtime/showtime-add.php', 'messages', $messages, 'admin');
     }
 }
 
@@ -60,12 +60,12 @@ if (isset($_POST['editsc'])) {
                 WHERE MaSuatChieu = '$id'";
 
         if (mysqli_query($conn, $query)) {
-            redirect('showtime.php', 'success', 'Cập nhật suất chiếu thành công');
+            redirect('showtime.php', 'success', 'Cập nhật suất chiếu thành công', 'admin');
         } else {
-            redirect('views/showtime/showtime-edit.php?id=' . $id, 'error', 'Cập nhật suất chiếu thất bại');
+            redirect('views/showtime/showtime-edit.php?id=' . $id, 'error', 'Cập nhật suất chiếu thất bại', 'admin');
         }
     } else {
-        redirect('views/showtime/showtime-edit.php?id=' . $id, 'messages', $messages);
+        redirect('views/showtime/showtime-edit.php?id=' . $id, 'messages', $messages, 'admin');
         $_SESSION['form_data'] = $_POST;
     }
 }
@@ -83,9 +83,9 @@ if (isset($_POST['changeStatus'])) {
                 WHERE MaSuatChieu = '$id'";
 
     if (mysqli_query($conn, $edit_query)) {
-        redirect('showtime.php', 'success', 'Cập nhật trạng thái thành công');
+        redirect('showtime.php', 'success', 'Cập nhật trạng thái thành công', 'admin');
     } else {
-        redirect('showtime.php', 'error', 'Cập nhật trạng thái thất bại');
+        redirect('showtime.php', 'error', 'Cập nhật trạng thái thất bại', 'admin');
     }
 }
 $conn->close();

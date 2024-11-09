@@ -22,13 +22,13 @@ if (isset($_POST['saveTopic'])) {
         $query = "INSERT INTO chude (MaPhim,TenRutGon,MoTa,TuKhoa,TenChuDe,NguoiTao,NgayTao,NguoiCapNhat,NgayCapNhat,TrangThai)
             VALUES ('$phim','$slug','$mota','$tukhoa','$name_topic','$created',CURRENT_TIMESTAMP,'$created',CURRENT_TIMESTAMP,'$status')";
         if (mysqli_query($conn, $query)) {
-            redirect('topic.php', 'success', 'Thêm chủ đề thành công');
+            redirect('topic.php', 'success', 'Thêm chủ đề thành công', 'admin');
         } else {
-            redirect('views/topic/topic-add.php', 'error', 'Thêm chủ đề thất bại');
+            redirect('views/topic/topic-add.php', 'error', 'Thêm chủ đề thất bại', 'admin');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('views/topic/topic-add.php', 'messages', $messages);
+        redirect('views/topic/topic-add.php', 'messages', $messages, 'admin');
     }
 }
 
@@ -64,13 +64,13 @@ if (isset($_POST['editTopic'])) {
                 WHERE Id = '$id'
                 ";
         if (mysqli_query($conn, $query)) {
-            redirect('topic.php', 'success', 'Cập nhật chủ đề thành công');
+            redirect('topic.php', 'success', 'Cập nhật chủ đề thành công', 'admin');
         } else {
-            redirect('views/topic/topic-edit.php?id=' . $id, 'errors', 'Cập nhật chủ đề thất bại');
+            redirect('views/topic/topic-edit.php?id=' . $id, 'errors', 'Cập nhật chủ đề thất bại', 'admin');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('views/topic/topic-edit.php?id=' . $id, 'errors', $messages);
+        redirect('views/topic/topic-edit.php?id=' . $id, 'errors', $messages, 'admin');
     }
 }
 
@@ -86,9 +86,9 @@ if (isset($_POST['changeStatus'])) {
                 WHERE Id = '$id'";
 
     if (mysqli_query($conn, $edit_query)) {
-        redirect('topic.php', 'success', 'Cập nhật trạng thái thành công');
+        redirect('topic.php', 'success', 'Cập nhật trạng thái thành công', 'admin');
     } else {
-        redirect('topic.php', 'error', 'Cập nhật trạng thái thất bại');
+        redirect('topic.php', 'error', 'Cập nhật trạng thái thất bại', 'admin');
     }
 }
 $conn->close();

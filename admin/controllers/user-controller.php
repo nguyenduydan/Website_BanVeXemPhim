@@ -66,13 +66,13 @@ if (isset($_POST['saveUser'])) {
                   VALUES ('$name', '$username', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email', '$hashedPassword', '$role', '$created', CURRENT_TIMESTAMP, '$created', CURRENT_TIMESTAMP, '$status')";
 
         if (mysqli_query($conn, $query)) {
-            redirect('user.php', 'success', 'Thêm tài khoản thành công');
+            redirect('user.php', 'success', 'Thêm tài khoản thành công', 'admin');
         } else {
-            redirect('views/user/user-add.php', 'error', 'Thêm tài khoản thất bại');
+            redirect('views/user/user-add.php', 'error', 'Thêm tài khoản thất bại', 'admin');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('views/user/user-add.php', 'messages', $messages);
+        redirect('views/user/user-add.php', 'messages', $messages, 'admin');
     }
 }
 
@@ -145,12 +145,12 @@ if (isset($_POST['editUser'])) {
                 WHERE MaND = '$id'";
 
         if (mysqli_query($conn, $query)) {
-            redirect('user.php', 'success', 'Cập nhật tài khoản thành công');
+            redirect('user.php', 'success', 'Cập nhật tài khoản thành công', 'admin');
         } else {
-            redirect('views/user/user-edit.php?id=' . $id, 'error', 'Cập nhật tài khoản thất bại');
+            redirect('views/user/user-edit.php?id=' . $id, 'error', 'Cập nhật tài khoản thất bại', 'admin');
         }
     } else {
-        redirect('views/user/user-edit.php?id=' . $id, 'errors', $messages);
+        redirect('views/user/user-edit.php?id=' . $id, 'errors', $messages, 'admin');
         $_SESSION['form_data'] = $_POST;
     }
 }
@@ -168,9 +168,9 @@ if (isset($_POST['changeStatus'])) {
                 WHERE MaND = '$id'";
 
     if (mysqli_query($conn, $edit_query)) {
-        redirect('user.php', 'success', 'Cập nhật trạng thái thành công');
+        redirect('user.php', 'success', 'Cập nhật trạng thái thành công', 'admin');
     } else {
-        redirect('user.php', 'error', 'Cập nhật trạng thái thất bại');
+        redirect('user.php', 'error', 'Cập nhật trạng thái thất bại', 'admin');
     }
 }
 $conn->close();

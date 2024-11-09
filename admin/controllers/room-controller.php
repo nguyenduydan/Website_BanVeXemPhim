@@ -20,13 +20,13 @@ if (isset($_POST['saveRoom'])) {
                   VALUES ('$ten_phong', '$created', CURRENT_TIMESTAMP, '$created', CURRENT_TIMESTAMP, '$status')";
 
         if (mysqli_query($conn, $query)) {
-            redirect('room.php', 'success', 'Thêm phòng thành công');
+            redirect('room.php', 'success', 'Thêm phòng thành công', 'admin');
         } else {
-            redirect('views/room/room-add.php', 'error', 'Thêm phòng thất bại');
+            redirect('views/room/room-add.php', 'error', 'Thêm phòng thất bại', 'admin');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('views/room/room-add.php', 'messages', $messages);
+        redirect('views/room/room-add.php', 'messages', $messages, 'admin');
     }
 }
 
@@ -52,13 +52,13 @@ if (isset($_POST['editRoom'])) {
                 WHERE MaPhong = '$id'";
 
         if (mysqli_query($conn, $query)) {
-            redirect('room.php', 'success', 'Cập nhật phòng thành công');
+            redirect('room.php', 'success', 'Cập nhật phòng thành công', 'admin');
         } else {
-            redirect('views/room/room-edit.php?id=' . $id, 'error', 'Cập nhật phòng thất bại');
+            redirect('views/room/room-edit.php?id=' . $id, 'error', 'Cập nhật phòng thất bại', 'admin');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('views/room/room-edit.php?id=' . $id, 'messages', $messages);
+        redirect('views/room/room-edit.php?id=' . $id, 'messages', $messages, 'admin');
     }
 }
 
@@ -75,9 +75,9 @@ if (isset($_POST['changeStatus'])) {
                 WHERE MaPhong = '$id'";
 
     if (mysqli_query($conn, $edit_query)) {
-        redirect('room.php', 'success', 'Cập nhật trạng thái thành công');
+        redirect('room.php', 'success', 'Cập nhật trạng thái thành công', 'admin');
     } else {
-        redirect('room.php', 'error', 'Cập nhật trạng thái thất bại');
+        redirect('room.php', 'error', 'Cập nhật trạng thái thất bại', 'admin');
     }
 }
 $conn->close();

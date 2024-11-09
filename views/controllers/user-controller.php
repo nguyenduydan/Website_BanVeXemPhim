@@ -59,13 +59,13 @@ if (isset($_POST['signup'])) {
                   VALUES ('$tennd', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email','$hashedPassword','$role' ,'0',CURRENT_TIMESTAMP, '0', CURRENT_TIMESTAMP, '$status')";
 
         if (mysqli_query($conn, $query)) {
-            redirect('../../login.php', 'success', 'Tạo tài khoản thành công');
+            redirect('login.php', 'success', 'Tạo tài khoản thành công');
         } else {
-            redirect('../../register.php', 'error', 'Tạo tài khoản thất bại');
+            redirect('register.php', 'error', 'Tạo tài khoản thất bại');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('../../register.php', 'messages', $messages);
+        redirect('register.php', 'messages', $messages);
     }
 }
 if (isset($_POST['login'])) {
@@ -86,19 +86,19 @@ if (isset($_POST['login'])) {
             if (password_verify($password, $user['data']['MatKhau'])) {
                 $_SESSION['NDloggedIn'] = true;
                 $_SESSION['NDId'] = $user['data']['MaND'];
-                redirect('../../index.php', 'success', 'Đăng nhập thành công');
+                redirect('index.php', 'success', 'Đăng nhập thành công');
             } else {
                 $messages['password'] = 'Sai mật khẩu';
                 $_SESSION['form_data'] = $_POST;
-                redirect('../../login.php', 'messages', $messages);
+                redirect('login.php', 'messages', $messages);
             }
         } else {
-            redirect('../../login.php', 'error', 'Đăng nhập thất bại');
+            redirect('login.php', 'error', 'Đăng nhập thất bại');
         }
     } else {
         // Lưu thông tin lỗi và dữ liệu form vào session nếu có lỗi
         $_SESSION['form_data'] = $_POST;
-        redirect('../../login.php', 'messages', $messages);
+        redirect('login.php', 'messages', $messages);
     }
 }
 $conn->close();

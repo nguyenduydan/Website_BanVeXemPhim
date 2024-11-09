@@ -39,16 +39,16 @@ if (isset($_POST['SignIn'])) {
                 }
 
                 // Điều hướng đến trang index với thông báo đăng nhập thành công
-                redirect('index.php', 'success', 'Đăng nhập thành công');
+                redirect('index.php', 'success', 'Đăng nhập thành công', 'admin');
             } else {
-                redirect('sign-in.php', 'error', 'Sai mật khẩu');
+                redirect('sign-in.php', 'error', 'Sai mật khẩu', 'admin');
             }
         } else {
-            redirect('sign-in.php', 'error', 'Đăng nhập thất bại');
+            redirect('sign-in.php', 'error', 'Đăng nhập thất bại', 'admin');
         }
     } else {
         // Lưu thông tin lỗi và dữ liệu form vào session nếu có lỗi
         $_SESSION['form_data'] = $_POST;
-        redirect('sign-in.php', 'messages', $messages);
+        redirect('sign-in.php', 'messages', $messages, 'admin');
     }
 }

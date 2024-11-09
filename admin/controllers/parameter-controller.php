@@ -27,13 +27,13 @@ if (isset($_POST['saveParameter'])) {
                   VALUES ('$tenthamso','$dvt',$giatri,'$status')";
 
         if (mysqli_query($conn, $query)) {
-            redirect('parameter.php', 'success', 'Thêm tham số thành công');
+            redirect('parameter.php', 'success', 'Thêm tham số thành công', 'admin');
         } else {
-            redirect('views/parameter/parameter-add.php', 'error', 'Thêm tham số thất bại');
+            redirect('views/parameter/parameter-add.php', 'error', 'Thêm tham số thất bại', 'admin');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('views/parameter/parameter-add.php', 'messages', $messages);
+        redirect('views/parameter/parameter-add.php', 'messages', $messages, 'admin');
     }
 }
 
@@ -63,13 +63,13 @@ if (isset($_POST['editParameter'])) {
         if (mysqli_query($conn, $query)) {
             $updateGheQuery = "UPDATE Ghe SET GiaGhe = '$giatri' WHERE LoaiGhe = '$tenthamso'";
             mysqli_query($conn, $updateGheQuery);
-            redirect('parameter.php', 'success', 'Cập nhật tham số thành công');
+            redirect('parameter.php', 'success', 'Cập nhật tham số thành công', 'admin');
         } else {
-            redirect('views/parameter/parameter-edit.php?id=' . $id, 'error', 'Cập nhật tham số thất bại');
+            redirect('views/parameter/parameter-edit.php?id=' . $id, 'error', 'Cập nhật tham số thất bại', 'admin');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('views/parameter/parameter-edit.php?id=' . $id, 'messages', $messages);
+        redirect('views/parameter/parameter-edit.php?id=' . $id, 'messages', $messages, 'admin');
     }
 }
 
@@ -84,9 +84,9 @@ if (isset($_POST['changeStatus'])) {
                 WHERE Id = '$id'";
 
     if (mysqli_query($conn, $edit_query)) {
-        redirect('parameter.php', 'success', 'Cập nhật trạng thái thành công');
+        redirect('parameter.php', 'success', 'Cập nhật trạng thái thành công', 'admin');
     } else {
-        redirect('parameter.php', 'error', 'Cập nhật trạng thái thất bại');
+        redirect('parameter.php', 'error', 'Cập nhật trạng thái thất bại', 'admin');
     }
 }
 $conn->close();

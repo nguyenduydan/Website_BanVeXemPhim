@@ -1,6 +1,6 @@
 <?php
 require 'dbcon.php';
-define('BASE_URL_ADMIN', 'http://localhost/Website_BanVeXemPhim/admin/');
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -97,10 +97,16 @@ function deleteImage($filePath)
 
     return $result;
 }
-function redirect($url, $status, $message)
+
+function redirect($url, $status, $message, $page = NULL)
 {
+    if ($page == 'admin') {
+        define('BASE_URL', 'http://localhost/Website_BanVeXemPhim/admin/');
+    } else {
+        define('BASE_URL', 'http://localhost/Website_BanVeXemPhim/');
+    }
     $_SESSION[$status] = $message;
-    header('Location: ' . BASE_URL_ADMIN . $url);
+    header('Location: ' . BASE_URL . $url);
     exit(0);
 }
 

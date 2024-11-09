@@ -5,7 +5,7 @@
     <?php
     // Kiểm tra xem người dùng đã đăng nhập chưa
     if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
-        redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
+        redirect('sign-in.php', 'error', 'Vui lòng đăng nhập', 'admin');
     }
     require($_SERVER['DOCUMENT_ROOT'] . '/Website_BanVeXemPhim/config/session.php');
 

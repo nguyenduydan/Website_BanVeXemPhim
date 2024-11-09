@@ -1,7 +1,7 @@
 <?php
 
 // Kiểm tra phiên và hết hạn
-$inactiveLimit = 6; // Giới hạn thời gian không hoạt động, ví dụ 10 giây
+$inactiveLimit = 300; // Giới hạn thời gian không hoạt động, ví dụ 10 giây
 $_SESSION['session_expired'] = false;
 
 // Kiểm tra thời gian không hoạt động
@@ -9,7 +9,7 @@ if (isset($_SESSION['lastActivity']) && (time() - $_SESSION['lastActivity'] > $i
     // Nếu đã quá thời gian không hoạt động, hủy session và đăng xuất người dùng
     session_unset();
     $_SESSION['session_expired'] = true; // Đánh dấu phiên đã hết hạn
-    redirect('sign-in.php', 'error', 'Quá phiên đăng nhập! Vui lòng đăng nhập lại'); // Thông báo phiên hết hạn
+    redirect('sign-in.php', 'error', 'Quá phiên đăng nhập! Vui lòng đăng nhập lại', 'admin'); // Thông báo phiên hết hạn
 }
 
 // Cập nhật thời gian hoạt động cuối cùng của người dùng
