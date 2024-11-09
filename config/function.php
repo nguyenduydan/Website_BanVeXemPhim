@@ -385,8 +385,7 @@ function searchString($searchString, $records_per_page, $current_page, $tableNam
 
     $sql = "SELECT * FROM `$tableName`";
     if (!empty($searchString)) {
-        $searchString = validate($conn, $searchString);
-        $sql .= " WHERE '$colName' LIKE '%$searchString%'";
+        $sql .= " WHERE `$colName`   LIKE '%$searchString%'";
     }
 
     $result = mysqli_query($conn, $sql);
