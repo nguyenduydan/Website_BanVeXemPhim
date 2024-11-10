@@ -121,12 +121,6 @@ if (isset($_POST['seatsInput'])) {
     <div class="d-flex justify-content-center gap-3 mt-4">
         <a href="http://localhost/Website_BanVeXemPhim/index.php" class="btn btn-outline-secondary custom-button">Quay
             Lại</a>
-        <button class="btn btn-primary custom-button" id="payButton">Thanh Toán</button>
-    </div>
-
-    <!-- Thành công alert -->
-    <div class="alert alert-success mt-3 text-center custom-alert" id="successMessage" style="display: none;">
-        Thanh toán thành công!
     </div>
 </div>
 
