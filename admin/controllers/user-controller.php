@@ -84,26 +84,16 @@ if (isset($_POST['editUser'])) {
     $messages = [];
     $id = validate($_POST['mand']);
     $name = validate($_POST['name']);
-    $username = validate($_POST['username']);
     $ngay_sinh = validate($_POST['ngay_sinh']);
     $gioi_tinh = validate($_POST['gioi_tinh']);
     $sdt = validate($_POST['sdt']);
     $email = validate($_POST['email']);
-    $role = validate($_POST['role']);
     $status = validate($_POST['status']);
     $user = getByID('NguoiDung', 'MaND', $id);
     $avatar = $user['data']['Anh'];
     // Kiểm tra tên người dùng
     if (empty($name)) {
         $messages['name'] = "Họ và tên không được để trống.";
-    }
-    if (empty($username)) {
-        $messages['username'] = "Tên người dùng không được để trống.";
-    } else {
-        // Kiểm tra tính duy nhất của username
-        if (isExistValue('NguoiDung', 'username', $username, 'MaND', $id)) {
-            $messages['username'] = "Tên người dùng đã tồn tại";
-        }
     }
     if (empty($ngay_sinh)) {
         $messages['ngay_sinh'] = "Ngày sinh không được để trống.";
@@ -135,13 +125,11 @@ if (isset($_POST['editUser'])) {
 
         $query = "UPDATE NguoiDung SET
                 TenND = '$name',
-                username = '$username',
                 NgaySinh = '$ngay_sinh',
                 GioiTinh = '$gioi_tinh',
                 SDT = '$sdt',
                 Anh = '$avatar',
                 Email = '$email',
-                Role = '$role',
                 NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP,
                 TrangThai = '$status'
