@@ -29,10 +29,7 @@ if (isset($_POST['signup'])) {
     } else if (!preg_match('/^[a-zA-Z0-9]+$/', $tendn)) {
         $messages['tendn'] = "Tên đăng nhập chỉ chấp nhận chữ cái và số.";
     }
-    if (isExistValue('TaiKhoan', 'tendn', $tendn)) {
-        $messages['tendn'] = "Tên đăng nhập đã tồn tại";
-    }
-    if (isExistValue('TaiKhoan', 'tendn', $tendn)) {
+    if (isExistValue('TaiKhoan', 'TenDangNhap', $tendn)) {
         $messages['tendn'] = "Tên đăng nhập đã tồn tại";
     }
     if (empty($password)) {
