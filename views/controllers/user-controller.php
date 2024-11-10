@@ -7,32 +7,41 @@ $messages = [];
 if (isset($_POST['signup'])) {
     $tennd = validate($_POST['tennd']);
     $password = validate($_POST['password']);
-    $email = validate($_POST['email']);
+    $tendn = validate($_POST['tendn']);
     $re_password = validate($_POST['re_password']);
-    $ngay_sinh = validate($_POST['ngay_sinh']);
-    $gioi_tinh = validate($_POST['gioi_tinh']) == 1 ? 1 : 0;
-    $sdt = validate($_POST['sdt']);
+    $captchaResponse = $_POST['g-recaptcha-response'];
+    $secretKey = "6LddNHoqAAAAAOyi3IX4uU4dxgNnB29kbHUgjQcK";
+    $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$secretKey}&response={$captchaResponse}");
+    $responseKeys = json_decode($response, true);
+
+    if (intval($responseKeys["success"]) !== 1) {
+        $messages['captcha'] = "Vui lòng xác nhận rằng bạn không phải là robot.";
+    }
     $role = 0;
     $status = 1;
-    if (empty($tennd)) {
-        $messages['tennd'] = "Họ và tên không được để trống.";
+    if (empty($tendn)) {
+        $messages['tendn'] = "Tên đăng nhập không được để trống.";
+    } else if (!preg_match('/^[a-zA-Z]+$/', $tendn)) {
+        $messages['tendn'] = "Tên đăng nhập chỉ chấp nhận chữ cái.";
     }
-    if (empty($email)) {
-        $messages['email'] = "Email không được để trống.";
+    if (empty($tendn)) {
+        $messages['tendn'] = "Tên đăng nhập không được để trống.";
+    } else if (!preg_match('/^[a-zA-Z0-9]+$/', $tendn)) {
+        $messages['tendn'] = "Tên đăng nhập chỉ chấp nhận chữ cái và số.";
     }
-    if (isExistValue('NguoiDung', 'Email', $email)) {
-        $messages['email'] = "Email đã tồn tại";
+    if (isExistValue('TaiKhoan', 'tendn', $tendn)) {
+        $messages['tendn'] = "Tên đăng nhập đã tồn tại";
+    }
+    if (isExistValue('TaiKhoan', 'tendn', $tendn)) {
+        $messages['tendn'] = "Tên đăng nhập đã tồn tại";
     }
     if (empty($password)) {
         $messages['password'] = "Mật khẩu không được để trống.";
-    } elseif (strlen($password) < 6) {
-        $messages['password'] = "Mật khẩu phải từ 6 kí tự trở lên";
+    } else if (!preg_match('/^(?=.*[A-Z])(?=.*[0-9])(?=.*[\W_]).{6,}$/', $password)) {
+        $messages['password'] = "Mật khẩu phải có ít nhất 6 kí tự, bao gồm một chữ in hoa, một số và một ký tự đặc biệt.";
     }
     if (empty($re_password)) {
         $messages['re_password'] = "Xác nhận mật khẩu không được để trống.";
-    }
-    if (empty($ngay_sinh)) {
-        $messages['ngay_sinh'] = "Ngày sinh không được để trống.";
     }
 
     $passwordDetails = validateAndHashPassword($password, $re_password);
@@ -55,10 +64,14 @@ if (isset($_POST['signup'])) {
     }
 
     if (empty($messages)) {
-        $query = "INSERT INTO nguoidung (TenND, NgaySinh, GioiTinh, SDT, Anh, Email, MatKhau, Role, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
-                  VALUES ('$tennd', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email','$hashedPassword','$role' ,'0',CURRENT_TIMESTAMP, '0', CURRENT_TIMESTAMP, '$status')";
+        $query = "INSERT INTO TaiKhoan (TenDangNhap, MatKhau,TenND,Quyen)
+                  VALUES ('$tendn', '$hashedPassword','$tennd','$role')";
 
         if (mysqli_query($conn, $query)) {
+            $maND = mysqli_insert_id($conn);
+            $insert_query = "INSERT INTO NguoiDung(MaND,TenND,NguoiTao,NgayTao,NguoiCapNhat,NgayCapNhat,TrangThai)
+                            VALUES('$maND','$tennd','0',CURRENT_TIMESTAMP,'0',CURRENT_TIMESTAMP,'1')";
+            mysqli_query($conn, $insert_query);
             redirect('login.php', 'success', 'Tạo tài khoản thành công');
         } else {
             redirect('register.php', 'error', 'Tạo tài khoản thất bại');
@@ -69,19 +82,19 @@ if (isset($_POST['signup'])) {
     }
 }
 if (isset($_POST['login'])) {
-    $email = validate($_POST['email']);
+    $tendn = validate($_POST['tendn']);
     $password = validate($_POST['password']);
     $messages = [];
 
-    if (empty($email)) {
-        $messages['email'] = 'Email không được bỏ trống';
+    if (empty($tendn)) {
+        $messages['tendn'] = 'Tên đăng nhập không được bỏ trống';
     }
     if (empty($password)) {
         $messages['password'] = 'Mật khẩu không được bỏ trống';
     }
 
     if (empty($messages)) {
-        $user = getByID('NguoiDung', 'Email', $email);
+        $user = getByID('TaiKhoan', 'TenDangNhap', $tendn);
         if ($user['status'] == 200 && $user['data']['Role'] == 0) {
             if (password_verify($password, $user['data']['MatKhau'])) {
                 $_SESSION['NDloggedIn'] = true;

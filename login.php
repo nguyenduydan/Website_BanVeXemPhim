@@ -21,11 +21,11 @@ unset($_SESSION['form_data']);
             <div class="mb-3">
                 <div class="input-group mb-1">
                     <span class="input-group-text bg-primary"><i class="fas fa-envelope text-white"></i></span>
-                    <input type="email" class="form-control" name="email" placeholder="Email"
-                        value="<?php echo isset($formData['email']) ? htmlspecialchars($formData['email']) : ''; ?>">
+                    <input type="text" class="form-control" name="tendn" placeholder="Tên đăng nhập"
+                        value="<?php echo isset($formData['tendn']) ? htmlspecialchars($formData['tendn']) : ''; ?>">
                 </div>
-                <?php if (isset($messages['email'])): ?>
-                <small class="text-danger m-2"><?= htmlspecialchars($messages['email']) ?></small>
+                <?php if (isset($messages['tendn'])): ?>
+                    <small class="text-danger m-2"><?= htmlspecialchars($messages['tendn']) ?></small>
                 <?php endif; ?>
             </div>
 
@@ -42,7 +42,7 @@ unset($_SESSION['form_data']);
                     </span>
                 </div>
                 <?php if (isset($messages['password'])): ?>
-                <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
+                    <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
                 <?php endif; ?>
             </div>
 
