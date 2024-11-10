@@ -3,7 +3,6 @@ $title = 'Trang người dùng';
 include('includes/header.php');
 require_once 'config/function.php';
 getUser();
-
 ?>
 <div class="container my-5">
     <div class="row">
@@ -16,7 +15,7 @@ getUser();
         <div class="col-md-4 mb-4">
             <div class="card profile-card shadow border-0">
                 <div class="card-body text-center p-4">
-                    <form action="" method="post">
+                    <form action="views/controllers/user-controller.php" method="post">
                         <div class="profile-picture-container position-relative">
                             <img src="uploads/avatars/admin.gif" class="rounded-circle mb-3 border"
                                 alt="Profile Picture" width="100px" height="100px">
@@ -28,10 +27,10 @@ getUser();
                         </div>
                     </form>
                     <script>
-                    // JavaScript to trigger file input click on button click
-                    document.getElementById('camera').addEventListener('click', function() {
-                        document.getElementById('avatar').click();
-                    });
+                        // JavaScript to trigger file input click on button click
+                        document.getElementById('camera').addEventListener('click', function() {
+                            document.getElementById('avatar').click();
+                        });
                     </script>
 
                     <h4 class="fw-bold mb-3"><?= $user['data']['TenND'] ?></h4>
@@ -70,17 +69,21 @@ getUser();
                 <div id="personal-infomation" class="tab-pane fade show active">
                     <div class="card d-flex justify-content-center  w-100 shadow border-0">
                         <div class=" card-body p-4">
-                            <form class="row justify-content-center" action="#" method="post">
+                            <form class="row justify-content-center" action="views/controllers/user-controller.php" method="post">
                                 <div class="col-6">
                                     <!-- Tên đầy đủ -->
                                     <div class="mb-4">
+                                        <input type="hidden" name="mand" value="<?= $user['data']['MaND'] ?>">
                                         <label for="fullName" class="form-label fw-semibold">Họ và tên</label>
                                         <div class="input-group">
                                             <span class="input-group-text bg-light border-0"><i
                                                     class="fas fa-user"></i></span>
-                                            <input type="text" class="form-control form-control-lg" id="fullName"
-                                                value="<?= $user['data']['TenND'] ?>" readonly>
+                                            <input type="text" class="form-control form-control-lg" id="fullName" name="tennd"
+                                                value="<?= $user['data']['TenND'] ?>">
                                         </div>
+                                        <?php if (isset($messages['tennd'])): ?>
+                                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tennd']) ?></small>
+                                        <?php endif; ?>
                                     </div>
 
                                     <!-- Email -->
@@ -89,53 +92,38 @@ getUser();
                                         <div class="input-group">
                                             <span class="input-group-text bg-light border-0"><i
                                                     class="fas fa-envelope"></i></span>
-                                            <input type="email" class="form-control form-control-lg" id="email"
-                                                value="<?= $user['data']['Email'] ?>" readonly>
+                                            <input type="email" class="form-control form-control-lg" name="email" id="email"
+                                                value="<?= $user['data']['Email'] ?>">
                                         </div>
+                                        <?php if (isset($messages['email'])): ?>
+                                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['email']) ?></small>
+                                        <?php endif; ?>
                                     </div>
                                     <div class="mb-4 text-center">
                                         <label class="form-label fw-semibold">Giới tính</label>
                                         <div class="d-flex justify-content-center">
                                             <div class="form-check me-5">
-                                                <input class="form-check-input" type="radio" name="gender" id="male"
-                                                    value="male"
+                                                <input class="form-check-input" type="radio" name="gioi_tinh" id="male" value="1"
                                                     <?php echo ($user['data']['GioiTinh'] == '1') ? 'checked' : ''; ?>>
                                                 <label class="form-check-label" for="male">Nam</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gender" id="female"
-                                                    value="female"
-                                                    <?php echo ($user['data']['GioiTinh'] == '0') ? 'checked' : ''; ?>
-                                                    <?php echo ($user['data']['GioiTinh'] == '1') ? 'disabled' : ''; ?>>
+                                                <input class="form-check-input" type="radio" name="gioi_tinh" id="female" value="0"
+                                                    <?php echo ($user['data']['GioiTinh'] == '0') ? 'checked' : ''; ?>>
                                                 <label class="form-check-label" for="female">Nữ</label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div class="mb-4">
-                                        <label for="password" class="form-label fw-semibold">Mật khẩu</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text bg-light border-0"><i
-                                                    class="fas fa-lock"></i></span>
-                                            <input type="password" class="form-control form-control-lg" id="password"
-                                                value="<?php //echo htmlspecialchars($item['password']);
-                                                        ?>" readonly>
-                                            <button class="btn btn-outline-secondary border-0 bg-light text-black"
-                                                type="button" onclick="togglePasswordVisibility('password')">
-                                                <i class="fas fa-eye-slash "></i>
-                                            </button>
-                                        </div>
-                                    </div>
                                     <!-- Ngày sinh -->
                                     <div class="mb-4">
                                         <label for="dob" class="form-label fw-semibold">Ngày sinh</label>
                                         <div class="input-group">
                                             <span class="input-group-text bg-light border-0"><i
                                                     class="fas fa-calendar-alt"></i></span>
-                                            <input type="text" class="form-control form-control-lg" id="dob"
-                                                value="<?= date('d/m/Y', strtotime($user['data']['NgaySinh'])) ?>"
-                                                readonly>
+                                            <input type="date" class="form-control form-control-lg" id="dob" name="ngay_sinh"
+                                                max="<?php echo date('Y-m-d', strtotime('-5 years')); ?>" value="<?= isset($user['data']['NgaySinh']) ? htmlspecialchars($user['data']['NgaySinh']) : ''; ?>">
                                         </div>
                                     </div>
                                     <!-- Số điện thoại -->
@@ -160,8 +148,8 @@ getUser();
                                             }
                                             ?>
 
-                                            <input type="text" class="form-control form-control-lg" id="phone"
-                                                value="<?= htmlspecialchars($displayPhone) ?>" readonly>
+                                            <input type="text" class="form-control form-control-lg" id="phone" name="sdt"
+                                                value="<?= htmlspecialchars($displayPhone) ?>">
 
                                         </div>
                                     </div>

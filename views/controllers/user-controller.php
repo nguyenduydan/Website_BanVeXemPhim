@@ -111,4 +111,48 @@ if (isset($_POST['login'])) {
         redirect('login.php', 'messages', $messages);
     }
 }
+//====== user-edit =======//
+if (isset($_POST['updateInf'])) {
+    $messages = [];
+    $id = validate($_POST['mand']);
+    $name = validate($_POST['tennd']);
+    $ngay_sinh = validate($_POST['ngay_sinh']);
+    $gioi_tinh = validate($_POST['gioi_tinh']);
+    $sdt = validate($_POST['sdt']);
+    $email = validate($_POST['email']);
+    $user = getByID('NguoiDung', 'MaND', $id);
+    // Kiểm tra tên người dùng
+    if (empty($name)) {
+        $messages['tennd'] = "Họ và tên không được để trống.";
+    }
+    if (empty($ngay_sinh)) {
+        $messages['ngay_sinh'] = "Ngày sinh không được để trống.";
+    }
+    if (empty($email)) {
+        $messages['email'] = "Email không được để trống.";
+    } elseif (isExistValue('NguoiDung', 'Email', $email, 'MaND', $id)) {
+        $messages['email'] = "Email đã tồn tại";
+    }
+    if (empty($messages)) {
+
+        $query = "UPDATE NguoiDung SET
+                TenND = '$name',
+                NgaySinh = '$ngay_sinh',
+                GioiTinh = '$gioi_tinh',
+                SDT = '$sdt',
+                Email = '$email',
+                NguoiCapNhat = '$id',
+                NgayCapNhat = CURRENT_TIMESTAMP
+                WHERE MaND = '$id'";
+
+        if (mysqli_query($conn, $query)) {
+            redirect('profile-user.php', 'success', 'Cập nhật tài khoản thành công');
+        } else {
+            redirect('profile-user.php', 'error', 'Cập nhật tài khoản thất bại');
+        }
+    } else {
+        redirect('profile-user.php', 'messages', $messages);
+        $_SESSION['form_data'] = $_POST;
+    }
+}
 $conn->close();

@@ -140,7 +140,7 @@ if (isset($_POST['editUser'])) {
             redirect('views/user/user-edit.php?id=' . $id, 'error', 'Cập nhật tài khoản thất bại', 'admin');
         }
     } else {
-        redirect('views/user/user-edit.php?id=' . $id, 'errors', $messages, 'admin');
+        redirect('views/user/user-edit.php?id=' . $id, 'messages', $messages, 'admin');
         $_SESSION['form_data'] = $_POST;
     }
 }
