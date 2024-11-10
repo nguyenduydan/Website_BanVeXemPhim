@@ -33,36 +33,37 @@ if ($item['status'] == 200) {
         $bookedSeats[] = $bookedSeat['MaGhe'];
     }
 ?>
-<div id="toast"></div>
 
-<?php alertMessage() ?>
+    <div id="toast"></div>
 
-<div class="chair my-5">
-    <div class="container movie-content w-50 shadow">
-        <?php
+    <?php alertMessage() ?>
+
+    <div class="chair my-5">
+        <div class="container movie-content w-50 shadow">
+            <?php
             $film = getByID('Phim', 'MaPhim', $item['data']['MaPhim']);
             $maPhim = $film['data']['MaPhim'];
             ?>
-        <h4 class="text-center mb-4 text-uppercase fw-bold">Chọn ghế cho phim:
-            <?= htmlspecialchars($film['data']['TenPhim']) ?></h4>
-        <div class="type-chair">
-            <ul class="d-flex flex-row justify-content-center">
-                <li class="seat vip">Ghế VIP</li>
-                <li class="seat single">Ghế đơn</li>
-                <li class="seat couple">Ghế đôi</li>
-                <li class="seat choosed">Ghế đã chọn</li>
-                <li class="seat selected">Ghế đã đặt</li>
-            </ul>
-        </div>
-        <div class="room px-5">
-            <div class="d-flex justify-content-center flex-column">
-                <div class="tv mx-5"></div>
-                <span class="text-center text-secondary">Màn hình</span>
+            <h4 class="text-center mb-4 text-uppercase fw-bold">Chọn ghế cho phim:
+                <?= htmlspecialchars($film['data']['TenPhim']) ?></h4>
+            <div class="type-chair">
+                <ul class="d-flex flex-row justify-content-center">
+                    <li class="seat vip">Ghế VIP</li>
+                    <li class="seat single">Ghế đơn</li>
+                    <li class="seat couple">Ghế đôi</li>
+                    <li class="seat choosed">Ghế đã chọn</li>
+                    <li class="seat selected">Ghế đã đặt</li>
+                </ul>
             </div>
+            <div class="room px-5">
+                <div class="d-flex justify-content-center flex-column">
+                    <div class="tv mx-5"></div>
+                    <span class="text-center text-secondary">Màn hình</span>
+                </div>
 
-            <div class="list-chair mt-5">
-                <ul class="container-fluid d-flex flex-column">
-                    <?php
+                <div class="list-chair mt-5">
+                    <ul class="container-fluid d-flex flex-column">
+                        <?php
                         $currentRow = '';
                         foreach ($seats as $seat) {
                             $rowLetter = substr($seat['TenGhe'], 0, 1);
@@ -98,97 +99,97 @@ if ($item['status'] == 200) {
                             echo '</div><div class="col-1 fw-bold text-secondary">' . $currentRow . '</div></li>';
                         }
                         ?>
-                </ul>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div>
-            <form id="paymentForm" class="text-center" action="ticket.php" method="POST">
-                <input type="hidden" name="seatsInput" id="seatsInput">
-                <button type="button" id="paymentButton" onclick="handlePayment()">Thanh toán</button>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- MODAL NO SEAT SELECTED -->
-<div class="modal fade" id="noSeatSelectedModal" tabindex="-1" aria-labelledby="noSeatSelectedModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="noSeatSelectedModalLabel">Thông báo</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-danger fw-bold">
-                Bạn chưa chọn ghế >.< </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    </div>
+            <div>
+                <form id="paymentForm" class="text-center" action="ticket.php" method="POST">
+                    <input type="hidden" name="seatsInput" id="seatsInput">
+                    <button type="button" id="paymentButton" onclick="handlePayment()">Thanh toán</button>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- MODAL ĐĂNG NHẬP -->
-    <div class="modal fade" id="modalLogged" tabindex="-1" aria-labelledby="modalLoggedLabel" aria-hidden="true">
+    <!-- MODAL NO SEAT SELECTED -->
+    <div class="modal fade" id="noSeatSelectedModal" tabindex="-1" aria-labelledby="noSeatSelectedModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLoggedLabel">Thông báo</h5>
+                    <h5 class="modal-title" id="noSeatSelectedModalLabel">Thông báo</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-danger fw-bold">
-                    Bạn chưa đăng nhập trước khi thanh toán
-                </div>
-                <div class="modal-footer">
-                    <a href="../login.php" class="btn btn-primary">Đăng nhập</a>
+                    Bạn chưa chọn ghế >.< </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script>
-    function toggleSeatSelection(button) {
-        if (!button.classList.contains('disabled')) {
-            button.classList.toggle('choosed');
-        }
-    }
+        <!-- MODAL ĐĂNG NHẬP -->
+        <div class="modal fade" id="modalLogged" tabindex="-1" aria-labelledby="modalLoggedLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLoggedLabel">Thông báo</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-danger fw-bold">
+                        Bạn chưa đăng nhập trước khi thanh toán
+                    </div>
+                    <div class="modal-footer">
+                        <a href="../login.php" class="btn btn-primary">Đăng nhập</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    function handlePayment() {
-        const selectedSeats = document.querySelectorAll('.choosed');
-        const selectedSeatNumbers = Array.from(selectedSeats).map(seat => {
-            const rowLetter = seat.getAttribute('data-row');
-            const seatNumber = seat.textContent.trim();
-            if (rowLetter && seatNumber) {
-                return rowLetter + seatNumber;
+        <script>
+            function toggleSeatSelection(button) {
+                if (!button.classList.contains('disabled')) {
+                    button.classList.toggle('choosed');
+                }
             }
-            return null;
-        }).filter(seat => seat);
 
-        if (selectedSeatNumbers.length === 0) {
-            // Show "No Seat Selected" modal if no seats are selected
-            var noSeatSelectedModal = new bootstrap.Modal(document.getElementById('noSeatSelectedModal'), {});
-            noSeatSelectedModal.show();
-            return;
-        }
+            function handlePayment() {
+                const selectedSeats = document.querySelectorAll('.choosed');
+                const selectedSeatNumbers = Array.from(selectedSeats).map(seat => {
+                    const rowLetter = seat.getAttribute('data-row');
+                    const seatNumber = seat.textContent.trim();
+                    if (rowLetter && seatNumber) {
+                        return rowLetter + seatNumber;
+                    }
+                    return null;
+                }).filter(seat => seat);
 
-        const isLoggedIn = <?= json_encode($isLoggedIn) ?>;
-        if (!isLoggedIn) {
-            // Show "Not Logged In" modal if user is not logged in
-            var modalLogged = new bootstrap.Modal(document.getElementById('modalLogged'), {});
-            modalLogged.show();
-            return;
-        }
+                if (selectedSeatNumbers.length === 0) {
+                    // Show "No Seat Selected" modal if no seats are selected
+                    var noSeatSelectedModal = new bootstrap.Modal(document.getElementById('noSeatSelectedModal'), {});
+                    noSeatSelectedModal.show();
+                    return;
+                }
 
-        const dataArray = {
-            MaGhe: selectedSeatNumbers.join(','),
-            MaPhim: <?= json_encode($maPhim) ?>,
-            MaPhong: <?= json_encode($maPhong) ?>,
-            MaSuatChieu: <?= json_encode($id_result) ?>
-        };
-        document.getElementById('seatsInput').value = JSON.stringify(dataArray);
-        document.getElementById('paymentForm').submit();
-    }
-    </script>
+                const isLoggedIn = <?= json_encode($isLoggedIn) ?>;
+                if (!isLoggedIn) {
+                    // Show "Not Logged In" modal if user is not logged in
+                    var modalLogged = new bootstrap.Modal(document.getElementById('modalLogged'), {});
+                    modalLogged.show();
+                    return;
+                }
+
+                const dataArray = {
+                    MaGhe: selectedSeatNumbers.join(','),
+                    MaPhim: <?= json_encode($maPhim) ?>,
+                    MaPhong: <?= json_encode($maPhong) ?>,
+                    MaSuatChieu: <?= json_encode($id_result) ?>
+                };
+                document.getElementById('seatsInput').value = JSON.stringify(dataArray);
+                document.getElementById('paymentForm').submit();
+            }
+        </script>
     <?php
 } else {
     echo '<h5>' . htmlspecialchars($item['message']) . '</h5>';
@@ -197,9 +198,9 @@ if ($item['status'] == 200) {
 
     <?php include('../includes/footer.php'); ?>
     <style>
-    .seat-button.disabled {
-        pointer-events: none;
-        background-color: #d3d3d3;
-        opacity: 0.5;
-    }
+        .seat-button.disabled {
+            pointer-events: none;
+            background-color: #d3d3d3;
+            opacity: 0.5;
+        }
     </style>
