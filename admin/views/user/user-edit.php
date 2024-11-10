@@ -4,9 +4,9 @@ include('../../includes/header.php');
 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
 }
-$errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : []; // Lấy lỗi từ session
+$messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy lỗi từ session
 $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
-unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
+unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
 unset($_SESSION['form_data']);
 ?>
 
@@ -36,16 +36,16 @@ unset($_SESSION['form_data']);
                             <label for="name">Họ và tên người dùng(<span class="text-danger">*</span>)</label>
                             <input type="text" class="form-control" id="name" name="name" value="<?= $user['data']['TenND']; ?>" placeholder="Nhập họ và tên"
                                 value="<?php echo isset($formData['name']) ? htmlspecialchars($formData['name']) : ''; ?>">
-                            <?php if (isset($errors['name'])): ?>
-                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($errors['name']) ?></small>
+                            <?php if (isset($messages['name'])): ?>
+                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
                             <?php endif; ?>
                         </div>
                         <div class="form-group mb-3">
                             <label for="email">Email (<span class="text-danger">*</span>)</label>
                             <input type="email" class="form-control" id="email" name="email" value="<?= $user['data']['Email']; ?>" placeholder="Nhập email"
                                 value="<?php echo isset($formData['email']) ? htmlspecialchars($formData['email']) : ''; ?>">
-                            <?php if (isset($errors['email'])): ?>
-                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($errors['email']) ?></small>
+                            <?php if (isset($messages['email'])): ?>
+                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['email']) ?></small>
                             <?php endif; ?>
                         </div>
                         <div class="form-group row mb-3">

@@ -12,8 +12,13 @@ if (isset($_POST['savesc'])) {
     $maphong = validate($_POST['maphong']);
     if (empty($giochieu)) {
         $messages['giochieu'] = "Giờ chiếu không được để trống.";
-    } elseif (isExistValue('SuatChieu', 'GioChieu', $giochieu)) {
-        $messages['giochieu'] = "Giờ chiếu đã tồn tại";
+    }
+    $checkQuery = "SELECT COUNT(*) FROM SuatChieu WHERE GioChieu = '$giochieu' AND MaPhong = '$maphong'";
+    $result = mysqli_query($conn, $checkQuery);
+    $row = mysqli_fetch_array($result);
+
+    if ($row[0] > 0) {
+        $messages['giochieu'] = "Giờ chiếu và phòng đã tồn tại.";
     }
     if (empty($mafilm)) {
         $messages['maphim'] = 'Tên phim không được để trống';
@@ -43,8 +48,13 @@ if (isset($_POST['editsc'])) {
     $maphong = validate($_POST['maphong']);
     if (empty($giochieu)) {
         $messages['giochieu'] = "Giờ chiếu không được để trống.";
-    } elseif (isExistValue('SuatChieu', 'GioChieu', $giochieu, 'MaSuatChieu', $id)) {
-        $messages['giochieu'] = "Giờ chiếu đã tồn tại";
+    }
+    $checkQuery = "SELECT COUNT(*) FROM SuatChieu WHERE GioChieu = '$giochieu' AND MaPhong = '$maphong'";
+    $result = mysqli_query($conn, $checkQuery);
+    $row = mysqli_fetch_array($result);
+
+    if ($row[0] > 0) {
+        $messages['giochieu'] = "Giờ chiếu và phòng đã tồn tại.";
     }
     if (empty($mafilm)) {
         $messages['maphim'] = 'Tên phim không được để trống';
