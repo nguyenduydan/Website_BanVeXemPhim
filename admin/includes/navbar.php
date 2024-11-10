@@ -4,10 +4,6 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
 }
 getAdmin();
 ?>
-<style>
-
-</style>
-
 <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 border-radius-xl position-sticky blur shadow-blur mt-4 left-auto top-1 z-index-sticky"
     style="background-color: #f8f9fa;">
     <div class="container-fluid py-1 px-3">
@@ -81,56 +77,56 @@ getAdmin();
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        function updateClock() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
+$(document).ready(function() {
+    function updateClock() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
 
-            $('#clock').text(`${hours}:${minutes}:${seconds}`);
-        }
+        $('#clock').text(`${hours}:${minutes}:${seconds}`);
+    }
 
-        // Cập nhật đồng hồ ngay lập tức
-        updateClock();
-        // Cập nhật đồng hồ mỗi giây
-        setInterval(updateClock, 1000);
-    });
+    // Cập nhật đồng hồ ngay lập tức
+    updateClock();
+    // Cập nhật đồng hồ mỗi giây
+    setInterval(updateClock, 1000);
+});
 </script>
 <script>
-    function searchData() {
-        let query = document.getElementById("searchBox").value.toLowerCase();
-        let links = document.querySelectorAll("#linkContainer a");
-        let results = document.getElementById("results");
+function searchData() {
+    let query = document.getElementById("searchBox").value.toLowerCase();
+    let links = document.querySelectorAll("#linkContainer a");
+    let results = document.getElementById("results");
 
-        // Xóa kết quả hiện tại
-        results.innerHTML = "";
+    // Xóa kết quả hiện tại
+    results.innerHTML = "";
 
-        if (query.length > 0) {
-            // Hiển thị vùng kết quả
-            results.style.display = "block";
+    if (query.length > 0) {
+        // Hiển thị vùng kết quả
+        results.style.display = "block";
 
-            // Lọc và hiển thị các thẻ <a> có chứa từ khóa tìm kiếm
-            links.forEach(function(link) {
-                let linkText = link.textContent.toLowerCase();
-                if (linkText.includes(query)) {
-                    let resultLink = document.createElement("a");
-                    resultLink.href = link.href;
-                    resultLink.textContent = link.textContent;
-                    resultLink.classList.add("result-item");
+        // Lọc và hiển thị các thẻ <a> có chứa từ khóa tìm kiếm
+        links.forEach(function(link) {
+            let linkText = link.textContent.toLowerCase();
+            if (linkText.includes(query)) {
+                let resultLink = document.createElement("a");
+                resultLink.href = link.href;
+                resultLink.textContent = link.textContent;
+                resultLink.classList.add("result-item");
 
-                    results.appendChild(resultLink);
-                }
-            });
-
-            // Nếu không có kết quả phù hợp, ẩn vùng kết quả
-            if (results.innerHTML.trim() === "") {
-                results.style.display = "none";
+                results.appendChild(resultLink);
             }
+        });
 
-        } else {
-            // Ẩn vùng kết quả nếu không có dữ liệu tìm kiếm
+        // Nếu không có kết quả phù hợp, ẩn vùng kết quả
+        if (results.innerHTML.trim() === "") {
             results.style.display = "none";
         }
+
+    } else {
+        // Ẩn vùng kết quả nếu không có dữ liệu tìm kiếm
+        results.style.display = "none";
     }
+}
 </script>
