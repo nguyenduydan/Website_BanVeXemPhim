@@ -11,8 +11,11 @@ if (isset($_POST['saveContent'])) {
     $status = validate($_POST['status']);
     $mota = validate($_POST['mota']);
     $kieubv = validate($_POST['kieubv']);
+    if (empty($chudebv)) {
+        $messages['chudebv'] = 'Tên chủ đề không được để trống';
+    }
     if (empty($name)) {
-        $messages['name'] = 'Tên chủ đề không được để trống';
+        $messages['name'] = 'Tên bài viết không được để trống';
     }
     if (isset($_FILES['content-imgs'])) {
 

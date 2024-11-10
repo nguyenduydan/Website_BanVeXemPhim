@@ -10,7 +10,7 @@ getUser();
                 <!-- Logo -->
                 <div class="col-3 d-lg-flex row text-center col-lg-2 justify-content-center me-lg-auto mb-md-0">
                     <div class="col-6">
-                        <a href="#" class="me-3">
+                        <a href="http://localhost/Website_BanVeXemPhim/index.php" class="me-3">
                             <img src="/Website_BanVeXemPhim/assets/imgs/logo-100x100.png" style="width: 60px;"
                                 class="bg-dark rounded-circle">
                         </a>
