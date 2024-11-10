@@ -12,8 +12,8 @@ unset($_SESSION['form_data']);
 
 <?php alertMessage() ?>
 
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-    <div class="form-container sign-up shadow rounded w-50 px-5">
+<div class="container d-flex justify-content-center align-items-center ">
+    <div class="form-container sign-up shadow rounded w-50 px-5 my-5">
         <form class="py-2" action="views/controllers/user-controller.php" method="post">
             <div class="text-center mb-3">
                 <div class="mb-3 text-center">
@@ -30,7 +30,7 @@ unset($_SESSION['form_data']);
                                     placeholder="Họ và tên">
                             </div>
                             <?php if (isset($messages['tennd'])): ?>
-                                <small class="text-danger m-2"><?= htmlspecialchars($messages['tennd']) ?></small>
+                            <small class="text-danger m-2"><?= htmlspecialchars($messages['tennd']) ?></small>
                             <?php endif; ?>
                         </div>
                         <div class="mb-3">
@@ -41,7 +41,7 @@ unset($_SESSION['form_data']);
                                     placeholder="Tên đăng nhập">
                             </div>
                             <?php if (isset($messages['tendn'])): ?>
-                                <small class="text-danger m-2"><?= htmlspecialchars($messages['tendn']) ?></small>
+                            <small class="text-danger m-2"><?= htmlspecialchars($messages['tendn']) ?></small>
                             <?php endif; ?>
                         </div>
                         <!-- Mật khẩu -->
@@ -56,7 +56,7 @@ unset($_SESSION['form_data']);
                                 </span>
                             </div>
                             <?php if (isset($messages['password'])): ?>
-                                <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
+                            <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
                             <?php endif; ?>
                         </div>
 
@@ -72,12 +72,12 @@ unset($_SESSION['form_data']);
                                 </span>
                             </div>
                             <?php if (isset($messages['re_password'])): ?>
-                                <small class="text-danger m-2"><?= htmlspecialchars($messages['re_password']) ?></small>
+                            <small class="text-danger m-2"><?= htmlspecialchars($messages['re_password']) ?></small>
                             <?php endif; ?>
                         </div>
                         <div class="g-recaptcha" data-sitekey="6LddNHoqAAAAADttUJjLEihMpDd-UL1xA0a75ZeB"></div>
                         <?php if (isset($messages['captcha'])): ?>
-                            <small class="text-danger m-2"><?= htmlspecialchars($messages['captcha']) ?></small>
+                        <small class="text-danger m-2"><?= htmlspecialchars($messages['captcha']) ?></small>
                         <?php endif; ?>
                     </div>
                 </div>

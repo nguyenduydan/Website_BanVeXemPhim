@@ -70,7 +70,7 @@ getUser();
                                                         alt="<?= $item['TenPhim'] ?>">
                                                     <span class="movie-age"><?= $item['PhanLoai'] ?></span>
                                                     <a style="width: 100px; font-size: 13px; padding: 10px 7px"
-                                                        href="views/detail-film.php?id=<?= $item['MaPhim'] ?>"
+                                                        href="/Website_BanVeXemPhim/views/detail-film.php?id=<?= $item['MaPhim'] ?>"
                                                         class="buy-ticket text-center align-items-center">
                                                         <i class="bi bi-ticket-perforated"></i> Mua Vé
                                                     </a>
