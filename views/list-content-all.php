@@ -3,7 +3,7 @@ $title = 'Góc điện ảnh';
 include('../includes/header.php');
 
 ?>
-<div class="container mt-5">
+<div class="container mt-5 vh-100">
     <h4 class="mb-4 text-uppercase ps-3" style="border-left: 4px solid #15036c; ">
         Góc điện ảnh
     </h4>
