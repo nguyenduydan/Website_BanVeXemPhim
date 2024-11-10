@@ -9,7 +9,7 @@ include('includes/header.php');
 
 <?php alertMessage(); ?>
 
-<div class="container mx-10 py-3 content">
+<div class="container mx-10 py-3 content vh-100">
     <?php include('views/list-film.php'); ?>
     <?php include('views/list-content.php'); ?>
 </div>
