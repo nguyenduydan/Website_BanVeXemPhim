@@ -114,34 +114,8 @@ if (isset($_POST['updateInf'])) {
     if (empty($name)) {
         $messages['tennd'] = "Họ và tên không được để trống.";
     }
-    if (empty($ngay_sinh)) {
-        $messages['ngay_sinh'] = "Ngày sinh không được để trống.";
-    }
-    if (empty($email)) {
-        $messages['email'] = "Email không được để trống.";
-    } elseif (isExistValue('NguoiDung', 'Email', $email, 'MaND', $id)) {
+    if (isExistValue('NguoiDung', 'Email', $email, 'MaND', $id)) {
         $messages['email'] = "Email đã tồn tại";
-    }
-
-    $user = getByID('NguoiDung', 'MaND', $id);
-    $avatar = $user['data']['Anh'];
-    $avt_url = $avatar;
-    $unique = uniqid('user_', false);
-    if (isset($_FILES['avatar'])) {
-        // Use usertennd as filetennd for the avatar
-        $avatarPath = $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/uploads/avatars/" . $avt_url;
-        if (!empty($avatar) && file_exists($avatarPath)) {
-            $deleteResult = deleteImage($avatarPath);
-            if (!$deleteResult['success']) {
-                $messages[] = $deleteResult['message'];
-            }
-        }
-        $avatarResult = uploadImage($_FILES['avatar'], $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/uploads/avatars/", $unique);
-        if ($avatarResult['success']) {
-            $avatar = $avatarResult['filename'];
-        } else {
-            $messages[] = $avatarResult['message'];
-        }
     }
     if (empty($messages)) {
 
@@ -151,7 +125,7 @@ if (isset($_POST['updateInf'])) {
                 GioiTinh = '$gioi_tinh',
                 SDT = '$sdt',
                 Email = '$email',
-                Anh = '$avatar',
+                -- Anh = '$avatar',
                 NguoiCapNhat = '$id',
                 NgayCapNhat = CURRENT_TIMESTAMP
                 WHERE MaND = '$id'";
@@ -166,4 +140,53 @@ if (isset($_POST['updateInf'])) {
         $_SESSION['form_data'] = $_POST;
     }
 }
+
+//====== user-edit =======//
+if (isset($_POST['updateAvt'])) {
+    $messages = [];
+    $id = validate($_POST['mand']);
+    $user = getByID('NguoiDung', 'MaND', $id);
+    $currentAvatar = $user['data']['Anh'];
+    $unique = uniqid('user_', false);
+
+    if (isset($_FILES['avatar'])) {
+        // Delete old avatar if it exists
+        if (!empty($currentAvatar)) {
+            $avatarPath = $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/uploads/avatars/" . $currentAvatar;
+            if (file_exists($avatarPath)) {
+                $deleteResult = deleteImage($avatarPath);
+                if (!$deleteResult['success']) {
+                    $messages[] = $deleteResult['message'];
+                }
+            }
+        }
+
+        // Upload new avatar
+        $avatarResult = uploadImage($_FILES['avatar'], $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/uploads/avatars/", $unique);
+        if ($avatarResult['success']) {
+            $avatar = $avatarResult['filename'];
+        } else {
+            $messages[] = $avatarResult['message'];
+        }
+    }
+    if (empty($messages)) {
+
+        $query = "UPDATE NguoiDung SET
+                Anh = '$avatar',
+                NguoiCapNhat = '$id',
+                NgayCapNhat = CURRENT_TIMESTAMP
+                WHERE MaND = '$id'";
+
+        if (mysqli_query($conn, $query)) {
+            redirect('profile-user.php', 'success', 'Cập nhật avatar thành công');
+        } else {
+            redirect('profile-user.php', 'error', 'Cập nhật avatar thất bại');
+        }
+    } else {
+        redirect('profile-user.php', 'messages', $messages);
+        $_SESSION['form_data'] = $_POST;
+    }
+}
+
+
 $conn->close();

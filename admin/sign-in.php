@@ -61,7 +61,8 @@ $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ?
                                             <input type="text" class="form-control" name="username"
                                                 placeholder="Username" aria-label="Username"
                                                 aria-describedby="username-addon"
-                                                value="<?= isset($formData['username']) ? htmlspecialchars($formData['username']) : ''; ?>">
+                                                value="<?= isset($formData['username']) ? htmlspecialchars($formData['username']) : htmlspecialchars($username); ?>"
+                                                autocomplete="username">
                                             <?php if (isset($messages['username'])): ?>
                                                 <small
                                                     class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['username']) ?></small>
@@ -72,7 +73,7 @@ $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ?
                                         <div class="input-group">
                                             <input type="password" id="password" name="password" class="form-control"
                                                 placeholder="Password" aria-label="Password"
-                                                aria-describedby="password-addon">
+                                                aria-describedby="password-addon" autocomplete="password">
                                             <span class="icon" id="password-addon">
                                                 <i class="fas fa-eye-slash" id="togglePassword"></i>
                                             </span>
@@ -106,6 +107,7 @@ $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ?
             </div>
         </section>
     </main>
+
 
     <div class="mt-5">
         <?php include('includes/footer.php'); ?>
