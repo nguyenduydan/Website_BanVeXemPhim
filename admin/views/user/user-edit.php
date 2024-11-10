@@ -41,11 +41,11 @@ unset($_SESSION['form_data']);
                             <?php endif; ?>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="username">Tên đăng nhập (<span class="text-danger">*</span>)</label>
-                            <input type="text" class="form-control" id="username" name="username" value="<?= $user['data']['username']; ?>" placeholder="Nhập tên đăng nhập"
-                                value="<?php echo isset($formData['username']) ? htmlspecialchars($formData['username']) : ''; ?>">
-                            <?php if (isset($errors['username'])): ?>
-                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($errors['username']) ?></small>
+                            <label for="email">Email (<span class="text-danger">*</span>)</label>
+                            <input type="email" class="form-control" id="email" name="email" value="<?= $user['data']['Email']; ?>" placeholder="Nhập email"
+                                value="<?php echo isset($formData['email']) ? htmlspecialchars($formData['email']) : ''; ?>">
+                            <?php if (isset($errors['email'])): ?>
+                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($errors['email']) ?></small>
                             <?php endif; ?>
                         </div>
                         <div class="form-group row mb-3">
@@ -64,34 +64,21 @@ unset($_SESSION['form_data']);
                             </div>
 
                         </div>
-                        <div class="form-group mb-3">
-                            <label for="sdt">Số điện thoại</label>
-                            <input type="number" class="form-control" id="sdt" name="sdt" value="<?= $user['data']['SDT']; ?>" placeholder="Nhập số điện thoại"
-                                value="<?php echo isset($formData['sdt']) ? htmlspecialchars($formData['sdt']) : ''; ?>">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="email">Email (<span class="text-danger">*</span>)</label>
-                            <input type="email" class="form-control" id="email" name="email" value="<?= $user['data']['Email']; ?>" placeholder="Nhập email"
-                                value="<?php echo isset($formData['email']) ? htmlspecialchars($formData['email']) : ''; ?>">
-                            <?php if (isset($errors['email'])): ?>
-                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($errors['email']) ?></small>
-                            <?php endif; ?>
-                        </div>
+
+
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row mb-3">
                             <div class="col-6">
-                                <label for="role">Vai trò</label>
-                                <select class="form-select" id="role" name="role">
-                                    <option value="1">Admin</option>
-                                    <option value="0">User</option>
-                                </select>
+                                <label for="sdt">Số điện thoại</label>
+                                <input type="number" class="form-control" id="sdt" name="sdt" value="<?= $user['data']['SDT']; ?>" placeholder="Nhập số điện thoại"
+                                    value="<?php echo isset($formData['sdt']) ? htmlspecialchars($formData['sdt']) : ''; ?>">
                             </div>
                             <div class="col-6">
                                 <label for="status">Trạng thái</label>
                                 <select class="form-select" id="status" name="status">
-                                <option value="1" <?= $user['data']['TrangThai'] == 1 ? 'selected' : ''; ?>>Online</option>
-                                <option value="0" <?= $user['data']['TrangThai'] == 0 ? 'selected' : ''; ?>>Offline</option>
+                                    <option value="1" <?= $user['data']['TrangThai'] == 1 ? 'selected' : ''; ?>>Online</option>
+                                    <option value="0" <?= $user['data']['TrangThai'] == 0 ? 'selected' : ''; ?>>Offline</option>
                                 </select>
                             </div>
                         </div>

@@ -17,7 +17,7 @@ if (isset($_POST['SignIn'])) {
     if (empty($messages)) {
         $user = getByID('TaiKhoan', 'TenDangNhap', $username);
 
-        if ($user['status'] == 200 && $user['data']['Role'] == 1) {
+        if ($user['status'] == 200 && $user['data']['Quyen'] == 1) {
             if (password_verify($password, $user['data']['MatKhau'])) {
                 $_SESSION['loggedIn'] = true;
                 $_SESSION['userId'] = $user['data']['MaND'];
