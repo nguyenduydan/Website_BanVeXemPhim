@@ -25,24 +25,24 @@ unset($_SESSION['form_data']);
                         value="<?php echo isset($formData['tendn']) ? htmlspecialchars($formData['tendn']) : ''; ?>">
                 </div>
                 <?php if (isset($messages['tendn'])): ?>
-                    <small class="text-danger m-2"><?= htmlspecialchars($messages['tendn']) ?></small>
+                <small class="text-danger m-2"><?= htmlspecialchars($messages['tendn']) ?></small>
                 <?php endif; ?>
             </div>
 
             <!-- Mật khẩu -->
 
             <div class="mb-3">
-                <div class="input-group mb-1">
+                <div class="input-group mb-1 ">
                     <span class="input-group-text bg-primary"><i class="fas fa-lock text-white"></i></span>
                     <input type="password" class="form-control" id="password_login" name="password"
                         placeholder="Nhập mật khẩu">
-                    <span class="input-group-text iconEye" style="cursor: pointer;"
+                    <span class="input-group-text iconEye me-2" style="cursor: pointer;"
                         onclick="togglePassword('password_login', 'togglePasswordLogin')">
                         <i class="fas fa-eye-slash" id="togglePasswordLogin"></i>
                     </span>
                 </div>
                 <?php if (isset($messages['password'])): ?>
-                    <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
+                <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
                 <?php endif; ?>
             </div>
 
