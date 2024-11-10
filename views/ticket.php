@@ -76,11 +76,10 @@ if (isset($_POST['seatsInput'])) {
 <div class="container d-flex justify-content-center align-items-center my-5 flex-column">
     <div class="ticket-wrapper d-flex shadow position-relative">
 
-        <!-- Ngày mua: Positioned in the top-right corner -->
         <div class="ticket-date position-absolute top-0 end-0 p-2 text-muted"
             style="font-size: 0.75rem; background-color: rgba(255, 255, 255, 0.7); border-radius: 4px;">
             <?php
-                $purchaseDate = new DateTime(); // Get current date and time
+                $purchaseDate = new DateTime();
                 echo $purchaseDate->format('d-m-Y');
                 ?>
         </div>
