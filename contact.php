@@ -15,6 +15,7 @@ unset($_SESSION['form_data']);
     <div class="container">
         <div class="row gy-3 gy-md-4 gy-lg-0 align-items-xl-center">
             <div class="col-12 col-lg-6">
+
                 <img class="img-fluid rounded" loading="lazy"
                     src="https://photo2.tinhte.vn/data/avatars/l/3037/3037189.jpg?1723275753" alt="Get in Touch">
             </div>

@@ -13,12 +13,27 @@ getUser();
 
         $percentage = min(($tongTien / $mucTieu) * 100, 100);
         ?>
-
         <div class="col-md-4 mb-4">
             <div class="card profile-card shadow border-0">
                 <div class="card-body text-center p-4">
-                    <img src="uploads/avatars/admin.gif" class="rounded-circle mb-3 border" alt="Profile Picture"
-                        width="100px" height="100px">
+                    <form action="" method="post">
+                        <div class="profile-picture-container position-relative">
+                            <img src="uploads/avatars/admin.gif" class="rounded-circle mb-3 border"
+                                alt="Profile Picture" width="100px" height="100px">
+                            <input type="file" id="avatar" style="display: none;">
+                            <button id="camera" type="submit"
+                                class="bg-secondary rounded border-0 text-white position-absolute top-50 start-50 translate-middle">
+                                <i class="bi bi-camera"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <script>
+                    // JavaScript to trigger file input click on button click
+                    document.getElementById('camera').addEventListener('click', function() {
+                        document.getElementById('avatar').click();
+                    });
+                    </script>
+
                     <h4 class="fw-bold mb-3"><?= $user['data']['TenND'] ?></h4>
 
                     <h5 class="text-muted mt-3">Tổng chi tiêu 2024</h5>
@@ -98,7 +113,7 @@ getUser();
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <!-- <div class="mb-4">
+                                    <div class="mb-4">
                                         <label for="password" class="form-label fw-semibold">Mật khẩu</label>
                                         <div class="input-group">
                                             <span class="input-group-text bg-light border-0"><i
@@ -111,7 +126,7 @@ getUser();
                                                 <i class="fas fa-eye-slash "></i>
                                             </button>
                                         </div>
-                                    </div> -->
+                                    </div>
                                     <!-- Ngày sinh -->
                                     <div class="mb-4">
                                         <label for="dob" class="form-label fw-semibold">Ngày sinh</label>
