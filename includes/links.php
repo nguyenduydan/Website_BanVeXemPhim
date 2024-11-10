@@ -16,6 +16,6 @@ $baseURL = '/Website_BanVeXemPhim/';
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/login_signin.css?2.2">
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/profile.css?1.4">
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/toast.css">
-<link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/style.css?v2.5">
+<link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/style.css?v2.6">
 <script src="<?php echo $baseURL; ?>assets/js/toast.js?1.0"></script>
 <script src="<?php echo $baseURL; ?>assets/js/my-js.js?2.4"></script>

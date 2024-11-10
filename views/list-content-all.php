@@ -3,7 +3,7 @@ $title = 'Góc điện ảnh';
 include('../includes/header.php');
 
 ?>
-<div class="container mt-5 vh-100">
+<div class="container mt-5">
     <h4 class="mb-4 text-uppercase ps-3" style="border-left: 4px solid #15036c; ">
         Góc điện ảnh
     </h4>
@@ -20,14 +20,14 @@ include('../includes/header.php');
                     // Kiểm tra xem mảng có ít nhất một phần tử hay không
                     if (!empty($anhArray[0])) {
                         $anh = trim($anhArray[0]); // Lấy ảnh đầu tiên
-                        echo '<img src="../uploads/content-imgs/' . htmlspecialchars($anh) . '" alt="Ảnh xem trước" id="img-content"  class="small-image img-fluid"/> ';
+                        echo '<img src="../uploads/content-imgs/' . htmlspecialchars($anh) . '" alt="Ảnh xem trước" id="img-content"  class="rounded small-image img-fluid"/> ';
                     }
                     ?>
 
                 <div class="card-body ms-3 mt-4">
                     <h5 class="card-title"><?= $item['TenBV'] ?></h5>
                     <br>
-                    <p><?= $item['MoTa'] ?></p>
+                    <small><?= $item['MoTa'] ?></small>
                 </div>
             </div>
         </a>

@@ -17,7 +17,7 @@ if ($item['status'] == 200) {
         <i class="bi bi-arrow-left"></i> Trở về
     </button></a>
 
-<div class="container mt-5 w-75 text-center vh-100">
+<div class="container mt-5 w-75 text-center mb-4">
     <!-- Tiêu đề bài viết -->
     <h1 class="fw-bold mb-3 text-uppercase"><?= $item['data']['TenBV'] ?></h1>
 
