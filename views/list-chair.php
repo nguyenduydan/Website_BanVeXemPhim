@@ -25,12 +25,11 @@ if ($item['status'] == 200) {
     $query = "SELECT * FROM GHE WHERE MaPhong = '$maPhong'";
     $seats = mysqli_query($conn, $query);
 
-    // Get list of booked seats for the current show time
-    $bookedSeats = [];
-    $queryBookedSeats = "SELECT MaGhe FROM ChiTietHoaDon WHERE MaSuatChieu = '$id_result' AND TrangThai = 1";
-    $bookedResult = mysqli_query($conn, $queryBookedSeats);
-    while ($bookedSeat = mysqli_fetch_assoc($bookedResult)) {
-        $bookedSeats[] = $bookedSeat['MaGhe'];
+    $booked = [];
+    $booked_query = "SELECT MaGhe FROM ChiTietHoaDon WHERE MaSuatChieu = '$id_result' AND TrangThai = 1";
+    $booked_result = mysqli_query($conn, $booked_query);
+    while ($bookedSeat = mysqli_fetch_assoc($booked_result)) {
+        $booked[] = $bookedSeat['MaGhe'];
     }
 ?>
 
@@ -70,7 +69,7 @@ if ($item['status'] == 200) {
                             $seatNumber = substr($seat['TenGhe'], 1);
                             $seatId = htmlspecialchars($seat['MaGhe']);
 
-                            $isBooked = in_array($seatId, $bookedSeats);
+                            $isBooked = in_array($seatId, $booked);
 
                             if ($rowLetter != $currentRow) {
                                 if ($currentRow != '') {
@@ -83,15 +82,13 @@ if ($item['status'] == 200) {
                             $seatClass = strtolower($seat['LoaiGhe']) == 'Đơn' ? 'single' : (strtolower($seat['LoaiGhe']) == 'vip' ? 'vip' : 'couple');
 
                             if ($seatClass == 'couple') {
-                                // Ghép đôi các số ghế thành cặp (1-2, 3-4, ...)
                                 if ($seatNumber % 2 != 0) {
                                     $seatNumberPair = htmlspecialchars($seatNumber) . '-' . htmlspecialchars($seatNumber + 1);
-                                    $disabledClass = $isBooked ? 'disabled' : ''; // Disable if booked
+                                    $disabledClass = $isBooked ? 'disabled' : '';
                                     echo '<button class="mx-1 ' . $seatClass . ' rounded seat-button ' . $disabledClass . '" data-row="' . $rowLetter . '" onclick="toggleSeatSelection(this)"><span>' . $seatNumberPair . '</span></button>';
                                 }
                             } else {
-                                // Hiển thị một số trong một ô cho các loại ghế khác
-                                $disabledClass = $isBooked ? 'disabled' : ''; // Disable if booked
+                                $disabledClass = $isBooked ? 'disabled' : ''; 
                                 echo '<button class="mx-1 ' . $seatClass . ' rounded seat-button ' . $disabledClass . '" data-row="' . $rowLetter . '" onclick="toggleSeatSelection(this)"><span>' . htmlspecialchars($seatNumber) . '</span></button>';
                             }
                         }
