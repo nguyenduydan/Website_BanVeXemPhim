@@ -23,7 +23,7 @@ unset($_SESSION['form_data']);
                     <label for="tenghe">Tên ghế</label>
                     <input type="text" class="form-control" id="tenghe" name="tenghe" placeholder="Nhập tên ghế">
                     <?php if (isset($messages['tenghe'])): ?>
-                    <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tenghe']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tenghe']) ?></small>
                     <?php endif; ?>
                 </div>
                 <div class="col-md-6">
@@ -38,7 +38,7 @@ unset($_SESSION['form_data']);
 
                             </select>
                             <?php if (isset($messages['loaighe'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['loaighe']) ?></small>
+                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['loaighe']) ?></small>
                             <?php endif; ?>
                         </div>
                         <div class="col-6">
@@ -46,7 +46,7 @@ unset($_SESSION['form_data']);
                             <input type="number" class="form-control" id="soluong" name="soluong"
                                 placeholder="Nhập số lượng" min="0" max="10">
                             <?php if (isset($messages['soluong'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['soluong']) ?></small>
+                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['soluong']) ?></small>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -66,18 +66,18 @@ unset($_SESSION['form_data']);
                 <div class="col-md-6">
                     <label for="maphong">Tên phòng (<span class="text-danger">*</span>)</label>
                     <select class="form-control" id="maphong" name="maphong">
-                        <option value="">Chọn phòng</option>
+                        <option value="" disabled selected>Chọn phòng</option>
                         <?php
                         $rooms = getAll('Phong');
                         foreach ($rooms as $room): ?>
-                        <option value="<?php echo htmlspecialchars($room['MaPhong']); ?>"
-                            <?php echo (isset($formData['maphong']) && $formData['maphong'] == $room['maphong']) ? 'selected' : ''; ?>>
-                            <?php echo htmlspecialchars($room['TenPhong']); ?>
-                        </option>
+                            <option value="<?php echo htmlspecialchars($room['MaPhong']); ?>"
+                                <?php echo (isset($formData['maphong']) && $formData['maphong'] == $room['maphong']) ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($room['TenPhong']); ?>
+                            </option>
                         <?php endforeach; ?>
                     </select>
                     <?php if (isset($messages['maphong'])): ?>
-                    <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['maphong']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['maphong']) ?></small>
                     <?php endif; ?>
                 </div>
             </div>

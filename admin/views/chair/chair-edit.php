@@ -31,46 +31,46 @@ unset($_SESSION['form_data']);
             ?>
                 <input type="hidden" name="maghe" value=<?= $item['data']['MaGhe'] ?>>
                 <div class="row">
-                <div class="col-md-6">
-                    <label for="tenghe">Tên ghế</label>
-                    <input type="text" class="form-control" id="tenghe" name="tenghe" placeholder="Nhập tên ghế"
-                    value="<?php echo isset($formData['tenghe']) ? htmlspecialchars($formData['tenghe']) : $item['data']['TenGhe']; ?>">
+                    <div class="col-md-6">
+                        <label for="tenghe">Tên ghế</label>
+                        <input type="text" class="form-control" id="tenghe" name="tenghe" placeholder="Nhập tên ghế"
+                            value="<?php echo isset($formData['tenghe']) ? htmlspecialchars($formData['tenghe']) : $item['data']['TenGhe']; ?>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="loaighe">Loại ghế</label>
+                        <select class="form-select" id="loaighe" name="loaighe" required>
+                            <option value="" disabled selected>Chọn loại ghế</option>
+                            <option value="Đơn" <?= $item['data']['LoaiGhe'] == 'Đơn' ? 'selected' : ''; ?>>Đơn</option>
+                            <option value="Đôi" <?= $item['data']['LoaiGhe'] == 'Đôi' ? 'selected' : ''; ?>>Đôi</option>
+                            <option value="VIP" <?= $item['data']['LoaiGhe'] == 'VIP' ? 'selected' : ''; ?>>VIP</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="status">Trạng thái</label>
+                        <select class="form-select" id="status" name="status">
+                            <option value="1" <?= $item['data']['TrangThai'] == 1 ? 'selected' : ''; ?>>Online</option>
+                            <option value="0" <?= $item['data']['TrangThai'] == 0 ? 'selected' : ''; ?>>Offline</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="maphong">Tên phòng (<span class="text-danger">*</span>)</label>
+                        <select class="form-control" id="maphong" name="maphong" required>
+                            <option value="" disabled selected>Chọn phòng</option>
+                            <?php
+                            $rooms = getAll('Phong');
+                            foreach ($rooms as $room): ?>
+                                <option value="<?= htmlspecialchars($room['MaPhong']); ?>"
+                                    <?= (isset($formData['maphong']) && $formData['maphong'] == $room['MaPhong']) || $item['data']['MaPhong'] == $room['MaPhong'] ? 'selected' : ''; ?>>
+                                    <?= htmlspecialchars($room['TenPhong']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <?php if (isset($messages['maphong'])): ?>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['maphong']) ?></small>
+                        <?php endif; ?>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <label for="loaighe">Loại ghế</label>
-                    <select class="form-select" id="loaighe" name="loaighe" required>
-                        <option value="" disabled selected>Chọn loại ghế</option>
-                        <option value="Đơn" <?= $item['data']['LoaiGhe'] == 'Đơn' ? 'selected' : ''; ?>>Đơn</option>
-                        <option value="Đôi" <?= $item['data']['LoaiGhe'] == 'Đôi' ? 'selected' : ''; ?>>Đôi</option>
-                        <option value="VIP" <?= $item['data']['LoaiGhe'] == 'VIP' ? 'selected' : ''; ?>>VIP</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label for="status">Trạng thái</label>
-                    <select class="form-select" id="status" name="status">
-                        <option value="1" <?= $item['data']['TrangThai'] == 1 ? 'selected' : ''; ?>>Online</option>
-                        <option value="0" <?= $item['data']['TrangThai'] == 0 ? 'selected' : ''; ?>>Offline</option>
-                    </select>
-                </div>
-                
-                <div class="col-md-6">
-                    <label for="maphong">Tên phòng (<span class="text-danger">*</span>)</label>
-                    <select class="form-control" id="maphong" name="maphong" required>
-                        <option value="">Chọn phòng</option>
-                        <?php
-                        $rooms = getAll('Phong');
-                        foreach ($rooms as $room): ?>
-                            <option value="<?= htmlspecialchars($room['MaPhong']); ?>"
-                                <?= (isset($formData['maphong']) && $formData['maphong'] == $room['MaPhong']) || $item['data']['MaPhong'] == $room['MaPhong'] ? 'selected' : ''; ?>>
-                                <?= htmlspecialchars($room['TenPhong']); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                    <?php if (isset($messages['maphong'])): ?>
-                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['maphong']) ?></small>
-                    <?php endif; ?>
-                </div>
-            </div>
             <?php
             } else {
                 echo '<h5>' . $content['message'] . '</h5>';
