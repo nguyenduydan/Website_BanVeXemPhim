@@ -68,7 +68,7 @@ if ($item['status'] == 200) {
                         foreach ($seats as $seat) {
                             $rowLetter = substr($seat['TenGhe'], 0, 1);
                             $seatNumber = substr($seat['TenGhe'], 1);
-                            $seatId = htmlspecialchars($seat['TenGhe']);
+                            $seatId = htmlspecialchars($seat['MaGhe']);
 
                             $isBooked = in_array($seatId, $bookedSeats);
 
