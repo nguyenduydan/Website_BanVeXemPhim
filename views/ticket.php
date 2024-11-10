@@ -74,7 +74,16 @@ if (isset($_POST['seatsInput'])) {
 
 
 <div class="container d-flex justify-content-center align-items-center my-5 flex-column">
-    <div class="ticket-wrapper d-flex shadow">
+    <div class="ticket-wrapper d-flex shadow position-relative">
+
+        <!-- Ngày mua: Positioned in the top-right corner -->
+        <div class="ticket-date position-absolute top-0 end-0 p-2 text-muted"
+            style="font-size: 0.75rem; background-color: rgba(255, 255, 255, 0.7); border-radius: 4px;">
+            <?php
+                $purchaseDate = new DateTime(); // Get current date and time
+                echo $purchaseDate->format('d-m-Y');
+                ?>
+        </div>
 
         <!-- Phần hình ảnh bên trái -->
         <div class="ticket-image d-flex align-items-center justify-content-center">
@@ -117,14 +126,12 @@ if (isset($_POST['seatsInput'])) {
         </div>
     </div>
 
-    <!-- Nút Quay lại và Thanh toán, centered and close together -->
+    <!-- Nút Quay lại -->
     <div class="d-flex justify-content-center gap-3 mt-4">
         <a href="http://localhost/Website_BanVeXemPhim/index.php" class="btn btn-outline-secondary custom-button">Quay
             Lại</a>
     </div>
 </div>
-
-
 
 <?php
 } else {
