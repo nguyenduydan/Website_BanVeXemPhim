@@ -16,6 +16,7 @@ if (!is_numeric($id_result)) {
     return false;
 }
 $user = getByID('NguoiDung', 'MaND', check_valid_ID('id'));
+$taikhoan = getByID('TaiKhoan', 'MaND', check_valid_ID('id'));
 if ($user['status'] == 200) {
 ?>
     <div class="row">
@@ -45,7 +46,7 @@ if ($user['status'] == 200) {
                             </div>
                             <div class="mb-3">
                                 <label class="fs-6">Tên đăng nhập:</label>
-                                <span><?= $user['data']['username']; ?></span>
+                                <span><?= $taikhoan['data']['TenDangNhap']; ?></span>
                             </div>
                             <div class="mb-3">
                                 <label class="fs-6">Ngày sinh:</label>
@@ -65,7 +66,7 @@ if ($user['status'] == 200) {
                             </div>
                             <div class="mb-3">
                                 <label class="fs-6">Role:</label>
-                                <span><?= $user['data']['Role'] == 1 ? 'Admin' : 'User'; ?></span>
+                                <span><?= $taikhoan['data']['Quyen'] == 1 ? 'Admin' : 'User'; ?></span>
                             </div>
                         </div>
 
@@ -74,7 +75,7 @@ if ($user['status'] == 200) {
 
                             <div class="mb-3">
                                 <label class="fs-6">Người tạo:</label>
-                                <span><?=$admin['data']['TenND']?></span>
+                                <span><?= $admin['data']['TenND'] ?></span>
                             </div>
                             <div class="mb-3">
                                 <label class="fs-6">Ngày tạo:</label>
@@ -82,7 +83,7 @@ if ($user['status'] == 200) {
                             </div>
                             <div class="mb-3">
                                 <label class="fs-6">Người cập nhật:</label>
-                                <span><?=$admin['data']['TenND']?></span>
+                                <span><?= $admin['data']['TenND'] ?></span>
                             </div>
                             <div class="mb-3">
                                 <label class="fs-6">Ngày cập nhật:</label>
