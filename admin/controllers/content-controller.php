@@ -43,33 +43,53 @@ if (isset($_POST['saveContent'])) {
 
 //====== content-edit =======//
 
-if (isset($_POST['editCategory'])) {
+if (isset($_POST['editContent'])) {
     $messages = [];
-    $name = validate($_POST['ten_the_loai']);
-    $id = validate($_POST['matl']);
+    $id = validate($_POST['mabv']);
+    $name = validate($_POST['tenbv']);
+    $chudebv = validate($_POST['chudebv']);
+    $chitiet = validate($_POST['chitietbv']);
+    $tukhoa = validate($_POST['tukhoa']);
     $status = validate($_POST['status']);
+    $mota = validate($_POST['mota']);
+    $kieubv = validate($_POST['kieubv']);
     if (empty($name)) {
-        $messages['name'] = 'Tên thể loại không được để trống';
+        $messages['name'] = 'Tên chủ đề không được để trống';
     }
-    if (isExistValue('TheLoai', 'TenTheLoai', $name, 'MaTheLoai', $id)) {
-        $messages['name'] = 'Tên thể loại đã tồn tại';
+    if (isset($_FILES['content-imgs'])) {
+
+        $uploadResult = uploadMultipleImages($_FILES['content-imgs'], "../../uploads/content-imgs/");
+
+        if ($uploadResult['success']) {
+            $anhbv = implode(',', $uploadResult['filenames']);
+        } else {
+            $messages['images'] = implode(', ', $uploadResult['messages']);
+        }
     }
     if (empty($messages)) {
-        $query = "UPDATE TheLoai SET
-                TenTheLoai = '$name',
+        $link = str_slug($name);
+        $query = "UPDATE baiviet SET
+                ChuDeBV = '$chudebv',
+                TenBV = '$name',
+                LienKet = '$link',
+                ChiTiet = '$chitiet',
+                Anh = '$anhbv',
+                KieuBV = '$kieubv',
+                MoTa = '$mota',
+                TuKhoa = '$tukhoa',
                 NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP,
                 TrangThai = '$status'
-                WHERE MaTheLoai = '$id'
-                ";
+              WHERE Id = '$id'";  // Chú ý: Cần xác định $id là ID của bài viết cần cập nhật
+
         if (mysqli_query($conn, $query)) {
-            redirect('content.php', 'success', 'Cập nhật thể loại thành công', 'admin');
+            redirect('content.php', 'success', 'Cập nhật bài viết thành công', 'admin');
         } else {
-            redirect('views/category/content-edit.php?id=' . $id, 'errors', 'Cập nhật thể loại thất bại', 'admin');
+            redirect('views/content/content-edit.php', 'error', 'Cập nhật bài viết thất bại', 'admin');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('views/category/content-edit.php?id=' . $id, 'errors', $messages, 'admin');
+        redirect('views/content/content-edit.php', 'messages', $messages, 'admin');
     }
 }
 

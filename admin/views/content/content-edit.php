@@ -107,7 +107,6 @@ unset($_SESSION['form_data']);
                         <?php if (isset($messages['images'])): ?>
                         <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['images']) ?></small>
                         <?php endif; ?>
-
                     </div>
                     <div class="form-group mb-3">
 
@@ -123,7 +122,7 @@ unset($_SESSION['form_data']);
                 echo '<h5>' . $content['message'] . '</h5>';
             }
             ?>
-            <button type="submit" name="editcontent" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
+            <button type="submit" name="editContent" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
         </form>
     </div>
 </div>
