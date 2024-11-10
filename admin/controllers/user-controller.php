@@ -16,33 +16,32 @@ if (isset($_POST['saveUser'])) {
     $email = validate($_POST['email']);
     $role = validate($_POST['role']);
     $status = validate($_POST['status']) == 1 ? 1 : 0;
-    // Kiểm tra không được để trống
-    if (empty($name)) {
-        $messages['name'] = "Họ và tên không được để trống.";
+    if (empty($username)) {
+        $messages['tendn'] = "Tên đăng nhập không được để trống.";
+    } else if (!preg_match('/^[a-zA-Z]+$/', $username)) {
+        $messages['tendn'] = "Tên đăng nhập chỉ chấp nhận chữ cái.";
     }
     if (empty($username)) {
-        $messages['username'] = "Tên người dùng không được để trống.";
-    } elseif (isExistValue('NguoiDung', 'username', $username)) {
-        $messages['username'] = "Tên người dùng đã tồn tại";
+        $messages['tendn'] = "Tên đăng nhập không được để trống.";
+    } else if (!preg_match('/^[a-zA-Z0-9]+$/', $username)) {
+        $messages['tendn'] = "Tên đăng nhập chỉ chấp nhận chữ cái và số.";
     }
-
+    if (isExistValue('TaiKhoan', 'TenDangNhap', $username)) {
+        $messages['tendn'] = "Tên đăng nhập đã tồn tại";
+    }
     if (empty($password)) {
         $messages['password'] = "Mật khẩu không được để trống.";
-    } elseif (strlen($password) < 6) {
-        $messages['password'] = "Mật khẩu phải từ 6 kí tự trở lên";
+    } else if (!preg_match('/^(?=.*[A-Z])(?=.*[0-9])(?=.*[\W_]).{6,}$/', $password)) {
+        $messages['password'] = "Mật khẩu phải có ít nhất 6 kí tự, bao gồm một chữ in hoa, một số và một ký tự đặc biệt.";
     }
     if (empty($re_password)) {
         $messages['re_password'] = "Xác nhận mật khẩu không được để trống.";
     }
-    if (empty($ngay_sinh)) {
-        $messages['ngay_sinh'] = "Ngày sinh không được để trống.";
-    }
     if (empty($email)) {
         $messages['email'] = "Email không được để trống.";
-    } elseif (isExistValue('NguoiDung', 'Email', $email)) {
-        $messages['email'] = "Email đã tồn tại";
+    } else if (isExistValue('NguoiDung', 'Email', $name)) {
+        $messages['tendn'] = "Email đã tồn tại";
     }
-
     // Hash password
     $passwordDetails = validateAndHashPassword($password, $re_password);
     if (!$passwordDetails['status']) {

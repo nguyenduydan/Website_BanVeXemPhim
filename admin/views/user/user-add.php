@@ -62,20 +62,7 @@ unset($_SESSION['form_data']);
                             <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['re_password']) ?></small>
                         <?php endif; ?>
                     </div>
-                    <div class="form-group row mb-3">
-                        <div class="col">
-                            <label for="gioi_tinh">Giới tính (<span class="text-danger">*</span>)</label>
-                            <select class="form-control form-select" id="gioi_tinh" name="gioi_tinh">
-                                <option value="1" <?php echo (isset($formData['gioi_tinh']) && $formData['gioi_tinh'] === 'Nam') ? 'selected' : ''; ?> selected>Nam</option>
-                                <option value="0" <?php echo (isset($formData['gioi_tinh']) && $formData['gioi_tinh'] === 'Nữ') ? 'selected' : ''; ?>>Nữ</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <label for="sdt">Số điện thoại</label>
-                            <input type="number" class="form-control" id="sdt" name="sdt" placeholder="Nhập số điện thoại"
-                                value="<?php echo isset($formData['sdt']) ? htmlspecialchars($formData['sdt']) : ''; ?>">
-                        </div>
-                    </div>
+
                     <div class="form-group mb-3">
                         <label for="email">Email (<span class="text-danger">*</span>)</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email"
@@ -86,21 +73,25 @@ unset($_SESSION['form_data']);
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group mb-3">
-                        <label for="ngay_sinh">Ngày sinh (<span class="text-danger">*</span>)</label>
-                        <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh" value="<?php echo isset($formData['ngay_sinh']) ? htmlspecialchars($formData['ngay_sinh']) : ''; ?>">
-                        <?php if (isset($messages['ngay_sinh'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ngay_sinh']) ?></small>
-                        <?php endif; ?>
-                    </div>
                     <div class="form-group row mb-3">
                         <div class="col-6">
-                            <label for="role">Vai trò</label>
-                            <select class=" form-select" id="role" name="role">
-                                <option value="1">Admin</option>
-                                <option value="0">User</option>
+                            <label for="gioi_tinh">Giới tính (<span class="text-danger">*</span>)</label>
+                            <select class="form-control form-select" id="gioi_tinh" name="gioi_tinh">
+                                <option value="1" <?php echo (isset($formData['gioi_tinh']) && $formData['gioi_tinh'] === 'Nam') ? 'selected' : ''; ?> selected>Nam</option>
+                                <option value="0" <?php echo (isset($formData['gioi_tinh']) && $formData['gioi_tinh'] === 'Nữ') ? 'selected' : ''; ?>>Nữ</option>
                             </select>
-
+                        </div>
+                        <div class="col-6">
+                            <label for="sdt">Số điện thoại</label>
+                            <input type="number" class="form-control" id="sdt" name="sdt" placeholder="Nhập số điện thoại"
+                                value="<?php echo isset($formData['sdt']) ? htmlspecialchars($formData['sdt']) : ''; ?>">
+                        </div>
+                        <div class="col-6">
+                            <label for="ngay_sinh">Ngày sinh (<span class="text-danger">*</span>)</label>
+                            <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh" max="<?php echo date('Y-m-d', strtotime('-5 years')); ?>" value="<?php echo isset($formData['ngay_sinh']) ? htmlspecialchars($formData['ngay_sinh']) : ''; ?>">
+                            <?php if (isset($messages['ngay_sinh'])): ?>
+                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ngay_sinh']) ?></small>
+                            <?php endif; ?>
                         </div>
                         <div class="col-6">
                             <label for="status">Trạng thái</label>
@@ -109,7 +100,6 @@ unset($_SESSION['form_data']);
                                 <option value="0">Offline</option>
                             </select>
                         </div>
-
                     </div>
                     <div class="form-group mb-3">
                         <label for="avatar">Chọn ảnh</label>

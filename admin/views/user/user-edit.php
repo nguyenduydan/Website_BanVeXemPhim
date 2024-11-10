@@ -59,7 +59,7 @@ unset($_SESSION['form_data']);
                             <div class="col-6">
                                 <label for="ngay_sinh">Ngày sinh (<span class="text-danger">*</span>)</label>
                                 <input type="date" class="form-control" id="ngay_sinh"
-                                    value="<?= isset($user['data']['NgaySinh']) ? htmlspecialchars($user['data']['NgaySinh']) : ''; ?>"
+                                    max="<?php echo date('Y-m-d', strtotime('-5 years')); ?>" value="<?= isset($user['data']['NgaySinh']) ? htmlspecialchars($user['data']['NgaySinh']) : ''; ?>"
                                     name="ngay_sinh">
                             </div>
 

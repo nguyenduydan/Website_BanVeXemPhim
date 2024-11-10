@@ -8,7 +8,6 @@ $result = check_valid_ID('id');
 if (is_numeric($result)) {
     $userId = validate($result);
     $user = getByID('NguoiDung', 'MaND', $userId);
-
     if ($user['status'] == 200) {
         $username = validate($user['data']['username']);
         $avatarPath = "../../../uploads/avatars/" . $user['data']['Anh'];
