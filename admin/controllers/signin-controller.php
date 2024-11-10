@@ -15,7 +15,7 @@ if (isset($_POST['SignIn'])) {
     }
 
     if (empty($messages)) {
-        $user = getByID('NguoiDung', 'username', $username);
+        $user = getByID('TaiKhoan', 'TenDangNhap', $username);
 
         if ($user['status'] == 200 && $user['data']['Role'] == 1) {
             if (password_verify($password, $user['data']['MatKhau'])) {
@@ -41,9 +41,11 @@ if (isset($_POST['SignIn'])) {
                 // Điều hướng đến trang index với thông báo đăng nhập thành công
                 redirect('index.php', 'success', 'Đăng nhập thành công', 'admin');
             } else {
+                $_SESSION['form_data'] = $_POST;
                 redirect('sign-in.php', 'error', 'Sai mật khẩu', 'admin');
             }
         } else {
+            $_SESSION['form_data'] = $_POST;
             redirect('sign-in.php', 'error', 'Đăng nhập thất bại', 'admin');
         }
     } else {

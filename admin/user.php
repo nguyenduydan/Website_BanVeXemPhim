@@ -43,7 +43,6 @@ $records_per_page = $pagination['records_per_page'];
                             <tr>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">STT</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Họ và tên</th>
-                                <th class="text-center text-uppercase text-xs font-weight-bolder">Tên đăng nhập</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Email</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">SĐT</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Trạng thái</th>
@@ -57,72 +56,71 @@ $records_per_page = $pagination['records_per_page'];
                                 foreach ($data as $item) {
                                     $stt++;
                             ?>
-                            <tr>
-                                <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
-                                <th class="text-center text-xs font-weight-bolder"><?= $item['TenND']; ?></th>
-                                <th class="text-center text-xs font-weight-bolder"><?= $item['username']; ?></th>
-                                <th class="text-center text-xs font-weight-bolder"><?= $item['Email']; ?></th>
-                                <th class="text-center text-xs font-weight-bolder"><?= $item['SDT']; ?></th>
-                                <th class="text-center text-s font-weight-bolder">
-                                    <form action="controllers/user-controller.php" method="POST"
-                                        style="display:inline;">
-                                        <input type="hidden" name="mand" value="<?= $item['MaND'] ?>">
-                                        <input type="hidden" name="status"
-                                            value="<?= $item['TrangThai'] == 1 ? 0 : 1 ?>">
-                                        <button type="submit" name="changeStatus"
-                                            class="badge badge-sm <?= $item['TrangThai'] == 1 ? 'bg-gradient-success' : 'bg-gradient-secondary' ?> text-uppercase"
-                                            style="border: none; cursor: pointer;">
-                                            <?= $item['TrangThai'] == 1 ? 'ON' : 'OFF' ?>
-                                        </button>
-                                    </form>
-                                </th>
-                                <td class="align-middle text-center text-sm">
-                                    <a class="btn btn-secondary m-0"
-                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                        href="views/user/user-detail.php?id=<?= $item['MaND'] ?>">
-                                        <i class="bi bi-info-circle"></i> Chi tiết
-                                    </a>
-                                    <a class="btn btn-info m-0"
-                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                        href="views/user/user-edit.php?id=<?= $item['MaND'] ?>">
-                                        <i class="bi bi-pencil"></i> Sửa
-                                    </a>
-                                    <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['MaND'] ?>"
-                                        data-url="views/user/user-delete.php"
-                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                        data-bs-toggle="modal" data-bs-target="#confirmModal">
-                                        <i class="bi bi-trash"></i> Xoá
-                                    </a>
-                                    <div class="modal fade" id="confirmModal" tabindex="-1"
-                                        aria-labelledby="confirmModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog mt-10">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="confirmModalLabel">Xác Nhận Xóa</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p class="p-2 fs-5">Bạn có muốn xóa người dùng này không?</p>
-                                                </div>
-                                                <div class="modal-footer d-flex justify-content-center">
-                                                    <button type="button" id="confirmYes"
-                                                        class="btn btn-sm btn-success">Có</button>
-                                                    <button type="button" class="btn btn-sm btn-danger me-2"
-                                                        data-bs-dismiss="modal">Không</button>
+                                    <tr>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['TenND']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['Email']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['SDT']; ?></th>
+                                        <th class="text-center text-s font-weight-bolder">
+                                            <form action="controllers/user-controller.php" method="POST"
+                                                style="display:inline;">
+                                                <input type="hidden" name="mand" value="<?= $item['MaND'] ?>">
+                                                <input type="hidden" name="status"
+                                                    value="<?= $item['TrangThai'] == 1 ? 0 : 1 ?>">
+                                                <button type="submit" name="changeStatus"
+                                                    class="badge badge-sm <?= $item['TrangThai'] == 1 ? 'bg-gradient-success' : 'bg-gradient-secondary' ?> text-uppercase"
+                                                    style="border: none; cursor: pointer;">
+                                                    <?= $item['TrangThai'] == 1 ? 'ON' : 'OFF' ?>
+                                                </button>
+                                            </form>
+                                        </th>
+                                        <td class="align-middle text-center text-sm">
+                                            <a class="btn btn-secondary m-0"
+                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                href="views/user/user-detail.php?id=<?= $item['MaND'] ?>">
+                                                <i class="bi bi-info-circle"></i> Chi tiết
+                                            </a>
+                                            <a class="btn btn-info m-0"
+                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                href="views/user/user-edit.php?id=<?= $item['MaND'] ?>">
+                                                <i class="bi bi-pencil"></i> Sửa
+                                            </a>
+                                            <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['MaND'] ?>"
+                                                data-url="views/user/user-delete.php"
+                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                data-bs-toggle="modal" data-bs-target="#confirmModal">
+                                                <i class="bi bi-trash"></i> Xoá
+                                            </a>
+                                            <div class="modal fade" id="confirmModal" tabindex="-1"
+                                                aria-labelledby="confirmModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog mt-10">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="confirmModalLabel">Xác Nhận Xóa</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p class="p-2 fs-5">Bạn có muốn xóa người dùng này không?</p>
+                                                        </div>
+                                                        <div class="modal-footer d-flex justify-content-center">
+                                                            <button type="button" id="confirmYes"
+                                                                class="btn btn-sm btn-success">Có</button>
+                                                            <button type="button" class="btn btn-sm btn-danger me-2"
+                                                                data-bs-dismiss="modal">Không</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <?php
+                                        </td>
+                                    </tr>
+                                <?php
                                 }
                             } else {
                                 ?>
-                            <tr>
-                                <td colspan="8" class="text-center">Không có bản ghi nào</td>
-                            </tr>
+                                <tr>
+                                    <td colspan="8" class="text-center">Không có bản ghi nào</td>
+                                </tr>
                             <?php
                             }
                             ?>

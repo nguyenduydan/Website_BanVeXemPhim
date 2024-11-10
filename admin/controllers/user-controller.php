@@ -16,7 +16,6 @@ if (isset($_POST['saveUser'])) {
     $email = validate($_POST['email']);
     $role = validate($_POST['role']);
     $status = validate($_POST['status']) == 1 ? 1 : 0;
-
     // Kiểm tra không được để trống
     if (empty($name)) {
         $messages['name'] = "Họ và tên không được để trống.";
@@ -62,10 +61,14 @@ if (isset($_POST['saveUser'])) {
         }
     }
     if (empty($messages)) {
-        $query = "INSERT INTO nguoidung (TenND, username, NgaySinh, GioiTinh, SDT, Anh, Email, MatKhau, Role, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
-                  VALUES ('$name', '$username', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email', '$hashedPassword', '$role', '$created', CURRENT_TIMESTAMP, '$created', CURRENT_TIMESTAMP, '$status')";
+        $query = "INSERT INTO TaiKhoan (TenDangNhap, MatKhau,TenND,Quyen)
+                  VALUES ('$username', '$hashedPassword','$name','$role')";
 
         if (mysqli_query($conn, $query)) {
+            $maND = mysqli_insert_id($conn);
+            $insert_query = "INSERT INTO nguoidung (MaND,TenND, NgaySinh, GioiTinh, SDT, Anh, Email, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
+                  VALUES ('$maND','$name', '$ngay_sinh', '$gioi_tinh', '$sdt', '$avatar', '$email', '$created', CURRENT_TIMESTAMP, '$created', CURRENT_TIMESTAMP, '$status')";
+            mysqli_query($conn, $insert_query);
             redirect('user.php', 'success', 'Thêm tài khoản thành công', 'admin');
         } else {
             redirect('views/user/user-add.php', 'error', 'Thêm tài khoản thất bại', 'admin');

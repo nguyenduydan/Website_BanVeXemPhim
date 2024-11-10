@@ -18,25 +18,25 @@ $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ?
     <title>Đăng nhập</title>
     <?php require('../admin/includes/links.php'); ?>
     <style>
-    .input-group .form-control {
-        padding-right: 40px;
-        /* Để dành khoảng trống cho icon */
-    }
+        .input-group .form-control {
+            padding-right: 40px;
+            /* Để dành khoảng trống cho icon */
+        }
 
-    .input-group {
-        position: relative;
-    }
+        .input-group {
+            position: relative;
+        }
 
-    .input-group .icon {
-        position: absolute;
-        right: 20px;
-        /* Đặt icon ở phía bên phải của ô input */
-        top: 40%;
-        transform: translateY(-50%);
-        cursor: pointer;
-        z-index: 999;
-        /* Đảm bảo icon không bị che khuất */
-    }
+        .input-group .icon {
+            position: absolute;
+            right: 20px;
+            /* Đặt icon ở phía bên phải của ô input */
+            top: 40%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            z-index: 999;
+            /* Đảm bảo icon không bị che khuất */
+        }
     </style>
 </head>
 <div id="toast"></div>
@@ -61,10 +61,10 @@ $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ?
                                             <input type="text" class="form-control" name="username"
                                                 placeholder="Username" aria-label="Username"
                                                 aria-describedby="username-addon"
-                                                value="<?php echo htmlspecialchars($username); ?>">
+                                                value="<?= isset($formData['username']) ? htmlspecialchars($formData['username']) : ''; ?>">
                                             <?php if (isset($messages['username'])): ?>
-                                            <small
-                                                class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['username']) ?></small>
+                                                <small
+                                                    class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['username']) ?></small>
                                             <?php endif; ?>
                                         </div>
 
@@ -78,8 +78,8 @@ $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ?
                                             </span>
                                         </div>
                                         <?php if (isset($messages['password'])): ?>
-                                        <small
-                                            class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['password']) ?></small>
+                                            <small
+                                                class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['password']) ?></small>
                                         <?php endif; ?>
                                         <div class="form-check mt-3 form-switch">
                                             <input class="form-check-input" type="checkbox" id="rememberMe"
