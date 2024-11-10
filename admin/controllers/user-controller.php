@@ -113,7 +113,7 @@ if (isset($_POST['editUser'])) {
         }
 
         // Upload the avatar with the username as the filename
-        $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/", $username); // Pass username
+        $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/", $id); // Pass username
         if ($avatarResult['success']) {
             $avatar = $avatarResult['filename'];
         } else {

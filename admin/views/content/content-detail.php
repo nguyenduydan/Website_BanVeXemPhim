@@ -54,7 +54,10 @@ if ($item['status'] == 200) {
                         </div>
                         <div class="mb-3">
                             <label class="fs-6">Chi tiết bài viết:</label>
-                            <span><?= $item['data']['ChiTiet']; ?></span>
+                            <span>
+                                <?= (strlen($item['data']['ChiTiet']) > 200) ? substr($item['data']['ChiTiet'], 0, 200) . '...' : $item['data']['ChiTiet']; ?>
+                            </span>
+
                         </div>
 
                         <div class="mb-3">

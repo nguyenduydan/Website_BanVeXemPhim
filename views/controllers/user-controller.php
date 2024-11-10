@@ -48,17 +48,7 @@ if (isset($_POST['signup'])) {
     }
     $hashedPassword = $passwordDetails['hashed'];
 
-    $avatar = '';
-    $unique = uniqid('user_', false);
-    if (isset($_FILES['avatar'])) {
-        // Use usertennd as filetennd for the avatar
-        $avatarResult = uploadImage($_FILES['avatar'], "../../uploads/avatars/", $unique);
-        if ($avatarResult['success']) {
-            $avatar = $avatarResult['filename'];
-        } else {
-            $messages[] = $avatarResult['message'];
-        }
-    }
+
 
     if (empty($messages)) {
         $query = "INSERT INTO TaiKhoan (TenDangNhap, MatKhau,TenND,Quyen)
@@ -120,7 +110,6 @@ if (isset($_POST['updateInf'])) {
     $gioi_tinh = validate($_POST['gioi_tinh']);
     $sdt = validate($_POST['sdt']);
     $email = validate($_POST['email']);
-    $user = getByID('NguoiDung', 'MaND', $id);
     // Kiểm tra tên người dùng
     if (empty($name)) {
         $messages['tennd'] = "Họ và tên không được để trống.";
@@ -133,6 +122,27 @@ if (isset($_POST['updateInf'])) {
     } elseif (isExistValue('NguoiDung', 'Email', $email, 'MaND', $id)) {
         $messages['email'] = "Email đã tồn tại";
     }
+
+    $user = getByID('NguoiDung', 'MaND', $id);
+    $avatar = $user['data']['Anh'];
+    $avt_url = $avatar;
+    $unique = uniqid('user_', false);
+    if (isset($_FILES['avatar'])) {
+        // Use usertennd as filetennd for the avatar
+        $avatarPath = $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/uploads/avatars/" . $avt_url;
+        if (!empty($avatar) && file_exists($avatarPath)) {
+            $deleteResult = deleteImage($avatarPath);
+            if (!$deleteResult['success']) {
+                $messages[] = $deleteResult['message'];
+            }
+        }
+        $avatarResult = uploadImage($_FILES['avatar'], $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/uploads/avatars/", $unique);
+        if ($avatarResult['success']) {
+            $avatar = $avatarResult['filename'];
+        } else {
+            $messages[] = $avatarResult['message'];
+        }
+    }
     if (empty($messages)) {
 
         $query = "UPDATE NguoiDung SET
@@ -141,12 +151,13 @@ if (isset($_POST['updateInf'])) {
                 GioiTinh = '$gioi_tinh',
                 SDT = '$sdt',
                 Email = '$email',
+                Anh = '$avatar',
                 NguoiCapNhat = '$id',
                 NgayCapNhat = CURRENT_TIMESTAMP
                 WHERE MaND = '$id'";
 
         if (mysqli_query($conn, $query)) {
-            redirect('profile-user.php', 'success', 'Cập nhật tài khoản thành công');
+            redirect('profile-user.php', 'success', 'Cập nhật tài khoản thành công' . $avatar_ngu);
         } else {
             redirect('profile-user.php', 'error', 'Cập nhật tài khoản thất bại');
         }
