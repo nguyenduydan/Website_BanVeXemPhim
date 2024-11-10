@@ -8,38 +8,33 @@
                         <div class="row gy-4 gy-md-0">
                             <div class="col-6 col-md-3">
                                 <div class="link-wrapper">
-                                    <h4 class="mb-3 fs-6 text-light">Clients</h4>
+                                    <h4 class="mb-3 fs-6 text-light">Giới thiệu</h4>
                                     <ul class="m-0 list-unstyled">
                                         <li class="mb-1">
                                             <a href="#!"
                                                 class="link-opacity-75 link-underline-opacity-0 link-opacity-100-hover link-underline-opacity-100-hover link-offset-1 link-light">
-                                                Templates
+                                                Về chúng tôi
                                             </a>
                                         </li>
                                         <li class="mb-1">
                                             <a href="#!"
                                                 class="link-opacity-75 link-underline-opacity-0 link-opacity-100-hover link-underline-opacity-100-hover link-offset-1 link-light">
-                                                Enterprise
+                                                Thỏa thuận sử dụng
                                             </a>
                                         </li>
                                         <li class="mb-1">
                                             <a href="#!"
                                                 class="link-opacity-75 link-underline-opacity-0 link-opacity-100-hover link-underline-opacity-100-hover link-offset-1 link-light">
-                                                Extensions
+                                                Quy chế hoạt động
                                             </a>
                                         </li>
                                         <li class="mb-1">
                                             <a href="#!"
                                                 class="link-opacity-75 link-underline-opacity-0 link-opacity-100-hover link-underline-opacity-100-hover link-offset-1 link-light">
-                                                Managers
+                                                Chính sách bảo mật
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="#!"
-                                                class="link-opacity-75 link-underline-opacity-0 link-opacity-100-hover link-underline-opacity-100-hover link-offset-1 link-light">
-                                                How to Hire
-                                            </a>
-                                        </li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -207,13 +202,13 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
     </script>
     <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-            var options = {
-                damping: '0.5'
-            }
-            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
+var win = navigator.platform.indexOf('Win') > -1;
+if (win && document.querySelector('#sidenav-scrollbar')) {
+    var options = {
+        damping: '0.5'
+    }
+    Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+}
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
