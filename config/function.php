@@ -316,10 +316,39 @@ function paginate_html($totalPages, $currentPage, $url = "?page=")
                                 </a>
                             </li>';
     }
-    for ($i = 1; $i <= $totalPages; $i++) {
+
+    // Hiển thị trang đầu nếu không phải là trang đầu
+    if ($currentPage > 3) {
+        $paginationHtml .= '<li class="page-item">
+                                <a class="page-link border-radius-xs" href="' . $url . '1">1</a>
+                            </li>';
+        if ($currentPage > 4) {
+            $paginationHtml .= '<li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>';
+        }
+    }
+
+    // Hiển thị các trang xung quanh trang hiện tại
+    $start = max(1, $currentPage - 2);
+    $end = min($totalPages, $currentPage + 2);
+
+    for ($i = $start; $i <= $end; $i++) {
         $activeClass = ($i == $currentPage) ? 'active' : '';
         $paginationHtml .= '<li class="page-item ' . $activeClass . '">
                                 <a class="page-link border-radius-xs" href="' . $url . $i . '">' . $i . '</a>
+                            </li>';
+    }
+
+    // Hiển thị trang cuối nếu không phải là trang cuối
+    if ($currentPage < $totalPages - 2) {
+        if ($currentPage < $totalPages - 3) {
+            $paginationHtml .= '<li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>';
+        }
+        $paginationHtml .= '<li class="page-item">
+                                <a class="page-link border-radius-xs" href="' . $url . $totalPages . '">' . $totalPages . '</a>
                             </li>';
     }
 
@@ -335,6 +364,7 @@ function paginate_html($totalPages, $currentPage, $url = "?page=")
 
     return $paginationHtml;
 }
+
 // Hàm sort
 function sortData(&$data, $sortField, $sortOrder = 'ASC')
 {
