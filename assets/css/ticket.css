@@ -1,0 +1,55 @@
+.ticket-wrapper {
+    max-width: 800px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ticket-image {
+    flex: 1;
+    background-color: #e3e3e3;
+    padding: 10px;
+}
+
+.ticket-image img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.ticket-info {
+    flex: 2;
+    background-color: #f9f9f9;
+    padding: 20px;
+    text-align: center;
+}
+
+.seat-list .badge {
+    font-size: 0.875rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+}
+
+.ticket-footer {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.custom-button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.custom-alert {
+    display: none;
+    padding: 0.75rem;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.alert-success {
+    background-color: #28a745;
+    color: white;
+}

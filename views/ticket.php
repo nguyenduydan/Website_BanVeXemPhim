@@ -73,42 +73,63 @@ if (isset($_POST['seatsInput'])) {
 ?>
 
 
-<div class="container d-flex justify-content-center my-5">
-    <div class="ticket-container mt-4 border rounded shadow p-4" style="max-width: 400px; width: 100%;">
-        <div class="ticket-header text-center">
-            <h4 class="text-uppercase mt-2 mb-4">
-                <?php echo $movie['TenPhim']; ?>
-            </h4>
+<div class="container d-flex justify-content-center align-items-center my-5 flex-column">
+    <div class="ticket-wrapper d-flex shadow">
+
+        <!-- Phần hình ảnh bên trái -->
+        <div class="ticket-image d-flex align-items-center justify-content-center">
+            <img src="../uploads/film-imgs/<?= $movie['Anh']; ?>" alt="Poster" class="img-fluid">
         </div>
-        <div class="ticket-body d-flex align-items-center mb-3">
-            <div class="ticket-poster me-3">
-                <img src="../uploads/film-imgs/<?= $movie['Anh']; ?>" class="img-fluid rounded"
-                    style="max-width: 100px;">
-            </div>
-            <div class="ticket-info">
-                <p class="mb-2"><strong>D2P - <?php echo $room['TenPhong']; ?></strong></p>
-                <p class="mb-2">Suất: <strong>
-                        <?php
-                            $showtimeDate = new DateTime($showtime['GioChieu']);
-                            echo $showtimeDate->format('d-m-Y H:i');
-                            ?>
-                    </strong>
+
+        <!-- Phần thông tin vé ở giữa -->
+        <div class="ticket-info p-4">
+            <div class="text-center mb-2">
+                <small class="text-uppercase text-muted">Suất chiếu</small>
+                <p class="display-6 text-danger fw-bold">
+                    <?php
+                        $showtimeDate = new DateTime($showtime['GioChieu']);
+                        echo $showtimeDate->format('d-m-Y');
+                        ?>
                 </p>
-                <p class="mb-2">Loại ghế: <?php echo implode(", ", $seatTypes); ?></p>
-                <p class="mb-2">Ghế: <?php echo $data['MaGhe']; ?></p>
-                <p class="mb-2"><strong>Tổng cộng:</strong>
-                    <?php echo number_format($tongTien, 0, ',', '.') . ' VNĐ'; ?></p>
             </div>
-        </div>
-        <div class="ticket-footer d-flex justify-content-between align-items-center mt-3">
-            <a href="http://localhost/Website_BanVeXemPhim/index.php" class="btn btn-secondary">Quay Lại</a>
-            <button class="btn btn-primary" id="payButton">Thanh Toán</button>
-        </div>
-        <div class="alert alert-success mt-3 text-center" id="successMessage" style="display: none;">
-            Thanh toán thành công!
+
+            <h3 class="text-center fw-bold"><?= $movie['TenPhim']; ?></h3>
+            <p class="text-center text-primary"><?= $room['TenPhong']; ?></p>
+
+            <div class="d-flex justify-content-center text-muted">
+                <p class="m-0">Giờ chiếu: <?= $showtimeDate->format('H:i'); ?></p>
+            </div>
+
+            <p class="text-center mt-3"><strong>Ghế:</strong></p>
+            <div class="seat-list d-flex flex-wrap justify-content-center">
+                <?php
+                    $seats = explode(",", $data['MaGhe']);
+                    foreach ($seats as $seat) {
+                        echo "<span class='badge bg-secondary me-1 mb-1'>$seat</span>";
+                    }
+                    ?>
+            </div>
+
+            <p class="text-center mt-3"><strong>Tổng cộng:</strong>
+                <span class="text-danger"><?= number_format($tongTien, 0, ',', '.') . ' VNĐ'; ?></span>
+            </p>
+
         </div>
     </div>
+
+    <!-- Nút Quay lại và Thanh toán, centered and close together -->
+    <div class="d-flex justify-content-center gap-3 mt-4">
+        <a href="http://localhost/Website_BanVeXemPhim/index.php" class="btn btn-outline-secondary custom-button">Quay
+            Lại</a>
+        <button class="btn btn-primary custom-button" id="payButton">Thanh Toán</button>
+    </div>
+
+    <!-- Thành công alert -->
+    <div class="alert alert-success mt-3 text-center custom-alert" id="successMessage" style="display: none;">
+        Thanh toán thành công!
+    </div>
 </div>
+
 
 
 <?php

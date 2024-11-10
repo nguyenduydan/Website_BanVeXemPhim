@@ -16,22 +16,41 @@ getUser();
             <div class="card profile-card shadow border-0">
                 <div class="card-body text-center p-4">
                     <form action="views/controllers/user-controller.php" method="post">
-                        <div class="profile-picture-container position-relative">
-                            <img src="uploads/avatars/admin.gif" class="rounded-circle mb-3 border"
-                                alt="Profile Picture" width="100px" height="100px">
+                        <div class="profile-picture-container position-relative d-inline-block">
+                            <!-- Avatar với Bootstrap -->
+                            <img src="uploads/avatars/admin.gif"
+                                class="rounded-circle border border-2 border-light shadow-sm mb-3" alt="Profile Picture"
+                                width="120" height="120">
+
                             <input type="file" id="avatar" style="display: none;">
-                            <button id="camera" type="submit"
-                                class="bg-secondary rounded border-0 text-white position-absolute top-50 start-50 translate-middle">
-                                <i class="bi bi-camera"></i>
+
+                            <!-- Nút thêm ảnh chỉ có icon -->
+                            <button id="camera" type="button"
+                                class="position-absolute top-50 start-50 translate-middle text-white d-none"
+                                style="border: none; background: rgba(0, 0, 0, 0.6); width: 40px; height: 40px; border-radius: 50%;">
+                                <i class="bi bi-camera" style="font-size: 20px;"></i>
                             </button>
                         </div>
                     </form>
+
                     <script>
-                        // JavaScript to trigger file input click on button click
-                        document.getElementById('camera').addEventListener('click', function() {
-                            document.getElementById('avatar').click();
-                        });
+                    // Kích hoạt file input khi click vào nút camera
+                    document.getElementById('camera').addEventListener('click', function(event) {
+                        event.preventDefault();
+                        document.getElementById('avatar').click();
+                    });
                     </script>
+
+                    <style>
+                    /* Hiển thị nút camera khi hover vào ảnh đại diện */
+                    .profile-picture-container:hover #camera {
+                        display: flex !important;
+                        /* Hiển thị nút khi hover */
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    </style>
+
 
                     <h4 class="fw-bold mb-3"><?= $user['data']['TenND'] ?></h4>
 
@@ -69,7 +88,8 @@ getUser();
                 <div id="personal-infomation" class="tab-pane fade show active">
                     <div class="card d-flex justify-content-center  w-100 shadow border-0">
                         <div class=" card-body p-4">
-                            <form class="row justify-content-center" action="views/controllers/user-controller.php" method="post">
+                            <form class="row justify-content-center" action="views/controllers/user-controller.php"
+                                method="post">
                                 <div class="col-6">
                                     <!-- Tên đầy đủ -->
                                     <div class="mb-4">
@@ -78,11 +98,12 @@ getUser();
                                         <div class="input-group">
                                             <span class="input-group-text bg-light border-0"><i
                                                     class="fas fa-user"></i></span>
-                                            <input type="text" class="form-control form-control-lg" id="fullName" name="tennd"
-                                                value="<?= $user['data']['TenND'] ?>">
+                                            <input type="text" class="form-control form-control-lg" id="fullName"
+                                                name="tennd" value="<?= $user['data']['TenND'] ?>">
                                         </div>
                                         <?php if (isset($messages['tennd'])): ?>
-                                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tennd']) ?></small>
+                                        <small
+                                            class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tennd']) ?></small>
                                         <?php endif; ?>
                                     </div>
 
@@ -92,23 +113,26 @@ getUser();
                                         <div class="input-group">
                                             <span class="input-group-text bg-light border-0"><i
                                                     class="fas fa-envelope"></i></span>
-                                            <input type="email" class="form-control form-control-lg" name="email" id="email"
-                                                value="<?= $user['data']['Email'] ?>">
+                                            <input type="email" class="form-control form-control-lg" name="email"
+                                                id="email" value="<?= $user['data']['Email'] ?>">
                                         </div>
                                         <?php if (isset($messages['email'])): ?>
-                                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['email']) ?></small>
+                                        <small
+                                            class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['email']) ?></small>
                                         <?php endif; ?>
                                     </div>
                                     <div class="mb-4 text-center">
                                         <label class="form-label fw-semibold">Giới tính</label>
                                         <div class="d-flex justify-content-center">
                                             <div class="form-check me-5">
-                                                <input class="form-check-input" type="radio" name="gioi_tinh" id="male" value="1"
+                                                <input class="form-check-input" type="radio" name="gioi_tinh" id="male"
+                                                    value="1"
                                                     <?php echo ($user['data']['GioiTinh'] == '1') ? 'checked' : ''; ?>>
                                                 <label class="form-check-label" for="male">Nam</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gioi_tinh" id="female" value="0"
+                                                <input class="form-check-input" type="radio" name="gioi_tinh"
+                                                    id="female" value="0"
                                                     <?php echo ($user['data']['GioiTinh'] == '0') ? 'checked' : ''; ?>>
                                                 <label class="form-check-label" for="female">Nữ</label>
                                             </div>
@@ -122,8 +146,10 @@ getUser();
                                         <div class="input-group">
                                             <span class="input-group-text bg-light border-0"><i
                                                     class="fas fa-calendar-alt"></i></span>
-                                            <input type="date" class="form-control form-control-lg" id="dob" name="ngay_sinh"
-                                                max="<?php echo date('Y-m-d', strtotime('-5 years')); ?>" value="<?= isset($user['data']['NgaySinh']) ? htmlspecialchars($user['data']['NgaySinh']) : ''; ?>">
+                                            <input type="date" class="form-control form-control-lg" id="dob"
+                                                name="ngay_sinh"
+                                                max="<?php echo date('Y-m-d', strtotime('-5 years')); ?>"
+                                                value="<?= isset($user['data']['NgaySinh']) ? htmlspecialchars($user['data']['NgaySinh']) : ''; ?>">
                                         </div>
                                     </div>
                                     <!-- Số điện thoại -->
@@ -148,8 +174,8 @@ getUser();
                                             }
                                             ?>
 
-                                            <input type="text" class="form-control form-control-lg" id="phone" name="sdt"
-                                                value="<?= htmlspecialchars($displayPhone) ?>">
+                                            <input type="text" class="form-control form-control-lg" id="phone"
+                                                name="sdt" value="<?= htmlspecialchars($displayPhone) ?>">
 
                                         </div>
                                     </div>
