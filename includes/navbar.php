@@ -150,7 +150,7 @@ getUser();
                             }
 
                             .dropdown-menu li a {
-                                font-size: 10px !important;
+                                font-size: 13px !important;
                             }
                         }
 
@@ -168,7 +168,7 @@ getUser();
                             }
 
                             .dropdown-menu li a {
-                                font-size: 7px !important;
+                                font-size: 13px !important;
                             }
                         }
                         </style>
@@ -185,12 +185,12 @@ getUser();
                                     <img src="<?= $baseUrl . 'uploads/avatars/' . (!empty($user['data']['Anh']) ? $user['data']['Anh'] : 'user-icon.png') ?>"
                                         alt="User Avatar" width="40" height="40" class="rounded-circle">
                                 </a>
-                                <ul class="dropdown-menu text-small shadow border-0">
+                                <ul class="dropdown-menu shadow border-0">
                                     <li class="dropdown-css">
                                         <a class="dropdown-item">
                                             <img src="<?= $baseUrl ?>/assets/imgs/wave.gif" class="bg-transparent"
                                                 width="25px" height="25px" alt="">
-                                            <span>Xin chào, </span>
+                                            <span class="fw-bold ">Xin chào, </span>
                                             <div class="d-flex overflow-visible">
                                                 <span class="fw-bold user-name" style="background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
                                                 background-clip: text; color: transparent; white-space: nowrap;
@@ -201,7 +201,7 @@ getUser();
                                         </a>
                                     </li>
                                     <li class="dropdown-css">
-                                        <a class="dropdown-item" href="<?= $baseUrl ?>profile-user.php">
+                                        <a class="dropdown-item fw-bold " href="<?= $baseUrl ?>profile-user.php">
                                             <i class="bi bi-person-video2"></i> Trang người dùng
                                         </a>
                                     </li>
@@ -209,7 +209,7 @@ getUser();
                                         <hr class="dropdown-divider">
                                     </li>
                                     <li class="dropdown-css">
-                                        <a class="dropdown-item" href="<?= $baseUrl ?>logout.php">
+                                        <a class="dropdown-item fw-bold " href="<?= $baseUrl ?>logout.php">
                                             <i class="bi bi-box-arrow-right"></i> Đăng xuất
                                         </a>
                                     </li>

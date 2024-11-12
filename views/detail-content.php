@@ -11,40 +11,47 @@ if (!is_numeric($id_result)) {
 $item = getByID('BaiViet', 'Id', $id_result);
 if ($item['status'] == 200) {
 ?>
-<div class="container mt-5 mb-4">
-    <a href="http://localhost/Website_BanVeXemPhim/views/list-content-all.php" class="btn btn-dark mb-3">
+<div class="container mb-4">
+    <a href="http://localhost/Website_BanVeXemPhim/views/list-content-all.php" class="btn btn-dark mb-3 mt-5">
         <i class="bi bi-arrow-left"></i> Trở về
     </a>
+    <div class="row flex-nowrap mt-0">
+        <div class="col-9">
+            <div class="text-center my-4">
+                <!-- Tiêu đề bài viết -->
+                <h2 class="fw-bold mb-4 text-uppercase"><?= htmlspecialchars($item['data']['TenBV']) ?></h2>
 
-    <div class="text-center my-4">
-        <!-- Tiêu đề bài viết -->
-        <h1 class="fw-bold mb-4 text-uppercase"><?= htmlspecialchars($item['data']['TenBV']) ?></h1>
+                <!-- Hình ảnh chính -->
+                <div class="mb-4">
+                    <?php
+                        $anhArray = explode(',', $item['data']['Anh']);
+                        if (!empty($anhArray[0])) {
+                            $anh = trim($anhArray[0]); // Lấy ảnh đầu tiên
+                            echo '<img src="/Website_BanVeXemPhim/uploads/content-imgs/' . htmlspecialchars($anh) . '" alt="Ảnh xem trước" class="img-fluid w-50 rounded shadow"/>';
+                        }
+                        ?>
+                </div>
 
-        <!-- Hình ảnh chính -->
-        <div class="mb-4">
-            <?php
-                $anhArray = explode(',', $item['data']['Anh']);
-                if (!empty($anhArray[0])) {
-                    $anh = trim($anhArray[0]); // Lấy ảnh đầu tiên
-                    echo '<img src="/Website_BanVeXemPhim/uploads/content-imgs/' . htmlspecialchars($anh) . '" alt="Ảnh xem trước" class="img-fluid rounded shadow"/>';
-                }
-                ?>
+                <!-- Nội dung bài viết -->
+                <div class="content-area">
+                    <h2 class="fw-bold text-left">Nội dung bài viết</h2>
+                    <?php
+                        // Split the content by paragraph breaks or new lines
+                        $paragraphs = explode(PHP_EOL, $item['data']['ChiTiet']);
+                        foreach ($paragraphs as $paragraph) {
+                            // Trim whitespace and check if paragraph is not empty
+                            $trimmedParagraph = trim($paragraph);
+                            if (!empty($trimmedParagraph)) {
+                                echo '<p class="text-justify">' . nl2br(htmlspecialchars($trimmedParagraph)) . '</p>';
+                            }
+                        }
+                        ?>
+                </div>
+            </div>
         </div>
-
-        <!-- Nội dung bài viết -->
-        <div class="content-area">
-            <h2 class="fw-bold text-left">Nội dung bài viết</h2>
-            <?php
-                // Split the content by paragraph breaks or new lines
-                $paragraphs = explode(PHP_EOL, $item['data']['ChiTiet']);
-                foreach ($paragraphs as $paragraph) {
-                    // Trim whitespace and check if paragraph is not empty
-                    $trimmedParagraph = trim($paragraph);
-                    if (!empty($trimmedParagraph)) {
-                        echo '<p class="text-justify">' . nl2br(htmlspecialchars($trimmedParagraph)) . '</p>';
-                    }
-                }
-                ?>
+        <div class="col-3">
+            <h4 class="mb-4 text-uppercase ps-3" style="border-left: 4px solid black;">Phim đang chiếu</h4>
+            <?php include("currently-showing.php"); ?>
         </div>
     </div>
 </div>
