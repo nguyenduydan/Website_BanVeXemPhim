@@ -59,7 +59,7 @@ $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ?
                                         <label class="fs-5">Tên đăng nhập</label>
                                         <div class="mb-3">
                                             <input type="text" class="form-control" name="username"
-                                                placeholder="Username" aria-label="Username"
+                                                placeholder="Tên đăng nhập" aria-label="Username"
                                                 aria-describedby="username-addon"
                                                 value="<?= isset($formData['username']) ? htmlspecialchars($formData['username']) : htmlspecialchars($username); ?>"
                                                 autocomplete="username">
@@ -72,7 +72,7 @@ $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ?
                                         <label class="fs-5">Mật khẩu</label>
                                         <div class="input-group">
                                             <input type="password" id="password" name="password" class="form-control"
-                                                placeholder="Password" aria-label="Password"
+                                                placeholder="Mật khẩu" aria-label="Password"
                                                 aria-describedby="password-addon" autocomplete="password">
                                             <span class="icon" id="password-addon">
                                                 <i class="fas fa-eye-slash" id="togglePassword"></i>
