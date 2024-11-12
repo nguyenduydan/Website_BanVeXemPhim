@@ -1,7 +1,7 @@
 // Hiển thị nút khi cuộn xuống
 window.onscroll = function () {
     const button = document.getElementById("scrollToTopBtn");
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+    if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
         button.style.display = "block";
     } else {
         button.style.display = "none";
