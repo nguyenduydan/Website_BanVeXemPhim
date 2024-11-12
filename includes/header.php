@@ -1,6 +1,8 @@
 <?php global $title; ?>
 <!doctype html>
 <html lang="en">
+<?php
+require($_SERVER['DOCUMENT_ROOT'] . '/Website_BanVeXemPhim/config/session.php'); ?>
 
 <head>
 

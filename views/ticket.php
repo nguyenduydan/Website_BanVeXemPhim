@@ -1,7 +1,6 @@
 <?php
 $title = 'Thông tin vé';
 include('../includes/header.php');
-
 require_once("../config/function.php");
 
 if (isset($_POST['seatsInput'])) {
@@ -73,64 +72,64 @@ if (isset($_POST['seatsInput'])) {
 ?>
 
 
-<div class="container d-flex justify-content-center align-items-center my-5 flex-column">
-    <div class="ticket-wrapper d-flex shadow position-relative">
+    <div class="container d-flex justify-content-center align-items-center my-5 flex-column">
+        <div class="ticket-wrapper d-flex shadow position-relative">
 
-        <div class="ticket-date position-absolute top-0 end-0 p-2 text-muted"
-            style="font-size: 0.75rem; background-color: rgba(255, 255, 255, 0.7); border-radius: 4px;">
-            <?php
+            <div class="ticket-date position-absolute top-0 end-0 p-2 text-muted"
+                style="font-size: 0.75rem; background-color: rgba(255, 255, 255, 0.7); border-radius: 4px;">
+                <?php
                 $purchaseDate = new DateTime();
                 echo $purchaseDate->format('d-m-Y');
                 ?>
-        </div>
+            </div>
 
-        <!-- Phần hình ảnh bên trái -->
-        <div class="ticket-image d-flex align-items-center justify-content-center">
-            <img src="../uploads/film-imgs/<?= $movie['Anh']; ?>" alt="Poster" class="img-fluid">
-        </div>
+            <!-- Phần hình ảnh bên trái -->
+            <div class="ticket-image d-flex align-items-center justify-content-center">
+                <img src="../uploads/film-imgs/<?= $movie['Anh']; ?>" alt="Poster" class="img-fluid">
+            </div>
 
-        <!-- Phần thông tin vé ở giữa -->
-        <div class="ticket-info p-4">
-            <div class="text-center mb-2">
-                <small class="text-uppercase text-muted">Suất chiếu</small>
-                <p class="display-6 text-danger fw-bold">
-                    <?php
+            <!-- Phần thông tin vé ở giữa -->
+            <div class="ticket-info p-4">
+                <div class="text-center mb-2">
+                    <small class="text-uppercase text-muted">Suất chiếu</small>
+                    <p class="display-6 text-danger fw-bold">
+                        <?php
                         $showtimeDate = new DateTime($showtime['GioChieu']);
                         echo $showtimeDate->format('d-m-Y');
                         ?>
-                </p>
-            </div>
+                    </p>
+                </div>
 
-            <h3 class="text-center fw-bold"><?= $movie['TenPhim']; ?></h3>
-            <p class="text-center text-primary"><?= $room['TenPhong']; ?></p>
+                <h3 class="text-center fw-bold"><?= $movie['TenPhim']; ?></h3>
+                <p class="text-center text-primary"><?= $room['TenPhong']; ?></p>
 
-            <div class="d-flex justify-content-center text-muted">
-                <p class="m-0">Giờ chiếu: <?= $showtimeDate->format('H:i'); ?></p>
-            </div>
+                <div class="d-flex justify-content-center text-muted">
+                    <p class="m-0">Giờ chiếu: <?= $showtimeDate->format('H:i'); ?></p>
+                </div>
 
-            <p class="text-center mt-3"><strong>Ghế:</strong></p>
-            <div class="seat-list d-flex flex-wrap justify-content-center">
-                <?php
+                <p class="text-center mt-3"><strong>Ghế:</strong></p>
+                <div class="seat-list d-flex flex-wrap justify-content-center">
+                    <?php
                     $seats = explode(",", $data['MaGhe']);
                     foreach ($seats as $seat) {
                         echo "<span class='badge bg-secondary me-1 mb-1'>$seat</span>";
                     }
                     ?>
+                </div>
+
+                <p class="text-center mt-3"><strong>Tổng cộng:</strong>
+                    <span class="text-danger"><?= number_format($tongTien, 0, ',', '.') . ' VNĐ'; ?></span>
+                </p>
+
             </div>
+        </div>
 
-            <p class="text-center mt-3"><strong>Tổng cộng:</strong>
-                <span class="text-danger"><?= number_format($tongTien, 0, ',', '.') . ' VNĐ'; ?></span>
-            </p>
-
+        <!-- Nút Quay lại -->
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <a href="http://localhost/Website_BanVeXemPhim/index.php" class="btn btn-outline-secondary custom-button">Quay
+                Lại</a>
         </div>
     </div>
-
-    <!-- Nút Quay lại -->
-    <div class="d-flex justify-content-center gap-3 mt-4">
-        <a href="http://localhost/Website_BanVeXemPhim/index.php" class="btn btn-outline-secondary custom-button">Quay
-            Lại</a>
-    </div>
-</div>
 
 <?php
 } else {

@@ -26,7 +26,7 @@ unset($_SESSION['form_data']);
                                 value="<?php echo isset($formData['tendn']) ? htmlspecialchars($formData['tendn']) : ''; ?>">
                         </div>
                         <?php if (isset($messages['tendn'])): ?>
-                        <small class="text-danger m-2"><?= htmlspecialchars($messages['tendn']) ?></small>
+                            <small class="text-danger m-2"><?= htmlspecialchars($messages['tendn']) ?></small>
                         <?php endif; ?>
                     </div>
 
@@ -42,7 +42,7 @@ unset($_SESSION['form_data']);
                             </span>
                         </div>
                         <?php if (isset($messages['password'])): ?>
-                        <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
+                            <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
                         <?php endif; ?>
                     </div>
 

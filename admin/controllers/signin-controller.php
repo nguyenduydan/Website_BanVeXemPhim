@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../../config/function.php';
+require_once '../../config/function.php';
 getAdmin();
 if (isset($_POST['SignIn'])) {
     $username = validate($_POST['username']);
@@ -22,7 +22,7 @@ if (isset($_POST['SignIn'])) {
                 $_SESSION['loggedIn'] = true;
                 $_SESSION['userId'] = $user['data']['MaND'];
                 $_SESSION['lastActivity'] = time();
-
+                $_SESSION['role'] = 'admin';
                 // Kiểm tra nếu checkbox 'rememberMe' được chọn
                 if (isset($_POST['rememberMe']) && $_POST['rememberMe'] == '1') {
                     $_SESSION['rememberMe'] = true; // Lưu vào session
