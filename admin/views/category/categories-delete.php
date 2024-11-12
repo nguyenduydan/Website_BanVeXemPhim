@@ -1,23 +1,30 @@
 <?php
-session_start();
-require '../../../config/function.php';
+session_start(); // Bắt đầu phiên làm việc để sử dụng $_SESSION
+require '../../../config/function.php'; // Bao gồm các hàm chức năng từ file function.php
 
+// Kiểm tra ID hợp lệ từ GET request, trả về kết quả nếu là số
 $result = check_valid_ID('id');
-if (is_numeric($result)) {
-    $categoryId = validate($result);
-    $category = getByID('TheLoai', 'MaTheLoai', $categoryId);
+if (is_numeric($result)) { // Nếu ID hợp lệ (là số)
+    $categoryId = validate($result); // Xác thực và lấy ID của thể loại
+    // Lấy thông tin thể loại từ cơ sở dữ liệu dựa trên ID
+    $category = getByID('theloai', 'MaTheLoai', $categoryId);
 
-    if ($category['status'] == 200) {
-        $name = validate($category['data']['TenTheLoai']);
-        $categoryDelete = deleteQuery('TheLoai', 'MaTheLoai', $categoryId);
-        if ($categoryDelete) {
+    if ($category['status'] == 200) { // Kiểm tra nếu thể loại tồn tại trong cơ sở dữ liệu
+        $name = validate($category['data']['TenTheLoai']); // Lấy tên thể loại và xác thực
+        // Thực hiện xóa thể loại trong cơ sở dữ liệu
+        $categoryDelete = deleteQuery('theloai', 'MaTheLoai', $categoryId);
+        if ($categoryDelete) { // Nếu xóa thành công
+            // Chuyển hướng về trang categories.php với thông báo thành công
             redirect('categories.php', 'success', 'Xóa <span class="text-danger fw-bolder">' . htmlspecialchars($name) . '</span> thành công', 'admin');
-        } else {
+        } else { // Nếu xóa thất bại
+            // Chuyển hướng về trang categories.php với thông báo thất bại
             redirect('categories.php', 'error', 'Xóa ' . htmlspecialchars($name) . ' thất bại', 'admin');
         }
-    } else {
+    } else { // Nếu thể loại không tồn tại
+        // Chuyển hướng về trang categories.php với thông báo lỗi từ API
         redirect('categories.php', 'error', $category['message'], 'admin');
     }
-} else {
+} else { // Nếu ID không hợp lệ (không phải số)
+    // Chuyển hướng về trang categories.php với thông báo lỗi
     redirect('categories.php', 'error', $result, 'admin');
 }

@@ -1,11 +1,13 @@
 <?php
-require '../../../config/function.php';
-include('../../includes/header.php');
+require '../../../config/function.php'; // Bao gồm file function.php để sử dụng các hàm
+include('../../includes/header.php'); // Bao gồm file header của trang
 
+// Lấy thông báo lỗi và dữ liệu form từ session nếu có
 $messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy lỗi từ session
-$formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
+$formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : []; // Lấy dữ liệu form từ session
 unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
-unset($_SESSION['form_data']);
+unset($_SESSION['form_data']); // Xóa dữ liệu form khỏi session sau khi hiển thị
+
 ?>
 
 <div class="row">
@@ -27,7 +29,7 @@ unset($_SESSION['form_data']);
                             value="<?php echo isset($formData['ten_the_loai']) ? htmlspecialchars($formData['ten_the_loai']) : ''; ?>"
                             class="form-control" id="ten_the_loai" name="ten_the_loai" placeholder="Nhập tên thể loại">
                         <?php if (isset($messages['name'])): ?>
-                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
