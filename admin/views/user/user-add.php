@@ -1,10 +1,15 @@
 <?php
+// Kết nối file cấu hình và header
 require '../../../config/function.php';
 include('../../includes/header.php');
+
+// Kiểm tra đăng nhập, nếu chưa đăng nhập sẽ chuyển hướng đến trang đăng nhập
 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
 }
-$messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy lỗi từ session
+
+// Lấy thông báo lỗi từ session nếu có và dữ liệu form người dùng đã nhập trước đó
+$messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : [];
 $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
 unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
 unset($_SESSION['form_data']);
@@ -19,7 +24,8 @@ unset($_SESSION['form_data']);
         <div class="text-end mb-4">
             <a class="btn btn-secondary" href="../../user.php">Quay lại</a>
         </div>
-        <form id="addUserForm" action="../../controllers/user-controller.php" method="post" enctype="multipart/form-data">
+        <form id="addUserForm" action="../../controllers/user-controller.php" method="post"
+            enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group mb-3">
@@ -32,7 +38,8 @@ unset($_SESSION['form_data']);
                     </div>
                     <div class="form-group mb-3">
                         <label for="username">Tên người dùng (<span class="text-danger">*</span>)</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên đăng nhập"
+                        <input type="text" class="form-control" id="username" name="username"
+                            placeholder="Nhập tên đăng nhập"
                             value="<?php echo isset($formData['username']) ? htmlspecialchars($formData['username']) : ''; ?>">
                         <?php if (isset($messages['username'])): ?>
                             <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['username']) ?></small>
@@ -41,7 +48,8 @@ unset($_SESSION['form_data']);
                     <div class="form-group mb-3">
                         <label for="password">Mật khẩu (<span class="text-danger">*</span>)</label>
                         <div class="input-group">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="Nhập mật khẩu">
                             <span class="input-group-text iconEye" style="cursor: pointer;">
                                 <i class="fas fa-eye-slash" id="togglePassword"></i>
                             </span>
@@ -53,7 +61,8 @@ unset($_SESSION['form_data']);
                     <div class="form-group mb-3">
                         <label for="re_password">Nhập lại mật khẩu (<span class="text-danger">*</span>)</label>
                         <div class="input-group">
-                            <input type="password" class="form-control" id="re_password" name="re_password" placeholder="Nhập lại mật khẩu">
+                            <input type="password" class="form-control" id="re_password" name="re_password"
+                                placeholder="Nhập lại mật khẩu">
                             <span class="input-group-text iconEye" style="cursor: pointer;">
                                 <i class="fas fa-eye-slash" id="toggleRePassword"></i>
                             </span>
@@ -77,20 +86,28 @@ unset($_SESSION['form_data']);
                         <div class="col-6">
                             <label for="gioi_tinh">Giới tính (<span class="text-danger">*</span>)</label>
                             <select class="form-control form-select" id="gioi_tinh" name="gioi_tinh">
-                                <option value="1" <?php echo (isset($formData['gioi_tinh']) && $formData['gioi_tinh'] === 'Nam') ? 'selected' : ''; ?> selected>Nam</option>
-                                <option value="0" <?php echo (isset($formData['gioi_tinh']) && $formData['gioi_tinh'] === 'Nữ') ? 'selected' : ''; ?>>Nữ</option>
+                                <option value="1"
+                                    <?php echo (isset($formData['gioi_tinh']) && $formData['gioi_tinh'] === 'Nam') ? 'selected' : ''; ?>
+                                    selected>Nam</option>
+                                <option value="0"
+                                    <?php echo (isset($formData['gioi_tinh']) && $formData['gioi_tinh'] === 'Nữ') ? 'selected' : ''; ?>>
+                                    Nữ</option>
                             </select>
                         </div>
                         <div class="col-6">
                             <label for="sdt">Số điện thoại</label>
-                            <input type="number" class="form-control" id="sdt" name="sdt" placeholder="Nhập số điện thoại"
+                            <input type="number" class="form-control" id="sdt" name="sdt"
+                                placeholder="Nhập số điện thoại"
                                 value="<?php echo isset($formData['sdt']) ? htmlspecialchars($formData['sdt']) : ''; ?>">
                         </div>
                         <div class="col-6">
                             <label for="ngay_sinh">Ngày sinh (<span class="text-danger">*</span>)</label>
-                            <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh" max="<?php echo date('Y-m-d', strtotime('-5 years')); ?>" value="<?php echo isset($formData['ngay_sinh']) ? htmlspecialchars($formData['ngay_sinh']) : ''; ?>">
+                            <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh"
+                                max="<?php echo date('Y-m-d', strtotime('-5 years')); ?>"
+                                value="<?php echo isset($formData['ngay_sinh']) ? htmlspecialchars($formData['ngay_sinh']) : ''; ?>">
                             <?php if (isset($messages['ngay_sinh'])): ?>
-                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ngay_sinh']) ?></small>
+                                <small
+                                    class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ngay_sinh']) ?></small>
                             <?php endif; ?>
                         </div>
                         <div class="col-6">
@@ -103,10 +120,12 @@ unset($_SESSION['form_data']);
                     </div>
                     <div class="form-group mb-3">
                         <label for="avatar">Chọn ảnh</label>
-                        <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*" onchange="previewImageAdd(event)">
+                        <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*"
+                            onchange="previewImageAdd(event)">
                     </div>
                     <div class="form-group d-flex justify-content-center mb-3">
-                        <img id="preview" src="#" alt="Ảnh xem trước" class="img-fluid" style="display:none; max-width: 100%; max-height: 15rem;" />
+                        <img id="preview" src="#" alt="Ảnh xem trước" class="img-fluid"
+                            style="display:none; max-width: 100%; max-height: 15rem;" />
                     </div>
                 </div>
             </div>
