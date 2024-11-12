@@ -4,8 +4,8 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
 }
 getAdmin();
 ?>
-<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 border-radius-xl position-sticky blur shadow-blur mt-4 left-auto top-1 z-index-sticky"
-    style="background-color: #f8f9fa;">
+<nav
+    class="navbar navbar-main navbar-expand-lg px-0 mx-4 border-radius-xl position-sticky blur shadow-blur mt-4 left-auto top-1 z-index-sticky">
     <div class="container-fluid py-1 px-3">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
             aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,56 +77,56 @@ getAdmin();
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function() {
-    function updateClock() {
-        const now = new Date();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
+    $(document).ready(function() {
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
 
-        $('#clock').text(`${hours}:${minutes}:${seconds}`);
-    }
-
-    // Cập nhật đồng hồ ngay lập tức
-    updateClock();
-    // Cập nhật đồng hồ mỗi giây
-    setInterval(updateClock, 1000);
-});
-</script>
-<script>
-function searchData() {
-    let query = document.getElementById("searchBox").value.toLowerCase();
-    let links = document.querySelectorAll("#linkContainer a");
-    let results = document.getElementById("results");
-
-    // Xóa kết quả hiện tại
-    results.innerHTML = "";
-
-    if (query.length > 0) {
-        // Hiển thị vùng kết quả
-        results.style.display = "block";
-
-        // Lọc và hiển thị các thẻ <a> có chứa từ khóa tìm kiếm
-        links.forEach(function(link) {
-            let linkText = link.textContent.toLowerCase();
-            if (linkText.includes(query)) {
-                let resultLink = document.createElement("a");
-                resultLink.href = link.href;
-                resultLink.textContent = link.textContent;
-                resultLink.classList.add("result-item");
-
-                results.appendChild(resultLink);
-            }
-        });
-
-        // Nếu không có kết quả phù hợp, ẩn vùng kết quả
-        if (results.innerHTML.trim() === "") {
-            results.style.display = "none";
+            $('#clock').text(`${hours}:${minutes}:${seconds}`);
         }
 
-    } else {
-        // Ẩn vùng kết quả nếu không có dữ liệu tìm kiếm
-        results.style.display = "none";
+        // Cập nhật đồng hồ ngay lập tức
+        updateClock();
+        // Cập nhật đồng hồ mỗi giây
+        setInterval(updateClock, 1000);
+    });
+</script>
+<script>
+    function searchData() {
+        let query = document.getElementById("searchBox").value.toLowerCase();
+        let links = document.querySelectorAll("#linkContainer a");
+        let results = document.getElementById("results");
+
+        // Xóa kết quả hiện tại
+        results.innerHTML = "";
+
+        if (query.length > 0) {
+            // Hiển thị vùng kết quả
+            results.style.display = "block";
+
+            // Lọc và hiển thị các thẻ <a> có chứa từ khóa tìm kiếm
+            links.forEach(function(link) {
+                let linkText = link.textContent.toLowerCase();
+                if (linkText.includes(query)) {
+                    let resultLink = document.createElement("a");
+                    resultLink.href = link.href;
+                    resultLink.textContent = link.textContent;
+                    resultLink.classList.add("result-item");
+
+                    results.appendChild(resultLink);
+                }
+            });
+
+            // Nếu không có kết quả phù hợp, ẩn vùng kết quả
+            if (results.innerHTML.trim() === "") {
+                results.style.display = "none";
+            }
+
+        } else {
+            // Ẩn vùng kết quả nếu không có dữ liệu tìm kiếm
+            results.style.display = "none";
+        }
     }
-}
 </script>
