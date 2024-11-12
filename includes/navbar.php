@@ -4,11 +4,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/config/function.
 getUser();
 ?>
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light navbar-blur p-3">
-    <div class="container-fluid mx-5">
-        <div class="container">
-            <div class="d-flex row flex-lg-nowrap align-items-center justify-content-center justify-content-lg-center">
+    <div class="container">
+        <div class="container-fluid">
+            <div class="flex-lg-nowrap d-flex align-items-center justify-content-center ">
                 <!-- Logo -->
-                <div class="col-3 d-lg-flex row text-center col-lg-2 justify-content-center me-lg-auto mb-md-0">
+                <div class="col-6 d-lg-flex row text-center col-lg-2 justify-content-center me-lg-auto mb-md-0">
                     <div class="col-6">
                         <a href="http://localhost/Website_BanVeXemPhim/index.php" class="me-3">
                             <img src="/Website_BanVeXemPhim/assets/imgs/logo-100x100.png" style="width: 60px;"
@@ -27,7 +27,12 @@ getUser();
                         </p>
                     </div>
                 </div>
-
+                <div class="col-6 d-lg-none align-content-end text-end ms-4 ms-lg-0">
+                    <button class="btn btn-dark" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+                        <i class="bi bi-list"></i>
+                    </button>
+                </div>
                 <!-- Offcanvas sidebar cho menu trên màn hình nhỏ -->
                 <div class="offcanvas offcanvas-end w-100" tabindex="-1" id="offcanvasMenu"
                     aria-labelledby="offcanvasMenuLabel">
@@ -136,7 +141,7 @@ getUser();
 
                 <!-- Phần tìm kiếm và dropdown người dùng -->
                 <div
-                    class="col-8 col-md-8 col-lg-4 d-none d-md-flex d-lg-flex mt-lg-0 mt-2 justify-content-start justify-content-sm-start flex-column">
+                    class="col-8 col-md-8 col-lg-4 d-none d-md-none d-lg-flex mt-lg-0 mt-2 justify-content-start justify-content-sm-start flex-column">
                     <div class="d-flex align-items-center">
                         <form class="mb-3 mb-lg-0 me-3 input-group w-100 flex-nowrap" role="search">
                             <span class="input-group-text bg-dark text-white border" style="cursor: pointer;"
@@ -190,13 +195,6 @@ getUser();
                             <?php endif; ?>
                         </div>
                     </div>
-                </div>
-                <!-- Nút mở sidebar trên màn hình nhỏ -->
-                <div class="col-1 d-lg-none ms-4 ms-lg-0">
-                    <button class="btn btn-dark" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
-                        <i class="bi bi-list"></i>
-                    </button>
                 </div>
             </div>
         </div>
