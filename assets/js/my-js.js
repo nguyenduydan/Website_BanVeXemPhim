@@ -1,3 +1,21 @@
+// Hiển thị nút khi cuộn xuống
+window.onscroll = function () {
+    const button = document.getElementById("scrollToTopBtn");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        button.style.display = "block";
+    } else {
+        button.style.display = "none";
+    }
+};
+
+// Cuộn về đầu trang
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Cuộn mượt mà
+    });
+}
+
 function previewImageAdd(event) {
     var reader = new FileReader();
     reader.onload = function () {

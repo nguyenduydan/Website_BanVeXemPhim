@@ -19,4 +19,4 @@ $baseURL = '/Website_BanVeXemPhim/';
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/style.css?v2.7">
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/ticket.css?v1.0">
 <script src="<?php echo $baseURL; ?>assets/js/toast.js?1.0"></script>
-<script src="<?php echo $baseURL; ?>assets/js/my-js.js?2.4"></script>
+<script src="<?php echo $baseURL; ?>assets/js/my-js.js?2.5"></script>
