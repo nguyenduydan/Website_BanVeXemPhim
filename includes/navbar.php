@@ -34,7 +34,7 @@ getUser();
                     </button>
                 </div>
                 <!-- Offcanvas sidebar cho menu trên màn hình nhỏ -->
-                <div class="offcanvas offcanvas-end w-100" tabindex="-1" id="offcanvasMenu"
+                <div class="offcanvas offcanvas-top w-100 h-50" tabindex="-1" id="offcanvasMenu"
                     aria-labelledby="offcanvasMenuLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
@@ -46,153 +46,156 @@ getUser();
                         $baseUrl = "http://" . $_SERVER['HTTP_HOST'] . "/Website_BanVeXemPhim/";
                         ?>
                         <ul
-                            class="nav flex-lg-row flex-column col-lg-12 col-sm-12 me-lg-auto mb-2 justify-content-start justify-content-lg-center mb-md-0">
+                            class="nav flex-lg-row flex-column col-lg-8 col-sm-12 align-items-center justify-content-start justify-content-lg-center mb-md-0">
                             <?php foreach ($items as $item): ?>
-                            <li class="nav-item dropdown mx-2">
-                                <a href="<?= $baseUrl . $item['LienKet'] ?>" aria-expanded="false"
-                                    id="<?= ($item['TenMenu'] == 'Phim') ? 'phim' : '' ?>"
-                                    class="nav-link px-2 fw-bolder text-capitalize text-secondary <?= ($current_url === $baseUrl . $item['LienKet']) ? 'active' : '' ?>">
-                                    <?= htmlspecialchars($item['TenMenu']) ?>
-                                </a>
+                                <li class="nav-item dropdown mx-2">
+                                    <a href="<?= $baseUrl . $item['LienKet'] ?>" aria-expanded="false"
+                                        id="<?= ($item['TenMenu'] == 'Phim') ? 'phim' : '' ?>"
+                                        class="nav-link px-2 fw-bolder text-capitalize text-secondary <?= ($current_url === $baseUrl . $item['LienKet']) ? 'active' : '' ?>">
+                                        <?= htmlspecialchars($item['TenMenu']) ?>
+                                    </a>
 
-                                <?php if ($item['TenMenu'] == 'Phim'): ?>
-                                <ul class="dropdown-menu shadow border-0 w-100 py-3 px-2"
-                                    style="width:45rem !important;left: -50px;" aria-labelledby="phim">
-                                    <li class="px-3 py-2">
-                                        <h6 class="mb-3 text-uppercase ps-3" style="border-left: 4px solid #15036c;">
-                                            Phim đang chiếu
-                                        </h6>
-                                        <div class="row g-3">
-                                            <?php
+                                    <?php if ($item['TenMenu'] == 'Phim'): ?>
+                                        <ul class="dropdown-menu shadow border-0 w-100 py-3 px-2"
+                                            style="width:45rem !important;left: -50px;" aria-labelledby="phim">
+                                            <li class="px-3 py-2">
+                                                <h6 class="mb-3 text-uppercase ps-3" style="border-left: 4px solid #15036c;">
+                                                    Phim đang chiếu
+                                                </h6>
+                                                <div class="row g-3">
+                                                    <?php
                                                     $items = getFilm('1'); //Nhập trạng thái muốn hiển thị
                                                     $countCurrentlyShowing = count($items);
                                                     foreach ($items as $value => $item): ?>
-                                            <div
-                                                class="col-12 col-sm-12 col-md-6 col-lg-3 <?= $value >= 4 ? 'd-none' : '' ?>">
-                                                <div class="movie-card card">
-                                                    <img class="img-fluid" style="height: 200px; width:280px"
-                                                        src="/Website_BanVeXemPhim/uploads/film-imgs/<?= $item['Anh'] ?>"
-                                                        alt="<?= $item['TenPhim'] ?>">
-                                                    <span class="movie-age"><?= $item['PhanLoai'] ?></span>
-                                                    <a style="width: 100px; font-size: 13px; padding: 10px 7px"
-                                                        href="/Website_BanVeXemPhim/views/detail-film.php?id=<?= $item['MaPhim'] ?>"
-                                                        class="buy-ticket text-center align-items-center">
-                                                        <i class="bi bi-ticket-perforated"></i> Mua Vé
-                                                    </a>
+                                                        <div
+                                                            class="col-12 col-sm-12 col-md-6 col-lg-3 <?= $value >= 4 ? 'd-none' : '' ?>">
+                                                            <div class="movie-card card">
+                                                                <img class="img-fluid" style="height: 200px; width:280px"
+                                                                    src="/Website_BanVeXemPhim/uploads/film-imgs/<?= $item['Anh'] ?>"
+                                                                    alt="<?= $item['TenPhim'] ?>">
+                                                                <span class="movie-age"><?= $item['PhanLoai'] ?></span>
+                                                                <a style="width: 100px; font-size: 13px; padding: 10px 7px"
+                                                                    href="/Website_BanVeXemPhim/views/detail-film.php?id=<?= $item['MaPhim'] ?>"
+                                                                    class="buy-ticket text-center align-items-center">
+                                                                    <i class="bi bi-ticket-perforated"></i> Mua Vé
+                                                                </a>
+                                                            </div>
+                                                            <div class="movie-info">
+                                                                <small
+                                                                    class="movie-title fs-6 fw-bold"><?= $item['TenPhim'] ?></small>
+                                                            </div>
+                                                        </div>
+                                                    <?php endforeach; ?>
                                                 </div>
-                                                <div class="movie-info">
-                                                    <small
-                                                        class="movie-title fs-6 fw-bold"><?= $item['TenPhim'] ?></small>
-                                                </div>
-                                            </div>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    </li>
-                                    <li class="px-3 py-2 mt-2">
-                                        <h6 class="mb-3 text-uppercase ps-3" style="border-left: 4px solid #15036c;">
-                                            Phim sắp chiếu
-                                        </h6>
-                                        <div class="row g-3">
-                                            <?php
+                                            </li>
+                                            <li class="px-3 py-2 mt-2">
+                                                <h6 class="mb-3 text-uppercase ps-3" style="border-left: 4px solid #15036c;">
+                                                    Phim sắp chiếu
+                                                </h6>
+                                                <div class="row g-3">
+                                                    <?php
                                                     $items = getFilm('2'); //Nhập trạng thái muốn hiển thị
                                                     $countCurrentlyShowing = count($items);
                                                     foreach ($items as $value => $item): ?>
-                                            <div
-                                                class="col-12 col-sm-12 col-md-6 col-lg-3<?= $value >= 4 ? 'd-none' : '' ?>">
-                                                <div class="movie-card card">
-                                                    <img class="img-fluid" style="height: 200px; width:280px"
-                                                        src="/Website_BanVeXemPhim/uploads/film-imgs/<?= $item['Anh'] ?>"
-                                                        alt="<?= $item['TenPhim'] ?>">
-                                                    <span class="movie-age"><?= $item['PhanLoai'] ?></span>
-                                                    <a style="width: 100px; font-size: 13px; padding: 10px 7px"
-                                                        href="views/detail-film.php?id=<?= $item['MaPhim'] ?>"
-                                                        class="buy-ticket text-center align-items-center">
-                                                        <i class="bi bi-ticket-perforated"></i> Mua Vé
-                                                    </a>
+                                                        <div
+                                                            class="col-12 col-sm-12 col-md-6 col-lg-3<?= $value >= 4 ? 'd-none' : '' ?>">
+                                                            <div class="movie-card card">
+                                                                <img class="img-fluid" style="height: 200px; width:280px"
+                                                                    src="/Website_BanVeXemPhim/uploads/film-imgs/<?= $item['Anh'] ?>"
+                                                                    alt="<?= $item['TenPhim'] ?>">
+                                                                <span class="movie-age"><?= $item['PhanLoai'] ?></span>
+                                                                <a style="width: 100px; font-size: 13px; padding: 10px 7px"
+                                                                    href="views/detail-film.php?id=<?= $item['MaPhim'] ?>"
+                                                                    class="buy-ticket text-center align-items-center">
+                                                                    <i class="bi bi-ticket-perforated"></i> Mua Vé
+                                                                </a>
+                                                            </div>
+                                                            <div class="movie-info">
+                                                                <small
+                                                                    class="movie-title fs-6 fw-bold"><?= $item['TenPhim'] ?></small>
+                                                            </div>
+                                                        </div>
+                                                    <?php endforeach; ?>
                                                 </div>
-                                                <div class="movie-info">
-                                                    <small
-                                                        class="movie-title fs-6 fw-bold"><?= $item['TenPhim'] ?></small>
-                                                </div>
-                                            </div>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <?php endif; ?>
-                            </li>
+                                            </li>
+                                        </ul>
+                                    <?php endif; ?>
+                                </li>
                             <?php endforeach; ?>
                         </ul>
 
                         <style>
-                        /* Hiện dropdown khi hover */
-                        .nav-item.dropdown:hover .dropdown-menu {
-                            display: block;
-                        }
+                            /* Hiện dropdown khi hover trên màn hình lớn */
+                            .nav-item.dropdown:hover .dropdown-menu {
+                                display: block;
+                            }
 
-                        /* Ẩn dropdown mặc định */
-                        .dropdown-menu {
-                            display: none;
-                            transition: all .3s ease-in-out;
-                        }
+                            /* Ẩn dropdown mặc định */
+                            .dropdown-menu {
+                                display: none;
+                                transition: all .3s ease-in-out;
+                            }
+
+                            /* Ẩn dropdown khi hover trên màn hình nhỏ */
+                            @media (max-width: 575.98px) {
+                                .nav-item.dropdown:hover .dropdown-menu {
+                                    display: none;
+                                    /* Giữ cho dropdown ẩn khi hover trên màn hình nhỏ */
+                                }
+
+                                /* Ẩn dropdown mặc định */
+                                .dropdown-menu {
+                                    display: none;
+                                    transition: all .3s ease-in-out;
+                                }
+                            }
                         </style>
-                    </div>
-                </div>
-
-                <!-- Phần tìm kiếm và dropdown người dùng -->
-                <div
-                    class="col-8 col-md-8 col-lg-4 d-none d-md-none d-lg-flex mt-lg-0 mt-2 justify-content-start justify-content-sm-start flex-column">
-                    <div class="d-flex align-items-center">
-                        <form class="mb-3 mb-lg-0 me-3 input-group w-100 flex-nowrap" role="search">
-                            <span class="input-group-text bg-dark text-white border" style="cursor: pointer;"
-                                id="addon-wrapping"><i class="bi bi-search"></i></span>
-                            <input type="search" class="form-control ps-4" placeholder="Search..." aria-label="Search">
-                        </form>
-                        <div class="dropdown col-lg-3 text-center ">
-                            <?php if (isset($_SESSION['NDId']) && $_SESSION['NDloggedIn'] == true): ?>
-                            <!-- Người dùng đã đăng nhập, hiển thị dropdown -->
-                            <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="<?= $baseUrl . 'uploads/avatars/' . (!empty($user['data']['Anh']) ? $user['data']['Anh'] : 'user-icon.png') ?>"
-                                    alt="User Avatar" width="40" height="40" class="rounded-circle">
-                            </a>
-                            <ul class="dropdown-menu text-small shadow border-0">
-                                <li class="dropdown-css">
-                                    <a class="dropdown-item">
-                                        <img src="<?= $baseUrl ?>/assets/imgs/wave.gif" class="bg-transparent"
-                                            width="25px" height="25px" alt="">
-                                        <span>Xin chào, </span>
-                                        <span class="fw-bold user-name" style="
+                        <!-- Search and Login Section in Offcanvas -->
+                        <div class="col-lg-4 d-flex flex-lg-row flex-column align-items-center col-12">
+                            <form class="mb-0 input-group" role="search">
+                                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+                                <button class="btn btn-dark" type="submit"><i class="bi bi-search"></i></button>
+                            </form>
+                            <div class="dropdown mt-auto ms-3 ">
+                                <?php if (isset($_SESSION['NDId']) && $_SESSION['NDloggedIn'] == true): ?>
+                                    <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="<?= $baseUrl . 'uploads/avatars/' . (!empty($user['data']['Anh']) ? $user['data']['Anh'] : 'user-icon.png') ?>"
+                                            alt="User Avatar" width="40" height="40" class="rounded-circle">
+                                    </a>
+                                    <ul class="dropdown-menu text-small shadow border-0">
+                                        <li class="dropdown-css">
+                                            <a class="dropdown-item">
+                                                <img src="<?= $baseUrl ?>/assets/imgs/wave.gif" class="bg-transparent"
+                                                    width="25px" height="25px" alt="">
+                                                <span>Xin chào, </span>
+                                                <span class="fw-bold user-name" style="
                                                 background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
                                                 background-clip: text;
-                                                color: transparent;
-                                                display: block;
-                                                max-width: 200px; /* Giới hạn chiều rộng của tên */
-                                                overflow: hidden;
-                                                text-overflow: ellipsis;">
-                                            <?= $user['data']['TenND'] ?>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="dropdown-css">
-                                    <a class="dropdown-item" href="<?= $baseUrl ?>profile-user.php">
-                                        <i class="bi bi-person-video2"></i> Trang người dùng
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li class="dropdown-css">
-                                    <a class="dropdown-item" href="<?= $baseUrl ?>logout.php">
-                                        <i class="bi bi-box-arrow-right"></i> Đăng xuất
-                                    </a>
-                                </li>
-                            </ul>
-                            <?php else: ?>
-                            <!-- Người dùng chưa đăng nhập, hiển thị nút Đăng nhập -->
-                            <a href="<?= $baseUrl ?>login.php" class="nav-link px-2 fw-bolder text-capitalize "
-                                id="login">Đăng nhập</a>
-                            <?php endif; ?>
+                                                color: transparent;">
+                                                    <?= $user['data']['TenND'] ?>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="dropdown-css">
+                                            <a class="dropdown-item" href="<?= $baseUrl ?>profile-user.php">
+                                                <i class="bi bi-person-video2"></i> Trang người dùng
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li class="dropdown-css">
+                                            <a class="dropdown-item" href="<?= $baseUrl ?>logout.php">
+                                                <i class="bi bi-box-arrow-right"></i> Đăng xuất
+                                            </a>
+                                        </li>
+                                    </ul>
+                                <?php else: ?>
+                                    <a href="<?= $baseUrl ?>login.php" class="nav-link px-2 fw-bolder text-capitalize"
+                                        id="login">Đăng nhập</a>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -201,58 +204,58 @@ getUser();
     </div>
 </nav>
 <script>
-var words = document.getElementsByClassName('word');
-var wordArray = [];
-var currentWord = 0;
+    var words = document.getElementsByClassName('word');
+    var wordArray = [];
+    var currentWord = 0;
 
-words[currentWord].style.opacity = 1;
-for (var i = 0; i < words.length; i++) {
-    splitLetters(words[i]);
-}
-
-function changeWord() {
-    var cw = wordArray[currentWord];
-    var nw = currentWord == words.length - 1 ? wordArray[0] : wordArray[currentWord + 1];
-    for (var i = 0; i < cw.length; i++) {
-        animateLetterOut(cw, i);
+    words[currentWord].style.opacity = 1;
+    for (var i = 0; i < words.length; i++) {
+        splitLetters(words[i]);
     }
 
-    for (var i = 0; i < nw.length; i++) {
-        nw[i].className = 'letter behind';
-        nw[0].parentElement.style.opacity = 1;
-        animateLetterIn(nw, i);
+    function changeWord() {
+        var cw = wordArray[currentWord];
+        var nw = currentWord == words.length - 1 ? wordArray[0] : wordArray[currentWord + 1];
+        for (var i = 0; i < cw.length; i++) {
+            animateLetterOut(cw, i);
+        }
+
+        for (var i = 0; i < nw.length; i++) {
+            nw[i].className = 'letter behind';
+            nw[0].parentElement.style.opacity = 1;
+            animateLetterIn(nw, i);
+        }
+
+        currentWord = (currentWord == wordArray.length - 1) ? 0 : currentWord + 1;
     }
 
-    currentWord = (currentWord == wordArray.length - 1) ? 0 : currentWord + 1;
-}
-
-function animateLetterOut(cw, i) {
-    setTimeout(function() {
-        cw[i].className = 'letter out';
-    }, i * 80);
-}
-
-function animateLetterIn(nw, i) {
-    setTimeout(function() {
-        nw[i].className = 'letter in';
-    }, 340 + (i * 80));
-}
-
-function splitLetters(word) {
-    var content = word.innerHTML;
-    word.innerHTML = '';
-    var letters = [];
-    for (var i = 0; i < content.length; i++) {
-        var letter = document.createElement('span');
-        letter.className = 'letter';
-        letter.innerHTML = content.charAt(i);
-        word.appendChild(letter);
-        letters.push(letter);
+    function animateLetterOut(cw, i) {
+        setTimeout(function() {
+            cw[i].className = 'letter out';
+        }, i * 80);
     }
 
-    wordArray.push(letters);
-}
+    function animateLetterIn(nw, i) {
+        setTimeout(function() {
+            nw[i].className = 'letter in';
+        }, 340 + (i * 80));
+    }
 
-changeWord();
-setInterval(changeWord, 4000);
+    function splitLetters(word) {
+        var content = word.innerHTML;
+        word.innerHTML = '';
+        var letters = [];
+        for (var i = 0; i < content.length; i++) {
+            var letter = document.createElement('span');
+            letter.className = 'letter';
+            letter.innerHTML = content.charAt(i);
+            word.appendChild(letter);
+            letters.push(letter);
+        }
+
+        wordArray.push(letters);
+    }
+
+    changeWord();
+    setInterval(changeWord, 4000);
 </script>
