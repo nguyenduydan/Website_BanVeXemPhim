@@ -22,7 +22,7 @@ if (isset($_POST['signup'])) {
     
     if (empty($tennd)) {
         $messages['tennd'] = "Tên người dùng không được để trống.";
-    } else if (!preg_match('/^[\p{L}\s.,]+$/u', $tendn)) {
+    } else if (!preg_match('/^[\p{L}\s.,]+$/u', $tennd)) {
         $messages['tennd'] = "Tên người dùng không được dùng kí tự đặc biệt";
     }
     

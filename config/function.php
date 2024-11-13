@@ -555,3 +555,26 @@ function discount($maND, $sumBill){
         return $sumBill;
     }
 }
+function getBillByUserId($maND) {
+    global $conn;
+    $maND = validate($maND); 
+
+    $query = "SELECT DISTINCT h.*, p.TenPhim 
+              FROM hoadon h
+              JOIN chitiethoadon cthd on h.MaHD = cthd.MaHD
+              JOIN suatchieu sc on cthd.MaSuatChieu = sc.MaSuatChieu
+              JOIN phim p ON sc.MaPhim =p.MaPhim
+              WHERE h.MaND = '$maND'";
+    
+    $result = mysqli_query($conn, $query);
+    $invoices = []; 
+
+    if ($result) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $row['TongTien'] = sumBill($row['MaHD']); 
+            $invoices[] = $row;
+        }
+    }
+
+    return $invoices; 
+}
