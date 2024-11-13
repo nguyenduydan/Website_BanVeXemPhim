@@ -603,35 +603,31 @@ let revenueThisYear = <?php echo $current_year_revenue_json; ?>;
 let revenueChange = 0;
 
 if (revenueLastYear === 0 && revenueThisYear !== 0) {
-    // Nếu doanh thu năm ngoái bằng 0 và năm nay có doanh thu
     revenueChange = 100;
 } else if (revenueLastYear !== 0) {
-    // Nếu doanh thu năm ngoái khác 0, tính sự thay đổi về doanh thu
     revenueChange = ((revenueThisYear - revenueLastYear) / revenueLastYear) * 100;
 }
 
-// Giới hạn sự thay đổi doanh thu từ 1% đến 100%
-revenueChange = Math.max(0, Math.min(100, revenueChange));
+revenueChange = Math.max(-100, Math.min(100, revenueChange)); // Cho phép -100 đến 100%
 
-// Cập nhật giao diện
 let revenueChangeElement = document.getElementById("revenue-change");
 let arrowIcon = document.getElementById("arrow-icon");
 
 if (revenueChange > 0) {
     revenueChangeElement.textContent = `${revenueChange.toFixed(1)}% nhiều hơn`;
-    arrowIcon.classList.remove("text-danger"); // Xóa mũi tên đỏ (giảm)
-    arrowIcon.classList.add("text-success"); // Thêm mũi tên xanh (tăng)
+    arrowIcon.classList.remove("text-danger");
+    arrowIcon.classList.add("text-success");
     arrowIcon.classList.remove("fa-arrow-down");
     arrowIcon.classList.add("fa-arrow-up");
 } else if (revenueChange < 0) {
     revenueChangeElement.textContent = `${Math.abs(revenueChange).toFixed(1)}% ít hơn`;
-    arrowIcon.classList.remove("text-success"); // Xóa mũi tên xanh (tăng)
-    arrowIcon.classList.add("text-danger"); // Thêm mũi tên đỏ (giảm)
+    arrowIcon.classList.remove("text-success");
+    arrowIcon.classList.add("text-danger");
     arrowIcon.classList.remove("fa-arrow-up");
     arrowIcon.classList.add("fa-arrow-down");
 } else {
     revenueChangeElement.textContent = "Không thay đổi";
     arrowIcon.classList.remove("text-success", "text-danger");
-    arrowIcon.classList.add("fa-close"); // Thêm biểu tượng "đóng" nếu không có thay đổi
+    arrowIcon.classList.add("fa-close");
 }
 </script>
