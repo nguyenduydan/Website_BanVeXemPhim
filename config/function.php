@@ -527,11 +527,12 @@ function count_record($tableName) {
 function discount($maND, $sumBill){
     $goldValue = 0;
     $platinumValue = 0;
+    $silverValue =0;
     $list_param = getAll('thamso');
     if(!empty($list_param)){
         foreach($list_param as $param){
             if($param['TenThamSo'] == 'Silver'){
-                $goldValue = $param['GiaTri'];
+                $silverValue = $param['GiaTri'];
             }
             if($param['TenThamSo'] == 'Gold'){
                 $goldValue = $param['GiaTri'];
