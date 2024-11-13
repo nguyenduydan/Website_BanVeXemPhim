@@ -201,11 +201,11 @@ getUser();
                             <small class="text-warning"><?= $goldName ?></small>
                             <small class="text-primary"><?= $platinumName ?></small>
                         </div>
-                        <div class="container">
-                            <small class="text-sm mt-2 text-white">Số tiền còn thiếu để đạt <br> <span
+                        <div class="container mt-3">
+                            <small class="text-sm text-white">Số tiền còn thiếu để đạt <br> <span
                                     class="fw-bold"><?= $level ?></span></small>
                             <p class="fw-bold fs-6 mb-0">
-                                <?= number_format(max(0, $diff), 0, ',', '.') ?> ₫</p>
+                                +<?= number_format(max(0, $diff), 0, ',', '.') ?> ₫</p>
                             <!-- Đảm bảo không có giá trị âm -->
                         </div>
                     </div>

@@ -201,13 +201,38 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
     </script>
     <script>
-var win = navigator.platform.indexOf('Win') > -1;
-if (win && document.querySelector('#sidenav-scrollbar')) {
-    var options = {
-        damping: '0.5'
-    }
-    Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-}
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    <script>
+        const audio = document.getElementById('myAudio');
+        const playPauseIcon = document.getElementById('playPauseIcon');
+        audio.volume = 0.5; //âm thanh mặc định 50%
+        // Kiểm tra trạng thái nhạc từ localStorage
+        if (localStorage.getItem('audioPlaying') === 'true') {
+            audio.play();
+            playPauseIcon.classList.remove('bi-volume-mute');
+            playPauseIcon.classList.add('bi-volume-up');
+        }
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                playPauseIcon.classList.remove('bi-volume-mute');
+                playPauseIcon.classList.add('bi-volume-up');
+                localStorage.setItem('audioPlaying', 'true'); // Lưu trạng thái đang phát
+            } else {
+                audio.pause();
+                playPauseIcon.classList.remove('bi-volume-up');
+                playPauseIcon.classList.add('bi-volume-mute');
+                localStorage.setItem('audioPlaying', 'false'); // Lưu trạng thái đang phát
+            }
+        }
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

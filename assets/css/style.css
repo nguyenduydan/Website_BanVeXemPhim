@@ -20,6 +20,22 @@ small{
     opacity: 0;
 }
 
+ /* Ẩn thanh điều khiển mặc định */
+ .audio-player {
+     display: none;
+ }
+
+ /* Hiển thị nút bật/tắt */
+button.play-button{
+     cursor: pointer;
+     background-color: rgb(85, 0, 182);
+     color: white;
+     border: none;
+     padding: 5px 10px;
+     font-size: 20px;
+     border-radius: 50%;
+ }
+
 .letter {
     display: inline-block;
     position: relative;

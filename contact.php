@@ -14,7 +14,13 @@ $isLoggedIn = isset($_SESSION['NDloggedIn']) && $_SESSION['NDloggedIn'] == TRUE;
 
 <?php alertMessage() ?>
 
-<section class="bg-dark py-3 py-md-5">
+<section class="py-3 py-md-5" style="
+background-image: url(https://wallpaperaccess.com/full/8406708.gif);
+ background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+
+">
     <div class="container">
         <div class="row gy-3 gy-md-4 gy-lg-0 align-items-xl-center">
             <div class="col-12 col-lg-6 d-none d-sm-none d-md-none d-lg-block">

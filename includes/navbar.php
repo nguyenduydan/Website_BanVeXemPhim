@@ -17,7 +17,7 @@ getUser();
                     </div>
                     <div class="text d-none d-lg-block col-6 position-relative mt-1">
                         <!-- Đặt chiều cao để chứa văn bản -->
-                        <p class="mb-0 position-absolute" style="left: 0;">
+                        <p class="mb-0 position-absolute" style="left: -20px;">
                             <!-- Đảm bảo các từ không bị cắt -->
                             <span class="word wisteria">ticket</span>
                             <span class="word belize">cheap</span>
@@ -25,8 +25,16 @@ getUser();
                             <span class="word green">fate</span>
                             <span class="word midnight">fogvn</span>
                         </p>
+
                     </div>
                 </div>
+                <audio id="myAudio" class="audio-player ms-5" autoplay loop>
+                    <source src="assets/imgs/Querry.mp3" type="audio/mpeg">
+                    Trình duyệt của bạn không hỗ trợ thẻ audio.
+                </audio>
+                <button class="play-button" onclick="toggleAudio()">
+                    <i id="playPauseIcon" class="bi bi-volume-up"></i>
+                </button>
                 <div class="col-6 d-lg-none align-content-end text-end ms-4 ms-lg-0">
                     <button class="btn btn-dark" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
