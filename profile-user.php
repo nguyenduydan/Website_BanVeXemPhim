@@ -253,23 +253,6 @@ getUser();
                                             </div>
                                         </div>
 
-                                        <div class="mb-4 text-center">
-                                            <label class="form-label fw-semibold">Giới tính</label>
-                                            <div class="d-flex justify-content-center">
-                                                <div class="form-check me-5">
-                                                    <input class="form-check-input" type="radio" name="gioi_tinh"
-                                                        id="male" value="1"
-                                                        <?php echo ($user['data']['GioiTinh'] == '1') ? 'checked' : ''; ?>>
-                                                    <label class="form-check-label" for="male">Nam</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="gioi_tinh"
-                                                        id="female" value="0"
-                                                        <?php echo ($user['data']['GioiTinh'] == '0') ? 'checked' : ''; ?>>
-                                                    <label class="form-check-label" for="female">Nữ</label>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
 
                                     <div class="col-6">
@@ -304,6 +287,24 @@ getUser();
                                                 ?>
                                                 <input type="text" class="form-control form-control-lg" id="phone"
                                                     name="sdt" value="<?= htmlspecialchars($displayPhone) ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4 text-center">
+                                        <label class="form-label fw-semibold">Giới tính</label>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="form-check me-5">
+                                                <input class="form-check-input" type="radio" name="gioi_tinh" id="male"
+                                                    value="1"
+                                                    <?php echo ($user['data']['GioiTinh'] == '1') ? 'checked' : ''; ?>>
+                                                <label class="form-check-label" for="male">Nam</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gioi_tinh"
+                                                    id="female" value="0"
+                                                    <?php echo ($user['data']['GioiTinh'] == '0') ? 'checked' : ''; ?>>
+                                                <label class="form-check-label" for="female">Nữ</label>
                                             </div>
                                         </div>
                                     </div>
