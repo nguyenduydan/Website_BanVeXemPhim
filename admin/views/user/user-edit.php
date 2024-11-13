@@ -46,7 +46,7 @@ unset($_SESSION['form_data']);
                             <label for="name">Họ và tên người dùng(<span class="text-danger">*</span>)</label>
                             <input type="text" class="form-control" id="name" name="name"
                                 value="<?= $user['data']['TenND']; ?>" placeholder="Nhập họ và tên"
-                                value="<?php echo isset($formData['name']) ? htmlspecialchars($formData['name']) : ''; ?>">
+                                value="<?php echo isset($formData['name']) ? htmlspecialchars($formData['name']) : $user['data']['TenND']; ?>">
                             <?php if (isset($messages['name'])): ?>
                                 <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
                             <?php endif; ?>
@@ -55,7 +55,7 @@ unset($_SESSION['form_data']);
                             <label for="email">Email (<span class="text-danger">*</span>)</label>
                             <input type="email" class="form-control" id="email" name="email"
                                 value="<?= $user['data']['Email']; ?>" placeholder="Nhập email"
-                                value="<?php echo isset($formData['email']) ? htmlspecialchars($formData['email']) : ''; ?>">
+                                value="<?php echo isset($formData['email']) ? htmlspecialchars($formData['email']) :$user['data']['Email']; ?>">
                             <?php if (isset($messages['email'])): ?>
                                 <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['email']) ?></small>
                             <?php endif; ?>
@@ -89,7 +89,7 @@ unset($_SESSION['form_data']);
                                 <label for="sdt">Số điện thoại</label>
                                 <input type="number" class="form-control" id="sdt" name="sdt"
                                     value="<?= $user['data']['SDT']; ?>" placeholder="Nhập số điện thoại"
-                                    value="<?php echo isset($formData['sdt']) ? htmlspecialchars($formData['sdt']) : ''; ?>">
+                                    value="<?php echo isset($formData['sdt']) ? htmlspecialchars($formData['sdt']) : $user['data']['SDT']; ?>">
                             </div>
                             <div class="col-6">
                                 <label for="status">Trạng thái</label>
