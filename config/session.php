@@ -28,26 +28,23 @@ $_SESSION['lastActivity'] = time();
 <script>
 // Biến cờ để kiểm tra xem modal đã hiển thị chưa
 var modalShown = false;
-
+var sessionExpired = false; // Biến cờ kiểm tra phiên đã hết hạn hay chưa
 // Gán giá trị $inactiveLimit cho biến JavaScript
 var inactiveLimit = <?php echo $inactiveLimit; ?> * 1000; // Chuyển đổi sang miligiây
 var timeout;
 const userRole =
     "<?php echo $_SESSION['role'] ?? 'user'; ?>"; // Nhận giá trị vai trò từ PHP, mặc định là 'user' nếu không có
-// Kiểm tra nếu phiên đã hết hạn
+// Kiểm tra nếu phiên đã hết hạn khi trang tải
 window.onload = function() {
     // Kiểm tra nếu PHP đã thiết lập session_expired
     <?php if (isset($_SESSION['session_expired']) && $_SESSION['session_expired'] === true): ?>
-    // Chỉ hiển thị modal nếu nó chưa được hiển thị
-    if (!modalShown) {
-        createSessionExpiredModal(); // Tạo và hiển thị modal
-        modalShown = true; // Đánh dấu là modal đã được hiển thị
-
-        // Tự động chuyển hướng đến trang sign-in.php sau 5 giây
-        setTimeout(function() {
-            window.location.href = userRole === 'admin' ? '/Website_BanVeXemPhim/admin/sign-in.php' :
-                '/Website_BanVeXemPhim/login.php';
-        }, inactiveLimit);
+    sessionExpired = true; // Đặt cờ session đã hết hạn
+    if (userRole === 'admin' && !modalShown) {
+        createSessionExpiredModal();
+        modalShown = true;
+    } else if (userRole === 'user') {
+        // Chuyển hướng nếu là người dùng
+        window.location.href = '/Website_BanVeXemPhim/login.php';
     }
     <?php unset($_SESSION['session_expired']); ?>
     <?php endif; ?>
@@ -128,15 +125,20 @@ function resetTimer() {
 
     // Thiết lập lại thời gian timeout
     timeout = setTimeout(function() {
-        // Mở modal khi hết phiên đăng nhập
-        if (!modalShown) {
-            createSessionExpiredModal(); // Tạo và hiển thị modal
-            modalShown = true; // Đánh dấu là modal đã được hiển thị
+        if (!sessionExpired) {
+            if (userRole === 'admin') {
+                createSessionExpiredModal();
+                modalShown = true;
+            } else if (sessionExpired === true) {
+                // Chuyển hướng nếu phiên đã hết hạn
+                window.location.href = '/Website_BanVeXemPhim/login.php';
+            }
+            sessionExpired = true; // Đánh dấu phiên đã hết hạn
         }
+    }, inactiveLimit);
 
-    }, inactiveLimit); // Sử dụng giá trị inactiveLimit
 }
-
+// console.log(sessionExpired);
 // Gọi hàm resetTimer mỗi khi người dùng di chuyển chuột hoặc nhấn phím
 document.onmousemove = resetTimer;
 document.onkeypress = resetTimer;

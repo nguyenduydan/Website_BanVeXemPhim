@@ -44,29 +44,29 @@ getUser();
                         </div>
 
                         <script>
-                            // Kích hoạt file input khi click vào nút camera
-                            document.getElementById('camera').addEventListener('click', function(event) {
-                                event.preventDefault();
-                                document.getElementById('avatar').click();
-                            });
+                        // Kích hoạt file input khi click vào nút camera
+                        document.getElementById('camera').addEventListener('click', function(event) {
+                            event.preventDefault();
+                            document.getElementById('avatar').click();
+                        });
 
-                            function submitAvatarForm() {
-                                // Set the name of the button to identify which submit to use
-                                var submitButton = document.createElement('input');
-                                submitButton.type = 'hidden';
-                                submitButton.name = 'updateAvt'; // Name for avatar update
-                                document.getElementById('avatarForm').appendChild(submitButton);
-                                document.getElementById('avatarForm').submit();
-                            }
+                        function submitAvatarForm() {
+                            // Set the name of the button to identify which submit to use
+                            var submitButton = document.createElement('input');
+                            submitButton.type = 'hidden';
+                            submitButton.name = 'updateAvt'; // Name for avatar update
+                            document.getElementById('avatarForm').appendChild(submitButton);
+                            document.getElementById('avatarForm').submit();
+                        }
                         </script>
 
                         <style>
-                            /* Hiển thị nút camera khi hover vào ảnh đại diện */
-                            .profile-picture-container:hover #camera {
-                                display: flex !important;
-                                align-items: center;
-                                justify-content: center;
-                            }
+                        /* Hiển thị nút camera khi hover vào ảnh đại diện */
+                        .profile-picture-container:hover #camera {
+                            display: flex !important;
+                            align-items: center;
+                            justify-content: center;
+                        }
                         </style>
 
                         <h4 class="fw-bold mb-3"><?= $user['data']['TenND'] ?></h4>
@@ -111,8 +111,8 @@ getUser();
                                         <div class="mb-4">
                                             <label for="fullName" class="form-label fw-semibold">Họ và tên</label>
                                             <?php if (isset($messages['tennd'])): ?>
-                                                <small
-                                                    class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tennd']) ?></small>
+                                            <small
+                                                class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tennd']) ?></small>
                                             <?php endif; ?>
                                             <div class="input-group">
                                                 <span class="input-group-text bg-light border-0"><i
@@ -126,8 +126,8 @@ getUser();
                                         <div class="mb-4">
                                             <label for="email" class="form-label fw-semibold">Email</label>
                                             <?php if (isset($messages['email'])): ?>
-                                                <small
-                                                    class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['email']) ?></small>
+                                            <small
+                                                class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['email']) ?></small>
                                             <?php endif; ?>
                                             <div class="input-group">
                                                 <span class="input-group-text bg-light border-0"><i
@@ -202,32 +202,7 @@ getUser();
                     <div id="transition-history" class="tab-pane fade">
                         <div class="card d-flex justify-content-center w-100 shadow border-0">
                             <div class="card-body p-4">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Ngày giao dịch</th>
-                                            <th>Tên phim</th>
-                                            <th>Số tiền</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        if (isset($transactions) && count($transactions) > 0) {
-                                            foreach ($transactions as $index => $transaction) {
-                                                echo "<tr>";
-                                                echo "<td>" . ($index + 1) . "</td>";
-                                                echo "<td>" . htmlspecialchars($transaction['date']) . "</td>";
-                                                echo "<td>" . htmlspecialchars($transaction['movie_name']) . "</td>";
-                                                echo "<td>" . number_format($transaction['amount'], 0, ',', '.') . " VND</td>";
-                                                echo "</tr>";
-                                            }
-                                        } else {
-                                            echo "<tr><td colspan='4' class='text-center'>Chưa có giao dịch nào.</td></tr>";
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
+                                <?php include('views/transition-history.php'); ?>
                             </div>
                         </div>
                     </div>

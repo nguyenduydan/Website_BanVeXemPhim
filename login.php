@@ -5,6 +5,12 @@ $messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy 
 $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
 unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
 unset($_SESSION['form_data']);
+
+// Lấy lại dữ liệu từ cookie nếu có
+$username = isset($_COOKIE['username']) ? $_COOKIE['username'] : '';
+// Kiểm tra trạng thái của checkbox 'Remember me'
+$rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ? 'checked' : '';
+
 ?>
 
 <div id="toast"></div>
@@ -23,10 +29,11 @@ unset($_SESSION['form_data']);
                         <div class="input-group mb-1">
                             <span class="input-group-text bg-primary"><i class="fas fa-envelope text-white"></i></span>
                             <input type="text" class="form-control" name="tendn" placeholder="Tên đăng nhập"
-                                value="<?php echo isset($formData['tendn']) ? htmlspecialchars($formData['tendn']) : ''; ?>">
+                                autocomplete="username"
+                                value="<?php echo isset($formData['tendn']) ? htmlspecialchars($formData['tendn']) :  htmlspecialchars($username); ?>">
                         </div>
                         <?php if (isset($messages['tendn'])): ?>
-                            <small class="text-danger m-2"><?= htmlspecialchars($messages['tendn']) ?></small>
+                        <small class="text-danger m-2"><?= htmlspecialchars($messages['tendn']) ?></small>
                         <?php endif; ?>
                     </div>
 
@@ -42,14 +49,15 @@ unset($_SESSION['form_data']);
                             </span>
                         </div>
                         <?php if (isset($messages['password'])): ?>
-                            <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
+                        <small class="text-danger m-2"><?= htmlspecialchars($messages['password']) ?></small>
                         <?php endif; ?>
                     </div>
 
                     <!-- Ghi nhớ đăng nhập -->
                     <div class="form-check form-switch mb-3">
                         <input class="form-check-input" type="checkbox" name="remember_me" id="remember_me">
-                        <label class="form-check-label" for="remember_me">Ghi nhớ đăng nhập</label>
+                        <label class="form-check-label" for="remember_me" <?php echo $rememberMeChecked; ?>>Ghi nhớ đăng
+                            nhập</label>
                     </div>
 
                     <!-- Nút Đăng Nhập -->

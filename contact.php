@@ -5,6 +5,9 @@ $messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy 
 $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
 unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
 unset($_SESSION['form_data']);
+
+$isLoggedIn = isset($_SESSION['NDloggedIn']) && $_SESSION['NDloggedIn'] == TRUE;
+
 ?>
 
 <div id="toast"></div>
@@ -27,12 +30,12 @@ unset($_SESSION['form_data']);
                                     <div class="col-12">
                                         <label for="fullname" class="form-label fw-bold">Họ và tên <span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="fullname" name="fullname" required>
+                                        <input type="text" class="form-control" id="fullname" name="fullname">
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label for="email" class="form-label fw-bold">Email <span
                                                 class="text-danger">*</span></label>
-                                        <input type="email" class="form-control" id="email" name="email" required>
+                                        <input type="email" class="form-control" id="email" name="email">
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label for="phone" class="form-label fw-bold">Số điện thoại</label>
@@ -41,18 +44,23 @@ unset($_SESSION['form_data']);
                                     <div class="col-12">
                                         <label for="subject" class="form-label fw-bold">Tiêu đề <span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="subject" name="subject" required>
+                                        <input type="text" class="form-control" id="subject" name="subject">
                                     </div>
                                     <div class="col-12">
                                         <label for="message" class="form-label fw-bold">Tin nhắn <span
                                                 class="text-danger">*</span></label>
-                                        <textarea class="form-control" id="message" name="message" rows="3"
-                                            required></textarea>
+                                        <textarea class="form-control" id="message" name="message" rows="3"></textarea>
                                     </div>
                                     <div class="col-12">
                                         <div class="d-grid">
-                                            <button class="btn btn-primary btn-lg" id="login" type="submit">Gửi tin
-                                                nhắn</button>
+                                            <?php
+                                            if (!$isLoggedIn) {
+                                                echo '
+                                                <button class="btn btn-secondary btn-lg" id="login" type="button" disabled>Vui lòng đăng nhập để gửi tin nhắn</button>';
+                                            } else {
+                                                echo '<button class="btn btn-primary btn-lg" id="login" type="submit">Gửi tin nhắn</button>';
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
@@ -64,4 +72,5 @@ unset($_SESSION['form_data']);
         </div>
     </div>
 </section>
+
 <?php include('includes/footer.php'); ?>
