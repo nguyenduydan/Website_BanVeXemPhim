@@ -421,7 +421,7 @@ new Chart(ctx1, {
                         size: 14,
                         family: "Arial",
                         style: 'normal',
-                        lineHeight: 3
+                        lineHeight: 2
                     },
                     color: "#fff"
                 },
