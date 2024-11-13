@@ -512,7 +512,7 @@ function ticket_revenue() {
 }
 function count_record($tableName) {
     global $conn; 
-    $tableName = mysqli_real_escape_string($conn, $tableName);
+    $tableName = validate($tableName);
 
     $query = "SELECT COUNT(1) AS total_records FROM $tableName"; 
     $result = mysqli_query($conn, $query); 
