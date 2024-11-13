@@ -47,7 +47,6 @@ if (isset($_POST['saveContent'])) {
 //====== content-edit =======//
 
 if (isset($_POST['editContent'])) {
-    $messages = [];
     $id = validate($_POST['mabv']);
     $name = validate($_POST['tenbv']);
     $chudebv = validate($_POST['chudebv']);
@@ -83,7 +82,7 @@ if (isset($_POST['editContent'])) {
                 NguoiCapNhat = '$created',
                 NgayCapNhat = CURRENT_TIMESTAMP,
                 TrangThai = '$status'
-              WHERE Id = '$id'";  // Chú ý: Cần xác định $id là ID của bài viết cần cập nhật
+              WHERE Id = '$id'";
 
         if (mysqli_query($conn, $query)) {
             redirect('content.php', 'success', 'Cập nhật bài viết thành công', 'admin');
