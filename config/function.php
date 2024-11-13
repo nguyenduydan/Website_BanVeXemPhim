@@ -488,7 +488,19 @@ function time_revenue($startDay, $endDay) {
     global $conn;
     $startDay = validate($startDay);
     $endDay = validate($endDay);
-    $query = "SELECT MaHD FROM hoadon WHERE NgayLapHD BETWEEN '$startDay' AND '$endDay'";
+    $query = "SELECT MaHD FROM hoadon WHERE DATE(NgayLapHD) BETWEEN '$startDay' AND '$endDay'";
+    $result = mysqli_query($conn, $query);
+    $doanhthu = 0;
+    if ($result) {
+        while ($hd = mysqli_fetch_assoc($result)) {
+            $doanhthu += sumBill($hd['MaHD']);
+        }
+    }
+    return $doanhthu;
+}
+function ticket_revenue() {
+    global $conn;
+    $query = "SELECT MaHD FROM hoadon";
     $result = mysqli_query($conn, $query);
     $doanhthu = 0;
     if ($result) {

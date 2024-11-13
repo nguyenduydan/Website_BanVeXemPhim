@@ -19,10 +19,11 @@ if (isset($_POST['signup'])) {
     }
     $role = 0;
     $status = 1;
-    if (empty($tendn)) {
-        $messages['tendn'] = "Tên đăng nhập không được để trống.";
+    
+    if (empty($tennd)) {
+        $messages['tennd'] = "Tên người dùng không được để trống.";
     } else if (!preg_match('/^[a-zA-Z]+$/', $tendn)) {
-        $messages['tendn'] = "Tên đăng nhập chỉ chấp nhận chữ cái.";
+        $messages['tennd'] = "Tên người dùng chỉ chấp nhận chữ cái.";
     }
     if (empty($tendn)) {
         $messages['tendn'] = "Tên đăng nhập không được để trống.";
