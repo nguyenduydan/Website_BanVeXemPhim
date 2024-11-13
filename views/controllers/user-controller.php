@@ -79,7 +79,7 @@ if (isset($_POST['login'])) {
     if (empty($password)) {
         $messages['password'] = 'Mật khẩu không được bỏ trống';
     }
-
+    
     if (empty($messages)) {
         $user = getByID('TaiKhoan', 'TenDangNhap', $tendn);
         if ($user['status'] == 200 && $user['data']['Quyen'] == 0) {
@@ -123,16 +123,19 @@ if (isset($_POST['updateInf'])) {
     $messages = [];
     $id = validate($_POST['mand']);
     $name = validate($_POST['tennd']);
-    $ngay_sinh = validate($_POST['ngay_sinh']);
-    $gioi_tinh = validate($_POST['gioi_tinh']);
-    $sdt = validate($_POST['sdt']);
-    $email = validate($_POST['email']);
+    $ngay_sinh = validate($_POST['ngay_sinh']) ?: null;
+    $gioi_tinh = validate($_POST['gioi_tinh']) ?: null; 
+    $sdt = validate($_POST['sdt']) ?: null;
+    $email = validate($_POST['email']) ?: null;
     // Kiểm tra tên người dùng
     if (empty($name)) {
         $messages['tennd'] = "Họ và tên không được để trống.";
     }
     if (isExistValue('NguoiDung', 'Email', $email, 'MaND', $id)) {
         $messages['email'] = "Email đã tồn tại";
+    }
+    if (empty($sdt) || !preg_match('/^0[0-9]+$/', $sdt)) {
+        $messages['sdt'] = "Số điện thoại phải là số nguyên và bắt đầu bằng số 0.";
     }
     if (empty($messages)) {
 
@@ -142,7 +145,6 @@ if (isset($_POST['updateInf'])) {
                 GioiTinh = '$gioi_tinh',
                 SDT = '$sdt',
                 Email = '$email',
-                -- Anh = '$avatar',
                 NguoiCapNhat = '$id',
                 NgayCapNhat = CURRENT_TIMESTAMP
                 WHERE MaND = '$id'";
@@ -167,7 +169,6 @@ if (isset($_POST['updateAvt'])) {
     $unique = uniqid('user_', false);
 
     if (isset($_FILES['avatar'])) {
-        // Delete old avatar if it exists
         if (!empty($currentAvatar)) {
             $avatarPath = $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/uploads/avatars/" . $currentAvatar;
             if (file_exists($avatarPath)) {
@@ -177,8 +178,6 @@ if (isset($_POST['updateAvt'])) {
                 }
             }
         }
-
-        // Upload new avatar
         $avatarResult = uploadImage($_FILES['avatar'], $_SERVER['DOCUMENT_ROOT'] . "/Website_BanVeXemPhim/uploads/avatars/", $unique);
         if ($avatarResult['success']) {
             $avatar = $avatarResult['filename'];
