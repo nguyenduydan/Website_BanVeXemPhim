@@ -510,6 +510,20 @@ function ticket_revenue() {
     }
     return $doanhthu;
 }
+function count_record($tableName) {
+    global $conn; 
+    $tableName = mysqli_real_escape_string($conn, $tableName);
+
+    $query = "SELECT COUNT(1) AS total_records FROM $tableName"; 
+    $result = mysqli_query($conn, $query); 
+
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        return $row['total_records'];
+    } else {
+        return 0; 
+    }
+}
 function discount($maND, $sumBill){
     $goldValue = 0;
     $platinumValue = 0;

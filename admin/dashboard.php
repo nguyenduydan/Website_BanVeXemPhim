@@ -16,16 +16,8 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
                 //Doanh thu cả rạp
                 $revenue = ticket_revenue();
                 //Tổng số khách hàng
-                global $conn;
-                $query = "SELECT COUNT(1) AS total_customers FROM NGUOIDUNG"; 
-                $result = mysqli_query($conn, $query); 
-
-                $totalCustomers = 0; 
-                if ($result) {
-                    $row = mysqli_fetch_assoc($result); 
-                    $totalCustomers = $row['total_customers'];
-                }
-
+                $totalCustomers = count_record('nguoidung');
+                $total_bill = count_record('hoadon');
                 ?>
 
                 <div class="col-8">
@@ -75,7 +67,7 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
                             <p class="text-sm mb-0 text-capitalize font-weight-bold">Tổng số khách hàng</p>
                             <h5 class="font-weight-bolder mb-0">
                                 
-                                <?= number_format($totalCustomers, 0, ',', '.'); // Hiển thị tổng số khách hàng ?>
+                                <?= number_format($totalCustomers, 0, ',', '.');?>
                             </h5>
                         </div>
                     </div>
@@ -94,10 +86,10 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
                 <div class="row">
                     <div class="col-8">
                         <div class="numbers">
-                            <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Money</p>
+                            <p class="text-sm mb-0 text-capitalize font-weight-bold">Tổng hóa đơn</p>
                             <h5 class="font-weight-bolder mb-0">
-                                $53,000
-                                <span class="text-success text-sm font-weight-bolder">+55%</span>
+                            <?= number_format($total_bill, 0, ',', '.');?>
+                                
                             </h5>
                         </div>
                     </div>
