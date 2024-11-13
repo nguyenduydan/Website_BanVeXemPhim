@@ -19,14 +19,58 @@ getUser();
     <div class="container my-5">
         <div class="row">
             <?php
-
             $client_revenue = client_revenue($NDId);
 
+            $silverValue = 0;
+            $goldValue = 0;
+            $platinumValue = 0;
 
-            $mucTieu = 4000000;
+            $list_param = getAll('thamso');
+            if (!empty($list_param)) {
+                foreach ($list_param as $param) {
+                    if ($param['TenThamSo'] == 'Silver') {
+                        $silverValue = $param['GiaTri'];
+                        $silverName = $param['TenThamSo'];
+                    }
+                    if ($param['TenThamSo'] == 'Gold') {
+                        $goldValue = $param['GiaTri'];
+                        $goldName = $param['TenThamSo'];
+                    }
+                    if ($param['TenThamSo'] == 'Platinum') {
+                        $platinumValue = $param['GiaTri'];
+                        $platinumName = $param['TenThamSo'];
+                    }
+                }
+            }
 
-            $percentage = min(($client_revenue / $mucTieu) * 100, 100);
+            $mucTieu = $platinumValue;
+            $percentage = ($client_revenue / $mucTieu) * 100;
+
+            // Determine membership level and corresponding styles
+            if ($client_revenue < 100000) {
+                $level = "Bronze";
+                $colorClass = "text-muted";
+                $icon = "bi-award";
+            } elseif ($client_revenue >= $platinumValue) {
+                $level = "Platinum";
+                $colorClass = "text-primary";
+                $icon = "bi-gem";
+            } elseif ($client_revenue >= $goldValue) {
+                $level = "Gold";
+                $colorClass = "text-warning";
+                $icon = "bi-star-fill";
+            } elseif ($client_revenue >= $silverValue) {
+                $level = "Silver";
+                $colorClass = "text-secondary";
+                $icon = "bi-trophy";
+            } else {
+                $level = "Bronze";
+                $colorClass = "text-muted";
+                $icon = "bi-award";
+            }
             ?>
+
+
             <div class="col-md-4 mb-4">
                 <div class="card profile-card shadow border-0">
                     <div class="card-body text-center p-4">
@@ -45,48 +89,52 @@ getUser();
                         </div>
 
                         <script>
-                        // Kích hoạt file input khi click vào nút camera
-                        document.getElementById('camera').addEventListener('click', function(event) {
-                            event.preventDefault();
-                            document.getElementById('avatar').click();
-                        });
+                            document.getElementById('camera').addEventListener('click', function(event) {
+                                event.preventDefault();
+                                document.getElementById('avatar').click();
+                            });
 
-                        function submitAvatarForm() {
-                            // Set the name of the button to identify which submit to use
-                            var submitButton = document.createElement('input');
-                            submitButton.type = 'hidden';
-                            submitButton.name = 'updateAvt'; // Name for avatar update
-                            document.getElementById('avatarForm').appendChild(submitButton);
-                            document.getElementById('avatarForm').submit();
-                        }
+                            function submitAvatarForm() {
+                                var submitButton = document.createElement('input');
+                                submitButton.type = 'hidden';
+                                submitButton.name = 'updateAvt';
+                                document.getElementById('avatarForm').appendChild(submitButton);
+                                document.getElementById('avatarForm').submit();
+                            }
                         </script>
 
                         <style>
-                        /* Hiển thị nút camera khi hover vào ảnh đại diện */
-                        .profile-picture-container:hover #camera {
-                            display: flex !important;
-                            align-items: center;
-                            justify-content: center;
-                        }
+                            .profile-picture-container:hover #camera {
+                                display: flex !important;
+                                align-items: center;
+                                justify-content: center;
+                            }
                         </style>
 
-                        <h4 class="fw-bold mb-3"><?= $user['data']['TenND'] ?></h4>
-
+                        <h4 class="fw-bold mb-3 <?= $colorClass ?>">
+                            <i class="<?= $icon ?> me-2"></i>
+                            <?= $user['data']['TenND'] ?>
+                        </h4>
                         <h5 class="text-muted mt-3">Tổng chi tiêu 2024</h5>
-                        <p class="text-warning fw-bold"><?= number_format($client_revenue, 0, ',', '.') ?> ₫</p>
+                        <p class="fw-bold <?= $colorClass ?>"><?= number_format($client_revenue, 0, ',', '.') ?> ₫</p>
 
                         <div class="progress my-3" style="height: 10px;">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: <?= $percentage; ?>%;"
-                                aria-valuenow="<?= $percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar <?= $colorClass ?>" role="progressbar"
+                                style="width: <?= min($percentage, 100); ?>%;" aria-valuenow="<?= $percentage; ?>"
+                                aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <div class="d-flex justify-content-between text-muted">
-                            <span>0 ₫</span>
-                            <span>2.000.000 ₫</span>
-                            <span>4.000.000 ₫</span>
+
+                        <div class="d-flex justify-content-between">
+                            <span class="text-muted">0 ₫</span> <!-- For 0 marker -->
+                            <span class="text-secondary"><?= $silverName ?></span>
+                            <span class="text-warning"><?= $goldName ?></span>
+                            <span class="text-primary"><?= $platinumName ?></span>
                         </div>
+
                     </div>
                 </div>
             </div>
+
 
             <!-- Profile Details Form -->
             <div class="col-md-8 profile-form">
@@ -112,8 +160,8 @@ getUser();
                                         <div class="mb-4">
                                             <label for="fullName" class="form-label fw-semibold">Họ và tên</label>
                                             <?php if (isset($messages['tennd'])): ?>
-                                            <small
-                                                class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tennd']) ?></small>
+                                                <small
+                                                    class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tennd']) ?></small>
                                             <?php endif; ?>
                                             <div class="input-group">
                                                 <span class="input-group-text bg-light border-0"><i
@@ -127,8 +175,8 @@ getUser();
                                         <div class="mb-4">
                                             <label for="email" class="form-label fw-semibold">Email</label>
                                             <?php if (isset($messages['email'])): ?>
-                                            <small
-                                                class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['email']) ?></small>
+                                                <small
+                                                    class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['email']) ?></small>
                                             <?php endif; ?>
                                             <div class="input-group">
                                                 <span class="input-group-text bg-light border-0"><i
