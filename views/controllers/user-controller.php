@@ -22,9 +22,10 @@ if (isset($_POST['signup'])) {
     
     if (empty($tennd)) {
         $messages['tennd'] = "Tên người dùng không được để trống.";
-    } else if (!preg_match('/^[a-zA-Z]+$/', $tendn)) {
-        $messages['tennd'] = "Tên người dùng chỉ chấp nhận chữ cái.";
+    } else if (!preg_match('/^[\p{L}\s.,]+$/u', $tendn)) {
+        $messages['tennd'] = "Tên người dùng không được dùng kí tự đặc biệt";
     }
+    
     if (empty($tendn)) {
         $messages['tendn'] = "Tên đăng nhập không được để trống.";
     } else if (!preg_match('/^[a-zA-Z0-9]+$/', $tendn)) {

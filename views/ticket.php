@@ -90,7 +90,7 @@ if (isset($_POST['seatsInput'])) {
                 style="font-size: 0.75rem; background-color: rgba(255, 255, 255, 0.7); border-radius: 4px;">
                 <?php
                 $purchaseDate = new DateTime();
-                echo $purchaseDate->format('d-m-Y');
+                echo $purchaseDate->format('d-m-Y H:i');
                 ?>
             </div>
 
