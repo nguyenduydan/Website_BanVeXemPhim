@@ -530,6 +530,9 @@ function discount($maND, $sumBill){
     $list_param = getAll('thamso');
     if(!empty($list_param)){
         foreach($list_param as $param){
+            if($param['TenThamSo'] == 'Silver'){
+                $goldValue = $param['GiaTri'];
+            }
             if($param['TenThamSo'] == 'Gold'){
                 $goldValue = $param['GiaTri'];
             }
@@ -543,6 +546,9 @@ function discount($maND, $sumBill){
         return $sumBill -= $sumBill * 10/100;
     }else if($clientRevenue >= $goldValue){
         return $sumBill -= $sumBill * 5/100;
+    }
+    else if($clientRevenue >= $silverValue){
+        return $sumBill -=$sumBill * 3/100;
     }
     else{
         return $sumBill;
