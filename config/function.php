@@ -170,12 +170,11 @@ function getFilm($trangthai)
     $trangthai = validate($trangthai);
     $query = "SELECT * FROM PHIM WHERE TrangThai = '$trangthai'";
     $result = mysqli_query($conn, $query);
-
-    // Check if the query was successful and fetch results
+ 
     if ($result) {
-        return mysqli_fetch_all($result, MYSQLI_ASSOC); // Fetch all results as an associative array
+        return mysqli_fetch_all($result, MYSQLI_ASSOC); 
     } else {
-        return []; // Return an empty array in case of an error
+        return [];
     }
 }
 
@@ -250,14 +249,13 @@ function setupPagination($conn, $table, $record = 5, $searchString = null, $colN
     return $data;
 }
 
-// Pagination function with search handling
 function paginate($conn, $table, $recordsPerPage, $currentPage, $searchString = null, $colName = null)
 {
-    // Prepare the base SQL query for counting total records
+
     $totalQuery = "SELECT COUNT(*) AS total FROM $table" . ($searchString ? " WHERE `$colName` LIKE ?" : "");
     $stmt = $conn->prepare($totalQuery);
 
-    // Bind parameter if search string is provided
+
     if ($searchString) {
         $searchParam = '%' . $searchString . '%';
         $stmt->bind_param("s", $searchParam);
@@ -273,11 +271,9 @@ function paginate($conn, $table, $recordsPerPage, $currentPage, $searchString = 
 
     $offset = ($currentPage - 1) * $recordsPerPage;
 
-    // Prepare the query to fetch the paginated data
     $query = "SELECT * FROM $table" . ($searchString ? " WHERE `$colName` LIKE ?" : "") . " LIMIT ?, ?";
     $stmt = $conn->prepare($query);
 
-    // Bind parameters
     if ($searchString) {
         $stmt->bind_param("sii", $searchParam, $offset, $recordsPerPage);
     } else {
@@ -435,7 +431,6 @@ function getUser()
 
 function getMenu($table)
 {
-    // Giả sử bạn có kết nối tới cơ sở dữ liệu trong biến $conn
     global $conn;
 
     $query = "SELECT * FROM $table where TrangThai = 1 and KieuMenu = 'custom' ORDER BY `Order` ASC";
@@ -448,4 +443,58 @@ function getMenu($table)
         }
     }
     return $items;
+}
+function sumBill($maHD) {
+    global $conn;
+    $maHD = validate($maHD);
+
+    $query = "SELECT SUM(G.GiaGhe) AS sumBill 
+        FROM chitiethoadon cthd 
+        JOIN suatchieu sc ON cthd.MaSuatChieu = sc.MaSuatChieu 
+        JOIN phong p ON sc.MaPhong = p.MaPhong 
+        JOIN ghe g ON p.MaPhong = g.MaPhong
+        WHERE cthd.MaHD = '$maHD' AND cthd.MaGhe = g.MaGhe";
+    $result = mysql_query($query, $conn);
+    return $result ? mysql_fetch_assoc($result)['sumBill'] : 0;
+}
+function film_revenue($maPhim) {
+    global $conn;
+    $maPhim = validate($maPhim);
+    $query = "SELECT DISTINCT MaHD FROM chitiethoadon WHERE MaPhim = '$maPhim'";
+    $result = mysql_query($query, $conn);
+    $doanhthu = 0;
+    if ($result) {
+        while ($hd = mysql_fetch_assoc($result)) {
+            $doanhthu += sumBill($hd['MaHD']);
+        }
+    }
+    return $doanhthu;
+}
+function client_revenue($maND) {
+    global $conn;
+    $maND = validate($maND);
+    $query = "SELECT MaHD FROM hoadon WHERE MaND = '$maND'";
+    $result = mysql_query($query, $conn);
+    $tongchitieu = 0;
+    if ($result) {
+        while ($hd = mysql_fetch_assoc($result)) {
+            $tongchitieu += sumBill($hd['MaHD']);
+        }
+    }
+    return $tongchitieu;
+}
+
+function time_revenue($startDay, $endDay) {
+    global $conn;
+    $startDay = validate($startDay);
+    $endDay = validate($endDay);
+    $query = "SELECT MaHD FROM hoadon WHERE NgayLapHD BETWEEN '$startDay' AND '$endDay'";
+    $result = mysql_query($query, $conn);
+    $doanhthu = 0;
+    if ($result) {
+        while ($hd = mysql_fetch_assoc($result)) {
+            $doanhthu += sumBill($hd['MaHD']);
+        }
+    }
+    return $doanhthu;
 }
