@@ -9,7 +9,7 @@
      </thead>
      <tbody>
         <?php
-        $list_bill = getBillByUserIdd($NDId);
+        $list_bill = getBillByUserId($NDId);
 
         if (!empty($list_bill)) {
             foreach ($list_bill as $index => $bill) {
