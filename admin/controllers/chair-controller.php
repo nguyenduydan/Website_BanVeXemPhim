@@ -2,16 +2,15 @@
 session_start();
 require '../../config/function.php';
 getAdmin();
-$messages = [];
-//====== chair-add =======//
+$messages = []; // Mảng lỗi
+//====== Thêm ghế =======//
 if (isset($_POST['saveChair'])) {
-    $messages = []; // Initialize messages array
     $tenghe = validate($_POST['tenghe']);
     $loaighe = validate($_POST['loaighe']);
     $soluong = validate($_POST['soluong']);
     $maphong = validate($_POST['maphong']);
     $status = validate($_POST['status']) == 1 ? 1 : 0;
-
+    //Kiểm tra lỗi
     if (empty($tenghe)) {
         $messages['tenghe'] = "Tên ghế không được để trống.";
     }
@@ -40,15 +39,15 @@ if (isset($_POST['saveChair'])) {
     }
 }
 
-//====== chair-edit =======//
+//====== Sửa ghế =======//
 if (isset($_POST['editChair'])) {
-    $messages = []; // Initialize messages array
     $tenghe = validate($_POST['tenghe']);
     $loaighe = validate($_POST['loaighe']);
     $maphong = validate($_POST['maphong']);
     $status = validate($_POST['status']) == 1 ? 1 : 0;
     $id = validate($_POST['maghe']);
 
+    //Kiểm tra lỗi
     if (empty($tenghe)) {
         $messages['tenghe'] = "Tên ghế không được để trống.";
     }
@@ -77,7 +76,6 @@ if (isset($_POST['editChair'])) {
 }
 
 
-//====== changeStatus ======//
 if (isset($_POST['changeStatus'])) {
     $id = validate($_POST['maghe']);
     $status = validate($_POST['status']) == 1 ? 1 : 0;

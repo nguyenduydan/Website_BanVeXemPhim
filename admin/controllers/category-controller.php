@@ -37,7 +37,6 @@ if (isset($_POST['saveCategory'])) {
 
 //Sửa thể loại
 if (isset($_POST['editCategory'])) {
-    $messages = [];
     $name = validate($_POST['ten_the_loai']); 
     $id = validate($_POST['matl']);
     $status = validate($_POST['status']);
