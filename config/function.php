@@ -540,6 +540,21 @@ function count_record($tableName)
         return 0;
     }
 }
+
+function count_user()
+{
+    global $conn;
+    $query = "SELECT COUNT(1) AS total_records FROM nguoidung join taikhoan on nguoidung.MaND = taikhoan.MaND where taikhoan.Quyen = 0";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        return $row['total_records'];
+    } else {
+        return 0;
+    }
+}
+
 function discount($maND, $sumBill)
 {
     $goldValue = 0;

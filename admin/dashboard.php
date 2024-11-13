@@ -53,7 +53,7 @@ $revenues = array_reverse($revenues);
 //Doanh thu cả rạp
 $revenue = ticket_revenue();
 //Tổng số khách hàng
-$totalCustomers = count_record('nguoidung');
+$totalCustomers = count_user();
 $total_bill = count_record('hoadon');
 
 $users = getAll('nguoidung');

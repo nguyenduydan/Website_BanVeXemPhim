@@ -80,7 +80,9 @@ getUser();
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-position: center;
-                border: 4px solid gold;
+                border: 3px solid gold;
+                box-shadow: 0 0 10px 3px gold;
+
             }
 
             .bg-member-silver {
@@ -89,8 +91,9 @@ getUser();
                 background-image: url(https://i.pinimg.com/736x/2d/a9/e8/2da9e8590c45ef52fd0ce61a822a8197.jpg);
                 background-repeat: no-repeat;
                 background-size: cover;
+                box-shadow: 0 0 10px 3px silver;
                 background-position: center;
-                border: 4px solid silver;
+                border: 3px solid silver;
             }
 
 
@@ -101,12 +104,26 @@ getUser();
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-position: center;
-                border: 4px solid dodgerblue;
+                border: 3px solid dodgerblue;
+                box-shadow: 0 0 10px 3px dodgerblue;
             }
+
+            .bg-member-none {
+                color: aliceblue;
+                /* Một màu vàng nhạt hơn */
+                background-image: url(https://i.pinimg.com/736x/17/a9/a8/17a9a801d17a79fbafc52e4e19aa8750.jpg);
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+                border: 3px solid black;
+                box-shadow: 0 0 10px 3px lightslategray;
+            }
+
+            ;
             </style>
 
             <div class="col-md-4 col-lg-5 mb-4">
-                <div class="card profile-card shadow <?= $backround ?>">
+                <div class="card profile-card <?= $backround ?>">
                     <div class="card-body text-center p-4">
                         <div class="profile-picture-container position-relative d-inline-block">
                             <input type="file" class="form-control d-none" id="avatar" name="avatar" accept="image/*"
