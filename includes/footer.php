@@ -212,7 +212,7 @@
     <script>
         const audio = document.getElementById('myAudio');
         const playPauseIcon = document.getElementById('playPauseIcon');
-        audio.volume = 0.5; //âm thanh mặc định 50%
+        audio.volume = 0.3; //âm thanh mặc định 50%
         // Kiểm tra trạng thái nhạc từ localStorage
         if (localStorage.getItem('audioPlaying') === 'true') {
             audio.play();
