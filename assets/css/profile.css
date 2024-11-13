@@ -1,5 +1,5 @@
 .profile-card {
-    max-width: 300px;
+    max-width: 350px;
     margin: auto;
     background: white;
     padding: 20px;
@@ -85,7 +85,7 @@
     font-size: 20px;
     height: auto;
     transition: width 0.6s ease;
-    background-color: #7b6ada;
+    background: linear-gradient(87deg, rgba(194, 251, 251, 1) 0%, rgba(58, 51, 255, 1) 100%);
 }
 
 .input-container {

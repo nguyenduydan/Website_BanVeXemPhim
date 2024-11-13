@@ -42,6 +42,7 @@ window.onload = function() {
     if (userRole === 'admin' && !modalShown) {
         createSessionExpiredModal();
         modalShown = true;
+        window.location.href = '/Website_BanVeXemPhim/admin/sign-in.php';
     } else if (userRole === 'user') {
         // Chuyển hướng nếu là người dùng
         window.location.href = '/Website_BanVeXemPhim/login.php';
@@ -129,7 +130,7 @@ function resetTimer() {
             if (userRole === 'admin') {
                 createSessionExpiredModal();
                 modalShown = true;
-            } else if (sessionExpired === true) {
+            } else if (sessionExpired === true && userRole === 'user') {
                 // Chuyển hướng nếu phiên đã hết hạn
                 window.location.href = '/Website_BanVeXemPhim/login.php';
             }

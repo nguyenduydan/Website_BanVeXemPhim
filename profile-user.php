@@ -21,9 +21,9 @@ getUser();
             <?php
             $client_revenue = client_revenue($NDId);
 
-            $silverValue = 0;
-            $goldValue = 0;
-            $platinumValue = 0;
+            $silverValue = 1;
+            $goldValue = 1;
+            $platinumValue = 1;
 
             $list_param = getAll('thamso');
             if (!empty($list_param)) {
@@ -43,36 +43,70 @@ getUser();
                 }
             }
 
+
             $mucTieu = $platinumValue;
             $percentage = ($client_revenue / $mucTieu) * 100;
 
             // Determine membership level and corresponding styles
-            if ($client_revenue < 100000) {
-                $level = "Bronze";
-                $colorClass = "text-muted";
-                $icon = "bi-award";
-            } elseif ($client_revenue >= $platinumValue) {
-                $level = "Platinum";
-                $colorClass = "text-primary";
-                $icon = "bi-gem";
-            } elseif ($client_revenue >= $goldValue) {
-                $level = "Gold";
-                $colorClass = "text-warning";
-                $icon = "bi-star-fill";
-            } elseif ($client_revenue >= $silverValue) {
+            if ($client_revenue < $silverValue) {
                 $level = "Silver";
-                $colorClass = "text-secondary";
-                $icon = "bi-trophy";
+                $backround = "bg-member-none";
+                $diff = $silverValue - $client_revenue;
+            } elseif ($client_revenue < $goldValue) {
+                $level = "Gold";
+                $backround = "bg-member-silver";
+                $diff = $goldValue - $client_revenue;
+            } elseif ($client_revenue < $platinumValue) {
+                $level = "Platinum";
+                $backround = "bg-member-gold";
+                $diff = $platinumValue - $client_revenue;
             } else {
-                $level = "Bronze";
-                $colorClass = "text-muted";
-                $icon = "bi-award";
+                $level = "Đã max";
+                $backround = "bg-member-platinum";
+                $diff = 0; // Đã đạt tối đa
             }
+
+            // Tính tỷ lệ phần trăm cho từng rank
+            $silverPercentage = ($silverValue / $mucTieu) * 100;
+            $goldPercentage = ($goldValue / $mucTieu) * 100;
+            $platinumPercentage = ($platinumValue / $mucTieu) * 100;
+
             ?>
+            <style>
+            .bg-member-gold {
+                color: aliceblue;
+                /* Một màu vàng nhạt hơn */
+                background-image: url(https://i.pinimg.com/736x/9d/5c/13/9d5c13e3d92af6e99120a7b2394263cf.jpg);
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+                border: 4px solid gold;
+            }
+
+            .bg-member-silver {
+                color: aliceblue;
+                /* Một màu vàng nhạt hơn */
+                background-image: url(https://i.pinimg.com/736x/2d/a9/e8/2da9e8590c45ef52fd0ce61a822a8197.jpg);
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+                border: 4px solid silver;
+            }
 
 
-            <div class="col-md-4 mb-4">
-                <div class="card profile-card shadow border-0">
+            .bg-member-platinum {
+                color: aliceblue;
+                /* Một màu vàng nhạt hơn */
+                background-image: url(https://media4.giphy.com/media/xTiTnxpQ3ghPiB2Hp6/giphy.gif?cid=6c09b95219sdvq77x4l0mzc1omfnw4yceualg0y556obpxif&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g);
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+                border: 4px solid dodgerblue;
+            }
+            </style>
+
+            <div class="col-md-4 col-lg-5 mb-4">
+                <div class="card profile-card shadow <?= $backround ?>">
                     <div class="card-body text-center p-4">
                         <div class="profile-picture-container position-relative d-inline-block">
                             <input type="file" class="form-control d-none" id="avatar" name="avatar" accept="image/*"
@@ -89,55 +123,71 @@ getUser();
                         </div>
 
                         <script>
-                            document.getElementById('camera').addEventListener('click', function(event) {
-                                event.preventDefault();
-                                document.getElementById('avatar').click();
-                            });
+                        document.getElementById('camera').addEventListener('click', function(event) {
+                            event.preventDefault();
+                            document.getElementById('avatar').click();
+                        });
 
-                            function submitAvatarForm() {
-                                var submitButton = document.createElement('input');
-                                submitButton.type = 'hidden';
-                                submitButton.name = 'updateAvt';
-                                document.getElementById('avatarForm').appendChild(submitButton);
-                                document.getElementById('avatarForm').submit();
-                            }
+                        function submitAvatarForm() {
+                            var submitButton = document.createElement('input');
+                            submitButton.type = 'hidden';
+                            submitButton.name = 'updateAvt';
+                            document.getElementById('avatarForm').appendChild(submitButton);
+                            document.getElementById('avatarForm').submit();
+                        }
                         </script>
 
                         <style>
-                            .profile-picture-container:hover #camera {
-                                display: flex !important;
-                                align-items: center;
-                                justify-content: center;
-                            }
+                        .profile-picture-container:hover #camera {
+                            display: flex !important;
+                            align-items: center;
+                            justify-content: center;
+                        }
                         </style>
 
-                        <h4 class="fw-bold mb-3 <?= $colorClass ?>">
+                        <h5 class="fw-bold mb-3">
                             <i class="<?= $icon ?> me-2"></i>
                             <?= $user['data']['TenND'] ?>
-                        </h4>
-                        <h5 class="text-muted mt-3">Tổng chi tiêu 2024</h5>
-                        <p class="fw-bold <?= $colorClass ?>"><?= number_format($client_revenue, 0, ',', '.') ?> ₫</p>
+                        </h5>
+                        <h5 class="mt-3">Tổng chi tiêu <?= $current_year = date('Y'); ?></h5>
+                        <p class="fw-bold"><?= number_format($client_revenue, 0, ',', '.') ?> ₫</p>
 
-                        <div class="progress my-3" style="height: 10px;">
-                            <div class="progress-bar <?= $colorClass ?>" role="progressbar"
-                                style="width: <?= min($percentage, 100); ?>%;" aria-valuenow="<?= $percentage; ?>"
-                                aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress my-3" style="height: 10px; position: relative;">
+                            <div class="progress-bar" role="progressbar" style="width: <?= min($percentage, 100); ?>%;"
+                                aria-valuenow="<?= $percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-marks"
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                                <div class="progress-mark"
+                                    style="position: absolute; top: 0; left: <?= $silverPercentage; ?>%; width: 2px; height: 100%; background-color: #fff;">
+                                </div>
+                                <div class="progress-mark"
+                                    style="position: absolute; top: 0; left: <?= $goldPercentage; ?>%; width: 2px; height: 100%; background-color: #fff;">
+                                </div>
+                                <div class="progress-mark"
+                                    style="position: absolute; top: 0; left: <?= $platinumPercentage; ?>%; width: 1px; height: 100%; background-color: #fff;">
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="d-flex justify-content-between">
-                            <span class="text-muted">0 ₫</span> <!-- For 0 marker -->
-                            <span class="text-secondary"><?= $silverName ?></span>
-                            <span class="text-warning"><?= $goldName ?></span>
-                            <span class="text-primary"><?= $platinumName ?></span>
+                        <div class="d-flex justify-content-between fw-bold">
+                            <small class="text-secondary">0</small>
+                            <small class="text-secondary"><?= $silverName ?></small>
+                            <small class="text-warning"><?= $goldName ?></small>
+                            <small class="text-primary"><?= $platinumName ?></small>
                         </div>
-
+                        <div class="container">
+                            <small class="text-sm mt-2 text-white">Số tiền còn thiếu để đạt <br> <span
+                                    class="fw-bold"><?= $level ?></span></small>
+                            <p class="fw-bold fst-italic mb-0"><?= number_format(max(0, $diff), 0, ',', '.') ?> ₫</p>
+                            <!-- Đảm bảo không có giá trị âm -->
+                        </div>
                     </div>
                 </div>
             </div>
 
 
             <!-- Profile Details Form -->
-            <div class="col-md-8 profile-form">
+            <div class="col-md-8 col-lg-7 profile-form">
                 <div class="border-bottom mb-2">
                     <ul class="nav d-flex justify-content-center" id="filmTabs">
                         <li class="nav-item">
@@ -160,8 +210,8 @@ getUser();
                                         <div class="mb-4">
                                             <label for="fullName" class="form-label fw-semibold">Họ và tên</label>
                                             <?php if (isset($messages['tennd'])): ?>
-                                                <small
-                                                    class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tennd']) ?></small>
+                                            <small
+                                                class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tennd']) ?></small>
                                             <?php endif; ?>
                                             <div class="input-group">
                                                 <span class="input-group-text bg-light border-0"><i
@@ -175,8 +225,8 @@ getUser();
                                         <div class="mb-4">
                                             <label for="email" class="form-label fw-semibold">Email</label>
                                             <?php if (isset($messages['email'])): ?>
-                                                <small
-                                                    class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['email']) ?></small>
+                                            <small
+                                                class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['email']) ?></small>
                                             <?php endif; ?>
                                             <div class="input-group">
                                                 <span class="input-group-text bg-light border-0"><i

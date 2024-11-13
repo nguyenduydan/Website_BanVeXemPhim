@@ -462,7 +462,9 @@ function film_revenue($maPhim)
 {
     global $conn;
     $maPhim = validate($maPhim);
-    $query = "SELECT DISTINCT MaHD FROM chitiethoadon WHERE MaPhim = '$maPhim'";
+    $query = "SELECT DISTINCT cthd.MaHD FROM chitiethoadon cthd
+                JOIN suatchieu sc on cthd.MaSuatChieu = sc.MaSuatChieu
+                WHERE sc.MaPhim = '$maPhim'";
     $result = mysqli_query($conn, $query);
     $doanhthu = 0;
     if ($result) {
@@ -570,10 +572,12 @@ function getBillByUserId($maND)
 
     $query = "SELECT DISTINCT h.*, p.TenPhim
               FROM hoadon h
-              JOIN chitiethoadon cthd on h.MaHD = cthd.MaHD
-              JOIN suatchieu sc on cthd.MaSuatChieu = sc.MaSuatChieu
-              JOIN phim p ON sc.MaPhim =p.MaPhim
-              WHERE h.MaND = '$maND' limit 5";
+              JOIN chitiethoadon cthd ON h.MaHD = cthd.MaHD
+              JOIN suatchieu sc ON cthd.MaSuatChieu = sc.MaSuatChieu
+              JOIN phim p ON sc.MaPhim = p.MaPhim
+              WHERE h.MaND = '$maND'
+              ORDER BY h.NgayLapHD DESC
+              LIMIT 10";
 
     $result = mysqli_query($conn, $query);
     $invoices = [];
