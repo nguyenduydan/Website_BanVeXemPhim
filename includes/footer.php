@@ -212,25 +212,49 @@
     <script>
         const audio = document.getElementById('myAudio');
         const playPauseIcon = document.getElementById('playPauseIcon');
-        audio.volume = 0.3; //âm thanh mặc định 50%
+
+        // Thiết lập âm lượng mặc định
+        let volumeLevels = [1.0, 0.7, 0.3, 0.0]; // 100%, 70%, 30%, 0%
+        let currentVolumeIndex = 0;
+
         // Kiểm tra trạng thái nhạc từ localStorage
         if (localStorage.getItem('audioPlaying') === 'true') {
             audio.play();
-            playPauseIcon.classList.remove('bi-volume-mute');
-            playPauseIcon.classList.add('bi-volume-up');
+            updateIcon(); // Cập nhật biểu tượng khi phát
         }
 
         function toggleAudio() {
             if (audio.paused) {
                 audio.play();
-                playPauseIcon.classList.remove('bi-volume-mute');
-                playPauseIcon.classList.add('bi-volume-up');
                 localStorage.setItem('audioPlaying', 'true'); // Lưu trạng thái đang phát
             } else {
-                audio.pause();
-                playPauseIcon.classList.remove('bi-volume-up');
-                playPauseIcon.classList.add('bi-volume-mute');
-                localStorage.setItem('audioPlaying', 'false'); // Lưu trạng thái đang phát
+                // Giảm âm lượng
+                currentVolumeIndex++;
+                if (currentVolumeIndex >= volumeLevels.length) {
+                    currentVolumeIndex = 0; // Quay lại âm lượng đầu tiên
+                }
+                audio.volume = volumeLevels[currentVolumeIndex];
+            }
+            updateIcon(); // Cập nhật biểu tượng sau mỗi lần nhấn
+        }
+
+        function updateIcon() {
+            playPauseIcon.classList.remove('bi-volume-up', 'bi-volume-down', 'bi-volume-mute', 'bi-volume-off');
+
+            // Cập nhật biểu tượng theo âm lượng
+            switch (audio.volume) {
+                case 0:
+                    playPauseIcon.classList.add('bi-volume-mute'); // Tắt âm
+                    break;
+                case 0.3:
+                    playPauseIcon.classList.add('bi-volume-off'); // Âm lượng thấp
+                    break;
+                case 0.7:
+                    playPauseIcon.classList.add('bi-volume-down'); // Âm lượng trung bình
+                    break;
+                case 1.0:
+                    playPauseIcon.classList.add('bi-volume-up'); // Âm lượng tối đa
+                    break;
             }
         }
     </script>
