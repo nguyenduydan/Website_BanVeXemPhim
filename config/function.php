@@ -170,9 +170,9 @@ function getFilm($trangthai)
     $trangthai = validate($trangthai);
     $query = "SELECT * FROM PHIM WHERE TrangThai = '$trangthai'";
     $result = mysqli_query($conn, $query);
- 
+
     if ($result) {
-        return mysqli_fetch_all($result, MYSQLI_ASSOC); 
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
     } else {
         return [];
     }
@@ -444,20 +444,22 @@ function getMenu($table)
     }
     return $items;
 }
-function sumBill($maHD) {
+function sumBill($maHD)
+{
     global $conn;
     $maHD = validate($maHD);
 
-    $query = "SELECT SUM(G.GiaGhe) AS sumBill 
-        FROM chitiethoadon cthd 
-        JOIN suatchieu sc ON cthd.MaSuatChieu = sc.MaSuatChieu 
-        JOIN phong p ON sc.MaPhong = p.MaPhong 
+    $query = "SELECT SUM(G.GiaGhe) AS sumBill
+        FROM chitiethoadon cthd
+        JOIN suatchieu sc ON cthd.MaSuatChieu = sc.MaSuatChieu
+        JOIN phong p ON sc.MaPhong = p.MaPhong
         JOIN ghe g ON p.MaPhong = g.MaPhong
         WHERE cthd.MaHD = '$maHD' AND cthd.MaGhe = g.MaGhe";
     $result = mysqli_query($conn, $query);
     return $result ? mysqli_fetch_assoc($result)['sumBill'] : 0;
 }
-function film_revenue($maPhim) {
+function film_revenue($maPhim)
+{
     global $conn;
     $maPhim = validate($maPhim);
     $query = "SELECT DISTINCT MaHD FROM chitiethoadon WHERE MaPhim = '$maPhim'";
@@ -470,7 +472,8 @@ function film_revenue($maPhim) {
     }
     return $doanhthu;
 }
-function client_revenue($maND) {
+function client_revenue($maND)
+{
     global $conn;
     $maND = validate($maND);
     $query = "SELECT MaHD FROM hoadon WHERE MaND = '$maND'";
@@ -484,7 +487,8 @@ function client_revenue($maND) {
     return $tongchitieu;
 }
 
-function time_revenue($startDay, $endDay) {
+function time_revenue($startDay, $endDay)
+{
     global $conn;
     $startDay = validate($startDay);
     $endDay = validate($endDay);
@@ -498,7 +502,16 @@ function time_revenue($startDay, $endDay) {
     }
     return $doanhthu;
 }
-function ticket_revenue() {
+
+function get_yearly_revenue($year)
+{
+    $startDay = $year . '-01-01'; // Ngày bắt đầu của năm
+    $endDay = $year . '-12-31';   // Ngày kết thúc của năm
+    return time_revenue($startDay, $endDay);
+}
+
+function ticket_revenue()
+{
     global $conn;
     $query = "SELECT MaHD FROM hoadon";
     $result = mysqli_query($conn, $query);
@@ -510,71 +523,67 @@ function ticket_revenue() {
     }
     return $doanhthu;
 }
-function count_record($tableName) {
-    global $conn; 
-    $tableName = validate($tableName);
+function count_record($tableName)
+{
+    global $conn;
+    $tableName = mysqli_real_escape_string($conn, $tableName);
 
-    $query = "SELECT COUNT(1) AS total_records FROM $tableName"; 
-    $result = mysqli_query($conn, $query); 
+    $query = "SELECT COUNT(1) AS total_records FROM $tableName";
+    $result = mysqli_query($conn, $query);
 
     if ($result) {
         $row = mysqli_fetch_assoc($result);
         return $row['total_records'];
     } else {
-        return 0; 
+        return 0;
     }
 }
-function discount($maND, $sumBill){
+function discount($maND, $sumBill)
+{
     $goldValue = 0;
     $platinumValue = 0;
-    $silverValue =0;
+    $silverValue = 0;
     $list_param = getAll('thamso');
-    if(!empty($list_param)){
-        foreach($list_param as $param){
-            if($param['TenThamSo'] == 'Silver'){
-                $silverValue = $param['GiaTri'];
-            }
-            if($param['TenThamSo'] == 'Gold'){
+    if (!empty($list_param)) {
+        foreach ($list_param as $param) {
+            if ($param['TenThamSo'] == 'Gold') {
                 $goldValue = $param['GiaTri'];
             }
-            if($param['TenThamSo'] == 'Platinum'){
+            if ($param['TenThamSo'] == 'Platinum') {
                 $platinumValue = $param['GiaTri'];
             }
         }
     }
     $clientRevenue = client_revenue($maND);
-    if($clientRevenue >= $platinumValue){
-        return $sumBill -= $sumBill * 10/100;
-    }else if($clientRevenue >= $goldValue){
-        return $sumBill -= $sumBill * 5/100;
-    }
-    else if($clientRevenue >= $silverValue){
-        return $sumBill -=$sumBill * 3/100;
-    }
-    else{
+    if ($clientRevenue >= $platinumValue) {
+        return $sumBill -= $sumBill * 10 / 100;
+    } else if ($clientRevenue >= $goldValue) {
+        return $sumBill -= $sumBill * 5 / 100;
+    } else {
         return $sumBill;
     }
 }
-function getBillByUserId($maND) {
+function getBillByUserId($maND)
+{
     global $conn;
-    $maND = validate($maND); 
+    $maND = validate($maND);
 
-    $query = "SELECT DISTINCT h.*, p.TenPhim 
+    $query = "SELECT DISTINCT h.*, p.TenPhim
               FROM hoadon h
               JOIN chitiethoadon cthd on h.MaHD = cthd.MaHD
               JOIN suatchieu sc on cthd.MaSuatChieu = sc.MaSuatChieu
               JOIN phim p ON sc.MaPhim =p.MaPhim
-              WHERE h.MaND = '$maND'";
-    
+              WHERE h.MaND = '$maND' limit 5";
+
     $result = mysqli_query($conn, $query);
-    $invoices = []; 
+    $invoices = [];
 
     if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {
-            $row['TongTien'] = sumBill($row['MaHD']); 
+            $row['TongTien'] = sumBill($row['MaHD']);
             $invoices[] = $row;
         }
     }
 
-    return $invoices; 
+    return $invoices;
 }
