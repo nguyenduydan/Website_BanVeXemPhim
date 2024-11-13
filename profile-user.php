@@ -19,8 +19,9 @@ getUser();
     <div class="container my-5">
         <div class="row">
             <?php
-            
+
             $client_revenue = client_revenue($NDId);
+
 
             $mucTieu = 4000000;
 
