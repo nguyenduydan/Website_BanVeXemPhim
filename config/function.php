@@ -498,3 +498,27 @@ function time_revenue($startDay, $endDay) {
     }
     return $doanhthu;
 }
+function discount($maND, $sumBill){
+    $goldValue = 0;
+    $platinumValue = 0;
+    $list_param = getAll('thamso');
+    if(!empty($list_param)){
+        foreach($list_param as $param){
+            if($param['TenThamSo'] == 'Gold'){
+                $goldValue = $param['GiaTri'];
+            }
+            if($param['TenThamSo'] == 'Platinum'){
+                $platinumValue = $param['GiaTri'];
+            }
+        }
+    }
+    $clientRevenue = client_revenue($maND);
+    if($clientRevenue >= $platinumValue){
+        return $sumBill += $sumBill * 10/100;
+    }else if($clientRevenue >= $goldValue){
+        return $sumBill += $sumBill * 5/100;
+    }
+    else{
+        return $sumBill;
+    }
+}
