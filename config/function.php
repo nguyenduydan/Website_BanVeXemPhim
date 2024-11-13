@@ -454,17 +454,17 @@ function sumBill($maHD) {
         JOIN phong p ON sc.MaPhong = p.MaPhong 
         JOIN ghe g ON p.MaPhong = g.MaPhong
         WHERE cthd.MaHD = '$maHD' AND cthd.MaGhe = g.MaGhe";
-    $result = mysql_query($query, $conn);
-    return $result ? mysql_fetch_assoc($result)['sumBill'] : 0;
+    $result = mysqli_query($conn, $query);
+    return $result ? mysqli_fetch_assoc($result)['sumBill'] : 0;
 }
 function film_revenue($maPhim) {
     global $conn;
     $maPhim = validate($maPhim);
     $query = "SELECT DISTINCT MaHD FROM chitiethoadon WHERE MaPhim = '$maPhim'";
-    $result = mysql_query($query, $conn);
+    $result = mysqli_query($conn, $query);
     $doanhthu = 0;
     if ($result) {
-        while ($hd = mysql_fetch_assoc($result)) {
+        while ($hd = mysqli_fetch_assoc($result)) {
             $doanhthu += sumBill($hd['MaHD']);
         }
     }
@@ -474,10 +474,10 @@ function client_revenue($maND) {
     global $conn;
     $maND = validate($maND);
     $query = "SELECT MaHD FROM hoadon WHERE MaND = '$maND'";
-    $result = mysql_query($query, $conn);
+    $result = mysqli_query($conn, $query);
     $tongchitieu = 0;
     if ($result) {
-        while ($hd = mysql_fetch_assoc($result)) {
+        while ($hd = mysqli_fetch_assoc($result)) {
             $tongchitieu += sumBill($hd['MaHD']);
         }
     }
@@ -489,10 +489,10 @@ function time_revenue($startDay, $endDay) {
     $startDay = validate($startDay);
     $endDay = validate($endDay);
     $query = "SELECT MaHD FROM hoadon WHERE NgayLapHD BETWEEN '$startDay' AND '$endDay'";
-    $result = mysql_query($query, $conn);
+    $result = mysqli_query($conn, $query);
     $doanhthu = 0;
     if ($result) {
-        while ($hd = mysql_fetch_assoc($result)) {
+        while ($hd = mysqli_fetch_assoc($result)) {
             $doanhthu += sumBill($hd['MaHD']);
         }
     }
@@ -514,9 +514,9 @@ function discount($maND, $sumBill){
     }
     $clientRevenue = client_revenue($maND);
     if($clientRevenue >= $platinumValue){
-        return $sumBill += $sumBill * 10/100;
+        return $sumBill -= $sumBill * 10/100;
     }else if($clientRevenue >= $goldValue){
-        return $sumBill += $sumBill * 5/100;
+        return $sumBill -= $sumBill * 5/100;
     }
     else{
         return $sumBill;

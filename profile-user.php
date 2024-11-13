@@ -19,12 +19,12 @@ getUser();
     <div class="container my-5">
         <div class="row">
             <?php
-
-            $tongTien = 2000000;
+            
+            $client_revenue = client_revenue($NDId);
 
             $mucTieu = 4000000;
 
-            $percentage = min(($tongTien / $mucTieu) * 100, 100);
+            $percentage = min(($client_revenue / $mucTieu) * 100, 100);
             ?>
             <div class="col-md-4 mb-4">
                 <div class="card profile-card shadow border-0">
@@ -72,7 +72,7 @@ getUser();
                         <h4 class="fw-bold mb-3"><?= $user['data']['TenND'] ?></h4>
 
                         <h5 class="text-muted mt-3">Tổng chi tiêu 2024</h5>
-                        <p class="text-warning fw-bold"><?= number_format($tongTien, 0, ',', '.') ?> ₫</p>
+                        <p class="text-warning fw-bold"><?= number_format($client_revenue, 0, ',', '.') ?> ₫</p>
 
                         <div class="progress my-3" style="height: 10px;">
                             <div class="progress-bar bg-warning" role="progressbar" style="width: <?= $percentage; ?>%;"
