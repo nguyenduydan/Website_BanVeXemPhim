@@ -382,9 +382,11 @@ new Chart(ctx1, {
                 display: false,
             }
         },
+
         interaction: {
             intersect: false,
-            mode: 'index',
+            mode: 'nearest',
+            axis: 'y'
         },
         scales: {
             x: {
@@ -460,7 +462,8 @@ new Chart(ctx3, {
         },
         interaction: {
             intersect: false,
-            mode: 'index',
+            mode: 'nearest',
+            axis: 'y'
         },
         scales: {
             x: {
