@@ -10,10 +10,18 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
 }
 
-// Thiết lập phân trang cho bảng NguoiDung
-$pagination = setupPagination($conn, 'nguoidung');
-$data = $pagination['data'];
-$records_per_page = $pagination['records_per_page'];
+$searchString = isset($_GET['searchString']) ? trim($_GET['searchString']) : '';
+
+// Lấy số bản ghi muốn hiển thị mỗi trang từ POST request, mặc định là 5
+$records_per_page = isset($_POST['records_per_page']) ? (int)$_POST['records_per_page'] : 5;
+
+// Lấy số trang hiện tại từ GET request, mặc định là trang 1
+$current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+// Thiết lập phân trang với tìm kiếm
+$pagination = setupPagination($conn, 'nguoidung', $records_per_page, $searchString, 'TenND');
+$data = $pagination['data']; // Dữ liệu của các thể loại
+$records_per_page = $pagination['records_per_page']; // Số bản ghi trên mỗi trang
 ?>
 
 <div id="toast"></div>
@@ -36,6 +44,19 @@ $records_per_page = $pagination['records_per_page'];
                         <option value="20" <?= $records_per_page == 20 ? 'selected' : '' ?>>20</option>
                     </select>
                 </form>
+                <div class="col-3">
+                    <form class="mb-3 mb-lg-0 me-3 input-group w-100 flex-nowrap" role="search" method="GET" action="#">
+                        <button type="submit" class="bg-transparent p-0 border-0">
+                            <span class="input-group-text bg-dark text-white border" style="cursor: pointer;">
+                                <i class="bi bi-search"></i> <!-- Biểu tượng tìm kiếm -->
+                            </span>
+                        </button>
+                        <input type="search" name="searchString" class="form-control ps-2" placeholder="Search..."
+                            aria-label="Search" value="<?= htmlspecialchars($searchString) ?>">
+                        <!-- Ô nhập từ khóa tìm kiếm -->
+                        <input type="hidden" name="page" value="<?= $current_page ?>"> <!-- Ẩn trang hiện tại -->
+                    </form>
+                </div>
                 <!-- Nút Thêm người dùng mới -->
                 <a href="views/user/user-add.php" class="btn btn-lg me-5 btn-add"
                     style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">
@@ -53,7 +74,7 @@ $records_per_page = $pagination['records_per_page'];
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Họ và tên</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Email</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">SĐT</th>
-                                <th class="text-center text-uppercase text-xs font-weight-bolder">Quyền</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Loại thành viên</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Trạng thái</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Hành động</th>
                             </tr>
@@ -67,14 +88,41 @@ $records_per_page = $pagination['records_per_page'];
                             ?>
                                     <tr>
                                         <!-- Lấy thông tin tài khoản người dùng dựa vào MaND -->
-                                        <?php $taikhoan = getByID('TaiKhoan', 'MaND', $item["MaND"]) ?>
                                         <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['TenND']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['Email']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['SDT']; ?></th>
                                         <th class="text-center text-xs font-weight-bolder">
-                                            <!-- Hiển thị quyền của người dùng -->
-                                            <?= ($taikhoan['data']['Quyen'] == 1) ? 'Admin' : 'Người dùng'; ?>
+                                        <?php 
+                                            $client_revenue = client_revenue2($item['MaND']);
+                                            $list_param = getAll('thamso');
+                                            if (!empty($list_param)) {
+                                                foreach ($list_param as $param) {
+                                                    if ($param['TenThamSo'] == 'Silver') {
+                                                        $silverValue = $param['GiaTri'];
+                                                        $silverName = $param['TenThamSo'];
+                                                    }
+                                                    if ($param['TenThamSo'] == 'Gold') {
+                                                        $goldValue = $param['GiaTri'];
+                                                        $goldName = $param['TenThamSo'];
+                                                    }
+                                                    if ($param['TenThamSo'] == 'Platinum') {
+                                                        $platinumValue = $param['GiaTri'];
+                                                        $platinumName = $param['TenThamSo'];
+                                                    }
+                                                }
+                                            }
+                                            if ($client_revenue >= $platinumValue) {
+                                                $level = 'Platinum';
+                                            } elseif ($client_revenue >= $goldValue) {
+                                                $level = 'Gold';
+                                            } else if ($client_revenue >= $silverValue){
+                                                $level = 'Silver';
+                                            }else{
+                                                $level = 'Thành viên';
+                                            }
+                                            echo $level;
+                                        ?>
                                         </th>
                                         <th class="text-center text-s font-weight-bolder">
                                             <!-- Nút thay đổi trạng thái hoạt động của người dùng -->
