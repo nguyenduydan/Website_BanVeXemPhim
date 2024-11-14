@@ -474,6 +474,16 @@ function film_revenue($maPhim)
     }
     return $doanhthu;
 }
+function film_revenue2($maPhim){
+    global $conn;
+    $maPhim =validate($maPhim);
+    $query = "SELECT SUM (hd.TongTien) FROM hoadon
+                JOIN chitiethoadon cthd on hoadon.MaHD = cthd.MaHD
+                JOIN suatchieu sc on cthd.MaSuatChieu = sc.MaSuatChieu
+                WHERE sc.MaPhim = '$maPhim'";
+    $result = mysqli_query($conn, $query);
+    return $result ? mysqli_fetch_array($result)[0] : 0;
+}
 function client_revenue($maND)
 {
     global $conn;
@@ -488,7 +498,14 @@ function client_revenue($maND)
     }
     return $tongchitieu;
 }
-
+function client_revenue2($maND)
+{
+    global $conn;
+    $maND = validate($maND);
+    $query = "SELECT SUM (hd.TongTien) FROM hoadon WHERE MaND = '$maND'";
+    $result = mysqli_query($conn, $query);
+    return $result ? mysqli_fetch_array($result)[0] : 0;
+}
 function time_revenue($startDay, $endDay)
 {
     global $conn;
