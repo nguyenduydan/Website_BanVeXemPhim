@@ -18,7 +18,7 @@ getUser();
     <div class="container p-5">
         <div class="row">
             <?php
-            $client_revenue = client_revenue($NDId);
+            $client_revenue = client_revenue2($NDId);
 
             $silverValue = 1;
             $goldValue = 1;
