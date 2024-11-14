@@ -609,6 +609,9 @@ function discount($maND, $sumBill)
             if ($param['TenThamSo'] == 'Platinum') {
                 $platinumValue = $param['GiaTri'];
             }
+            if ($param['TenThamSo'] == 'Silver') {
+                $silverValue = $param['GiaTri'];
+            }
         }
     }
     $clientRevenue = client_revenue($maND);
@@ -616,7 +619,9 @@ function discount($maND, $sumBill)
         return $sumBill -= $sumBill * 10 / 100;
     } else if ($clientRevenue >= $goldValue) {
         return $sumBill -= $sumBill * 5 / 100;
-    } else {
+    } else if($clientRevenue >= $silverValue){
+        return $sumBill -= $sumBill * 3 /100;
+    }else{
         return $sumBill;
     }
 }
