@@ -27,7 +27,7 @@ require_once("config/function.php");
                 $items = getFilm('1'); //Nhập trạng thái muốn hiển thị
                 $countCurrentlyShowing = count($items);
                 foreach ($items as $value => $item): ?>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-4 movie-item <?= $value >= 8 ? 'hidden' : '' ?>">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-3 movie-item <?= $value >= 8 ? 'hidden' : '' ?>">
                     <div class="movie-card card">
                         <img class="img-fluid" src="uploads/film-imgs/<?= $item['Anh'] ?>"
                             alt="<?= $item['TenPhim'] ?>">
@@ -50,7 +50,7 @@ require_once("config/function.php");
                 $items = getFilm('2');
                 $countComingSoon = count($items);
                 foreach ($items as $value => $item): ?>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-4 movie-item <?= $value >= 8 ? 'hidden' : '' ?>">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-3 movie-item <?= $value >= 8 ? 'hidden' : '' ?>">
                     <div class="movie-card card">
                         <img class="img-fluid" src="uploads/film-imgs/<?= $item['Anh'] ?>"
                             alt="<?= $item['TenPhim'] ?>">

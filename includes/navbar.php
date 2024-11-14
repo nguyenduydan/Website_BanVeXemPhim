@@ -47,7 +47,7 @@ getUser();
                         $baseUrl = "http://" . $_SERVER['HTTP_HOST'] . "/Website_BanVeXemPhim/";
                         ?>
                         <ul
-                            class="nav flex-lg-row flex-column col-lg-8 col-sm-12 align-items-center justify-content-start justify-content-lg-center mb-md-0">
+                            class="nav flex-lg-row flex-column col-lg-10 col-sm-12 align-items-center justify-content-start justify-content-lg-center mb-md-0">
                             <?php foreach ($items as $item): ?>
                             <li class="nav-item dropdown mx-2">
                                 <a href="<?= $baseUrl . $item['LienKet'] ?>" aria-expanded="false"
@@ -105,6 +105,11 @@ getUser();
                                                         src="/Website_BanVeXemPhim/uploads/film-imgs/<?= $item['Anh'] ?>"
                                                         alt="<?= $item['TenPhim'] ?>">
                                                     <span class="movie-age"><?= $item['PhanLoai'] ?></span>
+                                                    <a style="width: 100px; font-size: 13px; padding: 10px 7px"
+                                                        href="/Website_BanVeXemPhim/views/detail-film.php?id=<?= $item['MaPhim'] ?>"
+                                                        class="buy-ticket text-center align-items-center">
+                                                        <i class="bi bi-ticket-perforated"></i> Mua Vé
+                                                    </a>
                                                 </div>
                                                 <div class="movie-info">
                                                     <small
@@ -169,7 +174,7 @@ getUser();
                         }
                         </style>
                         <!-- Search and Login Section in Offcanvas -->
-                        <div class="col-lg-4 d-flex flex-lg-row flex-column align-items-center col-12">
+                        <div class="col-lg-2 d-flex flex-lg-row flex-column align-items-center col-12">
                             <div class="dropdown mt-auto ms-2">
                                 <?php if (isset($_SESSION['NDId']) && $_SESSION['NDloggedIn'] == true): ?>
                                 <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"

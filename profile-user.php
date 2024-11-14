@@ -169,10 +169,10 @@ getUser();
                         }
                         </style>
 
-                        <h3 class="mt-2 mb-2" style=" font-family: 'Fleur De Leah', cursive;">
+                        <h4 class="mt-2 mb-2" style="font-family: 'Pacifico', cursive;">
                             <i class="<?= $icon ?> me-2"></i>
                             <?= $user['data']['TenND'] ?>
-                        </h3>
+                        </h4>
                         <small class="mt-3">Tổng chi tiêu <span
                                 class="text-info fw-bolder fs-5 text-decoration-underline"><?= $current_year = date('Y'); ?></span></small>
                         <p class="fw-bold fs-4"><?= number_format($client_revenue, 0, ',', '.') ?> ₫</p>
