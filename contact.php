@@ -15,12 +15,19 @@ $isLoggedIn = isset($_SESSION['NDloggedIn']) && $_SESSION['NDloggedIn'] == TRUE;
 <?php alertMessage() ?>
 
 <section class="py-3 py-md-5" style="
-background-image: url(https://wallpaperaccess.com/full/8406708.gif);
+background:linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)),url(https://wallpaperaccess.com/full/8406708.gif);
  background-repeat: no-repeat;
     background-size:cover;
     background-position: center;
 
 ">
+    <audio id="myAudio" class="audio-player ms-5" autoplay loop>
+        <source src="assets/imgs/Querry.mp3" type="audio/mpeg">
+        Trình duyệt của bạn không hỗ trợ thẻ audio.
+    </audio>
+    <button class="play-button" onclick="toggleAudio()">
+        <i id="playPauseIcon" class="bi bi-volume-up"></i>
+    </button>
     <div class="container">
         <div class="row gy-3 gy-md-4 gy-lg-0 align-items-xl-center">
             <div class="col-12 col-lg-6 d-none d-sm-none d-md-none d-lg-block">

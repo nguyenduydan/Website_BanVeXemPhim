@@ -10,13 +10,20 @@ getUser();
 ?>
 <div id="toast"></div>
 <?php alertMessage() ?>
+<audio id="myAudio" class="audio-player ms-5" autoplay loop>
+    <source src="assets/imgs/Querry.mp3" type="audio/mpeg">
+    Trình duyệt của bạn không hỗ trợ thẻ audio.
+</audio>
+<button class="play-button" onclick="toggleAudio()">
+    <i id="playPauseIcon" class="bi bi-volume-up"></i>
+</button>
 
 <form id="avatarForm" action="/Website_BanVeXemPhim/views/controllers/user-controller.php" method="post"
     enctype="multipart/form-data">
     <input type="hidden" name="mand" value="<?= $user['data']['MaND'] ?>">
     <input type="hidden" name="tend" value="<?= $user['data']['TenND'] ?>">
 
-    <div class="container my-5">
+    <div class="container p-5">
         <div class="row">
             <?php
             $client_revenue = client_revenue($NDId);
@@ -81,53 +88,53 @@ getUser();
 
             ?>
             <style>
-                .bg-member-gold {
-                    color: aliceblue;
-                    /* Một màu vàng nhạt hơn */
-                    background-image: url(https://i.pinimg.com/736x/9d/5c/13/9d5c13e3d92af6e99120a7b2394263cf.jpg);
-                    background-repeat: no-repeat;
-                    background-size: cover;
-                    background-position: center;
-                    border: 3px solid gold;
-                    box-shadow: 0 0 10px 3px gold;
+            .bg-member-gold {
+                color: aliceblue;
+                /* Một màu vàng nhạt hơn */
+                background-image: url(https://i.pinimg.com/736x/9d/5c/13/9d5c13e3d92af6e99120a7b2394263cf.jpg);
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+                border: 3px solid gold;
+                box-shadow: 0 0 10px 3px gold;
 
-                }
+            }
 
-                .bg-member-silver {
-                    color: aliceblue;
-                    /* Một màu vàng nhạt hơn */
-                    background-image: url(https://i.pinimg.com/736x/2d/a9/e8/2da9e8590c45ef52fd0ce61a822a8197.jpg);
-                    background-repeat: no-repeat;
-                    background-size: cover;
-                    box-shadow: 0 0 10px 3px silver;
-                    background-position: center;
-                    border: 3px solid silver;
-                }
+            .bg-member-silver {
+                color: aliceblue;
+                /* Một màu vàng nhạt hơn */
+                background-image: url(https://i.pinimg.com/736x/2d/a9/e8/2da9e8590c45ef52fd0ce61a822a8197.jpg);
+                background-repeat: no-repeat;
+                background-size: cover;
+                box-shadow: 0 0 10px 3px silver;
+                background-position: center;
+                border: 3px solid silver;
+            }
 
 
-                .bg-member-platinum {
-                    color: aliceblue;
-                    /* Một màu vàng nhạt hơn */
-                    background-image: url(https://media4.giphy.com/media/xTiTnxpQ3ghPiB2Hp6/giphy.gif?cid=6c09b95219sdvq77x4l0mzc1omfnw4yceualg0y556obpxif&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g);
-                    background-repeat: no-repeat;
-                    background-size: cover;
-                    background-position: center;
-                    border: 3px solid dodgerblue;
-                    box-shadow: 0 0 10px 3px dodgerblue;
-                }
+            .bg-member-platinum {
+                color: aliceblue;
+                /* Một màu vàng nhạt hơn */
+                background-image: url(https://media4.giphy.com/media/xTiTnxpQ3ghPiB2Hp6/giphy.gif?cid=6c09b95219sdvq77x4l0mzc1omfnw4yceualg0y556obpxif&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g);
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+                border: 3px solid dodgerblue;
+                box-shadow: 0 0 10px 3px dodgerblue;
+            }
 
-                .bg-member-none {
-                    color: aliceblue;
-                    /* Một màu vàng nhạt hơn */
-                    background-image: url(https://i.pinimg.com/736x/17/a9/a8/17a9a801d17a79fbafc52e4e19aa8750.jpg);
-                    background-repeat: no-repeat;
-                    background-size: cover;
-                    background-position: center;
-                    border: 3px solid black;
-                    box-shadow: 0 0 10px 3px lightslategray;
-                }
+            .bg-member-none {
+                color: aliceblue;
+                /* Một màu vàng nhạt hơn */
+                background-image: url(https://i.pinimg.com/736x/17/a9/a8/17a9a801d17a79fbafc52e4e19aa8750.jpg);
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+                border: 3px solid black;
+                box-shadow: 0 0 10px 3px lightslategray;
+            }
 
-                ;
+            ;
             </style>
 
             <div class="col-md-4 col-lg-5 mb-4">
@@ -148,32 +155,32 @@ getUser();
                         </div>
 
                         <script>
-                            document.getElementById('camera').addEventListener('click', function(event) {
-                                event.preventDefault();
-                                document.getElementById('avatar').click();
-                            });
+                        document.getElementById('camera').addEventListener('click', function(event) {
+                            event.preventDefault();
+                            document.getElementById('avatar').click();
+                        });
 
-                            function submitAvatarForm() {
-                                var submitButton = document.createElement('input');
-                                submitButton.type = 'hidden';
-                                submitButton.name = 'updateAvt';
-                                document.getElementById('avatarForm').appendChild(submitButton);
-                                document.getElementById('avatarForm').submit();
-                            }
+                        function submitAvatarForm() {
+                            var submitButton = document.createElement('input');
+                            submitButton.type = 'hidden';
+                            submitButton.name = 'updateAvt';
+                            document.getElementById('avatarForm').appendChild(submitButton);
+                            document.getElementById('avatarForm').submit();
+                        }
                         </script>
 
                         <style>
-                            .profile-picture-container:hover #camera {
-                                display: flex !important;
-                                align-items: center;
-                                justify-content: center;
-                            }
+                        .profile-picture-container:hover #camera {
+                            display: flex !important;
+                            align-items: center;
+                            justify-content: center;
+                        }
                         </style>
 
-                        <h5 class="fw-bold mt-3 mb-2">
+                        <h3 class="mt-2 mb-2" style=" font-family: 'Fleur De Leah', cursive;">
                             <i class="<?= $icon ?> me-2"></i>
                             <?= $user['data']['TenND'] ?>
-                        </h5>
+                        </h3>
                         <small class="mt-3">Tổng chi tiêu <span
                                 class="text-info fw-bolder fs-5 text-decoration-underline"><?= $current_year = date('Y'); ?></span></small>
                         <p class="fw-bold fs-4"><?= number_format($client_revenue, 0, ',', '.') ?> ₫</p>
@@ -237,8 +244,8 @@ getUser();
                                         <div class="mb-4">
                                             <label for="fullName" class="form-label fw-semibold">Họ và tên</label>
                                             <?php if (isset($messages['tennd'])): ?>
-                                                <small
-                                                    class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tennd']) ?></small>
+                                            <small
+                                                class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tennd']) ?></small>
                                             <?php endif; ?>
                                             <div class="input-group">
                                                 <span class="input-group-text bg-light border-0"><i
@@ -252,8 +259,8 @@ getUser();
                                         <div class="mb-4">
                                             <label for="email" class="form-label fw-semibold">Email</label>
                                             <?php if (isset($messages['email'])): ?>
-                                                <small
-                                                    class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['email']) ?></small>
+                                            <small
+                                                class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['email']) ?></small>
                                             <?php endif; ?>
                                             <div class="input-group">
                                                 <span class="input-group-text bg-light border-0"><i
