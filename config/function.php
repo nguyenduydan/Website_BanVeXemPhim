@@ -476,14 +476,19 @@ function film_revenue($maPhim)
 }
 function film_revenue2($maPhim){
     global $conn;
-    $maPhim =validate($maPhim);
-    $query = "SELECT SUM(TongTien) FROM (SELECT DISTINCT hd.TongTien
-                                            FROM hoadon hd
-                                            JOIN chitiethoadon cthd ON hd.MaHD = cthd.MaHD
-                                            JOIN suatchieu sc ON cthd.MaSuatChieu = sc.MaSuatChieu
-                                            WHERE sc.MaPhim = '$maPhim'";
+    $maPhim = validate($maPhim);
+    
+    $query = "SELECT SUM(TongTien) AS totalRevenue FROM (
+                  SELECT DISTINCT hd.TongTien
+                  FROM hoadon hd
+                  JOIN chitiethoadon cthd ON hd.MaHD = cthd.MaHD
+                  JOIN suatchieu sc ON cthd.MaSuatChieu = sc.MaSuatChieu
+                  WHERE sc.MaPhim = '$maPhim'
+              ) AS distinctValues";
+    
     $result = mysqli_query($conn, $query);
-    return $result ? mysqli_fetch_array($result)[0] : 0;
+    
+    return $result ? mysqli_fetch_array($result)['totalRevenue'] : 0;
 }
 function client_revenue($maND)
 {
@@ -503,7 +508,7 @@ function client_revenue2($maND)
 {
     global $conn;
     $maND = validate($maND);
-    $query = "SELECT SUM (hd.TongTien) FROM hoadon WHERE MaND = '$maND'";
+    $query = "SELECT SUM(TongTien) FROM hoadon WHERE MaND = '$maND'";
     $result = mysqli_query($conn, $query);
     return $result ? mysqli_fetch_array($result)[0] : 0;
 }

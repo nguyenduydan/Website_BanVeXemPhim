@@ -13,14 +13,14 @@ $last_year_revenue_json = json_encode($last_year_revenue);
 
 //Doanh thu ngày
 $today = date('Y-m-d');
-$today_revenue = time_revenue($today, $today);
+$today_revenue = time_revenue2($today, $today);
 // Lấy 7 ngày gần nhất từ hôm nay
 $days = [];
 $revenues = [];
 for ($i = 0; $i < 7; $i++) {
     $date = date('Y-m-d', strtotime("-$i days")); // Ngày lùi lại từng ngày
     $day_month = date('d-m', strtotime($date)); // Lấy ngày và tháng (d-m)
-    $revenue = time_revenue($date, $date); // Giả sử đây là hàm tính doanh thu theo ngày
+    $revenue = time_revenue2($date, $date); // Giả sử đây là hàm tính doanh thu theo ngày
     $days[] = $day_month;
     $revenues[] = $revenue;
 }
@@ -37,7 +37,7 @@ for ($month = 1; $month <= 12; $month++) {
     $month_end = date('Y-m-t', strtotime($month_date));
 
     // Gọi hàm time_revenue để tính doanh thu cho tháng này
-    $revenue = time_revenue($month_start, $month_end);
+    $revenue = time_revenue2($month_start, $month_end);
 
     // Thêm doanh thu vào mảng
     $monthly_revenue[] = $revenue;
@@ -51,7 +51,7 @@ $days = array_reverse($days);
 $revenues = array_reverse($revenues);
 
 //Doanh thu cả rạp
-$revenue = ticket_revenue();
+$revenue = ticket_revenue2();
 //Tổng số khách hàng
 $totalCustomers = count_user();
 $total_bill = count_record('hoadon');
@@ -63,7 +63,7 @@ $user_revenues = [];
 
 // Lặp qua từng người dùng để lấy mã và doanh thu
 foreach ($users as $user) {
-    $revenue_user = client_revenue($user['MaND']);
+    $revenue_user = client_revenue2($user['MaND']);
     $user_revenues[] = [
         'username' => $user['TenND'],
         'revenue' => $revenue_user
@@ -92,7 +92,7 @@ $data_json = json_encode($data);
 $films = getAll('phim');
 $film_revenues = [];
 foreach ($films as $film) {
-    $revenue_film = film_revenue($film['MaPhim']);
+    $revenue_film = film_revenue2($film['MaPhim']);
     $film_revenues[] = [
         'filmname' => $film['TenPhim'],
         'revenue' => $revenue_film
