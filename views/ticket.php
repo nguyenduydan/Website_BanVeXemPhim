@@ -53,16 +53,16 @@ if (isset($_POST['seatsInput'])) {
     // Áp dụng giảm giá
     $tongTien = discount($NDId, $totalPrice); // Tính tổng tiền sau khi giảm giá
     // Thêm hóa đơn
-    $query = "INSERT INTO HoaDon(MaND, NgayLapHD, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai, TongTien)
-              VALUES ('$NDId', CURRENT_TIMESTAMP, '$NDId', CURRENT_TIMESTAMP, '$NDId', CURRENT_TIMESTAMP, '1','$tongTien')";
+    $query = "INSERT INTO HoaDon(MaND, NgayLapHD,TongTien, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
+              VALUES ('$NDId', CURRENT_TIMESTAMP,'$tongTien', '$NDId', CURRENT_TIMESTAMP, '$NDId', CURRENT_TIMESTAMP, '1')";
     mysqli_query($conn, $query);
 
     $maHD = mysqli_insert_id($conn);
     
     // Thêm chi tiết hóa đơn
     foreach ($seatId as $ghe) {
-        $queryDetail = "INSERT INTO ChiTietHoaDon(MaHD, MaSuatChieu, MaGhe, BapNuoc, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
-                        VALUES ('$maHD', '$maSuatChieu', '$ghe', '0', '$NDId', CURRENT_TIMESTAMP, '$NDId', CURRENT_TIMESTAMP, '1')";
+        $queryDetail = "INSERT INTO ChiTietHoaDon(MaHD, MaSuatChieu, MaGhe, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
+                        VALUES ('$maHD', '$maSuatChieu', '$ghe', '$NDId', CURRENT_TIMESTAMP, '$NDId', CURRENT_TIMESTAMP, '1')";
         mysqli_query($conn, $queryDetail);
     }
 

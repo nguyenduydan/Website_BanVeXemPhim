@@ -477,7 +477,7 @@ function film_revenue($maPhim)
 function film_revenue2($maPhim){
     global $conn;
     $maPhim =validate($maPhim);
-    $query = "SELECT SUM (hd.TongTien) FROM hoadon
+    $query = "SELECT SUM(hd.TongTien) FROM hoadon
                 JOIN chitiethoadon cthd on hoadon.MaHD = cthd.MaHD
                 JOIN suatchieu sc on cthd.MaSuatChieu = sc.MaSuatChieu
                 WHERE sc.MaPhim = '$maPhim'";
