@@ -21,13 +21,6 @@ background:linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)),url(https://w
     background-position: center;
 
 ">
-    <audio id="myAudio" class="audio-player ms-5" autoplay loop>
-        <source src="assets/imgs/Querry.mp3" type="audio/mpeg">
-        Trình duyệt của bạn không hỗ trợ thẻ audio.
-    </audio>
-    <button class="play-button" onclick="toggleAudio()">
-        <i id="playPauseIcon" class="bi bi-volume-up"></i>
-    </button>
     <div class="container">
         <div class="row gy-3 gy-md-4 gy-lg-0 align-items-xl-center">
             <div class="col-12 col-lg-6 d-none d-sm-none d-md-none d-lg-block">
