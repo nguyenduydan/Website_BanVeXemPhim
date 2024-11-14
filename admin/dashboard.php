@@ -25,6 +25,7 @@ for ($i = 0; $i < 7; $i++) {
     $revenues[] = $revenue;
 }
 $monthly_revenue = [];
+
 // Lặp từ tháng 1 đến tháng 12
 for ($month = 1; $month <= 12; $month++) {
     // Tính năm và tháng tương ứng
@@ -39,9 +40,15 @@ for ($month = 1; $month <= 12; $month++) {
     // Gọi hàm time_revenue để tính doanh thu cho tháng này
     $revenue = time_revenue2($month_start, $month_end);
 
+    // Nếu không có doanh thu, gán giá trị bằng 0
+    if ($revenue === null) {
+        $revenue = 0;
+    }
+
     // Thêm doanh thu vào mảng
     $monthly_revenue[] = $revenue;
 }
+
 // Chuyển mảng doanh thu này sang định dạng JSON để JavaScript có thể sử dụng
 $monthly_revenue_json = json_encode($monthly_revenue);
 

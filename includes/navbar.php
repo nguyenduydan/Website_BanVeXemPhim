@@ -170,11 +170,7 @@ getUser();
                         </style>
                         <!-- Search and Login Section in Offcanvas -->
                         <div class="col-lg-4 d-flex flex-lg-row flex-column align-items-center col-12">
-                            <form class="mb-0 input-group" role="search">
-                                <input type="search" class="form-control" placeholder="Tìm kiếm..." aria-label="Search">
-                                <button class="btn btn-dark" type="submit"><i class="bi bi-search"></i></button>
-                            </form>
-                            <div class="dropdown mt-auto ms-3">
+                            <div class="dropdown mt-auto ms-2">
                                 <?php if (isset($_SESSION['NDId']) && $_SESSION['NDloggedIn'] == true): ?>
                                 <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
                                     data-bs-toggle="dropdown" aria-expanded="false">
