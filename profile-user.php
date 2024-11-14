@@ -10,14 +10,6 @@ getUser();
 ?>
 <div id="toast"></div>
 <?php alertMessage() ?>
-<audio id="myAudio" class="audio-player ms-5" autoplay loop>
-    <source src="assets/imgs/Querry.mp3" type="audio/mpeg">
-    Trình duyệt của bạn không hỗ trợ thẻ audio.
-</audio>
-<button class="play-button" onclick="toggleAudio()">
-    <i id="playPauseIcon" class="bi bi-volume-up"></i>
-</button>
-
 <form id="avatarForm" action="/Website_BanVeXemPhim/views/controllers/user-controller.php" method="post"
     enctype="multipart/form-data">
     <input type="hidden" name="mand" value="<?= $user['data']['MaND'] ?>">
