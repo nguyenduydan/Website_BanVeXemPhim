@@ -640,14 +640,5 @@ function getBillByUserId($maND)
               LIMIT 10";
 
     $result = mysqli_query($conn, $query);
-    $invoices = [];
-
-    if ($result) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $row['TongTien'] = sumBill($row['MaHD']);
-            $invoices[] = $row;
-        }
-    }
-
-    return $invoices;
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
