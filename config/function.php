@@ -477,10 +477,11 @@ function film_revenue($maPhim)
 function film_revenue2($maPhim){
     global $conn;
     $maPhim =validate($maPhim);
-    $query = "SELECT SUM(hd.TongTien) FROM hoadon
-                JOIN chitiethoadon cthd on hoadon.MaHD = cthd.MaHD
-                JOIN suatchieu sc on cthd.MaSuatChieu = sc.MaSuatChieu
-                WHERE sc.MaPhim = '$maPhim'";
+    $query = "SELECT SUM(TongTien) FROM (SELECT DISTINCT hd.TongTien
+                                            FROM hoadon hd
+                                            JOIN chitiethoadon cthd ON hd.MaHD = cthd.MaHD
+                                            JOIN suatchieu sc ON cthd.MaSuatChieu = sc.MaSuatChieu
+                                            WHERE sc.MaPhim = '$maPhim'";
     $result = mysqli_query($conn, $query);
     return $result ? mysqli_fetch_array($result)[0] : 0;
 }
@@ -521,6 +522,15 @@ function time_revenue($startDay, $endDay)
     }
     return $doanhthu;
 }
+function time_revenue2($startDay, $endDay)
+{
+    global $conn;
+    $startDay = validate($startDay);
+    $endDay = validate($endDay);
+    $query = "SELECT SUM(TongTien) FROM hoadon WHERE DATE(NgayLapHD) BETWEEN '$startDay' AND '$endDay'";
+    $result = mysqli_query($conn, $query);
+    return $result ? mysqli_fetch_array($result)[0] : 0;
+}
 
 function get_yearly_revenue($year)
 {
@@ -541,6 +551,14 @@ function ticket_revenue()
         }
     }
     return $doanhthu;
+}
+
+function ticket_revenue2()
+{
+    global $conn;
+    $query = "SELECT SUM(TongTien) FROM hoadon";
+    $result = mysqli_query($conn, $query);
+    return $result ? mysqli_fetch_array($result)[0] : 0;
 }
 function count_record($tableName)
 {
