@@ -1,6 +1,6 @@
  <table class="table table-striped table-hover">
      <thead>
-         <small class="text-danger">*Chi tiêu 10 ngày gần nhất</small>
+         <small class="text-danger">*Chi tiêu 10 hóa đơn gần nhất</small>
          <tr class="text-center">
              <th>STT</th>
              <th>Ngày mua</th>
