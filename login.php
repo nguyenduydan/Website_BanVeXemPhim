@@ -69,8 +69,31 @@ $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ?
                     </div>
 
                     <!-- Liên kết Đăng ký -->
-                    <div class="text-center mt-2">
+                    <div class="text-center mt-2 border-bottom pb-3">
                         <span>Chưa có tài khoản? <a href="register.php">Đăng ký</a></span>
+                    </div>
+                    <?php
+                    // Tạo đường dẫn đăng nhập Google
+                    $client_id = '918231739151-2cmcgr7vv80e5bq71uhce9kqfqoopfbt.apps.googleusercontent.com'; // Thay bằng Client ID từ Google Cloud Console
+                    $redirect_uri = 'http://localhost/Website_BanVeXemPhim/views/controllers/google-callback.php'; // URL để xử lý phản hồi của Google
+                    $scope = 'email profile';
+
+                    $google_login_url = 'https://accounts.google.com/o/oauth2/auth?' . http_build_query([
+                        'client_id' => $client_id,
+                        'redirect_uri' => $redirect_uri,
+                        'response_type' => 'code',
+                        'scope' => $scope,
+                        'access_type' => 'offline',
+                        'prompt' => 'select_account'
+                    ]);
+
+                    // Hiển thị nút đăng nhập Google
+                    // echo '<a href="' . htmlspecialchars($google_login_url) . '">Đăng nhập bằng Google</a>';
+                    ?>
+                    <div class="text-center mt-2" id="btn-google">
+                        <a href="<?= htmlspecialchars($google_login_url) ?>" class="btn p-2 shadow">
+                            <i class="bi bi-google"></i><span> Đăng nhập bằng Google</span>
+                        </a>
                     </div>
                 </form>
             </div>

@@ -653,3 +653,28 @@ li.nav-item.day-item {
     width: 100%;
 }
 
+#btn-google a{
+    font-size: medium;
+    transition: all .3s ease;
+}
+
+#btn-google a:hover{
+    text-decoration: none;
+    background-color: #447cff;
+    color: #fff;
+}
+
+#btn-google a i{
+    color: #dc3545;
+    transition: all .3s ease;
+}
+
+#btn-google a:hover i {
+    color: #f9ff46;
+    /* Màu của biểu tượng khi hover */
+}
+
+#btn-google a:active {
+  transform: scale(0.9);
+}
+

@@ -2,6 +2,7 @@
 // Định nghĩa đường dẫn gốc của dự án
 $baseURL = '/Website_BanVeXemPhim/';
 ?>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <link rel="shortcut icon" href="<?php echo $baseURL; ?>assets/imgs/favicon-32x32.png" type="image/x-icon">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
@@ -16,7 +17,7 @@ $baseURL = '/Website_BanVeXemPhim/';
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/login_signin.css?2.2">
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/profile.css?1.7">
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/toast.css">
-<link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/style.css?v2.9">
+<link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/style.css?v3.1">
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/ticket.css?v1.0">
 <script src="<?php echo $baseURL; ?>assets/js/toast.js?1.0"></script>
 <script src="<?php echo $baseURL; ?>assets/js/my-js.js?2.6"></script>

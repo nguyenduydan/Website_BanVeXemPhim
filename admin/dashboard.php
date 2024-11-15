@@ -67,14 +67,19 @@ $users = getAll('nguoidung');
 
 // Mảng để lưu trữ mã người dùng và doanh thu
 $user_revenues = [];
-
 // Lặp qua từng người dùng để lấy mã và doanh thu
 foreach ($users as $user) {
-    $revenue_user = client_revenue2($user['MaND']);
-    $user_revenues[] = [
-        'username' => $user['TenND'],
-        'revenue' => $revenue_user
-    ];
+    if (
+        $user['TenND'] != 'Admin' and
+        $totalCustomers >= 0
+    ) {
+        $revenue_user = client_revenue2($user['MaND']);
+        $user_revenues[] = [
+            'username' => $user['TenND'],
+            'revenue' => $revenue_user
+        ];
+        $count--;
+    }
 }
 
 // Sắp xếp mảng theo doanh thu giảm dần
@@ -362,6 +367,7 @@ var chart = new Chart(ctx, {
     },
 });
 
+//Top 5 nguoi co chi tieu cao nhat
 var users = <?php echo $labels_json; ?>;
 var revenues = <?php echo $data_json; ?>;
 
@@ -377,7 +383,7 @@ new Chart(ctx1, {
             borderRadius: 3,
             borderSkipped: false,
             backgroundColor: "#fff",
-            maxBarThickness: 15
+            maxBarThickness: 10
         }]
     },
     options: {
@@ -402,6 +408,7 @@ new Chart(ctx1, {
                     display: true,
                     drawOnChartArea: true,
                     drawTicks: true,
+                    color: "#fff"
                 },
                 ticks: {
                     display: true,
@@ -425,14 +432,14 @@ new Chart(ctx1, {
                     suggestedMin: 0,
                     suggestedMax: 500,
                     beginAtZero: true,
-                    padding: 15,
+                    padding: 10,
                     font: {
-                        size: 14,
+                        size: 13,
                         family: "Arial",
                         style: 'normal',
                         lineHeight: 2
                     },
-                    color: "#fff"
+                    color: "#fff",
                 },
             },
         },
@@ -479,6 +486,7 @@ new Chart(ctx3, {
                     display: true,
                     drawOnChartArea: true,
                     drawTicks: true,
+                    color: "#fff"
                 },
                 ticks: {
                     display: true,
@@ -509,7 +517,8 @@ new Chart(ctx3, {
                         style: 'normal',
                         lineHeight: 2
                     },
-                    color: "#fff"
+                    color: "#fff",
+
                 },
             },
         },
