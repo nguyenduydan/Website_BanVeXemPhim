@@ -115,10 +115,12 @@ foreach ($films as $film) {
 usort($film_revenues, function ($a, $b) {
     return $b['revenue'] <=> $a['revenue'];
 });
+// Lấy 5 người có doanh thu cao nhất
+$top_films = array_slice($film_revenues, 0, 5);
 
 $name_film = [];
 $data_film = [];
-foreach ($film_revenues as $film_revenue) {
+foreach ($top_films as $film_revenue) {
     $name_film[] = $film_revenue['filmname'];
     $data_film[] = $film_revenue['revenue'];
 }
@@ -609,7 +611,7 @@ new Chart(ctx2, {
                         size: 13,
                         family: "Arial",
                         style: 'normal',
-                        lineHeight: 2
+                        lineHeight: 3
                     },
                 }
             },
