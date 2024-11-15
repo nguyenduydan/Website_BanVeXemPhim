@@ -67,11 +67,12 @@ $users = getAll('nguoidung');
 
 // Mảng để lưu trữ mã người dùng và doanh thu
 $user_revenues = [];
+$count = 5;
 // Lặp qua từng người dùng để lấy mã và doanh thu
 foreach ($users as $user) {
     if (
         $user['TenND'] != 'Admin' and
-        $totalCustomers >= 0
+        $count > 0
     ) {
         $revenue_user = client_revenue2($user['MaND']);
         $user_revenues[] = [

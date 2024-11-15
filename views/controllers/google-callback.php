@@ -6,14 +6,14 @@ if (isset($_GET['code'])) {
     $code = $_GET['code'];
 
     $client_id = '918231739151-2cmcgr7vv80e5bq71uhce9kqfqoopfbt.apps.googleusercontent.com';
-    $client_sc = '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';
+    $client_secret = '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';
     $redirect_uri = 'http://localhost/Website_BanVeXemPhim/views/controllers/google-callback.php';
 
     $token_url = 'https://oauth2.googleapis.com/token';
     $post_data = [
         'code' => $code,
         'client_id' => $client_id,
-        'client_sc' => $client_sc,
+        'client_secret' => $client_secret,
         'redirect_uri' => $redirect_uri,
         'grant_type' => 'authorization_code',
     ];
@@ -52,7 +52,6 @@ if (isset($_GET['code'])) {
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
             }
-            $id_user = $user_data['id'];
             // Kiểm tra người dùng trong cơ sở dữ liệu
             $user = getByID('taikhoan', 'TenDangNhap', $user_data['email']);
 
