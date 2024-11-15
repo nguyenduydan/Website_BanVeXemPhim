@@ -1,6 +1,9 @@
 <?php
 session_start();
 require '../../config/function.php';
+require '../../vendor/autoload.php';
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Exception;
 getAdmin();
 
 $messages = []; // Mảng lỗi
@@ -88,4 +91,38 @@ if (isset($_POST['changeStatus'])) {
     }
 }
 
+if (isset($_FILES['excel_file'])) {
+    $filePath = $_FILES['excel_file']['tmp_name'];
+    $messages = [];
+    $spreadsheet = IOFactory::load($filePath);
+    $sheet = $spreadsheet->getActiveSheet();
+    $data = $sheet->toArray();
+    array_shift($data);
+
+    foreach ($data as $row) {
+        $name = validate(trim($row[0])); 
+        $status = 1;
+        if (empty($name)) {
+            $messages[] = 'Tên thể loại không được để trống'; 
+        } elseif (isExistValue('theloai', 'TenTheLoai', $name)) {
+            $messages[] = 'Tên thể loại đã tồn tại'; 
+        }
+
+        // Lưu thể loại nếu không có lỗi
+        if (empty($messages)) {
+            $query = "INSERT INTO theloai (TenTheLoai, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
+                      VALUES ('$name', '$created', CURRENT_TIMESTAMP, '$created', CURRENT_TIMESTAMP, '$status')";
+            if (!mysqli_query($conn, $query)) {
+                $messages[] = 'Thêm thể loại thất bại'; 
+            }
+        }
+    }
+
+    // Xử lý thông báo
+    if (!empty($messages)) {
+        redirect('categories.php', 'error', 'Thêm thể loại thất bại', 'admin');
+    } else {
+        redirect('categories.php', 'success', 'Thêm thể loại thành công', 'admin');
+    }
+}
 $conn->close();
