@@ -281,6 +281,10 @@ getUser();
                                         <!-- Số điện thoại -->
                                         <div class="mb-4">
                                             <label for="phone" class="form-label fw-semibold">Số điện thoại</label>
+                                            <?php if (isset($messages['email'])): ?>
+                                            <small
+                                                class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['sdt']) ?></small>
+                                            <?php endif; ?>
                                             <div class="input-group">
                                                 <span class="input-group-text bg-light border-0"><i
                                                         class="fas fa-phone"></i></span>

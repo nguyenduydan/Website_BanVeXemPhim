@@ -67,19 +67,14 @@ $users = getAll('nguoidung');
 
 // Mảng để lưu trữ mã người dùng và doanh thu
 $user_revenues = [];
-$count = 5;
 // Lặp qua từng người dùng để lấy mã và doanh thu
 foreach ($users as $user) {
-    if (
-        $user['TenND'] != 'Admin' and
-        $count > 0
-    ) {
+    if ($user['TenND'] != 'Admin') {
         $revenue_user = client_revenue2($user['MaND']);
         $user_revenues[] = [
             'username' => $user['TenND'],
             'revenue' => $revenue_user
         ];
-        $count--;
     }
 }
 
@@ -88,11 +83,15 @@ usort($user_revenues, function ($a, $b) {
     return $b['revenue'] <=> $a['revenue'];
 });
 
+// Lấy 5 người có doanh thu cao nhất
+$top_users = array_slice($user_revenues, 0, 5);
+
+
 // Tạo mảng cho biểu đồ
 $labels = [];
 $data = [];
 
-foreach ($user_revenues as $user_revenue) {
+foreach ($top_users as $user_revenue) {
     $labels[] = $user_revenue['username']; // Hoặc tên người dùng nếu có
     $data[] = $user_revenue['revenue'];
 }

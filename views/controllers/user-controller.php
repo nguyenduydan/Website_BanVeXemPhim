@@ -19,13 +19,13 @@ if (isset($_POST['signup'])) {
     }
     $role = 0;
     $status = 1;
-    
+
     if (empty($tennd)) {
         $messages['tennd'] = "Tên người dùng không được để trống.";
     } else if (!preg_match('/^[\p{L}\s.,]+$/u', $tennd)) {
         $messages['tennd'] = "Tên người dùng không được dùng kí tự đặc biệt";
     }
-    
+
     if (empty($tendn)) {
         $messages['tendn'] = "Tên đăng nhập không được để trống.";
     } else if (!preg_match('/^[a-zA-Z0-9]+$/', $tendn)) {
@@ -81,7 +81,7 @@ if (isset($_POST['login'])) {
     if (empty($password)) {
         $messages['password'] = 'Mật khẩu không được bỏ trống';
     }
-    
+
     if (empty($messages)) {
         $user = getByID('TaiKhoan', 'TenDangNhap', $tendn);
         if ($user['status'] == 200 && $user['data']['Quyen'] == 0) {
@@ -126,14 +126,14 @@ if (isset($_POST['updateInf'])) {
     $id = validate($_POST['mand']);
     $name = validate($_POST['tennd']);
     $ngay_sinh = validate($_POST['ngay_sinh']) ?: null;
-    $gioi_tinh = validate($_POST['gioi_tinh']) ?: null; 
+    $gioi_tinh = validate($_POST['gioi_tinh']) ?: null;
     $sdt = validate($_POST['sdt']) ?: null;
     $email = validate($_POST['email']) ?: null;
     // Kiểm tra tên người dùng
     if (empty($name)) {
         $messages['tennd'] = "Họ và tên không được để trống.";
     }
-    if (isExistValue('NguoiDung', 'Email', $email, 'MaND', $id)) {
+    if (isExistValue('nguoidung', 'Email', $email, 'MaND', $id)) {
         $messages['email'] = "Email đã tồn tại";
     }
     if (empty($sdt) || !preg_match('/^0[0-9]+$/', $sdt)) {
@@ -141,7 +141,7 @@ if (isset($_POST['updateInf'])) {
     }
     if (empty($messages)) {
 
-        $query = "UPDATE NguoiDung SET
+        $query = "UPDATE nguoidung SET
                 TenND = '$name',
                 NgaySinh = '$ngay_sinh',
                 GioiTinh = '$gioi_tinh',
@@ -152,7 +152,7 @@ if (isset($_POST['updateInf'])) {
                 WHERE MaND = '$id'";
 
         if (mysqli_query($conn, $query)) {
-            redirect('profile-user.php', 'success', 'Cập nhật tài khoản thành công' . $avatar_ngu);
+            redirect('profile-user.php', 'success', 'Cập nhật tài khoản thành công');
         } else {
             redirect('profile-user.php', 'error', 'Cập nhật tài khoản thất bại');
         }
