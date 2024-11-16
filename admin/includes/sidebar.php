@@ -54,18 +54,18 @@
 
     ?>
     <style>
-        .nav-link .icon svg {
-            stroke: #3a416f !important;
-            stroke-width: 0.5 !important;
-            fill: #3a416f !important;
-            /* Màu đen mặc định */
-        }
+    .nav-link .icon svg {
+        stroke: #3a416f !important;
+        stroke-width: 0.5 !important;
+        fill: #3a416f !important;
+        /* Màu đen mặc định */
+    }
 
-        .nav-link.active .icon svg {
-            stroke: #FFFFFF !important;
-            fill: #FFFFFF !important;
-            /* Màu trắng khi active */
-        }
+    .nav-link.active .icon svg {
+        stroke: #FFFFFF !important;
+        fill: #FFFFFF !important;
+        /* Màu trắng khi active */
+    }
     </style>
     <div class="collapse navbar-collapse w-auto h-100" id="sidenav-collapse-main">
         <ul class="navbar-nav" data-widget="treeview" role="menu" data-accordion="false">
@@ -96,7 +96,39 @@
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'room')) echo 'active'; ?>"
+                    href="/Website_BanVeXemPhim/admin/room.php" data-class="bg-white">
+                    <div
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-filter-square" viewBox="0 0 16 16">
+                            <path
+                                d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                            <path
+                                d="M6 11.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5" />
+                        </svg>
+                    </div>
+                    <span class="nav-link-text ms-1">Danh sách phòng</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'chair')) echo 'active'; ?>"
+                    href="/Website_BanVeXemPhim/admin/chair.php" data-class="bg-white">
+                    <div
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg width="12px" height="12px" viewBox="0 0 640 512" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g>
+                                <path
+                                    d="M64 160C64 89.3 121.3 32 192 32l256 0c70.7 0 128 57.3 128 128l0 33.6c-36.5 7.4-64 39.7-64 78.4l0 48-384 0 0-48c0-38.7-27.5-71-64-78.4L64 160zM544 272c0-20.9 13.4-38.7 32-45.3c5-1.8 10.4-2.7 16-2.7c26.5 0 48 21.5 48 48l0 176c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32L96 448c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32L0 272c0-26.5 21.5-48 48-48c5.6 0 11 1 16 2.7c18.6 6.6 32 24.4 32 45.3l0 48 0 32 32 0 384 0 32 0 0-32 0-48z">
+                                </path>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text ms-1">Danh sách ghế</span>
+                </a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link ps-4 ms-2 text-uppercase text-xs font-weight-bolder dropdown-toggle"
                     data-bs-toggle="collapse" data-bs-target="#listFilm"
@@ -136,39 +168,6 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php if (isActive($current_page, $base_pages, 'room')) echo 'active'; ?>"
-                            href="/Website_BanVeXemPhim/admin/room.php" data-class="bg-white">
-                            <div
-                                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-filter-square" viewBox="0 0 16 16">
-                                    <path
-                                        d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
-                                    <path
-                                        d="M6 11.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5" />
-                                </svg>
-                            </div>
-                            <span class="nav-link-text ms-1">Danh sách phòng</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php if (isActive($current_page, $base_pages, 'chair')) echo 'active'; ?>"
-                            href="/Website_BanVeXemPhim/admin/chair.php" data-class="bg-white">
-                            <div
-                                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <svg width="12px" height="12px" viewBox="0 0 640 512" version="1.1"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <g>
-                                        <path
-                                            d="M64 160C64 89.3 121.3 32 192 32l256 0c70.7 0 128 57.3 128 128l0 33.6c-36.5 7.4-64 39.7-64 78.4l0 48-384 0 0-48c0-38.7-27.5-71-64-78.4L64 160zM544 272c0-20.9 13.4-38.7 32-45.3c5-1.8 10.4-2.7 16-2.7c26.5 0 48 21.5 48 48l0 176c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32L96 448c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32L0 272c0-26.5 21.5-48 48-48c5.6 0 11 1 16 2.7c18.6 6.6 32 24.4 32 45.3l0 48 0 32 32 0 384 0 32 0 0-32 0-48z">
-                                        </path>
-                                    </g>
-                                </svg>
-                            </div>
-                            <span class="nav-link-text ms-1">Danh sách ghế</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link <?php if (isActive($current_page, $base_pages, 'showtime')) echo 'active'; ?>"
                             href="/Website_BanVeXemPhim/admin/showtime.php" data-class="bg-white">
                             <div
@@ -186,7 +185,6 @@
                     </li>
                 </ul>
             </li>
-
             <li class="nav-item dropdown">
                 <a class="nav-link ps-4 ms-2 text-uppercase text-xs font-weight-bolder dropdown-toggle"
                     data-bs-toggle="collapse" data-bs-target="#listContent"
