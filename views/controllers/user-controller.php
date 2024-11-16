@@ -127,10 +127,10 @@ if (isset($_POST['updateInf'])) {
     $messages = [];
     $id = validate($_POST['mand']);
     $name = validate($_POST['tennd']);
-    $ngay_sinh = validate($_POST['ngay_sinh']) ?: null;
-    $gioi_tinh = validate($_POST['gioi_tinh']) ?: null;
-    $sdt = validate($_POST['sdt']) ?: null;
-    $email = validate($_POST['email']) ?: null;
+    $ngay_sinh = validate($_POST['ngay_sinh']) ?? null;
+    $gioi_tinh = validate($_POST['gioi_tinh']) ?? null;
+    $sdt = validate($_POST['sdt']) ?? null;
+    $email = validate($_POST['email']) ?? null;
     // Kiểm tra tên người dùng
     if (empty($name)) {
         $messages['tennd'] = "Họ và tên không được để trống.";
@@ -138,7 +138,7 @@ if (isset($_POST['updateInf'])) {
     if (isExistValue('nguoidung', 'Email', $email, 'MaND', $id)) {
         $messages['email'] = "Email đã tồn tại";
     }
-    if (empty($sdt) || !preg_match('/^0[0-9]+$/', $sdt)) {
+    if (!preg_match('/^0[0-9]+$/', $sdt)) {
         $messages['sdt'] = "Số điện thoại phải là số nguyên và bắt đầu bằng số 0.";
     }
     if (empty($messages)) {

@@ -117,7 +117,7 @@ getUser();
 
             .bg-member-none {
                 color: aliceblue;
-                background-image: url(https://img.freepik.com/free-vector/luxury-blue-golden-background_23-2149329430.jpg);
+                background-image: url(https://i.pinimg.com/736x/dd/6e/d3/dd6ed3d230ac5c96c076a1371612c336.jpg);
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-position: center;
@@ -289,6 +289,7 @@ getUser();
                                         <div class="mb-4">
                                             <label for="dob" class="form-label fw-semibold">Ngày sinh</label>
                                             <div class="input-group">
+
                                                 <span class="input-group-text bg-light border-0"><i
                                                         class="fas fa-calendar-alt"></i></span>
                                                 <input type="date" class="form-control form-control-lg" id="dob"
@@ -301,7 +302,8 @@ getUser();
                                         <!-- Số điện thoại -->
                                         <div class="mb-4">
                                             <label for="phone" class="form-label fw-semibold">Số điện thoại</label>
-                                            <?php if (isset($messages['email'])): ?>
+                                            <?php
+                                            if (isset($messages['sdt'])): ?>
                                             <small
                                                 class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['sdt']) ?></small>
                                             <?php endif; ?>
