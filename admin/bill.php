@@ -94,7 +94,7 @@ $records_per_page = $pagination['records_per_page']; // Số bản ghi trên m�
                                 <th class="text-center text-xs font-weight-bolder"><?= $item['TrangThai']; ?></th>
                                 <td class="align-middle text-center text-sm">
                                     <a class="btn btn-secondary m-0"
-                                        href="views/invoice/invoice-detail.php?id=<?= $item['MaHD'] ?>"
+                                        href="views/bill/bill-detail.php?= $item['MaHD'] ?>"
                                         style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                         <i class="bi bi-info-circle"></i> Chi tiết
                                     </a>
