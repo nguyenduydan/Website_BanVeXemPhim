@@ -64,7 +64,7 @@ background:linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)),url(https://w
                                                 echo '
                                                 <button class="btn btn-secondary btn-lg" id="login" type="button" disabled>Vui lòng đăng nhập để gửi tin nhắn</button>';
                                             } else {
-                                                echo '<button class="btn btn-primary btn-lg" id="login" type="submit">Gửi tin nhắn</button>';
+                                                echo '<button class="btn btn-primary btn-lg" id="login" name="lienhe" type="submit">Gửi tin nhắn</button>';
                                             }
                                             ?>
                                         </div>

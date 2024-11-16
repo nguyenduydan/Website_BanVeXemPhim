@@ -265,7 +265,23 @@ getUser();
                                                     id="email" value="<?= $user['data']['Email'] ?>">
                                             </div>
                                         </div>
-
+                                        <div class="mb-4 text-center">
+                                            <label class="form-label fw-semibold">Giới tính</label>
+                                            <div class="d-flex justify-content-center">
+                                                <div class="form-check me-5">
+                                                    <input class="form-check-input" type="radio" name="gioi_tinh"
+                                                        id="male" value="1"
+                                                        <?php echo ($user['data']['GioiTinh'] == '1') ? 'checked' : ''; ?>>
+                                                    <label class="form-check-label" for="male">Nam</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="gioi_tinh"
+                                                        id="female" value="0"
+                                                        <?php echo ($user['data']['GioiTinh'] == '0') ? 'checked' : ''; ?>>
+                                                    <label class="form-check-label" for="female">Nữ</label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="col-6">
@@ -306,22 +322,65 @@ getUser();
                                                     name="sdt" value="<?= htmlspecialchars($displayPhone) ?>">
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="mb-4 text-center">
-                                        <label class="form-label fw-semibold">Giới tính</label>
-                                        <div class="d-flex justify-content-center">
-                                            <div class="form-check me-5">
-                                                <input class="form-check-input" type="radio" name="gioi_tinh" id="male"
-                                                    value="1"
-                                                    <?php echo ($user['data']['GioiTinh'] == '1') ? 'checked' : ''; ?>>
-                                                <label class="form-check-label" for="male">Nam</label>
+                                        <div class="mb-4">
+                                            <label for="pwd" class="form-label fw-semibold">Mật khẩu</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text bg-light border-0"><i
+                                                        class="fas fa-lock"></i></span>
+                                                <a href="#" data-bs-toggle="modal"
+                                                    data-url="views/controllers/user-controller.php"
+                                                    data-bs-target="#change-pwd">Thay đổi mật khẩu</a>
                                             </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gioi_tinh"
-                                                    id="female" value="0"
-                                                    <?php echo ($user['data']['GioiTinh'] == '0') ? 'checked' : ''; ?>>
-                                                <label class="form-check-label" for="female">Nữ</label>
+                                        </div>
+                                        <!-- Modal Thay Đổi Mật Khẩu -->
+                                        <div class="modal fade" id="change-pwd" tabindex="-1"
+                                            aria-labelledby="changePwdModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog mt-5">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="changePwdModalLabel">Thay đổi mật
+                                                            khẩu</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <label for="old-password">Mật khẩu cũ:</label>
+                                                            <input type="password" class="form-control mt-2"
+                                                                id="old-password" name="old-password">
+                                                            <?php if (isset($messages['old-password'])): ?>
+                                                            <small
+                                                                class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['old-password']) ?></small>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="new-password">Mật khẩu mới:</label>
+                                                            <input type="password" class="form-control mt-2"
+                                                                id="new-password" name="new-password">
+                                                            <?php if (isset($messages['new-password'])): ?>
+                                                            <small
+                                                                class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['new-password']) ?></small>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="new-repassword">Nhập lại mật khẩu
+                                                                mới:</label>
+                                                            <input type="password" class="form-control mt-2"
+                                                                id="new-repassword" name="new-repassword">
+                                                            <?php if (isset($messages['new-repassword'])): ?>
+                                                            <small
+                                                                class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['new-repassword']) ?></small>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer d-flex justify-content-center">
+                                                        <button type="submit" name="change-password-form"
+                                                            id="change-password-btn"
+                                                            class="btn btn-sm btn-success px-3">Thay đổi</button>
+                                                        <button type="button" class="btn btn-sm btn-danger me-2"
+                                                            data-bs-dismiss="modal">Không</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

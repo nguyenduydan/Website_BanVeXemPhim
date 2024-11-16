@@ -10,27 +10,26 @@ unset($_SESSION['form_data']);
 $username = isset($_COOKIE['username']) ? $_COOKIE['username'] : '';
 // Kiểm tra trạng thái của checkbox 'Remember me'
 $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ? 'checked' : '';
-
 ?>
 
 <div id="toast"></div>
 
-<?php alertMessage() ?>
+<?php alertMessage(); ?>
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-12 col-md-6 col-lg-4 shadow rounded">
             <div class="form-container sign-in">
-                <form class="py-4" action="views/controllers/user-controller.php" method="post">
+                <form id="login-form" class="py-4" action="views/controllers/user-controller.php" method="post">
                     <div class="mb-3 text-center">
                         <span class="fw-bolder fs-3">Đăng Nhập Tài Khoản</span>
                     </div>
-                    <!-- Email -->
+                    <!-- Tên đăng nhập -->
                     <div class="mb-3">
                         <div class="input-group mb-1">
                             <span class="input-group-text bg-primary"><i class="fas fa-envelope text-white"></i></span>
                             <input type="text" class="form-control" name="tendn" placeholder="Tên đăng nhập"
                                 autocomplete="username"
-                                value="<?php echo isset($formData['tendn']) ? htmlspecialchars($formData['tendn']) :  htmlspecialchars($username); ?>">
+                                value="<?php echo isset($formData['tendn']) ? htmlspecialchars($formData['tendn']) : htmlspecialchars($username); ?>">
                         </div>
                         <?php if (isset($messages['tendn'])): ?>
                         <small class="text-danger m-2"><?= htmlspecialchars($messages['tendn']) ?></small>
@@ -55,9 +54,9 @@ $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ?
 
                     <!-- Ghi nhớ đăng nhập -->
                     <div class="form-check form-switch mb-3">
-                        <input class="form-check-input" type="checkbox" name="remember_me" id="remember_me">
-                        <label class="form-check-label" for="remember_me" <?php echo $rememberMeChecked; ?>>Ghi nhớ đăng
-                            nhập</label>
+                        <input class="form-check-input" type="checkbox" name="remember_me" id="remember_me"
+                            <?php echo $rememberMeChecked; ?>>
+                        <label class="form-check-label" for="remember_me">Ghi nhớ đăng nhập</label>
                     </div>
 
                     <!-- Nút Đăng Nhập -->
@@ -65,11 +64,49 @@ $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ?
 
                     <!-- Liên kết Quên mật khẩu -->
                     <div class="text-center mt-3">
-                        <a href="#">Quên mật khẩu?</a>
+                        <a href="#" data-bs-toggle="modal" data-url="views/controllers/user-controller.php"
+                            data-bs-target="#confirmModal">Quên mật khẩu?</a>
+                    </div>
+
+                    <!-- Modal Quên Mật Khẩu -->
+                    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog mt-5">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmModalLabel">Quên mật khẩu</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="username-fpwd">Tên đăng nhập:</label>
+                                        <input type="text" class="form-control mt-2" id="username-fpwd"
+                                            name="username-fpwd">
+                                        <?php if (isset($messages['username-fpwd'])): ?>
+                                        <small
+                                            class="text-danger m-2"><?= htmlspecialchars($messages['username-fpwd']) ?></small>
+                                        <?php endif; ?>
+                                        <label for="email-fpwd">Địa chỉ email:</label>
+                                        <input type="email" class="form-control mt-2" id="email-fpwd" name="email-fpwd">
+                                        <?php if (isset($messages['email-fpwd'])): ?>
+                                        <small
+                                            class="text-danger m-2"><?= htmlspecialchars($messages['email-fpwd']) ?></small>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button type="submit" id="forget-password" class="btn btn-sm btn-success px-3"
+                                        name="forget-password">Gửi</button>
+                                    <button type="button" class="btn btn-sm btn-danger me-2"
+                                        data-bs-dismiss="modal">Không</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Liên kết Đăng ký -->
-                    <div class="text-center mt-2 border-bottom pb-3">
+                    <div class="text-center border-bottom pb-3">
                         <span>Chưa có tài khoản? <a href="register.php">Đăng ký</a></span>
                     </div>
                     <?php
@@ -90,6 +127,7 @@ $rememberMeChecked = isset($_SESSION['rememberMe']) && $_SESSION['rememberMe'] ?
                     // Hiển thị nút đăng nhập Google
                     // echo '<a href="' . htmlspecialchars($google_login_url) . '">Đăng nhập bằng Google</a>';
                     ?>
+                    <!-- Nút Đăng Nhập Google -->
                     <div class="text-center mt-2" id="btn-google">
                         <a href="<?= htmlspecialchars($google_login_url) ?>" class="btn p-2 shadow">
                             <i class="bi bi-google"></i><span> Đăng nhập bằng Google</span>

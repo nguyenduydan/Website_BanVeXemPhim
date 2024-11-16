@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once '../../config/function.php';
+require_once '../../config/sendmail.php';
+
 
 // xử lý categories
 $messages = [];
@@ -162,6 +164,55 @@ if (isset($_POST['updateInf'])) {
     }
 }
 
+if (isset($_POST['change-password-form'])) {
+    $messages = [];
+    $id = validate($_POST['mand']);
+    $pwd = validate($_POST['old-password']);
+    $newPassword = validate($_POST['new-password']);
+    $rePassword = validate($_POST['new-repassword']);
+
+    $user = getByID('taikhoan', 'MaND', $id);
+
+    // Kiểm tra tên người dùng
+    if (empty($pwd)) {
+        $messages['old-password'] = 'Không được để trống';
+    } elseif (!password_verify($pwd, $user['data']['MatKhau'])) { // So sánh mật khẩu cũ
+        $messages['old-password'] = 'Sai mật khẩu';
+    }
+
+    if (empty($newPassword)) {
+        $messages['new-password'] = 'Không được để trống';
+    } else if (!preg_match('/^(?=.*[A-Z])(?=.*[0-9])(?=.*[\W_]).{6,}$/', $newPassword)) {
+        $messages['new-password'] = "Mật khẩu phải có ít nhất 6 kí tự, bao gồm một chữ in hoa, một số và một ký tự đặc biệt.";
+    }
+    if (empty($rePassword)) {
+        $messages['new-repassword'] = 'Không được để trống';
+    }
+
+    $passwordDetails = validateAndHashPassword($newPassword, $rePassword);
+
+    if ($passwordDetails['status'] == false) {
+        $messages['password'] = $passwordDetails['message'];
+    }
+    $hashedPassword = $passwordDetails['hashed'];
+
+    if (empty($messages)) {
+
+        $query = "UPDATE taikhoan SET
+                    MatKhau = '$hashedPassword'
+                WHERE MaND = '$id'";
+
+        if (mysqli_query($conn, $query)) {
+            redirect('profile-user.php', 'success', 'Cập nhật mật khẩu thành công');
+        } else {
+            redirect('profile-user.php', 'error', 'Cập nhật mật khẩu thất bại');
+        }
+    } else {
+        redirect('profile-user.php', 'messages', $messages);
+        $_SESSION['form_data'] = $_POST;
+    }
+}
+
 //====== user-edit =======//
 if (isset($_POST['updateAvt'])) {
     $messages = [];
@@ -206,5 +257,56 @@ if (isset($_POST['updateAvt'])) {
     }
 }
 
+if (isset($_POST['forget-password'])) {
+    $messages = []; // Khởi tạo mảng thông báo
+    $recipientEmail = validate($_POST['email-fpwd']); // Địa chỉ email của người nhận
+    $username = validate($_POST['username-fpwd']);
+    $user = getByID('taikhoan', 'TenDangNhap', $username);
+    $subject = 'Thay đổi mật khẩu';
+
+    if (empty($recipientEmail)) {
+        $messages["email-fpwd"] = "Email không được để trống";
+    }
+    if (empty($user)) {
+        $messages["username-fpwd"] = "Tên đăng nhập không được để trống";
+    } else if (!isset($user['data']['TenDangNhap'])) {
+        $messages["username-fpwd"] = "Tên đăng nhập không tồn tại";
+    }
+
+    if (empty($messages)) {
+        $password = generateRandomPassword(6);
+        $newPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $query = "UPDATE taikhoan SET
+                    MatKhau = '$newPassword'
+                WHERE TenDangNhap = '$username'";
+        // Tạo nội dung email
+
+        if (mysqli_query($conn, $query)) {
+            // Gửi email
+            $body = '
+            <h2>Mật khẩu mới là: ' . $password . '</h2></br>
+            <p>' . nl2br(htmlspecialchars($message)) . '</p>';
+
+            if (sendEmail($recipientEmail, $subject, $body)) {
+                redirect(
+                    'login.php',
+                    'success',
+                    'Thay đổi mật khẩu thành công.'
+                );
+            } else {
+                redirect(
+                    'login.php',
+                    'error',
+                    'Thay đổi mật khẩu thất bại.'
+                );
+            }
+        } else {
+            redirect('login.php', 'error', 'Thay đổi mật khẩu thất bại');
+        }
+    } else {
+        redirect('login.php', 'error', 'Thay đổi mật khẩu thất bại ngu ');
+    }
+}
 
 $conn->close();
