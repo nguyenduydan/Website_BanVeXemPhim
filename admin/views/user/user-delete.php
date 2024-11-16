@@ -1,5 +1,4 @@
 <?php
-session_start();
 require '../../../config/function.php';
 
 // Kiểm tra xem người dùng đã đăng nhập chưa, nếu chưa thì chuyển hướng đến trang đăng nhập

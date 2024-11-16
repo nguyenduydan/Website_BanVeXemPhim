@@ -1,5 +1,4 @@
 <?php
-session_start(); // Bắt đầu phiên làm việc để sử dụng $_SESSION
 require '../../../config/function.php'; // Bao gồm các hàm chức năng từ file function.php
 
 // Kiểm tra ID hợp lệ từ GET request, trả về kết quả nếu là số

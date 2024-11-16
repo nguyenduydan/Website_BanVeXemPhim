@@ -1,5 +1,4 @@
 <?php
-session_start();
 require '../../../config/function.php';
 
 $result = check_valid_ID('id');
