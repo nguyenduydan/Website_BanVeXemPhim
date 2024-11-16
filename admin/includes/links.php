@@ -18,9 +18,9 @@ $baseURL = '/Website_BanVeXemPhim/admin/';
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/style.css?2.6">
-<link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/toast.css">
+<link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/toast.css?1.0">
 
-<script src="<?php echo $baseURL; ?>assets/js/toast.js?1.0"></script>
+<script src="<?php echo $baseURL; ?>assets/js/toast.js?1.1"></script>
 <script src="<?php echo $baseURL; ?>assets/js/myJS.js?1.4"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" defer></script>
 <!-- Include Flatpickr CSS -->

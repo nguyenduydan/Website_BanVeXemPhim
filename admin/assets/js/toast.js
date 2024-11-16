@@ -3,7 +3,7 @@ function showSuccessToast(message) {
         title: "Thành công!",
         message: message,
         type: "success",
-        duration: 2000
+        duration: 1000
     });
 }
 
@@ -12,7 +12,7 @@ function showErrorToast(message) {
         title: "Thất bại!",
         message: message,
         type: "error",
-        duration: 2000
+        duration: 1000
     });
 }
 
@@ -20,7 +20,7 @@ function toast({
     title = "",
     message = "",
     type = "info",
-    duration = 400
+    duration = 1000
 }) {
     const main = document.getElementById("toast");
     if (main) {
@@ -29,7 +29,7 @@ function toast({
         // Auto remove toast
         const autoRemoveId = setTimeout(function () {
             main.removeChild(toast);
-        }, duration + 100);
+        }, duration + 1000);
 
         // Remove toast when clicked
         toast.onclick = function (e) {
@@ -49,7 +49,7 @@ function toast({
         const delay = (duration / 1000).toFixed(2);
 
         toast.classList.add("toast", `toast--${type}`);
-        toast.style.animation = `slideInLeft ease .3s, fadeOut linear .3s ${delay}s forwards`;
+        toast.style.animation = `slideInLeft ease .3s, slideOutRight linear .3s ${delay}s forwards`;
 
         toast.innerHTML = `
             <div class="toast__icon">
