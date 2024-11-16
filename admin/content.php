@@ -1,6 +1,4 @@
 <?php
-ob_start();
-session_start();
 require '../config/function.php';
 include('includes/header.php');
 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {

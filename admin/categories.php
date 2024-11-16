@@ -1,5 +1,4 @@
 <?php
-ob_start(); // Bắt đầu buffer output để kiểm soát việc gửi header
 require '../config/function.php'; // Bao gồm các hàm chức năng từ file function.php
 include('includes/header.php'); // Bao gồm phần header của trang
 

@@ -1,7 +1,4 @@
 <?php
-// Bắt đầu bộ đệm đầu ra và session
-ob_start();
-session_start();
 require '../config/function.php';
 include('includes/header.php');
 

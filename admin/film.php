@@ -1,7 +1,4 @@
 <?php
-ob_start();
-session_start();
-
 require '../config/function.php';
 include('includes/header.php');
 
