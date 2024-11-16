@@ -1,5 +1,4 @@
 <?php
-session_start();
 require '../../config/function.php';
 // xử lý topic
 getAdmin();

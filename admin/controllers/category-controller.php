@@ -1,5 +1,4 @@
 <?php
-session_start();
 require '../../config/function.php';
 require '../../vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\IOFactory;
