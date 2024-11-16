@@ -32,13 +32,6 @@ if ($invoice['status'] == 200) { // Kiểm tra xem có lấy thành công thông
     <div class="col-xl-12 col-lg-12 mx-auto">
         <h2><?= $title ?></h2>
 
-        <!-- Nút sửa và quay lại -->
-        <div class="text-end mb-4">
-            <a class="btn btn-info" href="invoice-edit.php?id=<?= $id_result; ?>"><i
-                    class="bi bi-pencil me-2"></i>Sửa</a>
-            <a class="btn btn-secondary" href="../../invoice.php">Quay lại</a>
-        </div>
-
         <!-- Thông tin chi tiết hóa đơn -->
         <div class="card">
             <div class="card-body">

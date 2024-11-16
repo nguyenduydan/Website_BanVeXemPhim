@@ -55,12 +55,6 @@ $records_per_page = $pagination['records_per_page']; // Số bản ghi trên m�
                         <input type="hidden" name="page" value="<?= $current_page ?>"> <!-- Ẩn trang hiện tại -->
                     </form>
                 </div>
-                <!-- Nút Thêm hóa đơn mới -->
-                <a href="views/invoice/invoice-add.php" class="btn btn-lg me-5 btn-add"
-                    style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: 20px; --bs-btn-font-size: 1.25rem;">
-                    <i class="bi bi-plus me-1 fs-3" style="margin-bottom: 5px;"></i>
-                    Thêm
-                </a>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
@@ -94,7 +88,7 @@ $records_per_page = $pagination['records_per_page']; // Số bản ghi trên m�
                                 <th class="text-center text-xs font-weight-bolder"><?= $item['TrangThai']; ?></th>
                                 <td class="align-middle text-center text-sm">
                                     <a class="btn btn-secondary m-0"
-                                        href="views/bill/bill-detail.php?= $item['MaHD'] ?>"
+                                        href="views/invoice/invoice-detail.php?= $item['MaHD'] ?>"
                                         style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                         <i class="bi bi-info-circle"></i> Chi tiết
                                     </a>
