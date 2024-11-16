@@ -16,7 +16,7 @@ if (isset($_POST['saveUser'])) {
     $gioi_tinh = validate($_POST['gioi_tinh']) == 1 ? 1 : 0; // Lấy và kiểm tra giới tính
     $sdt = validate($_POST['sdt']); // Lấy và kiểm tra số điện thoại
     $email = validate($_POST['email']); // Lấy và kiểm tra email
-    $role = 1;
+    $role = validate($_POST['role']);
     $status = validate($_POST['status']) == 1 ? 1 : 0; // Lấy và kiểm tra trạng thái
 
     // Kiểm tra lỗi cho tên đăng nhập

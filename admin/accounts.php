@@ -1,5 +1,4 @@
 <?php
-ob_start(); // Bắt đầu buffer output để kiểm soát việc gửi header
 require '../config/function.php'; // Bao gồm các hàm chức năng từ file function.php
 include('includes/header.php'); // Bao gồm phần header của trang
 
@@ -7,7 +6,9 @@ include('includes/header.php'); // Bao gồm phần header của trang
 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     redirect('sign-in.php', 'error', 'Vui lòng đăng nhập'); // Chuyển hướng đến trang đăng nhập nếu chưa đăng nhập
 }
-
+if (isset($_SESSION['EmployedIn']) && $_SESSION['EmployedIn'] == true) {
+    redirect('index.php', 'error', 'Bạn không phải admin!','admin'); 
+}
 // Lấy chuỗi tìm kiếm từ GET request và loại bỏ khoảng trắng thừa
 $searchString = isset($_GET['searchString']) ? trim($_GET['searchString']) : '';
 

@@ -7,7 +7,6 @@ include('../../includes/header.php');
 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
 }
-
 // Lấy thông báo lỗi từ session nếu có và dữ liệu form người dùng đã nhập trước đó
 $messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : [];
 $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
@@ -109,6 +108,13 @@ unset($_SESSION['form_data']);
                                 <small
                                     class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ngay_sinh']) ?></small>
                             <?php endif; ?>
+                        </div>
+                        <div class="col-6">
+                            <label for="role">Quyền</label>
+                            <select class="form-select" id="role" name="role">
+                                <option value="1">Admin</option>
+                                <option value="2">Nhân viên</option>
+                            </select>
                         </div>
                         <div class="col-6">
                             <label for="status">Trạng thái</label>
