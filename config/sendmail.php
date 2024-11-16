@@ -24,9 +24,6 @@ function sendEmail($to, $subject, $body = '')
         $mail->Password   = 'hzpw gavd dqzw rzfw'; // Mật khẩu ứng dụng
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;        // Kích hoạt mã hóa TLS
         $mail->Port       = 587;                                    // Cổng TCP để kết nối
-
-        if (empty($to)) {
-        }
         // Người gửi và người nhận
         $mail->setFrom('dn135897@gmail.com', 'NguyenThietDuyDan'); // Đặt địa chỉ email của admin làm người gửi
         $mail->addAddress($to); // Địa chỉ email của người nhận
@@ -69,7 +66,7 @@ function generateRandomPassword($length = 6)
 
 // Kiểm tra nếu có dữ liệu POST từ biểu mẫu
 if (isset($_POST['lienhe'])) {
-    $email = $_POST['email'];
+    $recipientEmail = $_POST['email'];
     $fullname = $_POST['fullname']; // Tên người gửi
     $subject = $_POST['subject']; // Tiêu đề
     $sdt = $_POST['phone']; // Tiêu đề
