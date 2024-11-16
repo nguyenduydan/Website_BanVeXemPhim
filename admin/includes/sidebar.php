@@ -33,6 +33,7 @@
         'menu' => ['menu.php', 'menu-add.php', 'menu-edit.php', 'menu-detail.php'],
         'parameter' => ['parameter.php', 'parameter-add.php', 'parameter-edit.php', 'parameter-detail.php'],
         'accounts' => ['accounts.php'],
+        'invoice' => ['invoice.php', 'invoice-detail.php'],
     ];
 
     function isActive($current_page, $base_pages, $key)
@@ -344,7 +345,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'user')) echo 'active'; ?>"
+                <a class="nav-link <?php if (isActive($current_page, $base_pages, 'invoice')) echo 'active'; ?>"
                     href="/Website_BanVeXemPhim/admin/invoice.php" data-class="bg-white">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">

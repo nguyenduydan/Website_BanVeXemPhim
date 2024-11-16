@@ -72,6 +72,8 @@ $records_per_page = $pagination['records_per_page']; // Số bản ghi trên m�
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">STT</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Tên đăng nhập</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Quyền</th>
+                                <th class="text-center text-uppercase text-xs font-weight-bolder">Hành động</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -81,11 +83,11 @@ $records_per_page = $pagination['records_per_page']; // Số bản ghi trên m�
                                 foreach ($data as $item) {
                                     $stt++; // Đếm số thứ tự
                             ?>
-                            <tr>
-                                <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th> <!-- Số thứ tự -->
-                                <th class="text-center text-xs font-weight-bolder"><?= $item['TenDangNhap']; ?></th>
-                                <!-- Tên quyền -->
-                                <?php
+                                    <tr>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th> <!-- Số thứ tự -->
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['TenDangNhap']; ?></th>
+                                        <!-- Tên quyền -->
+                                        <?php
                                         $roles = [
                                             1 => 'Admin',
                                             0 => 'Người dùng',
@@ -93,53 +95,48 @@ $records_per_page = $pagination['records_per_page']; // Số bản ghi trên m�
                                         ];
                                         $role = $roles[$item['Quyen']] ?: 'Không xác định';
                                         ?>
-                                <th class="text-center text-xs font-weight-bolder"><?= $role; ?></th>
-                                <td class="align-middle text-center text-sm">
-                                    <!-- Nút chỉnh sửa -->
-                                    <a class="btn btn-info m-0"
-                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                        href="views/category/categories-edit.php?id=<?= $item['MaND'] ?>">
-                                        <i class="bi bi-pencil"></i> Sửa
-                                    </a>
-                                    <!-- Nút xóa với modal xác nhận -->
-                                    <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['MaND'] ?>"
-                                        data-url="views/account/account-delete.php"
-                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                                        data-bs-toggle="modal" data-bs-target="#confirmModal">
-                                        <i class="bi bi-trash"></i> Xoá
-                                    </a>
-                                    <!-- Modal xác nhận xóa -->
-                                    <div class="modal fade" id="confirmModal" tabindex="-1"
-                                        aria-labelledby="confirmModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog mt-10">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="confirmModalLabel">Xác Nhận Xóa</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p class="p-2 fs-5">Bạn có muốn xóa không?</p>
-                                                </div>
-                                                <div class="modal-footer d-flex justify-content-center">
-                                                    <button type="button" id="confirmYes"
-                                                        class="btn btn-sm btn-success">Có</button>
-                                                    <button type="button" class="btn btn-sm btn-danger me-2"
-                                                        data-bs-dismiss="modal">Không</button>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $role; ?></th>
+                                        <td class="align-middle text-center text-sm">
+
+                                            <!-- Nút xóa với modal xác nhận -->
+                                            <a class="btn btn-danger m-0 delete-btn" data-id="<?= $item['MaND'] ?>"
+                                                data-url="views/account/account-delete.php"
+                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                                data-bs-toggle="modal" data-bs-target="#confirmModal">
+                                                <i class="bi bi-trash"></i> Xoá
+                                            </a>
+                                            <!-- Modal xác nhận xóa -->
+                                            <div class="modal fade" id="confirmModal" tabindex="-1"
+                                                aria-labelledby="confirmModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog mt-10">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="confirmModalLabel">Xác Nhận Xóa</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p class="p-2 fs-5">Bạn có muốn xóa không?</p>
+                                                        </div>
+                                                        <div class="modal-footer d-flex justify-content-center">
+                                                            <button type="button" id="confirmYes"
+                                                                class="btn btn-sm btn-success">Có</button>
+                                                            <button type="button" class="btn btn-sm btn-danger me-2"
+                                                                data-bs-dismiss="modal">Không</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <?php
+                                        </td>
+                                    </tr>
+                                <?php
                                 }
                             } else {
                                 ?>
-                            <tr>
-                                <td colspan="8" class="text-center">Không có bản ghi nào</td>
-                                <!-- Nếu không có dữ liệu -->
-                            </tr>
+                                <tr>
+                                    <td colspan="8" class="text-center">Không có bản ghi nào</td>
+                                    <!-- Nếu không có dữ liệu -->
+                                </tr>
                             <?php
                             }
                             ?>

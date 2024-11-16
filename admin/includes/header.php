@@ -26,6 +26,8 @@
         'room' => 'Danh sách phòng chiếu',
         'menu' => 'Danh sách menu',
         'parameter' => 'Danh sách tham số',
+        'accounts' => 'Danh sách tài khoản',
+        'invoice' => 'Danh sách hóa đơn',
     ];
     // Hàm để lấy tiêu đề dựa trên tên trang
     function getPageTitle($page, $titles)

@@ -67,32 +67,35 @@ $records_per_page = $pagination['records_per_page']; // Số bản ghi trên m�
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Khách Hàng</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Ngày Lập</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Tổng Tiền</th>
-                                <th class="text-center text-uppercase text-xs font-weight-bolder">Trạng Thái</th>
                                 <th class="text-center text-uppercase text-xs font-weight-bolder">Hành Động</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             $stt = 0;
+
+                            // Check if the data is not empty and sort it by 'NgayLapHD' in descending order
                             if (!empty($data)) {
+                                usort($data, function ($a, $b) {
+                                    return strtotime($b['NgayLapHD']) - strtotime($a['NgayLapHD']);
+                                });
+
                                 foreach ($data as $item) {
                                     $stt++;
                             ?>
                             <tr>
                                 <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
                                 <th class="text-center text-xs font-weight-bolder"><?= $item['MaHD']; ?></th>
-                                <th class="text-center text-xs font-weight-bolder"><?= $item['KhachHang']; ?></th>
-                                <th class="text-center text-xs font-weight-bolder"><?= $item['NgayLap']; ?></th>
+                                <th class="text-center text-xs font-weight-bolder"><?= $item['MaND']; ?></th>
+                                <th class="text-center text-xs font-weight-bolder"><?= $item['NgayLapHD']; ?></th>
                                 <th class="text-center text-xs font-weight-bolder">
                                     <?= number_format($item['TongTien'], 0, ',', '.') . ' VNĐ'; ?></th>
-                                <th class="text-center text-xs font-weight-bolder"><?= $item['TrangThai']; ?></th>
                                 <td class="align-middle text-center text-sm">
                                     <a class="btn btn-secondary m-0"
-                                        href="views/invoice/invoice-detail.php?= $item['MaHD'] ?>"
+                                        href="views/invoice/invoice-detail.php?MaHD=<?= $item['MaHD'] ?>"
                                         style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                         <i class="bi bi-info-circle"></i> Chi tiết
                                     </a>
-                                    <!-- Modal xác nhận xóa hóa đơn -->
                                 </td>
                             </tr>
                             <?php
