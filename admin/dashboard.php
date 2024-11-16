@@ -464,7 +464,7 @@ new Chart(ctx3, {
             borderRadius: 3,
             borderSkipped: false,
             backgroundColor: "#fff",
-            maxBarThickness: 15
+            maxBarThickness: 10
         }]
     },
     options: {
@@ -488,7 +488,8 @@ new Chart(ctx3, {
                     display: true,
                     drawOnChartArea: true,
                     drawTicks: true,
-                    color: "#fff"
+                    color: "#fff",
+                    borderDash: [5, 5]
                 },
                 ticks: {
                     display: true,
@@ -507,6 +508,7 @@ new Chart(ctx3, {
                     display: false,
                     drawOnChartArea: false,
                     drawTicks: false,
+                    borderDash: [5, 5]
                 },
                 ticks: {
                     suggestedMin: 0,
@@ -514,7 +516,7 @@ new Chart(ctx3, {
                     beginAtZero: true,
                     padding: 15,
                     font: {
-                        size: 14,
+                        size: 12,
                         family: "Arial",
                         style: 'normal',
                         lineHeight: 2
@@ -533,11 +535,6 @@ var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
 gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
 gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
 gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-
-var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //dark colors
 
 // Mảng doanh thu theo tháng từ PHP
 var monthlyRevenue = <?php echo $monthly_revenue_json; ?>;
