@@ -1,6 +1,8 @@
 <?php
 require '../../../config/function.php'; // Bao gồm các hàm chức năng từ file function.php
-
+if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+    redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
+}
 // Kiểm tra ID hợp lệ từ GET request, trả về kết quả nếu là số
 $result = check_valid_ID('id');
 if (is_numeric($result)) { // Nếu ID hợp lệ (là số)

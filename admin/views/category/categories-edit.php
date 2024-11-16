@@ -1,7 +1,9 @@
 <?php
 require '../../../config/function.php'; // Bao gồm các chức năng từ file function.php
 include('../../includes/header.php'); // Bao gồm phần header của trang
-
+if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+    redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
+}
 // Lấy các thông báo lỗi và dữ liệu form từ session, nếu có
 $messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : [];
 $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];

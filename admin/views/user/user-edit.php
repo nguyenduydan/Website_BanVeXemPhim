@@ -5,6 +5,9 @@ include('../../includes/header.php'); // Thêm header trang
 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
 }
+if (isset($_SESSION['EmployedIn']) && $_SESSION['EmployedIn'] === true) {
+    redirect('index.php', 'error', 'Bạn không phải admin!','admin'); 
+}
 // Lấy dữ liệu lỗi và dữ liệu form từ session (nếu có) và xóa chúng khỏi session sau khi hiển thị
 $messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : [];
 $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];

@@ -7,6 +7,9 @@ include('../../includes/header.php');
 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
 }
+if (isset($_SESSION['EmployedIn']) && $_SESSION['EmployedIn'] === true) {
+    redirect('index.php', 'error', 'Bạn không phải admin!','admin'); 
+}
 // Lấy thông báo lỗi từ session nếu có và dữ liệu form người dùng đã nhập trước đó
 $messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : [];
 $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];

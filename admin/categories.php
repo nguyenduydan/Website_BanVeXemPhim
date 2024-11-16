@@ -6,7 +6,6 @@ include('includes/header.php'); // Bao gồm phần header của trang
 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     redirect('sign-in.php', 'error', 'Vui lòng đăng nhập'); // Chuyển hướng đến trang đăng nhập nếu chưa đăng nhập
 }
-
 // Lấy chuỗi tìm kiếm từ GET request và loại bỏ khoảng trắng thừa
 $searchString = isset($_GET['searchString']) ? trim($_GET['searchString']) : '';
 

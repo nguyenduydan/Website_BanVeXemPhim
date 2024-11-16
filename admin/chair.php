@@ -4,6 +4,9 @@ include('includes/header.php');
 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
 }
+if (isset($_SESSION['EmployedIn']) && $_SESSION['EmployedIn'] === true) {
+    redirect('index.php', 'error', 'Bạn không phải admin!','admin'); 
+}
 $pagination = setupPagination($conn, 'Ghe');
 $data = $pagination['data'];
 $records_per_page = $pagination['records_per_page'];

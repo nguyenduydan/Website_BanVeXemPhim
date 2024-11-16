@@ -4,6 +4,9 @@ include('../../includes/header.php');
 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
 }
+if (isset($_SESSION['EmployedIn']) && $_SESSION['EmployedIn'] === true) {
+    redirect('index.php', 'error', 'Bạn không phải admin!','admin'); 
+}
 $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : []; // Lấy lỗi từ session
 $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
 unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
