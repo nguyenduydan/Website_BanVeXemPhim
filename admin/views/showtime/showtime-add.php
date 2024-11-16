@@ -60,7 +60,7 @@ unset($_SESSION['form_data']);
                             $rooms = getAll('Phong');
                             foreach ($rooms as $room): ?>
                             <option value="<?php echo htmlspecialchars($room['MaPhong']); ?>"
-                                <?php echo (isset($formData['maphong']) && $formData['maphong'] == $room['maphong']) ? 'selected' : ''; ?>>
+                                <?php echo (isset($formData['maphong']) && $formData['maphong'] == $room['MaPhong']) ? 'selected' : ''; ?>>
                                 <?php echo htmlspecialchars($room['TenPhong']); ?>
                             </option>
                             <?php endforeach; ?>

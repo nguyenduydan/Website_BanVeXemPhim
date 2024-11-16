@@ -23,6 +23,9 @@ if (isset($_POST['savesc'])) {
     if (empty($mafilm)) {
         $messages['maphim'] = 'Tên phim không được để trống';
     }
+    if (empty($maphong)) {
+        $messages['maphong'] = 'Tên phòng không được để trống';
+    }
     if (empty($messages)) {
         $query = "INSERT INTO SuatChieu (MaPhim,MaPhong,GioChieu, NguoiTao, NgayTao, NguoiCapNhat, NgayCapNhat, TrangThai)
                   VALUES ('$mafilm','$maphong','$giochieu', '$created', CURRENT_TIMESTAMP, '$created', CURRENT_TIMESTAMP, '$status')";
