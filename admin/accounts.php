@@ -91,7 +91,15 @@ $records_per_page = $pagination['records_per_page']; // Số bản ghi trên m�
                                         <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th> <!-- Số thứ tự -->
                                         <th class="text-center text-xs font-weight-bolder"><?= $item['TenDangNhap']; ?></th>
                                         <!-- Tên quyền -->
-                                        <th class="text-center text-xs font-weight-bolder"><?= $item['Quyen'] == 1 ? 'Admin' : 'Người dùng'; ?></th>                           
+                                        <?php
+                                        $roles = [
+                                            1 => 'Admin',
+                                            0 => 'Người dùng',
+                                            2 => 'Nhân viên'
+                                        ];
+                                        $role = $roles[$item['Quyen']] ? : 'Không xác định';
+                                        ?>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $role; ?></th>                          
                                         <td class="align-middle text-center text-sm">
                                             <!-- Nút chỉnh sửa -->
                                             <a class="btn btn-info m-0"
