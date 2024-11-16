@@ -474,10 +474,11 @@ function film_revenue($maPhim)
     }
     return $doanhthu;
 }
-function film_revenue2($maPhim){
+function film_revenue2($maPhim)
+{
     global $conn;
     $maPhim = validate($maPhim);
-    
+
     $query = "SELECT SUM(TongTien) AS totalRevenue FROM (
                   SELECT DISTINCT hd.TongTien
                   FROM hoadon hd
@@ -485,9 +486,9 @@ function film_revenue2($maPhim){
                   JOIN suatchieu sc ON cthd.MaSuatChieu = sc.MaSuatChieu
                   WHERE sc.MaPhim = '$maPhim'
               ) AS distinctValues";
-    
+
     $result = mysqli_query($conn, $query);
-    
+
     return $result ? mysqli_fetch_array($result)['totalRevenue'] : 0;
 }
 function client_revenue($maND)
@@ -541,7 +542,7 @@ function get_yearly_revenue($year)
 {
     $startDay = $year . '-01-01'; // Ngày bắt đầu của năm
     $endDay = $year . '-12-31';   // Ngày kết thúc của năm
-    return time_revenue($startDay, $endDay);
+    return time_revenue2($startDay, $endDay);
 }
 
 function ticket_revenue()
@@ -619,9 +620,9 @@ function discount($maND, $sumBill)
         return $sumBill -= $sumBill * 10 / 100;
     } else if ($clientRevenue >= $goldValue) {
         return $sumBill -= $sumBill * 5 / 100;
-    } else if($clientRevenue >= $silverValue){
-        return $sumBill -= $sumBill * 3 /100;
-    }else{
+    } else if ($clientRevenue >= $silverValue) {
+        return $sumBill -= $sumBill * 3 / 100;
+    } else {
         return $sumBill;
     }
 }

@@ -106,19 +106,18 @@ getUser();
 
             .bg-member-platinum {
                 color: aliceblue;
-                /* Một màu vàng nhạt hơn */
-                background-image: url(https://media4.giphy.com/media/xTiTnxpQ3ghPiB2Hp6/giphy.gif?cid=6c09b95219sdvq77x4l0mzc1omfnw4yceualg0y556obpxif&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g);
+                background-image: url(https://img.freepik.com/free-vector/luxury-blue-golden-background_23-2149329430.jpg);
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-position: center;
-                border: 3px solid dodgerblue;
+                border: 5px solid dodgerblue;
                 box-shadow: 0 0 10px 3px dodgerblue;
+
             }
 
             .bg-member-none {
                 color: aliceblue;
-                /* Một màu vàng nhạt hơn */
-                background-image: url(https://i.pinimg.com/736x/17/a9/a8/17a9a801d17a79fbafc52e4e19aa8750.jpg);
+                background-image: url(https://img.freepik.com/free-vector/luxury-blue-golden-background_23-2149329430.jpg);
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-position: center;
@@ -126,7 +125,13 @@ getUser();
                 box-shadow: 0 0 10px 3px lightslategray;
             }
 
-            ;
+            .profile-card {
+                transition: .3s ease;
+            }
+
+            .profile-card:hover {
+                transform: scale(1.05);
+            }
             </style>
 
             <div class="col-md-4 col-lg-5 mb-4">
@@ -210,7 +215,6 @@ getUser();
                     </div>
                 </div>
             </div>
-
 
             <!-- Profile Details Form -->
             <div class="col-md-8 col-lg-7 profile-form">
