@@ -233,28 +233,40 @@ function deleteQuery($tableName, $colName, $id)
     $result = mysqli_query($conn, $query);
     return $result;
 }
-function setupPagination($conn, $table, $record = 5, $searchString = null, $colName = null)
+
+function setupPagination($conn, $table, $record = 5, $searchString = null)
 {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['records_per_page'])) {
         $_SESSION['records_per_page'] = (int)$_POST['records_per_page'];
         header("Location: " . $_SERVER['PHP_SELF'] . "?page=1"); // Redirect to page 1
         exit;
     }
-    $records_per_page = isset($_SESSION['records_per_page']) ? $_SESSION['records_per_page'] : $record;
 
+    $records_per_page = isset($_SESSION['records_per_page']) ? $_SESSION['records_per_page'] : $record;
     $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-    $data = paginate($conn, $table, $records_per_page, $current_page, $searchString, $colName);
+
+    $data = paginate($conn, $table, $records_per_page, $current_page, $searchString);
     $data['records_per_page'] = $records_per_page;
 
     return $data;
 }
 
-function paginate($conn, $table, $recordsPerPage, $currentPage, $searchString = null, $colName = null)
+function paginate($conn, $table, $recordsPerPage, $currentPage, $searchString = null)
 {
+    // Get the columns of the specified table
+    $columns = getTableColumns($conn, $table);
+    if (empty($columns)) {
+        return ['data' => [], 'total_pages' => 0, 'current_page' => $currentPage, 'total_records' => 0];
+    }
 
-    $totalQuery = "SELECT COUNT(*) AS total FROM $table" . ($searchString ? " WHERE `$colName` LIKE ?" : "");
+    // Create a searchable string with all columns
+    $searchableColumns = implode(", ", array_map(function ($column) {
+        return "`$column`";
+    }, $columns));
+
+    // Prepare the total count query
+    $totalQuery = "SELECT COUNT(*) AS total FROM `$table`" . ($searchString ? " WHERE CONCAT_WS(' ', $searchableColumns) LIKE ?" : "");
     $stmt = $conn->prepare($totalQuery);
-
 
     if ($searchString) {
         $searchParam = '%' . $searchString . '%';
@@ -271,7 +283,8 @@ function paginate($conn, $table, $recordsPerPage, $currentPage, $searchString = 
 
     $offset = ($currentPage - 1) * $recordsPerPage;
 
-    $query = "SELECT * FROM $table" . ($searchString ? " WHERE `$colName` LIKE ?" : "") . " LIMIT ?, ?";
+    // Prepare the main query
+    $query = "SELECT * FROM `$table`" . ($searchString ? " WHERE CONCAT_WS(' ', $searchableColumns) LIKE ?" : "") . " LIMIT ?, ?";
     $stmt = $conn->prepare($query);
 
     if ($searchString) {
@@ -296,6 +309,18 @@ function paginate($conn, $table, $recordsPerPage, $currentPage, $searchString = 
     ];
 }
 
+function getTableColumns($conn, $table)
+{
+    $query = "SHOW COLUMNS FROM `$table`";
+    $result = $conn->query($query);
+
+    $columns = [];
+    while ($row = $result->fetch_assoc()) {
+        $columns[] = $row['Field'];
+    }
+
+    return $columns;
+}
 function paginate_html($totalPages, $currentPage, $url = "?page=")
 {
     if ($totalPages <= 1) {

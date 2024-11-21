@@ -18,7 +18,7 @@ $records_per_page = isset($_POST['records_per_page']) ? (int)$_POST['records_per
 $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
 // Thiết lập phân trang với tìm kiếm
-$pagination = setupPagination($conn, 'hoadon', $records_per_page, $searchString, 'MaHD');
+$pagination = setupPagination($conn, 'hoadon', $records_per_page, $searchString);
 $data = $pagination['data']; // Dữ liệu của các hóa đơn
 $records_per_page = $pagination['records_per_page']; // Số bản ghi trên mỗi trang
 ?>
@@ -79,33 +79,44 @@ $records_per_page = $pagination['records_per_page']; // Số bản ghi trên m�
                                 usort($data, function ($a, $b) {
                                     return strtotime($b['NgayLapHD']) - strtotime($a['NgayLapHD']);
                                 });
-
                                 foreach ($data as $item) {
                                     $stt++;
                             ?>
-                            <tr>
-                                <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
-                                <th class="text-center text-xs font-weight-bolder"><?= $item['MaHD']; ?></th>
-                                <th class="text-center text-xs font-weight-bolder"><?= $item['MaND']; ?></th>
-                                <th class="text-center text-xs font-weight-bolder"><?= $item['NgayLapHD']; ?></th>
-                                <th class="text-center text-xs font-weight-bolder">
-                                    <?= number_format($item['TongTien'], 0, ',', '.') . ' VNĐ'; ?></th>
-                                <td class="align-middle text-center text-sm">
-                                    <a class="btn btn-secondary m-0"
-                                        href="views/invoice/invoice-detail.php?MaHD=<?= $item['MaHD'] ?>"
-                                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                                        <i class="bi bi-info-circle"></i> Chi tiết
-                                    </a>
-                                </td>
-                            </tr>
-                            <?php
+                                    <tr>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $stt ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['MaHD']; ?></th>
+                                        <?php
+                                        // Fetch customer name
+                                        $query = "SELECT TenND
+                                          FROM nguoidung
+                                          JOIN hoadon ON nguoidung.MaND = hoadon.MaND
+                                          WHERE nguoidung.MaND = {$item['MaND']}";
+                                        $resultCustomer = $conn->query($query);
+                                        $customerName = "Không tìm thấy người dùng";
+                                        if ($resultCustomer && $content = $resultCustomer->fetch_assoc()) {
+                                            $customerName = htmlspecialchars($content['TenND']);
+                                        }
+                                        ?>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $customerName; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder"><?= $item['NgayLapHD']; ?></th>
+                                        <th class="text-center text-xs font-weight-bolder">
+                                            <?= number_format($item['TongTien'], 0, ',', '.') . ' VNĐ'; ?></th>
+                                        <td class="align-middle text-center text-sm">
+                                            <a class="btn btn-secondary m-0"
+                                                href="views/invoice/invoice-detail.php?id=<?= $item['MaHD'] ?>"
+                                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                                <i class="bi bi-info-circle"></i> Chi tiết
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php
                                 }
                             } else {
                                 ?>
-                            <!-- Thông báo khi không có bản ghi nào -->
-                            <tr>
-                                <td colspan="7" class="text-center">Không có bản ghi nào</td>
-                            </tr>
+                                <!-- Thông báo khi không có bản ghi nào -->
+                                <tr>
+                                    <td colspan="7" class="text-center">Không có bản ghi nào</td>
+                                </tr>
                             <?php
                             }
                             ?>

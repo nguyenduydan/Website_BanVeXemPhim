@@ -19,7 +19,7 @@ $records_per_page = isset($_POST['records_per_page']) ? (int)$_POST['records_per
 $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
 // Thiết lập phân trang với tìm kiếm
-$pagination = setupPagination($conn, 'TaiKhoan', $records_per_page, $searchString, 'TenDangNhap');
+$pagination = setupPagination($conn, 'TaiKhoan', $records_per_page, $searchString);
 $data = $pagination['data']; // Dữ liệu của các thể loại
 $records_per_page = $pagination['records_per_page']; // Số bản ghi trên mỗi trang
 ?>

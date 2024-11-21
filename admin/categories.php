@@ -16,7 +16,7 @@ $records_per_page = isset($_POST['records_per_page']) ? (int)$_POST['records_per
 $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
 // Thiết lập phân trang với tìm kiếm
-$pagination = setupPagination($conn, 'TheLoai', $records_per_page, $searchString, 'TenTheLoai');
+$pagination = setupPagination($conn, 'TheLoai', $records_per_page, $searchString);
 $data = $pagination['data']; // Dữ liệu của các thể loại
 $records_per_page = $pagination['records_per_page']; // Số bản ghi trên mỗi trang
 ?>
@@ -69,18 +69,22 @@ $records_per_page = $pagination['records_per_page']; // Số bản ghi trên m�
                 </button>
 
                 <!-- Modal Nhập File -->
-                <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+                <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="importModalLabel">Nhập Thể Loại Từ Excel</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form method="POST" enctype="multipart/form-data" action="controllers/category-controller.php">
+                                <form method="POST" enctype="multipart/form-data"
+                                    action="controllers/category-controller.php">
                                     <div class="mb-3">
                                         <label for="excel_file" class="form-label">Chọn tệp Excel:</label>
-                                        <input type="file" class="form-control" name="excel_file" id="excel_file" required>
+                                        <input type="file" class="form-control" name="excel_file" id="excel_file"
+                                            required>
                                     </div>
                                     <button type="submit" class="btn btn-success">Nhập</button>
                                 </form>
