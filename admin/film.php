@@ -5,7 +5,9 @@ include('includes/header.php');
 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
 }
-
+if (isset($_SESSION['EmployedIn']) && $_SESSION['EmployedIn'] === true) {
+    redirect('index.php', 'error', 'Bạn không phải admin!', 'admin');
+}
 $searchString = isset($_GET['searchString']) ? trim($_GET['searchString']) : '';
 $records_per_page = isset($_POST['records_per_page']) ? (int)$_POST['records_per_page'] : 5;
 $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
