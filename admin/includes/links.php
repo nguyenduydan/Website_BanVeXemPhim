@@ -20,7 +20,7 @@ $baseURL = '/Website_BanVeXemPhim/admin/';
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/style.css?2.6">
 <link rel="stylesheet" href="<?php echo $baseURL; ?>assets/css/toast.css?1.0">
 
-<script src="<?php echo $baseURL; ?>assets/js/toast.js?1.1"></script>
+<script src="<?php echo $baseURL; ?>assets/js/toast.js?1.2"></script>
 <script src="<?php echo $baseURL; ?>assets/js/myJS.js?1.4"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" defer></script>
 <!-- Include Flatpickr CSS -->

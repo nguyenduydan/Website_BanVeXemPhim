@@ -9,7 +9,6 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
 if (isset($_SESSION['EmployedIn']) && $_SESSION['EmployedIn'] == true) {
     redirect('index.php', 'error', 'Bạn không phải admin!', 'admin');
 }
-// Lấy chuỗi tìm kiếm từ GET request và loại bỏ khoảng trắng thừa
 $searchString = isset($_GET['searchString']) ? trim($_GET['searchString']) : '';
 
 // Lấy số bản ghi muốn hiển thị mỗi trang từ POST request, mặc định là 5
@@ -19,7 +18,7 @@ $records_per_page = isset($_POST['records_per_page']) ? (int)$_POST['records_per
 $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
 // Thiết lập phân trang với tìm kiếm
-$pagination = setupPagination($conn, 'TaiKhoan', $records_per_page, $searchString);
+$pagination = setupPagination($conn, 'taikhoan', $records_per_page, $searchString);
 $data = $pagination['data']; // Dữ liệu của các thể loại
 $records_per_page = $pagination['records_per_page']; // Số bản ghi trên mỗi trang
 ?>
