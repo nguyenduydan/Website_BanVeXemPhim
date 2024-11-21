@@ -6,9 +6,7 @@ include('includes/header.php');
 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
 }
-if (isset($_SESSION['EmployedIn']) && $_SESSION['EmployedIn'] === true) {
-    redirect('index.php', 'error', 'Bạn không phải admin!', 'admin');
-}
+
 $searchString = isset($_GET['searchString']) ? trim($_GET['searchString']) : '';
 
 // Lấy số bản ghi muốn hiển thị mỗi trang từ POST request, mặc định là 5
