@@ -54,7 +54,6 @@ if (isset($_POST['editChair'])) {
     if ($flag > 0) {
         $messages['tenghe'] = "Tên ghế đã tồn tại trong phòng này.";
     }
-    //Kiểm tra lỗi
     if (empty($tenghe)) {
         $messages['tenghe'] = "Tên ghế không được để trống.";
     }
@@ -77,7 +76,7 @@ if (isset($_POST['editChair'])) {
             redirect('views/chair/chair-edit.php?id=' . $id, 'error', 'Cập nhật ghế thất bại', 'admin');
         }
     } else {
-        redirect('views/chair/chair-edit.php?id=' . $id, 'errors', $messages, 'admin');
+        redirect('views/chair/chair-edit.php?id=' . $id, 'messages', $messages, 'admin');
         $_SESSION['form_data'] = $_POST;
     }
 }

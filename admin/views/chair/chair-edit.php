@@ -5,11 +5,11 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
 }
 if (isset($_SESSION['EmployedIn']) && $_SESSION['EmployedIn'] === true) {
-    redirect('index.php', 'error', 'Bạn không phải admin!','admin'); 
+    redirect('index.php', 'error', 'Bạn không phải admin!', 'admin');
 }
-$errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : []; // Lấy lỗi từ session
+$messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : []; // Lấy lỗi từ session
 $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
-unset($_SESSION['errors']); // Xóa lỗi khỏi session sau khi hiển thị
+unset($_SESSION['messages']); // Xóa lỗi khỏi session sau khi hiển thị
 unset($_SESSION['form_data']);
 ?>
 
@@ -38,7 +38,11 @@ unset($_SESSION['form_data']);
                         <label for="tenghe">Tên ghế</label>
                         <input type="text" class="form-control" id="tenghe" name="tenghe" placeholder="Nhập tên ghế"
                             value="<?php echo isset($formData['tenghe']) ? htmlspecialchars($formData['tenghe']) : $item['data']['TenGhe']; ?>">
+                        <?php if (isset($messages['tenghe'])): ?>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tenghe']) ?></small>
+                        <?php endif; ?>
                     </div>
+
                     <div class="col-md-6">
                         <label for="loaighe">Loại ghế</label>
                         <select class="form-select" id="loaighe" name="loaighe" required>

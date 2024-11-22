@@ -42,6 +42,34 @@ unset($_SESSION['form_data']); // Xóa dữ liệu form khỏi session sau khi h
                         </select>
                     </div>
                     <button type="submit" name="saveCategory" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal">
+                        Nhập Thể Loại Từ Excel
+                    </button>
+
+                    <!-- Modal Nhập File -->
+                    <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="importModalLabel">Nhập Thể Loại Từ Excel</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="POST" enctype="multipart/form-data"
+                                        action="../../controllers/category-controller.php">
+                                        <div class="mb-3">
+                                            <label for="excel_file" class="form-label">Chọn tệp Excel:</label>
+                                            <input type="file" class="form-control" name="excel_file" id="excel_file"
+                                                required>
+                                        </div>
+                                        <button type="submit" class="btn btn-success">Nhập</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>
