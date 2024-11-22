@@ -31,12 +31,7 @@ getAdmin();
                 <div id="clock" class="fs-4 fw-bold me-5 bg-gradient-info text-white p-2 d-none d-lg-block">
                     <!-- Clock content -->
                 </div>
-                <!-- <div class="input-group d-none d-lg-flex">
-                    <span class="input-group-text border"><i class="fas fa-search" aria-hidden="true"></i></span>
-                    <input type="text" class="form-control" id="searchBox" placeholder="Tìm kiếm..."
-                        onkeyup="searchData()">
-                    <div id="results"></div>
-                </div> -->
+
             </div>
 
             <!-- Welcome Message and Avatar -->
@@ -50,15 +45,6 @@ getAdmin();
                 </div>
             </div>
 
-            <!-- External Links and Sidenav Icon -->
-
-            <div id="linkContainer" style="display: none;">
-                <a class="nav-link-text" href="https://www.google.com">Google</a>
-                <a href="https://www.facebook.com">Facebook</a>
-                <a href="https://www.youtube.com">YouTube</a>
-                <a href="https://www.twitter.com">Twitter</a>
-                <a href="https://www.linkedin.com">LinkedIn</a>
-            </div>
 
             <ul class="navbar-nav justify-content-end">
                 <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -77,56 +63,19 @@ getAdmin();
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        function updateClock() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
+$(document).ready(function() {
+    function updateClock() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
 
-            $('#clock').text(`${hours}:${minutes}:${seconds}`);
-        }
-
-        // Cập nhật đồng hồ ngay lập tức
-        updateClock();
-        // Cập nhật đồng hồ mỗi giây
-        setInterval(updateClock, 1000);
-    });
-</script>
-<script>
-    function searchData() {
-        let query = document.getElementById("searchBox").value.toLowerCase();
-        let links = document.querySelectorAll("#linkContainer a");
-        let results = document.getElementById("results");
-
-        // Xóa kết quả hiện tại
-        results.innerHTML = "";
-
-        if (query.length > 0) {
-            // Hiển thị vùng kết quả
-            results.style.display = "block";
-
-            // Lọc và hiển thị các thẻ <a> có chứa từ khóa tìm kiếm
-            links.forEach(function(link) {
-                let linkText = link.textContent.toLowerCase();
-                if (linkText.includes(query)) {
-                    let resultLink = document.createElement("a");
-                    resultLink.href = link.href;
-                    resultLink.textContent = link.textContent;
-                    resultLink.classList.add("result-item");
-
-                    results.appendChild(resultLink);
-                }
-            });
-
-            // Nếu không có kết quả phù hợp, ẩn vùng kết quả
-            if (results.innerHTML.trim() === "") {
-                results.style.display = "none";
-            }
-
-        } else {
-            // Ẩn vùng kết quả nếu không có dữ liệu tìm kiếm
-            results.style.display = "none";
-        }
+        $('#clock').text(`${hours}:${minutes}:${seconds}`);
     }
+
+    // Cập nhật đồng hồ ngay lập tức
+    updateClock();
+    // Cập nhật đồng hồ mỗi giây
+    setInterval(updateClock, 1000);
+});
 </script>
