@@ -31,7 +31,7 @@ unset($_SESSION['form_data']); // Xóa dữ liệu form khỏi session sau khi h
                             value="<?php echo isset($formData['ten_the_loai']) ? htmlspecialchars($formData['ten_the_loai']) : ''; ?>"
                             class="form-control" id="ten_the_loai" name="ten_the_loai" placeholder="Nhập tên thể loại">
                         <?php if (isset($messages['name'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
@@ -41,31 +41,31 @@ unset($_SESSION['form_data']); // Xóa dữ liệu form khỏi session sau khi h
                             <option value="0">Offline</option>
                         </select>
                     </div>
-                    <button type="submit" name="saveCategory" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" name="saveCategory" class="btn bg-gradient-info px-5 mt-3">Lưu</button>
+                        <button type="button" class="btn  bg-gradient-primary px-5  mt-3 ms-5" data-bs-toggle="modal"
+                            data-bs-target="#importModal">
+                            Nhập Thể Loại Từ Excel
+                        </button>
+                    </div>
                 </div>
             </div>
         </form>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importModal">
-            Nhập Thể Loại Từ Excel
-        </button>
 
         <!-- Modal Nhập File -->
-        <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="importModalLabel">Nhập Thể Loại Từ Excel</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form method="POST" enctype="multipart/form-data"
                             action="../../controllers/category-controller.php">
                             <div class="mb-3">
                                 <label for="excel_file" class="form-label">Chọn tệp Excel:</label>
-                                <input type="file" class="form-control" name="excel_file" id="excel_file"
-                                    required>
+                                <input type="file" class="form-control" name="excel_file" id="excel_file" required>
                             </div>
                             <button type="submit" class="btn btn-success">Nhập</button>
                         </form>
