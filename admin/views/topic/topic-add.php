@@ -29,7 +29,7 @@ unset($_SESSION['form_data']);
                             placeholder="Nhập chủ đề"
                             value="<?php echo isset($formData['name_topic']) ? htmlspecialchars($formData['name_topic']) : ''; ?>">
                         <?php if (isset($messages['name_topic'])): ?>
-                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name_topic']) ?></small>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name_topic']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
@@ -37,7 +37,7 @@ unset($_SESSION['form_data']);
                         <input type="text" class="form-control" id="tukhoa" name="tukhoa" placeholder="Nhập từ khóa"
                             value="<?php echo isset($formData['tukhoa']) ? htmlspecialchars($formData['tukhoa']) : ''; ?>">
                         <?php if (isset($messages['tukhoa'])): ?>
-                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tukhoa']) ?></small>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['tukhoa']) ?></small>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -50,12 +50,15 @@ unset($_SESSION['form_data']);
                                 <?php
                                 $films = getAll('Phim');
                                 foreach ($films as $film): ?>
-                                <option value="<?php echo htmlspecialchars($film['MaPhim']); ?>"
-                                    <?php echo (isset($formData['maphim']) && $formData['maphim'] == $film['MaPhim']) ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($film['TenPhim']); ?>
-                                </option>
+                                    <option value="<?php echo htmlspecialchars($film['MaPhim']); ?>"
+                                        <?php echo (isset($formData['maphim']) && $formData['maphim'] == $film['MaPhim']) ? 'selected' : ''; ?>>
+                                        <?php echo htmlspecialchars($film['TenPhim']); ?>
+                                    </option>
                                 <?php endforeach; ?>
                             </select>
+                            <?php if (isset($messages['maphim'])): ?>
+                                <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['maphim']) ?></small>
+                            <?php endif; ?>
                         </div>
 
                         <div class="col">
