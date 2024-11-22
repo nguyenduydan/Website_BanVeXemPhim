@@ -23,6 +23,13 @@ if (isset($_POST['saveFilm'])) {
     $anh_phim = '';
     $banner = '';
     $slug = str_slug($name);
+    if (empty($name)) {
+        $messages['ten_phim'] = 'Tên phim không được để trống';
+    }
+
+    if (empty($dien_vien)) {
+        $messages['dien_vien'] = 'Tên diễn viên không được để trống';
+    }
     if (isset($_FILES['anh_phim'])) {
         // Use filmname as filename for the img
         $imgResult = uploadImage($_FILES['anh_phim'], "../../uploads/film-imgs/", $id);

@@ -31,14 +31,14 @@ unset($_SESSION['form_data']);
                         <label for="ten_phim">Tên phim</label>
                         <input type="text" class="form-control" id="ten_phim" name="ten_phim"
                             value="<?php echo isset($formData['ten_phim']) ? htmlspecialchars($formData['ten_phim']) : ''; ?>"
-                            placeholder="Nhập tên phim" required>
+                            placeholder="Nhập tên phim">
                         <?php if (isset($messages['ten_phim'])): ?>
-                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ten_phim']) ?></small>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ten_phim']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
                         <label for="phan_loai">Phân loại</label>
-                        <select class="form-select" id="phan_loai" name="phan_loai" required>
+                        <select class="form-select" id="phan_loai" name="phan_loai">
                             <option value="P">Phổ thông</option>
                             <option value="T13">T13</option>
                             <option value="T16">T16</option>
@@ -50,13 +50,13 @@ unset($_SESSION['form_data']);
                         <label for="dao_dien">Đạo diễn</label>
                         <input type="text" class="form-control" id="dao_dien" name="dao_dien"
                             value="<?php echo isset($formData['dao_dien']) ? htmlspecialchars($formData['dao_dien']) : ''; ?>"
-                            placeholder="Nhập tên đạo diễn" required>
+                            placeholder="Nhập tên đạo diễn">
                     </div>
                     <div class="form-group mb-3">
                         <label for="dien_vien">Diễn viên</label>
                         <input type="text" class="form-control" id="dien_vien" name="dien_vien"
                             value="<?php echo isset($formData['dien_vien']) ? htmlspecialchars($formData['dien_vien']) : ''; ?>"
-                            placeholder="Nhập tên diễn viên" required>
+                            placeholder="Nhập tên diễn viên">
                     </div>
                     <div class="form-group mb-3">
                         <label for="quoc_gia">Quốc gia</label>
@@ -64,12 +64,12 @@ unset($_SESSION['form_data']);
                             <?php
                             $nation = ['Âu Mỹ', 'Hàn Quốc', 'Trung Quốc', 'Anh', 'Việt Nam'];
                             foreach ($nation as $nation): ?>
-                            <div class="form-check me-3">
-                                <input class="form-check-input" type="checkbox" name="quoc_gia[]" value="<?= $nation ?>"
-                                    id="quoc_gia<?= strtolower($nation) ?>">
-                                <label class="form-check-label"
-                                    for="quoc_gia<?= strtolower($nation) ?>"><?= $nation ?></label>
-                            </div>
+                                <div class="form-check me-3">
+                                    <input class="form-check-input" type="checkbox" name="quoc_gia[]" value="<?= $nation ?>"
+                                        id="quoc_gia<?= strtolower($nation) ?>">
+                                    <label class="form-check-label"
+                                        for="quoc_gia<?= strtolower($nation) ?>"><?= $nation ?></label>
+                                </div>
                             <?php endforeach; ?>
                             <div class="d-flex align-items-center">
                                 <label for="quoc_gia" class="me-2">Khác: </label>
@@ -82,8 +82,7 @@ unset($_SESSION['form_data']);
                     <div class="form-group mb-3">
                         <label for="mo_ta">Mô tả phim</label>
                         <textarea class="form-control" id="mo_ta" name="mo_ta" rows="10" placeholder="Nhập mô tả phim"
-                            value="<?php echo isset($formData['mo_ta']) ? htmlspecialchars($formData['mo_ta']) : ''; ?>"
-                            required></textarea>
+                            value="<?php echo isset($formData['mo_ta']) ? htmlspecialchars($formData['mo_ta']) : ''; ?>"></textarea>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -93,13 +92,13 @@ unset($_SESSION['form_data']);
                             <?php
                             $genres = getAll('TheLoai');
                             foreach ($genres as $genre): ?>
-                            <div class="form-check me-3">
-                                <input class="form-check-input" type="checkbox" name="the_loai[]"
-                                    value="<?= $genre['MaTheLoai'] ?>"
-                                    id="the_loai_<?= strtolower($genre['TenTheLoai']) ?>">
-                                <label class="form-check-label"
-                                    for="the_loai_<?= strtolower($genre['TenTheLoai']) ?>"><?= $genre['TenTheLoai'] ?></label>
-                            </div>
+                                <div class="form-check me-3">
+                                    <input class="form-check-input" type="checkbox" name="the_loai[]"
+                                        value="<?= $genre['MaTheLoai'] ?>"
+                                        id="the_loai_<?= strtolower($genre['TenTheLoai']) ?>">
+                                    <label class="form-check-label"
+                                        for="the_loai_<?= strtolower($genre['TenTheLoai']) ?>"><?= $genre['TenTheLoai'] ?></label>
+                                </div>
                             <?php endforeach; ?>
                         </div>
                         <div class="mt-3">
@@ -111,13 +110,13 @@ unset($_SESSION['form_data']);
                     <div class="form-group mb-3">
                         <label for="nam_phat_hanh">Năm phát hành</label>
                         <input type="number" class="form-control" id="nam_phat_hanh" name="nam_phat_hanh"
-                            placeholder="Nhập năm phát hành" required>
+                            placeholder="Nhập năm phát hành">
                     </div>
 
                     <div class="form-group mb-3">
                         <label for="thoi_luong">Thời lượng (phút)</label>
                         <input type="number" class="form-control" id="thoi_luong" name="thoi_luong"
-                            placeholder="Nhập thời lượng phim" required>
+                            placeholder="Nhập thời lượng phim">
                     </div>
                     <div class="form-group mb-3">
                         <label for="status">Trạng thái</label>
