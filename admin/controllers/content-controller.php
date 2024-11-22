@@ -54,19 +54,36 @@ if (isset($_POST['editContent'])) {
     $status = validate($_POST['status']);
     $mota = validate($_POST['mota']);
     $kieubv = validate($_POST['kieubv']);
+    $content = getByID('baiviet', 'Id', $id);
+    $anhbv = $content['data']['Anh'];
     if (empty($name)) {
-        $messages['name'] = 'Tên chủ đề không được để trống';
+        $messages['name'] = 'Tên bài viết không được để trống';
+    }
+    if (empty($chudebv)) {
+        $messages['chudebv'] = 'Tên chủ đề không được để trống';
     }
     if (isset($_FILES['content-imgs'])) {
+
+        $oldImages = explode(',', $content['data']['Anh']);
+
 
         $uploadResult = uploadMultipleImages($_FILES['content-imgs'], "../../uploads/content-imgs/");
 
         if ($uploadResult['success']) {
             $anhbv = implode(',', $uploadResult['filenames']);
+
+            foreach ($oldImages as $oldImage) {
+                $filePath = "../../uploads/content-imgs/" . $oldImage;
+                $deleteResult = deleteImage($filePath);
+                if (!$deleteResult['success']) {
+                    $messages['images'] = 'Không thể xóa một số ảnh cũ: ' . $deleteResult['message'];
+                }
+            }
         } else {
             $messages['images'] = implode(', ', $uploadResult['messages']);
         }
     }
+
     if (empty($messages)) {
         $link = str_slug($name);
         $query = "UPDATE baiviet SET
@@ -86,11 +103,11 @@ if (isset($_POST['editContent'])) {
         if (mysqli_query($conn, $query)) {
             redirect('content.php', 'success', 'Cập nhật bài viết thành công', 'admin');
         } else {
-            redirect('views/content/content-edit.php', 'error', 'Cập nhật bài viết thất bại', 'admin');
+            redirect('views/content/content-edit.php?id=' . $id, 'error', 'Cập nhật bài viết thất bại', 'admin');
         }
     } else {
         $_SESSION['form_data'] = $_POST;
-        redirect('views/content/content-edit.php', 'messages', $messages, 'admin');
+        redirect('views/content/content-edit.php?id=' . $id, 'messages', $messages, 'admin');
     }
 }
 
