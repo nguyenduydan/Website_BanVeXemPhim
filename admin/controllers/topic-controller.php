@@ -15,6 +15,9 @@ if (isset($_POST['saveTopic'])) {
     if (empty($tukhoa)) {
         $messages['tukhoa'] = 'Từ khóa không được để trống';
     }
+    if (empty($phim)) {
+        $messages['phim'] = 'Phim không được để trống';
+    }
     $slug = str_slug($name_topic);
 
     if (empty($messages)) {

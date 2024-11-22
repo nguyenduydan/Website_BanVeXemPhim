@@ -32,7 +32,7 @@ unset($_SESSION['form_data']);
                             value="<?php echo isset($formData['giochieu']) ? htmlspecialchars($formData['giochieu']) : ''; ?>"
                             placeholder="Chọn ngày và giờ" readonly>
                         <?php if (isset($messages['giochieu'])): ?>
-                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['giochieu']) ?></small>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['giochieu']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
@@ -42,33 +42,33 @@ unset($_SESSION['form_data']);
                             <?php
                             $films = getAll('Phim');
                             foreach ($films as $film): ?>
-                            <option value="<?php echo htmlspecialchars($film['MaPhim']); ?>"
-                                <?php echo (isset($formData['maphim']) && $formData['maphim'] == $film['MaPhim']) ? 'selected' : ''; ?>>
-                                <?php echo htmlspecialchars($film['TenPhim']); ?>
-                            </option>
+                                <option value="<?php echo htmlspecialchars($film['MaPhim']); ?>"
+                                    <?php echo (isset($formData['maphim']) && $formData['maphim'] == $film['MaPhim']) ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($film['TenPhim']); ?>
+                                </option>
                             <?php endforeach; ?>
                         </select>
                         <?php if (isset($messages['maphim'])): ?>
-                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['maphim']) ?></small>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['maphim']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
-                    <label for="maphong">Tên phòng (<span class="text-danger">*</span>)</label>
+                        <label for="maphong">Tên phòng (<span class="text-danger">*</span>)</label>
                         <select class="form-control" id="maphong" name="maphong">
                             <option value="">Chọn phòng</option>
                             <?php
                             $rooms = getAll('Phong');
                             foreach ($rooms as $room): ?>
-                            <option value="<?php echo htmlspecialchars($room['MaPhong']); ?>"
-                                <?php echo (isset($formData['maphong']) && $formData['maphong'] == $room['MaPhong']) ? 'selected' : ''; ?>>
-                                <?php echo htmlspecialchars($room['TenPhong']); ?>
-                            </option>
+                                <option value="<?php echo htmlspecialchars($room['MaPhong']); ?>"
+                                    <?php echo (isset($formData['maphong']) && $formData['maphong'] == $room['MaPhong']) ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($room['TenPhong']); ?>
+                                </option>
                             <?php endforeach; ?>
                         </select>
                         <?php if (isset($messages['maphong'])): ?>
-                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['maphong']) ?></small>
+                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['maphong']) ?></small>
                         <?php endif; ?>
-                </div>
+                    </div>
                     <div class="form-group mb-3">
                         <label for="status">Trạng thái</label>
                         <select class="form-select" id="status" name="status">
@@ -87,14 +87,14 @@ unset($_SESSION['form_data']);
     </div>
 </div>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    flatpickr("#giochieu", {
-        enableTime: true,
-        dateFormat: "Y-m-d H:i",
-        minDate: "today",
-        allowInput: true,
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr("#giochieu", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            minDate: "today",
+            allowInput: true,
 
+        });
     });
-});
 </script>
 <?php include('../../includes/footer.php'); ?>
