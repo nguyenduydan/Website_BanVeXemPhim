@@ -45,7 +45,15 @@ if (isset($_POST['editChair'])) {
     $maphong = validate($_POST['maphong']);
     $status = validate($_POST['status']) == 1 ? 1 : 0;
     $id = validate($_POST['maghe']);
+    $phong = getAll($maphong);
 
+    $exist_query = "SELECT COUNT(*) as count FROM GHE WHERE TenGhe = '$tenghe' AND MaPhong = '$maphong' AND MaGhe != '$id'";
+    $exist_result = mysqli_query($conn, $exist_query);
+    $flag = mysqli_fetch_assoc($exist_result)['count'];
+
+    if ($flag > 0) {
+        $messages['tenghe'] = "Tên ghế đã tồn tại trong phòng này.";
+    }
     //Kiểm tra lỗi
     if (empty($tenghe)) {
         $messages['tenghe'] = "Tên ghế không được để trống.";
