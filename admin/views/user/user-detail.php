@@ -8,7 +8,7 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
 }
 if (isset($_SESSION['EmployedIn']) && $_SESSION['EmployedIn'] === true) {
-    redirect('index.php', 'error', 'Bạn không phải admin!','admin');
+    redirect('index.php', 'error', 'Bạn không phải admin!', 'admin');
 }
 ?>
 
@@ -71,10 +71,6 @@ if ($user['status'] == 200) { // Kiểm tra xem có lấy thành công thông ti
                         <div class="mb-3">
                             <label class="fs-6">Email:</label>
                             <span><?= $user['data']['Email']; ?></span>
-                        </div>
-                        <div class="mb-3">
-                            <label class="fs-6">Quyền:</label>
-                            <span><?= $taikhoan['data']['Quyen'] == 1 ? 'Admin' : 'User'; ?></span>
                         </div>
                     </div>
 
