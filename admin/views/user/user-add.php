@@ -8,7 +8,7 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     redirect('sign-in.php', 'error', 'Vui lòng đăng nhập');
 }
 if (isset($_SESSION['EmployedIn']) && $_SESSION['EmployedIn'] === true) {
-    redirect('index.php', 'error', 'Bạn không phải admin!','admin'); 
+    redirect('index.php', 'error', 'Bạn không phải admin!','admin');
 }
 // Lấy thông báo lỗi từ session nếu có và dữ liệu form người dùng đã nhập trước đó
 $messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : [];
@@ -35,16 +35,16 @@ unset($_SESSION['form_data']);
                         <input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ và tên"
                             value="<?php echo isset($formData['name']) ? htmlspecialchars($formData['name']) : ''; ?>">
                         <?php if (isset($messages['name'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['name']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="username">Tên người dùng (<span class="text-danger">*</span>)</label>
+                        <label for="username">Tên đăng nhập (<span class="text-danger">*</span>)</label>
                         <input type="text" class="form-control" id="username" name="username"
                             placeholder="Nhập tên đăng nhập"
                             value="<?php echo isset($formData['username']) ? htmlspecialchars($formData['username']) : ''; ?>">
                         <?php if (isset($messages['username'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['username']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['username']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
@@ -57,7 +57,7 @@ unset($_SESSION['form_data']);
                             </span>
                         </div>
                         <?php if (isset($messages['password'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['password']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['password']) ?></small>
                         <?php endif; ?>
                     </div>
                     <div class="form-group mb-3">
@@ -70,7 +70,7 @@ unset($_SESSION['form_data']);
                             </span>
                         </div>
                         <?php if (isset($messages['re_password'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['re_password']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['re_password']) ?></small>
                         <?php endif; ?>
                     </div>
 
@@ -79,7 +79,7 @@ unset($_SESSION['form_data']);
                         <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email"
                             value="<?php echo isset($formData['email']) ? htmlspecialchars($formData['email']) : ''; ?>">
                         <?php if (isset($messages['email'])): ?>
-                            <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['email']) ?></small>
+                        <small class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['email']) ?></small>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -108,8 +108,8 @@ unset($_SESSION['form_data']);
                                 max="<?php echo date('Y-m-d', strtotime('-5 years')); ?>"
                                 value="<?php echo isset($formData['ngay_sinh']) ? htmlspecialchars($formData['ngay_sinh']) : ''; ?>">
                             <?php if (isset($messages['ngay_sinh'])): ?>
-                                <small
-                                    class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ngay_sinh']) ?></small>
+                            <small
+                                class="text-danger m-2 text-xs"><?= htmlspecialchars($messages['ngay_sinh']) ?></small>
                             <?php endif; ?>
                         </div>
                         <div class="col-6">
