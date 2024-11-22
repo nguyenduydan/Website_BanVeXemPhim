@@ -21,3 +21,9 @@ http://localhost/Website_BanVeXemPhim/admin
 - Với tài khoản của admin thì có thể sử dụng được hết tất cả các chức năng.
 - Với tài khoản của nhanvien thì có một số chức năng sẽ bị khóa.
 ----------------------
+**CHÚ Ý: Nếu muốn sử dụng được import file từ excel thì mở XAMPfile php.ini thực hiện các bước sau:
+B1: Vào app XAMP Control Panel
+B2: Ở Apache chọn "config"
+B3: Chọn PHP(php.init)
+B4: Bấm crl+f để tìm "extension=zip", sau đó bỏ dấu ";" trước câu.
+B5: Lưu lại và chạy lại XAMP
